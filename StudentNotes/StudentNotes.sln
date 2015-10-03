@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotes", "StudentNotes\StudentNotes.csproj", "{2A1B6EF9-62AA-409B-B775-F2D44C3CC949}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotes.Tests", "StudentNotes.Tests\StudentNotes.Tests.csproj", "{9339B13F-9F42-4055-91B8-253DC90ADBAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A1B6EF9-62AA-409B-B775-F2D44C3CC949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1B6EF9-62AA-409B-B775-F2D44C3CC949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1B6EF9-62AA-409B-B775-F2D44C3CC949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1B6EF9-62AA-409B-B775-F2D44C3CC949}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9339B13F-9F42-4055-91B8-253DC90ADBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9339B13F-9F42-4055-91B8-253DC90ADBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9339B13F-9F42-4055-91B8-253DC90ADBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9339B13F-9F42-4055-91B8-253DC90ADBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

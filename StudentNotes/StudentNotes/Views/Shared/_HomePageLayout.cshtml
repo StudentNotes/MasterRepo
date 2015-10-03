@@ -1,0 +1,109 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Robert Winkler">
+
+        @*<title>_HomePageLayout</title>*@
+        <title>@ViewBag.Title</title>
+
+        <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+        <link href="~/Content/custom.css" rel="stylesheet" />
+
+        <!--Custom fonts-->
+        <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body id="page-top" class="index">
+        <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand hovertest" href="#page-top" style="">
+                    StudentNotes
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a class="hovertest" href="#about-project">O projekcie</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a class="hovertest" href="#about-me">O autorze</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a class="hovertest" href="#register">Rejestracja</a>
+                    </li>
+                    <li class="col-lg-offset-1"></li>
+                    <li>
+                        <form class="form-inline" role="search" action="/Home/SignIn" method="post">
+                            <div class="form-group">
+                                <input type="text" name="email" class="form-control" placeholder="E-mail">
+                                <input type="password" name="password" class="form-control" placeholder="Password">
+                            </div>
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="Zaloguj" class="btn btn-success" />
+                        </form>
+                    </li>
+                </ul>
+
+                
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+        @RenderBody()
+
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+
+    <!--Bootstrap Core JavaScript-->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!--Custom JavaScript-->
+    <script src="~/Scripts/custom.js"></script>
+
+    <!--Plugin JavaScript files-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="~/Scripts/classie.js"></script>
+    <script src="~/Scripts/cbpAnimatedHeader.js"></script>
+
+    <!--Custom Theme JavaScript-->
+    <script src="~/Scripts/freelancer.js"></script>
+
+    <!--Contact from JavaScript files-->
+    <script src="~/Scripts/jqBootstrapValidation.js"></script>
+    
+    </body>
+    </html>

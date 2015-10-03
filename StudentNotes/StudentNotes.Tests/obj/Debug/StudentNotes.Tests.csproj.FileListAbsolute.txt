@@ -1,0 +1,17 @@
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.Tests.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.Tests.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.Mvc.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.Razor.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.WebPages.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.Mvc.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.Razor.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.WebPages.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\obj\Debug\StudentNotes.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\obj\Debug\StudentNotes.Tests.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\STUDENT_NOTES\StudentNotes\StudentNotes.Tests\obj\Debug\StudentNotes.Tests.pdb

@@ -1,0 +1,35 @@
+﻿body {
+}
+/****************************************   NAVBAR_TOP_PARTIAL  *****************************************/
+/*pasek menu górnego*/
+#wrapper .navbar-fixed-top {
+    border-style: none;
+    padding: 10px 0;
+    background-color: #000000;
+    border-bottom: solid thin #f05557;
+    }
+/*logo w pasku górnym*/
+#wrapper .navbar-fixed-top .navbar-header .navbar-brand{
+    border: solid thin #fdd017;
+    border-radius: 20px;
+    color: #fdd017;
+}
+#wrapper .navbar-fixed-top .navbar-header .navbar-brand:hover{
+    border-color: #f05557;
+    background-color: #fdd017;
+    color: #000000;
+}
+/****************************************   NAVBAR_SIDE_PARTIAL  *****************************************/
+.collapse .side-nav {
+    margin-top: 20px;
+    background-color: #fdd017;
+}
+.collapse .side-nav li a {
+    color: #000000;
+}
+
+/****************************************   PAGE_CONTENT - WRAPPER  *****************************************/
+#page-wrapper {
+    min-height: 900px;
+    background-color: #ffe68b;
+}

@@ -1,0 +1,356 @@
+﻿@font-face {
+    font-family: 'Lato-Thin';
+    src: url('../fonts/Lato-Thin.eot') format('embedded-opentype');
+}
+@font-face {
+    font-family: 'Lato-Thin';
+    src: url('../fonts/Lato-Thin.ttf') format('truetype'), url('../fonts/Lato-Thin.woff') format('woff');
+}
+@font-face {
+    font-family: 'Lato-Thin';
+    src: url('../fonts/Lato-Thin.woff') format('woff');
+}
+@media(max-width: 1199px) {
+    .navbar-fixed-top .navbar-collapse {
+        margin-top: 25px;
+    }
+    .navbar-fixed-top.navbar-shrink .navbar-collapse {
+        margin-top: 10px;
+    }
+
+}
+html,
+body {
+    /*overflow-x: hidden;*/
+    height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    /*font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: Lato-Thin, "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+header {
+    text-align: center;
+    color: #fff;
+    background: #dedede;
+}
+
+.navbar {
+    /*text-transform: uppercase;*/
+    font-family: "Lato-Thin";
+    font-weight: 700;
+    background-color: #000000; 
+}
+
+.navbar span {
+    font-weight: 500;
+}
+
+.navbar-fixed-top {
+    padding: 25px 0;
+    -webkit-transition: padding .3s;
+    -moz-transition: padding .3s;
+    transition: padding .3s;
+    border-color: #fdd017;
+}
+section {
+    padding: 75px 0;
+}
+/*Ustawienie stylu dla paska menu po załadowaniu (odświerzeniu strony)*/
+.navbar-fixed-top .navbar-brand {
+    font-size: 3em;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    border: solid thin;
+    border-radius: 20px;
+    color: #fdd017;
+}
+.navbar-fixed-top .navbar-brand:hover {
+    background-color: #fdd017;
+    color: #000000;
+    border-color: #ffffff;
+}
+.navbar-fixed-top .navbar-brand:focus {
+    background-color: #000000;
+    color: #ffffff;
+}
+/*Ustawienie stylu przycisków paska menu po załadowaniu strony (lub też odświerzeniu)*/
+.navbar-fixed-top .navbar-nav li a {
+    color: #fdd017;
+    border: solid 1px;
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-left: 5px;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+.navbar-fixed-top .navbar-nav li a.hovertest:hover {
+    color: #000000;
+    border-color: #ffffff;
+    background: #fdd017;
+}
+.navbar-fixed-top .navbar-nav li a.hovertest:focus {
+    background-color: #000000;
+    color: #ffffff;
+}
+/*Przycisk naleśnikowy*/
+.navbar-fixed-top .navbar-header button{
+    border-color: #fdd017;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+.navbar-fixed-top .navbar-header button:hover,
+.navbar-fixed-top .navbar-header button:focus{
+    background-color: #fdd017;
+    border-color: #ffffff;
+}
+.navbar-fixed-top .navbar-header button .icon-bar{
+    background-color: #fdd017;
+}
+.navbar-fixed-top .navbar-header button:hover .icon-bar,
+.navbar-fixed-top .navbar-header button:focus .icon-bar{
+    background-color: #ffffff;
+}
+/*Panel logowania*/
+.navbar-fixed-top .navbar-collapse .form-inline {
+    padding: 7px;
+    border: solid 2px #fdd017;
+    border-radius: 5px;
+    background-color: #ffe68b;
+}
+.navbar-fixed-top .navbar-collapse .form-inline .form-group .form-control:focus {
+        border-color: #272727;
+    }
+/*************************************************************************************************************************/
+/*Ustawienie stylu dla paska menu po zjechaniu o 100px strony w dół*/
+.navbar-fixed-top.navbar-shrink {
+    padding: 10px 0;
+    background-color: #fdd017;
+    border-bottom: solid thin;
+    border-color: #000000;
+}
+.navbar-fixed-top.navbar-shrink .navbar-brand{
+    color: #000000;
+    border: solid thin;
+    background: #fdd017;
+    font-size: 1.5em;
+}
+.navbar-fixed-top.navbar-shrink .navbar-brand:hover{
+    color: #ffffff;
+    background: #000000;
+}
+.navbar-fixed-top.navbar-shrink .navbar-brand:focus{
+    color: #ffffff;
+}
+
+/*Ustawienie stylu przycisków paska menu po zjechaniu strony o 100px w dół*/
+.navbar-fixed-top.navbar-shrink .navbar-nav li a {
+    color: #000000;
+}
+.navbar-fixed-top.navbar-shrink .navbar-nav li a.hovertest:hover {
+    color: #ffffff;
+    background: #000000;
+}
+.navbar-fixed-top.navbar-shrink .navbar-nav li a.hovertest:focus {
+    background-color: #fdd017;
+    color: #ffffff;
+}
+.navbar-fixed-top.navbar-shrink .navbar-nav li.active a.hovertest {
+    background-color: #000000;
+    color: #ffffff;
+}
+/*Przycisk naleśnikowy po zjechaniu o 100px w dół*/
+.navbar-fixed-top.navbar-shrink .navbar-header button{
+    border-color: #000000;
+}
+.navbar-fixed-top.navbar-shrink .navbar-header button:hover,
+.navbar-fixed-top.navbar-shrink .navbar-header button:focus{
+    background-color: #000000;
+    border-color: #ffffff;
+}
+.navbar-fixed-top.navbar-shrink .navbar-header button .icon-bar{
+    background-color: #000000;
+}
+.navbar-fixed-top.navbar-shrink .navbar-header button:hover .icon-bar,
+.navbar-fixed-top.navbar-shrink .navbar-header button:focus .icon-bar{
+    background-color: #ffffff;
+}
+/*Panel logowania po zjechaniu 100px w dół*/
+.navbar-fixed-top.navbar-shrink .navbar-collapse .form-inline {
+    border-color: #000000;
+    background-color: #4d4d4d;
+}
+.navbar-fixed-top.navbar-shrink .navbar-collapse .form-inline .form-group .form-control:focus {
+    border-color: #fccc06;
+}
+/*******************************************    HEADER  ************************************************/
+/*Karuzela*/
+#myCarousel {
+    padding-top: 101px;
+}
+.carousel .item {
+    width: 100%;
+    /*max-height: 900px;*/
+    background-color: #000000;
+}
+.carousel .item  img{
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.carousel-control {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+.carousel-control.left {
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(253, 208, 23, 0.5) 0), color-stop(rgba(0, 0, 0, 0.0001) 100%)); /*For Safari*/
+  background-image: linear-gradient(to right, rgba(253, 208, 23, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80fdd017', endColorstr='#00000000', GradientType=1);
+}
+.carousel-control.right {
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.0001) 0), color-stop(rgba(253, 208, 23, 0.5) 100%)); /*For Safari*/
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0, rgba(253, 208, 23, 0.5) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80fdd017', GradientType=1);
+}
+
+
+/************************************** ABOUT PROJECT SECTION *********************************************/
+#about-project {
+    background-color: #ffe68b;
+}
+#about-project h1 {
+    color: #000000;
+}
+/*Linia oddzielająca nagłówek od treści sekcji*/
+#about-project hr.star-light {
+    border-color: #000000;
+}
+/*Modyfikowanie wyglądu elementu Jumbotron*/
+#about-project .jumbotron .jumbotron-title {
+    text-align: center;
+    padding-bottom: 48px;
+}
+#about-project .jumbotron .jumbotron-title h1 {
+    text-transform: none;
+    color: #fdd017;
+    background-color: #000000;
+    border: #fdd017 solid thin;
+    border-radius: 20px;
+    font-size: 5rem;
+    text-align: center;
+    display: inline;
+    padding: 10px;
+}
+#about-project .jumbotron .jumbotron-content {
+    height: auto;   
+}
+.jumbotron .jumbotron-content .jumbotron-logo {
+    text-align: center;
+}
+.jumbotron .jumbotron-content .jumbotron-about {
+    text-align: center;
+}
+#accordion .panel-title a {
+    text-transform: uppercase;
+}
+#accordion h2.panel-title{
+    font-size: larger;
+}
+#accordion .panel{
+    background-color: #fdd017;
+    border-color: #000000;
+}
+#accordion .panel .panel-heading{
+    background-color: #000000;
+    color: #fdd017;
+}
+.yellow-button {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    border: solid thin #000000;
+    border-radius: 20px;
+    font-size: 5rem;
+    padding: 5px;
+    color: #000000;
+}
+.yellow-button:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+    background-color: #000000;
+    text-decoration: none;
+}
+.yellow-button:focus {
+    color: #ffffff;
+    border-color: #ffffff;
+    text-decoration: none;
+}
+.panel-body .page-scroll {
+    text-align: center;
+}
+/************************************** ABOUT ME SECTION *********************************************/
+#about-me {
+    background-color: #f05557;
+}
+#about-me h1 {
+    color: #ffffff;
+}
+#about-me .jumbotron .jumbotron-title h1{
+    text-align: center;
+    font-size: 4rem;
+    color: #f05557;
+    border: solid thin #f05557;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    text-transform: none;
+}
+#about-me .jumbotron .jumbotron-about p{
+    color: #f05557;
+}
+/************************************** REGISTER SECTION *********************************************/
+#register {
+    background-color: #000000;
+}
+#register h1{
+    color: #fdd017;
+}
+#register hr {
+    border-color: #fdd017;
+}
+#register .form-group {
+    color: #fdd017;
+}
+#register .form-group input.form-control:focus{
+    border-color: #fdd017;
+    border-width: 2px;
+}
+.modal-content .modal-header{
+    border-width: 2px;
+    border-color: #f05557;
+    background-color: #000000;
+    color: #fdd017;
+}
+.modal-content .modal-body{
+    background-color: #fdd017;
+    color: #000000;
+}
+.modal-content button span{
+    color: #fdd017;
+}
+/************************************** FOOTER *********************************************/

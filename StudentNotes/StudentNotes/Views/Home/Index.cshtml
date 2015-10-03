@@ -1,0 +1,355 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_HomePageLayout.cshtml";
+}
+
+<header id="myCarousel" class="carousel slide" data-rider="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <!-- Set the first background image using inline CSS below. -->
+            <img class="img-responsive" src="~/Resources/mobile_devices.png" />
+        </div>
+        <div class="item">
+            <!-- Set the second background image using inline CSS below. -->
+            <img class="img-responsive" src="~/Resources/file-sharing.jpg"/>
+        </div>
+        <div class="item">
+            <!-- Set the third background image using inline CSS below. -->
+            <img class="img-responsive" src="~/Resources/data steal.png" />
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+
+</header>
+
+<!-- About Project Section -->
+<section id="about-project">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>O Projekcie</h1>
+                <hr class="star-light star-odd">
+            </div>
+        </div>
+        <div class="jumbotron img-responsive container">
+            <div class="jumbotron-title">
+                <h1>StudentNotes</h1>
+            </div>
+            <div class="jumbotron-content">
+                <div class="jumbotron-logo col-sm-4">
+                    <p>OBRAZEK<br/>LOGO</p>
+                </div>
+                <div class="jumbotron-about col-sm-8">
+                    <p class="lead">StudentNotes to portal pozwalający w łatwiejszy sposób zarządzać materiałami dydaktycznymi
+                    zapisanymi w formie elektronicznej (dokumenty tekstowe, pliki graficzne, nagrania audio, filmy wideo)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                Funkcjonalności serwisu
+                            </a>
+                        </h2>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <p>Portal <b>StudentNotes</b> usprawni każdy etap Twojej edukacji, gdyż pozwala na:
+                                <ul>
+                                    <li>Wygodne <b>przechowywanie</b> zgromadzonych materiałów dydaktycznych w zdefiniowanych przez Ciebie strukturach -
+                                        to <b>Ty</b> decydujesz w jakich katalogach zapisane zostaną twoje pliki.</li>
+                                    <li>Łatwe <b>udostępnianie</b> materiałów innym użytkownikom, a nawet całym grupom użytkowników.</li>
+                                    <li><b>Tagowanie</b> zapisanych w serwisie plików, co znacznie usprawnia proces <b>wyszukiwania</b> wybranego pliku.</li>
+                                    <li><b>Zarządzanie</b> dostępem do <b>Twoich</b> notatek.</li>
+                                    <li><b>Pobieranie</b> materiałów na dowolne urządzenie mobilne - wystarczy posiadać dostęp do sieci Internet.</li>
+                                </ul>
+                            </p>
+                            <p>
+                                Wszystkie te funkcjonalności zostaną ci udostępnione bezpośrednio po procesie rejestracji - i to
+                                zupełnie <b>za darmo!</b>
+                                <br/>
+                                <b>Nie zwlekaj! Załóż konto</b> i przestań marnować czas na kopiowanie notatek od znajomych, czy też
+                                wyszukiwanie ich gdzieś w folderach na dysku twardym. Tutaj masz wszystko zapisane w przejrzystych strukturach,
+                                a dostęp masz zapewniony przez cały czas!
+                            </p>
+                            <div class="page-scroll">
+                                <a class="yellow-button" href="#register">Zarejestruj się</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                Obsługiwane formaty plików
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>
+                                Serwis <b>StrudentNotes</b> współpracuje z plikami posiadającymi <b>dowolne rozszerzenie</b>. Natomiast w celu usprawnienia
+                                wyszukiwania pliku konkretnego typu wprowadzona została następująca klasyfikacja rozszerzeń (każda kategoria będzie
+                                odpowiadała konkrentym rozszerzeniom):
+                                <ol>
+                                    <li><b>Dokumenty tekstowe</b> - .TXT, .RTF, .DOC/.DOCX, .ODT, .PDF</li>
+                                    <li><b>Pliki arkusza kalkulacyjnego</b> - .XLS/.XLSX, .ODS</li>
+                                    <li><b>Prezentacje multimedialne</b> - .PPT/.PPTX, .ODP</li>
+                                    <li><b>Pliki graficzne</b> - .JPEG, .JPS, .TIFF, .PNG, .GIF, .BMP, .XCF, .PSD, .CDR, .SWF, .DGN, .DWF, .DWG</li>
+                                    <li><b>Nagrania audio</b> - .WAV, .AIF, .MPG, .MPEG, .MPEG2, .MIDI, .MP3, .WMA</li>
+                                    <li><b>Filmy wideo</b> - 3GP, .ASF, .AVI, .DV, .DVD, .FLV, .M2TS, .MKV, .MP4, .SMV, .TS, .WMV, .VCD</li>
+                                    <li><b>Pozostałe</b> - do tej kategorii przypisane zostają wszystkie rozszerzenia nie uwzględnione w powyższych kategoriach.</li>
+                                </ol>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                Zasady korzystania z serwisu
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>
+                                Zakładając konto na portalu <b>StudentNotes</b> Użytkownik zgadza się na poniższe warunki korzystania z serwisu:
+                            </p>
+                            <ol>
+                                <li>
+                                    Użytkownik zobowiązuje się nie naruszać w żaden możliwy sposób powszechnie rozumianego prawa autorskiego. A co za tym idzie -
+                                    każde złamanie zasad zdefioniowanych w Ustawie z dnia 4 lutego 1994r. o prawie autorskim i prawach pokrewnych (Dz.U. 1994 nr 24 poz. 83)
+                                    będzie równoznaczne z niedotrzymaniem zasad regulaminowych i wiązać sie będzie z bezwarunkowym usunięciem konta użytkownika.
+                                </li>
+                                <li>
+                                    Zabrania się podszywania pod innych użytkowników serwisu w jakichkolwiek celach.
+                                </li>
+                                <li>
+                                    Wszelkie próby wyłudzeń haseł innych użytkowników w jakichkolwiek celach, będą oznaczały niedotrzymanie warunków regulaminowych.
+                                </li>
+                                <li>
+                                    Portal <b>StudentNotes</b> nie ponosi żadnej odpowiedzialności cywilnoprawnej na wypadek utraty jakichkolwiek danych zgromadzonych przez
+                                    użytkownika.
+                                </li>
+                            </ol>
+                            <p>
+                                Konsekwencją złamania przez użytkownika zasad zdefiniowanych w punktach 1-3 jest bezwarunkowe usunięcie takiego użytkownika z serwisu. Tym samym
+                                pliki, których jest właścicielem zostaną niezwłocznie usunięte.
+                            </p>
+                            <p>
+                                W przypadku nie zgadzania się z jakimkolwiek punktem zdefiniowanym w regulaminie proces rejestracji staje się niemożliwy do zrealizowania.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Me Section -->
+<section class="success" id="about-me">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>O Autorze</h1>
+                <hr class="star-light star-even">
+            </div>
+        </div>
+        <div class="jumbotron img-responsive container">
+            <div class="jumbotron-title">
+                <h1>Cześć! Nazywam się Robert Winkler</h1>
+            </div>
+            <div class="jumbotron-content">
+                <div class="jumbotron-logo col-sm-4">
+                    <p>OBRAZEK<br />ZDJĘCIE</p>
+                </div>
+                <div class="jumbotron-about col-sm-8">
+                    <p class="lead">
+                        Jestem początkującym programistą .NET z ukierunkowaniem na rozwiązania internetowe -
+                        tworzenie stron www, portali internetowych i systemów zarządzania treścią (CMS).
+                    </p>
+                    <p>
+                        Realizując swoje projekty dbam o ich responsywność. W ten sposób tworzony projekt działa prawidłowo
+                        na różnego rodzaju urządzeniach (smartfony, tablety, komputery, TV).
+                    </p>
+                    <p>
+                        Wykorzystuję najnowsze technologie zapewniając tym samym, że projekt jest nowoczesny, estetyczny,
+                        a zarazem wydajny w działaniu.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Register Section -->
+<section id="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Utwórz konto w serwisie</h1>
+                <hr class="star-light star-even">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 hello">
+                <img src="~/Resources/logo_STARE.png" class="img-responsive" />
+            </div>
+            <div class="col-lg-7">
+
+                <form class="form-horizontal" role="form" method="POST" action="/LoggedIn/Register">
+                    <div class="form-group">
+                        <label for="loginName" class="col-sm-5 control-label">Nazwa użytkownika (login):</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" placeholder="Login" name="login">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginName" class="col-sm-5 control-label">Wprowadź hasło:</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" placeholder="Password" name="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginName" class="col-sm-5 control-label">Potwierdź wprowadzone hasło:</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" placeholder="Password" name="confirmPassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBox("termsOfUse", new {Value = true}) Oświadczam, że zapoznałem/am się i akceptuję
+                                    <a id="terms-of-use-link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Regulamin</a>
+                                     serwisu StudentNotes.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        @*@Html.ActionLink("Zarejestruj się", "LoggedIn", "LoggedIn", null, new { @class = "btn btn-success", type = "button", style = "border-radius:0px; width:inherit;" })*@
+                        <input type="submit" value="Zarejestruj się" class="btn btn-success" style="border-radius: 0px; width: inherit;" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="footer-above">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col col-md-4">
+                    <h3>Location</h3>
+                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                </div>
+                <div class="footer-col col-md-4">
+                    <h3>Around the Web</h3>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col col-md-4">
+                    <h3>About Freelancer</h3>
+                    <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-below">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    Copyright &copy; Your Website 2014
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+<div class="scroll-top page-scroll visible-xs visible-sm">
+    <a class="btn btn-primary" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Regulamin portalu StudentNotes</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Zakładając konto na portalu <b>StudentNotes</b> Użytkownik zgadza się na poniższe warunki korzystania z serwisu:
+                </p>
+                <ol>
+                    <li>
+                        Użytkownik zobowiązuje się nie naruszać w żaden możliwy sposób powszechnie rozumianego prawa autorskiego. A co za tym idzie -
+                        każde złamanie zasad zdefioniowanych w Ustawie z dnia 4 lutego 1994r. o prawie autorskim i prawach pokrewnych (Dz.U. 1994 nr 24 poz. 83)
+                        będzie równoznaczne z niedotrzymaniem zasad regulaminowych i wiązać sie będzie z bezwarunkowym usunięciem konta użytkownika.
+                    </li>
+                    <li>
+                        Zabrania się podszywania pod innych użytkowników serwisu w jakichkolwiek celach.
+                    </li>
+                    <li>
+                        Wszelkie próby wyłudzeń haseł innych użytkowników w jakichkolwiek celach, będą oznaczały niedotrzymanie warunków regulaminowych.
+                    </li>
+                    <li>
+                        Portal <b>StudentNotes</b> nie ponosi żadnej odpowiedzialności cywilnoprawnej na wypadek utraty jakichkolwiek danych zgromadzonych przez
+                        użytkownika.
+                    </li>
+                </ol>
+                <p>
+                    Konsekwencją złamania przez użytkownika zasad zdefiniowanych w punktach 1-3 jest bezwarunkowe usunięcie takiego użytkownika z serwisu. Tym samym
+                    pliki, których jest właścicielem zostaną niezwłocznie usunięte.
+                </p>
+                <p>
+                    W przypadku nie zgadzania się z jakimkolwiek punktem zdefiniowanym w regulaminie proces rejestracji staje się niemożliwy do zrealizowania.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
