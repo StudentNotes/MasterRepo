@@ -35,3 +35,20 @@ D:\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Mvc.xml
 D:\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.csprojResolveAssemblyReference.cache
 D:\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.dll
 D:\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\StudentNotes.dll.config
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\StudentNotes.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\StudentNotes.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Helpers.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Mvc.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Razor.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Webpages.Deployment.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Webpages.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Webpages.Razor.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Razor.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Webpages.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Webpages.Deployment.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Webpages.Razor.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Helpers.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\bin\System.Web.Mvc.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.pdb

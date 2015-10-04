@@ -6,19 +6,40 @@
     border-style: none;
     padding: 10px 0;
     background-color: #000000;
-    border-bottom: solid thin #f05557;
+    border-bottom: solid 2px #fdd017;
     }
 /*logo w pasku górnym*/
 #wrapper .navbar-fixed-top .navbar-header .navbar-brand{
-    border: solid thin #fdd017;
+    margin-left: 20px; 
+    border: solid 2px #262626;
+    border-radius: 20px;
+    color: #fdd017;
+    height: 54px;
+    font-size: 3rem;
+    text-decoration: underline;
+}
+#wrapper .navbar-fixed-top .navbar-header .navbar-brand:hover{
+    border: solid 2px #fdd017;
+    color: #fdd017;
+}
+/*Kontener na przyciski menu górne*/
+.navbar-collapse .navbar-nav-buttons {
+    margin-left: 2rem;
+}
+/*Przyciski menu górne*/
+.navbar-collapse .navbar-nav-buttons .navbar-nav-button {
+    text-transform: uppercase;
+    margin: 0 1rem;
+    border: solid 2px #262626;
     border-radius: 20px;
     color: #fdd017;
 }
-#wrapper .navbar-fixed-top .navbar-header .navbar-brand:hover{
-    border-color: #f05557;
-    background-color: #fdd017;
-    color: #000000;
+.navbar-collapse .navbar-nav-buttons .navbar-nav-button:hover {
+    border: solid 2px #fdd017;
+    color: #fdd017;
 }
+/*Przycisk użytkownika menu górne*/
+
 /****************************************   NAVBAR_SIDE_PARTIAL  *****************************************/
 .collapse .side-nav {
     margin-top: 20px;

@@ -135,6 +135,8 @@
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Resources\avatar-facet.jpg" />
+    <Content Include="Resources\avatar_baba.jpg" />
     <Content Include="Resources\data steal.png" />
     <Content Include="Resources\file-sharing.jpg" />
     <Content Include="Resources\mobile_devices.png" />
