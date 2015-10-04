@@ -39,8 +39,40 @@
     color: #fdd017;
 }
 /*Przycisk użytkownika menu górne*/
+.navbar-right.navbar-nav-user{
+    border: solid 2px #262626;
+    border-radius: 20px;
+    max-height: 54px;
+    margin-right: 2rem;
+    padding: 1px 0;
+}
+.navbar-right.navbar-nav-user:hover,
+.navbar-right.navbar-nav-user:focus{
+    border-color: #fdd017;
+}
+.navbar-right.navbar-nav-user .thumbnail {
+    margin: 0 20px;
+    background-color: #000000;
+    border: none;
+    padding: 4px;
+}
+
+.navbar-right.navbar-nav-user .thumbnail img {
+    max-height: 40px;
+    display: inline;
+}
+.navbar-right.navbar-nav-user .thumbnail span {
+    color: #fdd017;
+}
+#dropdown1:hover,
+#dropdown1:focus {
+    text-decoration: none;
+}
 
 /****************************************   NAVBAR_SIDE_PARTIAL  *****************************************/
+#navbar-side {
+    margin-top: 54px;
+}
 .collapse .side-nav {
     margin-top: 20px;
     background-color: #fdd017;

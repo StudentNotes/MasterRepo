@@ -1,4 +1,4 @@
-﻿<div class="collapse navbar-collapse navbar-top-collapse">
+﻿<div id="navbar-top-collapse" class="collapse navbar-collapse">
     <ul class="nav navbar-nav navbar-nav-buttons">
         <li>
             <a href="#" class="navbar-nav-button">Dodaj Notatkę</a>
@@ -10,27 +10,21 @@
             <a href="#" class="navbar-nav-button">Dodaj grupę</a>
         </li>
     </ul>
+
     <div class="navbar-right navbar-nav-user">
-        <div class="thumbnail">
-            <img class="img-responsive" src="~/Resources/avatar-facet.jpg"/>
-        </div>
-        <span>username</span>
-    </div>
-    @*<div class="dropdown navbar-right navbar-nav-user">
-        <button class="btn dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="true">
+        <a class="dropdown-toggle" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
             <div class="thumbnail">
-                <img class="img-responsive" src="~/Resources/avatar-facet.jpg"/>
+                <img class="img-responsive" src="~/Resources/avatar-facet.jpg" />
+                <span>username</span>
+                <span class="glyphicon glyphicon-chevron-down"></span>
             </div>
-            <span  class="thumbnail-title">
-                usernamedfvdfvdfvdfvdfvdfdvdfveferverververvveve
-            </span>      
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown1">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li><a href="#">Separated link</a></li>
         </ul>
-    </div>*@
+    </div>
+
 </div>
