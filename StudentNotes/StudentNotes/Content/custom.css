@@ -70,9 +70,10 @@ section {
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     transition: all .3s;
-    border: solid thin;
+    border: solid 2px; /*zmiana z solid thin*/
     border-radius: 20px;
-    color: #fdd017;
+    border-color: #262626;
+    color: #fdd017; /*dopisane*/
 }
 .navbar-fixed-top .navbar-brand:hover {
     background-color: #000000; /*zmiana*/
@@ -85,9 +86,10 @@ section {
 }
 /*Ustawienie stylu przycisków paska menu po załadowaniu strony (lub też odświerzeniu)*/
 .navbar-fixed-top .navbar-nav li a {
-    color: #fdd017;
-    border: solid 1px;
+    border: solid 2px;
     border-radius: 20px;
+    border-color: #262626; /*zmiana*/
+    color: #fdd017; /*zmiana*/
     margin-right: 10px;
     margin-left: 5px;
     -webkit-transition: all .3s;
@@ -141,12 +143,14 @@ section {
     border-color: #000000;
 }
 .navbar-fixed-top.navbar-shrink .navbar-brand{
-    color: #000000;
-    border: solid thin;
+    border: solid 2px; /*zmiana z solid thin*/
+    border-color: #F5C500; /*zmiana*/
+    color: #000000; /*zmiana*/
     background: #fdd017;
     font-size: 1.5em;
 }
 .navbar-fixed-top.navbar-shrink .navbar-brand:hover{
+    border-color: #2c2c2c; /*dopisane*/
     color: #000000; /*zmiana*/
     background: #fdd017; /*zmiana*/
 }
@@ -156,6 +160,7 @@ section {
 
 /*Ustawienie stylu przycisków paska menu po zjechaniu strony o 100px w dół*/
 .navbar-fixed-top.navbar-shrink .navbar-nav li a {
+    border-color: #F5C500;
     color: #000000;
 }
 .navbar-fixed-top.navbar-shrink .navbar-nav li a.hovertest:hover {
@@ -190,7 +195,7 @@ section {
 /*Panel logowania po zjechaniu 100px w dół*/
 .navbar-fixed-top.navbar-shrink .navbar-collapse .form-inline {
     border-color: #000000;
-    background-color: #4d4d4d;
+    background-color: #4d4d4d; /*fccc06*/
 }
 .navbar-fixed-top.navbar-shrink .navbar-collapse .form-inline .form-group .form-control:focus {
     border-color: #fccc06;
