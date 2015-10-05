@@ -75,13 +75,13 @@ section {
     color: #fdd017;
 }
 .navbar-fixed-top .navbar-brand:hover {
-    background-color: #fdd017;
-    color: #000000;
-    border-color: #f05557;
+    background-color: #000000; /*zmiana*/
+    color: #fdd017; /*zmiana*/
+    border-color: #fdd017; /*zmiana*/
 }
 .navbar-fixed-top .navbar-brand:focus {
     background-color: #000000;
-    color: #ffffff;
+    color: #fdd017; /*zmiana*/
 }
 /*Ustawienie stylu przycisków paska menu po załadowaniu strony (lub też odświerzeniu)*/
 .navbar-fixed-top .navbar-nav li a {
@@ -95,13 +95,13 @@ section {
     transition: all .3s;
 }
 .navbar-fixed-top .navbar-nav li a.hovertest:hover {
-    color: #000000;
-    border-color: #ffffff;
-    background: #fdd017;
+    color: #fdd017; /*zmiana*/
+    border-color: #fdd017; /*zmiana*/
+    background: #000000; /*zmiana*/
 }
 .navbar-fixed-top .navbar-nav li a.hovertest:focus {
     background-color: #000000;
-    color: #ffffff;
+    color: #fdd017; /*zmiana*/
 }
 /*Przycisk naleśnikowy*/
 .navbar-fixed-top .navbar-header button{
@@ -122,7 +122,7 @@ section {
 .navbar-fixed-top .navbar-header button:focus .icon-bar{
     background-color: #ffffff;
 }
-/*Panel logowania*/
+/*Panel logowania*/    /*polecam spróbować zmienić zielony kolor ZALOGUJ na czerwony lub bordo... chciałam sama ale nie wiem gdzie*/
 .navbar-fixed-top .navbar-collapse .form-inline {
     padding: 7px;
     border: solid 2px #fdd017;
@@ -147,11 +147,11 @@ section {
     font-size: 1.5em;
 }
 .navbar-fixed-top.navbar-shrink .navbar-brand:hover{
-    color: #ffffff;
-    background: #000000;
+    color: #000000; /*zmiana*/
+    background: #fdd017; /*zmiana*/
 }
 .navbar-fixed-top.navbar-shrink .navbar-brand:focus{
-    color: #ffffff;
+    color: #000000; /*zmiana*/
 }
 
 /*Ustawienie stylu przycisków paska menu po zjechaniu strony o 100px w dół*/
@@ -159,16 +159,17 @@ section {
     color: #000000;
 }
 .navbar-fixed-top.navbar-shrink .navbar-nav li a.hovertest:hover {
-    color: #ffffff;
-    background: #000000;
+    color: #000000; /*zmiana*/
+    background: #fdd017; /*zmiana*/
+    border-color: #000000; /*chyba dopisałam*/
 }
 .navbar-fixed-top.navbar-shrink .navbar-nav li a.hovertest:focus {
     background-color: #fdd017;
-    color: #ffffff;
+    color: #000000; /*zmiana*/
 }
 .navbar-fixed-top.navbar-shrink .navbar-nav li.active a.hovertest {
     background-color: #000000;
-    color: #ffffff;
+    color: #fdd017; /*zmiana z białego*/
 }
 /*Przycisk naleśnikowy po zjechaniu o 100px w dół*/
 .navbar-fixed-top.navbar-shrink .navbar-header button{
@@ -230,7 +231,7 @@ section {
 
 /************************************** ABOUT PROJECT SECTION *********************************************/
 #about-project {
-    background-color: #ffe68b;
+    background-color: #ffffff; /*zmiana z ffe68b*/
 }
 #about-project h1 {
     color: #000000;
@@ -271,7 +272,7 @@ section {
     font-size: larger;
 }
 #accordion .panel{
-    background-color: #fdd017;
+    background-color: #ffe68b; /*zmiana z fdd017*/
     border-color: #000000;
 }
 #accordion .panel .panel-heading{
@@ -289,14 +290,14 @@ section {
     color: #000000;
 }
 .yellow-button:hover {
-    color: #ffffff;
-    border-color: #ffffff;
-    background-color: #000000;
+    color: #000000; /*zmiana z ffffff*/
+    border-color: #000000; /*zmiana z ffffff*/
+    background-color: #fdd017; /*zmiana z 000000*/
     text-decoration: none;
 }
 .yellow-button:focus {
-    color: #ffffff;
-    border-color: #ffffff;
+    color: #000000; /*zmiana z ffffff*/
+    border-color: #000000; /*zmiana z ffffff*/
     text-decoration: none;
 }
 .panel-body .page-scroll {

@@ -166,6 +166,11 @@
     </Compile>
     <Compile Include="Models\StudentNotesModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\lang-pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lang-pl.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -173,6 +178,16 @@
     <Content Include="Views\LoggedIn\Index.cshtml" />
     <Content Include="Views\Partials\NavbarTopPartial.cshtml" />
     <Content Include="Views\Partials\NavbarSidePartial.cshtml" />
+    <Content Include="Views\Partials\MyNotes\UniversityNotesPartial.cshtml" />
+    <Content Include="Views\Partials\MyNotes\AllNotesPartial.cshtml" />
+    <Content Include="Views\Partials\MyNotes\SharedNotesPartial.cshtml" />
+    <Content Include="Views\Partials\MyNotes\NewestNotesPartial.cshtml" />
+    <Content Include="Views\Partials\MyNotes\PrivateNotesPartial.cshtml" />
+    <Content Include="Views\Partials\MyGroups\GroupSubjectNotesPartial.cshtml" />
+    <Content Include="Views\Partials\MyUniversities\UniversitySemestersPartial.cshtml" />
+    <Content Include="Views\Partials\MyUniversities\UniversitySemesterSubjectsPartial.cshtml" />
+    <Content Include="Views\Partials\MyUniversities\UniversitySemesterSubjectNotesPartial.cshtml" />
+    <Content Include="Views\Partials\MyGroups\GroupSubjectsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -182,6 +197,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\lang-pl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>lang-pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
