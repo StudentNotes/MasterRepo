@@ -54,3 +54,5 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.Resources.lang-pl.resources
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.csproj.GenerateResource.Cache
+D:\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.Resources.lang-pl.resources
+D:\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.csproj.GenerateResource.Cache
