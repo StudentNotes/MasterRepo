@@ -53,3 +53,5 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.csprojResolveAssemblyReference.cache
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.Resources.lang-pl.resources
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes\obj\Debug\StudentNotes.csproj.GenerateResource.Cache
