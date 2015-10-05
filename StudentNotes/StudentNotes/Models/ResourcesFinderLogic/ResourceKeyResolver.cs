@@ -35,5 +35,29 @@ namespace StudentNotesWeb.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("HomePageContentAboutProject"); }
         }
+        public static string AccordionFeaturesTitle
+        {
+            get { return ResourceFinder.GetResource("AccordionFeaturesTitle"); }
+        }
+        public static string ConstPortal
+        {
+            get { return ResourceFinder.GetResource("ConstPortal"); }
+        }
+        public static string ConstStudentNotes
+        {
+            get { return ResourceFinder.GetResource("ConstStudentNotes"); }
+        }
+        public static string ConstComfortable
+        {
+            get { return ResourceFinder.GetResource("ConstComfortable"); }
+        }
+        public static string ConstEasy
+        {
+            get { return ResourceFinder.GetResource("ConstEasy"); }
+        }
+        public static string AccordionFeaturesContentHeader
+        {
+            get { return ResourceFinder.GetResource("AccordionFeaturesContentHeader"); }
+        }
     }
 }

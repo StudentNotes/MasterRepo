@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccordionFeaturesContentHeader" xml:space="preserve">
+    <value>usprawni każdy etap Twojej edukacji, gdyż pozwala na:</value>
+  </data>
+  <data name="AccordionFeaturesTitle" xml:space="preserve">
+    <value>Funkcjonalności serwisu</value>
+  </data>
+  <data name="ConstComfortable" xml:space="preserve">
+    <value>Wygodne</value>
+  </data>
+  <data name="ConstEasy" xml:space="preserve">
+    <value>Łatwe</value>
+  </data>
+  <data name="ConstPortal" xml:space="preserve">
+    <value>Portal</value>
+  </data>
+  <data name="ConstStudentNotes" xml:space="preserve">
+    <value>StudentNotes</value>
+  </data>
   <data name="HomePageContentAboutProject" xml:space="preserve">
     <value>StudentNotes to portal pozwalający w łatwiejszy sposób zarządzać materiałami dydaktycznymi zapisanymi w formie elektronicznej (dokumenty tekstowe, pliki graficzne, nagrania audio, filmy wideo)</value>
   </data>
