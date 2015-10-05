@@ -1,4 +1,4 @@
-﻿
+﻿@using StudentNotesWeb.Models.ResourcesFinderLogic
 @{
     Layout = "~/Views/Shared/_HomePageLayout.cshtml";
 }
@@ -38,7 +38,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>O Projekcie</h1>
+                <h1>@ResourceKeyResolver.HomePageNavBarAboutProject</h1>
                 <hr class="star-light star-odd">
             </div>
         </div>
@@ -51,8 +51,7 @@
                     <p>OBRAZEK<br/>LOGO</p>
                 </div>
                 <div class="jumbotron-about col-sm-8">
-                    <p class="lead">StudentNotes to portal pozwalający w łatwiejszy sposób zarządzać materiałami dydaktycznymi
-                    zapisanymi w formie elektronicznej (dokumenty tekstowe, pliki graficzne, nagrania audio, filmy wideo)</p>
+                    <p class="lead"></p>
                 </div>
             </div>
         </div>
