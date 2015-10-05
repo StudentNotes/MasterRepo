@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentNotes</RootNamespace>
-    <AssemblyName>StudentNotes</AssemblyName>
+    <RootNamespace>StudentNotesWeb</RootNamespace>
+    <AssemblyName>StudentNotesWeb</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -164,12 +164,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResourcesFinderLogic\ResourceFinder.cs" />
+    <Compile Include="Models\ResourcesFinderLogic\ResourceKeyResolver.cs" />
     <Compile Include="Models\StudentNotesModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\lang-pl.Designer.cs">
+    <Compile Include="Resources\Lang.pl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>lang-pl.resx</DependentUpon>
+      <DependentUpon>Lang.pl.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -199,9 +201,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\lang-pl.resx">
+    <EmbeddedResource Include="Resources\Lang.pl.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>lang-pl.Designer.cs</LastGenOutput>
+      <LastGenOutput>Lang.pl.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

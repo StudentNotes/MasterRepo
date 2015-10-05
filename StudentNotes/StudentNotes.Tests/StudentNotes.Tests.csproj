@@ -6,7 +6,7 @@
     <ProjectGuid>{9339B13F-9F42-4055-91B8-253DC90ADBAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentNotes.Tests</RootNamespace>
+    <RootNamespace>StudentNotesWeb.Tests</RootNamespace>
     <AssemblyName>StudentNotes.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -52,9 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StudentNotes\StudentNotes.csproj">
+    <ProjectReference Include="..\StudentNotes\StudentNotesWeb.csproj">
       <Project>{2A1B6EF9-62AA-409B-B775-F2D44C3CC949}</Project>
-      <Name>StudentNotes</Name>
+      <Name>StudentNotesWeb</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StudentNotesWeb.Models.ResourcesFinderLogic;
 
-namespace StudentNotes.Tests
+namespace StudentNotesWeb.Tests
 {
     [TestClass]
     public class UnitTest1
@@ -9,6 +10,9 @@ namespace StudentNotes.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            ResourceFinder resourceFinder = new ResourceFinder();
+            string resourceValue = ResourceFinder.GetResource("resourceKey_1");
+            ResourceFinder.ChangeResourceLanguage("de");
         }
     }
 }

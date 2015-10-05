@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace StudentNotes.Models.StudentNotesModels
+namespace StudentNotesWeb.Models.StudentNotesModels
 {
     public class User
     {

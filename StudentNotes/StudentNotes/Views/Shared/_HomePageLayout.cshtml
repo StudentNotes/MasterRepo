@@ -1,8 +1,8 @@
-﻿
+﻿@using StudentNotesWeb.Models.ResourcesFinderLogic
+
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -55,23 +55,23 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a class="hovertest" href="#about-project">O projekcie</a>
+                        <a class="hovertest" href="#about-project">@ResourceKeyResolver.HomePageNavBarAboutProject</a>
                     </li>
                     <li class="page-scroll">
-                        <a class="hovertest" href="#about-me">O autorze</a>
+                        <a class="hovertest" href="#about-me">@ResourceKeyResolver.HomePageNavBarAboutAuthor</a>
                     </li>
                     <li class="page-scroll">
-                        <a class="hovertest" href="#register">Rejestracja</a>
+                        <a class="hovertest" href="#register">@ResourceKeyResolver.HomePageNavBarSignUp</a>
                     </li>
                     <li class="col-lg-offset-1"></li>
                     <li>
                         <form class="form-inline" role="search" action="/Home/SignIn" method="post">
                             <div class="form-group">
-                                <input type="text" name="email" class="form-control" placeholder="E-mail">
-                                <input type="password" name="password" class="form-control" placeholder="Password">
+                                <input type="text" name="email" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupEmail">
+                                <input type="password" name="password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupPassword">
                             </div>
                             @Html.AntiForgeryToken()
-                            <input type="submit" value="Zaloguj" class="btn btn-success" />
+                            <input type="submit" value="@ResourceKeyResolver.HomePageNavBarFormGroupSignIn" class="btn btn-success" />
                         </form>
                     </li>
                 </ul>
