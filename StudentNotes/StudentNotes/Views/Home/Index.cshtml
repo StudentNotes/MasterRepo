@@ -44,7 +44,7 @@
         </div>
         <div class="jumbotron img-responsive container">
             <div class="jumbotron-title">
-                <h1>StudentNotes</h1>
+                <h1>@ResourceKeyResolver.ConstStudentNotes</h1>
             </div>
             <div class="jumbotron-content">
                 <div class="jumbotron-logo col-sm-4">
@@ -71,23 +71,20 @@
                             <p>
                                 @ResourceKeyResolver.ConstPortal <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionFeaturesContentHeader
                                 <ul>
-                                    <li>@ResourceKeyResolver.ConstComfortable <b>przechowywanie</b> zgromadzonych materiałów dydaktycznych w zdefiniowanych przez Ciebie strukturach - to <b>Ty</b> decydujesz w jakich katalogach zapisane zostaną twoje pliki.</li>
-                                    <li>@ResourceKeyResolver.ConstEasy <b>udostępnianie</b> materiałów innym użytkownikom, a nawet całym grupom użytkowników.</li>
-                                    <li><b>Tagowanie</b> zapisanych w serwisie plików, co znacznie usprawnia proces <b>wyszukiwania</b> wybranego pliku.</li>
-                                    <li><b>Zarządzanie</b> dostępem do <b>Twoich</b> notatek.</li>
-                                    <li><b>Pobieranie</b> materiałów na dowolne urządzenie mobilne - wystarczy posiadać dostęp do sieci Internet.</li>
+                                    <li>@ResourceKeyResolver.ConstComfortable <b>@ResourceKeyResolver.ConstStoring</b>@ResourceKeyResolver.AccordionFeaturesFirstContent <b>@ResourceKeyResolver.ConstYou</b> @ResourceKeyResolver.AccordionFeaturesFirstContentCd</li>
+                                    <li>@ResourceKeyResolver.ConstEasy <b>@ResourceKeyResolver.ConstSharing</b> @ResourceKeyResolver.AccordionFeaturesSecondContent</li>
+                                    <li><b>@ResourceKeyResolver.ConstTagging</b> @ResourceKeyResolver.AccordionFeaturesThirdContent<b> @ResourceKeyResolver.ConstSearching</b> @ResourceKeyResolver.AccordionFeaturesThirdContentCd</li>
+                                    <li><b>@ResourceKeyResolver.ConstManagement</b> @ResourceKeyResolver.AccordionFeaturesFourthContent <b>@ResourceKeyResolver.ConstYours</b> @ResourceKeyResolver.AccordionFeaturesFourthContentCd</li>
+                                    <li><b>@ResourceKeyResolver.ConstDownloading</b> @ResourceKeyResolver.AccordionFeaturesFifthContent</li>
                                 </ul>
                             </p>
                             <p>
-                                Wszystkie te funkcjonalności zostaną ci udostępnione bezpośrednio po procesie rejestracji - i to
-                                zupełnie <b>za darmo!</b>
+                                @ResourceKeyResolver.AccordionFeaturesContentBody <b>@ResourceKeyResolver.AccordionFeaturesContentBodyCd</b>
                                 <br />
-                                <b>Nie zwlekaj! Załóż konto</b> i przestań marnować czas na kopiowanie notatek od znajomych, czy też
-                                wyszukiwanie ich gdzieś w folderach na dysku twardym. Tutaj masz wszystko zapisane w przejrzystych strukturach,
-                                a dostęp masz zapewniony przez cały czas!
+                                <b>@ResourceKeyResolver.AccordionFeaturesContentBodyCd_1</b> @ResourceKeyResolver.AccordionFeaturesContentBodyCd_2
                             </p>
                             <div class="page-scroll">
-                                <a class="yellow-button" href="#register">Zarejestruj się</a>
+                                <a class="yellow-button" href="#register">@ResourceKeyResolver.ConstSignUp</a>
                             </div>
                         </div>
                     </div>
@@ -97,24 +94,23 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                Obsługiwane formaty plików
+                                @ResourceKeyResolver.AccordionExtensionsTitle               
                             </a>
                         </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
                             <p>
-                                Serwis <b>StrudentNotes</b> współpracuje z plikami posiadającymi <b>dowolne rozszerzenie</b>. Natomiast w celu usprawnienia
-                                wyszukiwania pliku konkretnego typu wprowadzona została następująca klasyfikacja rozszerzeń (każda kategoria będzie
-                                odpowiadała konkrentym rozszerzeniom):
+                                @ResourceKeyResolver.ConstService <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionExtensionsContentHeader <b>@ResourceKeyResolver.AccordionExtensionsContentHeaderCd</b>
+                                @ResourceKeyResolver.AccordionExtensionsContentHeaderCd_1
                                 <ol>
-                                    <li><b>Dokumenty tekstowe</b> - .TXT, .RTF, .DOC/.DOCX, .ODT, .PDF</li>
-                                    <li><b>Pliki arkusza kalkulacyjnego</b> - .XLS/.XLSX, .ODS</li>
-                                    <li><b>Prezentacje multimedialne</b> - .PPT/.PPTX, .ODP</li>
-                                    <li><b>Pliki graficzne</b> - .JPEG, .JPS, .TIFF, .PNG, .GIF, .BMP, .XCF, .PSD, .CDR, .SWF, .DGN, .DWF, .DWG</li>
-                                    <li><b>Nagrania audio</b> - .WAV, .AIF, .MPG, .MPEG, .MPEG2, .MIDI, .MP3, .WMA</li>
-                                    <li><b>Filmy wideo</b> - 3GP, .ASF, .AVI, .DV, .DVD, .FLV, .M2TS, .MKV, .MP4, .SMV, .TS, .WMV, .VCD</li>
-                                    <li><b>Pozostałe</b> - do tej kategorii przypisane zostają wszystkie rozszerzenia nie uwzględnione w powyższych kategoriach.</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsFirstContentType</b> @ResourceKeyResolver.AccordionExtensionsFirstContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsSecondContentType</b> @ResourceKeyResolver.AccordionExtensionsSecondContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsThirdContentType</b> @ResourceKeyResolver.AccordionExtensionsThirdContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsFourthContentType</b> @ResourceKeyResolver.AccordionExtensionsFourthContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsFifthContentType</b> @ResourceKeyResolver.AccordionExtensionsFifthContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsSixthContentType</b> @ResourceKeyResolver.AccordionExtensionsSixthContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsSeventhContentType</b> @ResourceKeyResolver.AccordionExtensionsSeventhContentDesc</li>
                                 </ol>
                             </p>
                         </div>
@@ -125,38 +121,34 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                Zasady korzystania z serwisu
+                                @ResourceKeyResolver.AccordionRulesTitle    
                             </a>
                         </h4>
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
                             <p>
-                                Zakładając konto na portalu <b>StudentNotes</b> Użytkownik zgadza się na poniższe warunki korzystania z serwisu:
+                               @ResourceKeyResolver.AccordionRulesContentHeader <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionRulesContentHeaderCd
                             </p>
                             <ol>
                                 <li>
-                                    Użytkownik zobowiązuje się nie naruszać w żaden możliwy sposób powszechnie rozumianego prawa autorskiego. A co za tym idzie -
-                                    każde złamanie zasad zdefioniowanych w Ustawie z dnia 4 lutego 1994r. o prawie autorskim i prawach pokrewnych (Dz.U. 1994 nr 24 poz. 83)
-                                    będzie równoznaczne z niedotrzymaniem zasad regulaminowych i wiązać sie będzie z bezwarunkowym usunięciem konta użytkownika.
+                                    @ResourceKeyResolver.AccordionRulesContentFirstRule
                                 </li>
                                 <li>
-                                    Zabrania się podszywania pod innych użytkowników serwisu w jakichkolwiek celach.
+                                    @ResourceKeyResolver.AccordionRulesContentSecondRule
                                 </li>
                                 <li>
-                                    Wszelkie próby wyłudzeń haseł innych użytkowników w jakichkolwiek celach, będą oznaczały niedotrzymanie warunków regulaminowych.
+                                    @ResourceKeyResolver.AccordionRulesContentThirdRule
                                 </li>
                                 <li>
-                                    Portal <b>StudentNotes</b> nie ponosi żadnej odpowiedzialności cywilnoprawnej na wypadek utraty jakichkolwiek danych zgromadzonych przez
-                                    użytkownika.
+                                    @ResourceKeyResolver.ConstPortal <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionRulesContentFourthRule
                                 </li>
                             </ol>
                             <p>
-                                Konsekwencją złamania przez użytkownika zasad zdefiniowanych w punktach 1-3 jest bezwarunkowe usunięcie takiego użytkownika z serwisu. Tym samym
-                                pliki, których jest właścicielem zostaną niezwłocznie usunięte.
+                                @ResourceKeyResolver.AccordionRulesContentBody
                             </p>
                             <p>
-                                W przypadku nie zgadzania się z jakimkolwiek punktem zdefiniowanym w regulaminie proces rejestracji staje się niemożliwy do zrealizowania.
+                                @ResourceKeyResolver.AccordionRulesContentBodyCd
                             </p>
                         </div>
                     </div>
@@ -171,13 +163,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>O Autorze</h1>
+                <h1>@ResourceKeyResolver.HomePageNavBarAboutAuthor</h1>
                 <hr class="star-light star-even">
             </div>
         </div>
         <div class="jumbotron img-responsive container">
             <div class="jumbotron-title">
-                <h1>Cześć! Nazywam się Robert Winkler</h1>
+                <h1>@ResourceKeyResolver.JumbotronAboutUserGreeting</h1>
             </div>
             <div class="jumbotron-content">
                 <div class="jumbotron-logo col-sm-4">
@@ -185,16 +177,13 @@
                 </div>
                 <div class="jumbotron-about col-sm-8">
                     <p class="lead">
-                        Jestem początkującym programistą .NET z ukierunkowaniem na rozwiązania internetowe -
-                        tworzenie stron www, portali internetowych i systemów zarządzania treścią (CMS).
+                        @ResourceKeyResolver.JumbotronAboutUserContent_1
                     </p>
                     <p>
-                        Realizując swoje projekty dbam o ich responsywność. W ten sposób tworzony projekt działa prawidłowo
-                        na różnego rodzaju urządzeniach (smartfony, tablety, komputery, TV).
+                        @ResourceKeyResolver.JumbotronAboutUserContent_2
                     </p>
                     <p>
-                        Wykorzystuję najnowsze technologie zapewniając tym samym, że projekt jest nowoczesny, estetyczny,
-                        a zarazem wydajny w działaniu.
+                        @ResourceKeyResolver.JumbotronAboutUserContent_3
                     </p>
                 </div>
             </div>
@@ -206,8 +195,8 @@
 <section id="register">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1>Utwórz konto w serwisie</h1>
+            <div class="col-lg-12 text-center">               
+                <h1>@ResourceKeyResolver.ConstSignUpInService</h1>
                 <hr class="star-light star-even">
             </div>
         </div>
@@ -219,30 +208,30 @@
 
                 <form class="form-horizontal" role="form" method="POST" action="/LoggedIn/Register">
                     <div class="form-group">
-                        <label for="loginName" class="col-sm-5 control-label">Nazwa użytkownika (login):</label>
+                        <label for="loginName" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_1</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" placeholder="Login" name="login">
+                            <input type="text" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupEmail" name="login">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="loginName" class="col-sm-5 control-label">Wprowadź hasło:</label>
+                        <label for="loginName" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_2</label>
                         <div class="col-sm-7">
-                            <input type="password" class="form-control" placeholder="Password" name="password">
+                            <input type="password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupPassword" name="password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="loginName" class="col-sm-5 control-label">Potwierdź wprowadzone hasło:</label>
+                        <label for="loginName" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_3</label>
                         <div class="col-sm-7">
-                            <input type="password" class="form-control" placeholder="Password" name="confirmPassword">
+                            <input type="password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupConfirmPassword" name="confirmPassword">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="checkbox">
                                 <label>
-                                    @Html.CheckBox("termsOfUse", new {Value = true}) Oświadczam, że zapoznałem/am się i akceptuję
-                                    <a id="terms-of-use-link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Regulamin</a>
-                                     serwisu StudentNotes.
+                                    @Html.CheckBox("termsOfUse", new {Value = true}) @ResourceKeyResolver.SignUpFormLabel_4
+                                    <a id="terms-of-use-link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">@ResourceKeyResolver.ConstTermsOfUse</a>
+                                     @ResourceKeyResolver.SignUpFormLabel_4Cd
                                 </label>
                             </div>
                         </div>
@@ -322,31 +311,27 @@
             </div>
             <div class="modal-body">
                 <p>
-                    Zakładając konto na portalu <b>StudentNotes</b> Użytkownik zgadza się na poniższe warunki korzystania z serwisu:
+                    @ResourceKeyResolver.AccordionRulesContentHeader <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionRulesContentHeaderCd
                 </p>
                 <ol>
                     <li>
-                        Użytkownik zobowiązuje się nie naruszać w żaden możliwy sposób powszechnie rozumianego prawa autorskiego. A co za tym idzie -
-                        każde złamanie zasad zdefioniowanych w Ustawie z dnia 4 lutego 1994r. o prawie autorskim i prawach pokrewnych (Dz.U. 1994 nr 24 poz. 83)
-                        będzie równoznaczne z niedotrzymaniem zasad regulaminowych i wiązać sie będzie z bezwarunkowym usunięciem konta użytkownika.
+                        @ResourceKeyResolver.AccordionRulesContentFirstRule
                     </li>
                     <li>
-                        Zabrania się podszywania pod innych użytkowników serwisu w jakichkolwiek celach.
+                        @ResourceKeyResolver.AccordionRulesContentSecondRule
                     </li>
                     <li>
-                        Wszelkie próby wyłudzeń haseł innych użytkowników w jakichkolwiek celach, będą oznaczały niedotrzymanie warunków regulaminowych.
+                        @ResourceKeyResolver.AccordionRulesContentThirdRule
                     </li>
                     <li>
-                        Portal <b>StudentNotes</b> nie ponosi żadnej odpowiedzialności cywilnoprawnej na wypadek utraty jakichkolwiek danych zgromadzonych przez
-                        użytkownika.
+                        @ResourceKeyResolver.ConstPortal <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionRulesContentFourthRule
                     </li>
                 </ol>
                 <p>
-                    Konsekwencją złamania przez użytkownika zasad zdefiniowanych w punktach 1-3 jest bezwarunkowe usunięcie takiego użytkownika z serwisu. Tym samym
-                    pliki, których jest właścicielem zostaną niezwłocznie usunięte.
+                    @ResourceKeyResolver.AccordionRulesContentBody
                 </p>
                 <p>
-                    W przypadku nie zgadzania się z jakimkolwiek punktem zdefiniowanym w regulaminie proces rejestracji staje się niemożliwy do zrealizowania.
+                    @ResourceKeyResolver.AccordionRulesContentBodyCd
                 </p>
             </div>
         </div>

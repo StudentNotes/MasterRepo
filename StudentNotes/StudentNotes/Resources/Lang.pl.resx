@@ -117,23 +117,180 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccordionExtensionsContentHeader" xml:space="preserve">
+    <value>współpracuje z plikami posiadającymi</value>
+  </data>
+  <data name="AccordionExtensionsContentHeaderCd" xml:space="preserve">
+    <value>dowolne rozszerzenie.</value>
+  </data>
+  <data name="AccordionExtensionsContentHeaderCd_1" xml:space="preserve">
+    <value>Natomiast w celu usprawnienia wyszukiwania pliku konkretnego typu wprowadzona została następująca klasyfikacja rozszerzeń (każda kategoria będzie odpowiadała konkrentym rozszerzeniom):</value>
+  </data>
+  <data name="AccordionExtensionsFifthContentDesc" xml:space="preserve">
+    <value>- .WAV, .AIF, .MPG, .MPEG, .MPEG2, .MIDI, .MP3, .WMA</value>
+  </data>
+  <data name="AccordionExtensionsFifthContentType" xml:space="preserve">
+    <value>Nagrania audio</value>
+  </data>
+  <data name="AccordionExtensionsFirstContentDesc" xml:space="preserve">
+    <value>- .TXT, .RTF, .DOC/.DOCX, .ODT, .PDF</value>
+  </data>
+  <data name="AccordionExtensionsFirstContentType" xml:space="preserve">
+    <value>Dokumenty tekstowe</value>
+  </data>
+  <data name="AccordionExtensionsFourthContentDesc" xml:space="preserve">
+    <value>- .JPEG, .JPS, .TIFF, .PNG, .GIF, .BMP, .XCF, .PSD, .CDR, .SWF, .DGN, .DWF, .DWG</value>
+  </data>
+  <data name="AccordionExtensionsFourthContentType" xml:space="preserve">
+    <value>Pliki graficzne</value>
+  </data>
+  <data name="AccordionExtensionsSecondContentDesc" xml:space="preserve">
+    <value>- .XLS/.XLSX, .ODS</value>
+  </data>
+  <data name="AccordionExtensionsSecondContentType" xml:space="preserve">
+    <value>Pliki arkusza kalkulacyjnego</value>
+  </data>
+  <data name="AccordionExtensionsSeventhContentDesc" xml:space="preserve">
+    <value>- do tej kategorii przypisane zostają wszystkie rozszerzenia nie uwzględnione w powyższych kategoriach.</value>
+  </data>
+  <data name="AccordionExtensionsSeventhContentType" xml:space="preserve">
+    <value>Pozostałe</value>
+  </data>
+  <data name="AccordionExtensionsSixthContentDesc" xml:space="preserve">
+    <value>- 3GP, .ASF, .AVI, .DV, .DVD, .FLV, .M2TS, .MKV, .MP4, .SMV, .TS, .WMV, .VCD</value>
+  </data>
+  <data name="AccordionExtensionsSixthContentType" xml:space="preserve">
+    <value>Filmy wideo</value>
+  </data>
+  <data name="AccordionExtensionsThirdContentDesc" xml:space="preserve">
+    <value>- .PPT/.PPTX, .ODP</value>
+  </data>
+  <data name="AccordionExtensionsThirdContentType" xml:space="preserve">
+    <value>Prezentacje multimedialne</value>
+  </data>
+  <data name="AccordionExtensionsTitle" xml:space="preserve">
+    <value>Obsługiwane formaty plików</value>
+  </data>
+  <data name="AccordionFeaturesContentBody" xml:space="preserve">
+    <value>Wszystkie te funkcjonalności zostaną ci udostępnione bezpośrednio po procesie rejestracji - i to zupełnie</value>
+  </data>
+  <data name="AccordionFeaturesContentBodyCd" xml:space="preserve">
+    <value>za darmo!</value>
+  </data>
+  <data name="AccordionFeaturesContentBodyCd_1" xml:space="preserve">
+    <value>Nie zwlekaj! Załóż konto</value>
+  </data>
+  <data name="AccordionFeaturesContentBodyCd_2" xml:space="preserve">
+    <value>i przestań marnować czas na kopiowanie notatek od znajomych, czy też wyszukiwanie ich gdzieś w folderach na dysku twardym. Tutaj masz wszystko zapisane w przejrzystych strukturach, a dostęp masz zapewniony przez cały czas!</value>
+  </data>
   <data name="AccordionFeaturesContentHeader" xml:space="preserve">
     <value>usprawni każdy etap Twojej edukacji, gdyż pozwala na:</value>
+  </data>
+  <data name="AccordionFeaturesFifthContent" xml:space="preserve">
+    <value>materiałów na dowolne urządzenie mobilne - wystarczy posiadać dostęp do sieci Internet.</value>
+  </data>
+  <data name="AccordionFeaturesFirstContent" xml:space="preserve">
+    <value>zgromadzonych materiałów dydaktycznych w zdefiniowanych przez Ciebie strukturach - to</value>
+  </data>
+  <data name="AccordionFeaturesFirstContentCd" xml:space="preserve">
+    <value>decydujesz w jakich katalogach zapisane zostaną twoje pliki.</value>
+  </data>
+  <data name="AccordionFeaturesFourthContent" xml:space="preserve">
+    <value>dostępem do</value>
+  </data>
+  <data name="AccordionFeaturesFourthContentCd" xml:space="preserve">
+    <value>notatek.</value>
+  </data>
+  <data name="AccordionFeaturesSecondContent" xml:space="preserve">
+    <value>materiałów innym użytkownikom, a nawet całym grupom użytkowników.</value>
+  </data>
+  <data name="AccordionFeaturesThirdContent" xml:space="preserve">
+    <value>zapisanych w serwisie plików, co znacznie usprawnia proces</value>
+  </data>
+  <data name="AccordionFeaturesThirdContentCd" xml:space="preserve">
+    <value>wybranego pliku.</value>
   </data>
   <data name="AccordionFeaturesTitle" xml:space="preserve">
     <value>Funkcjonalności serwisu</value>
   </data>
+  <data name="AccordionRulesContentBody" xml:space="preserve">
+    <value>Konsekwencją złamania przez użytkownika zasad zdefiniowanych w punktach 1-3 jest bezwarunkowe usunięcie takiego użytkownika z serwisu. Tym samym
+                                pliki, których jest właścicielem zostaną niezwłocznie usunięte.</value>
+  </data>
+  <data name="AccordionRulesContentBodyCd" xml:space="preserve">
+    <value>W przypadku nie zgadzania się z jakimkolwiek punktem zdefiniowanym w regulaminie proces rejestracji staje się niemożliwy do zrealizowania.</value>
+  </data>
+  <data name="AccordionRulesContentFirstRule" xml:space="preserve">
+    <value>Użytkownik zobowiązuje się nie naruszać w żaden możliwy sposób powszechnie rozumianego prawa autorskiego. A co za tym idzie -
+                                    każde złamanie zasad zdefioniowanych w Ustawie z dnia 4 lutego 1994r. o prawie autorskim i prawach pokrewnych (Dz.U. 1994 nr 24 poz. 83)
+                                    będzie równoznaczne z niedotrzymaniem zasad regulaminowych i wiązać sie będzie z bezwarunkowym usunięciem konta użytkownika.</value>
+  </data>
+  <data name="AccordionRulesContentFourthRule" xml:space="preserve">
+    <value>nie ponosi żadnej odpowiedzialności cywilnoprawnej na wypadek utraty jakichkolwiek danych zgromadzonych przez
+                                    użytkownika.</value>
+  </data>
+  <data name="AccordionRulesContentHeader" xml:space="preserve">
+    <value>Zakładając konto na portalu</value>
+  </data>
+  <data name="AccordionRulesContentHeaderCd" xml:space="preserve">
+    <value>Użytkownik zgadza się na poniższe warunki korzystania z serwisu:</value>
+  </data>
+  <data name="AccordionRulesContentSecondRule" xml:space="preserve">
+    <value>Zabrania się podszywania pod innych użytkowników serwisu w jakichkolwiek celach.</value>
+  </data>
+  <data name="AccordionRulesContentThirdRule" xml:space="preserve">
+    <value>Wszelkie próby wyłudzeń haseł innych użytkowników w jakichkolwiek celach, będą oznaczały niedotrzymanie warunków regulaminowych.</value>
+  </data>
+  <data name="AccordionRulesTitle" xml:space="preserve">
+    <value>Zasady korzystania z serwisu</value>
+  </data>
   <data name="ConstComfortable" xml:space="preserve">
     <value>Wygodne</value>
+  </data>
+  <data name="ConstDownloading" xml:space="preserve">
+    <value>Pobieranie</value>
   </data>
   <data name="ConstEasy" xml:space="preserve">
     <value>Łatwe</value>
   </data>
+  <data name="ConstManagement" xml:space="preserve">
+    <value>Zarządzanie</value>
+  </data>
   <data name="ConstPortal" xml:space="preserve">
     <value>Portal</value>
   </data>
+  <data name="ConstSearching" xml:space="preserve">
+    <value>wyszukiwania</value>
+  </data>
+  <data name="ConstService" xml:space="preserve">
+    <value>Serwis</value>
+  </data>
+  <data name="ConstSharing" xml:space="preserve">
+    <value>udostępnianie</value>
+  </data>
+  <data name="ConstSignUp" xml:space="preserve">
+    <value>Zarejestruj się</value>
+  </data>
+  <data name="ConstSignUpInService" xml:space="preserve">
+    <value>Utwórz konto w serwisie</value>
+  </data>
+  <data name="ConstStoring" xml:space="preserve">
+    <value>przechowywanie</value>
+  </data>
   <data name="ConstStudentNotes" xml:space="preserve">
     <value>StudentNotes</value>
+  </data>
+  <data name="ConstTagging" xml:space="preserve">
+    <value>Tagowanie</value>
+  </data>
+  <data name="ConstTermsOfUse" xml:space="preserve">
+    <value>Regulamin</value>
+  </data>
+  <data name="ConstYou" xml:space="preserve">
+    <value>Ty</value>
+  </data>
+  <data name="ConstYours" xml:space="preserve">
+    <value>Twoich</value>
   </data>
   <data name="HomePageContentAboutProject" xml:space="preserve">
     <value>StudentNotes to portal pozwalający w łatwiejszy sposób zarządzać materiałami dydaktycznymi zapisanymi w formie elektronicznej (dokumenty tekstowe, pliki graficzne, nagrania audio, filmy wideo)</value>
@@ -143,6 +300,9 @@
   </data>
   <data name="HomePageNavBarAboutProject" xml:space="preserve">
     <value>O projekcie</value>
+  </data>
+  <data name="HomePageNavBarFormGroupConfirmPassword" xml:space="preserve">
+    <value>Potwierdź hasło</value>
   </data>
   <data name="HomePageNavBarFormGroupEmail" xml:space="preserve">
     <value>Adres E-mail</value>
@@ -155,5 +315,35 @@
   </data>
   <data name="HomePageNavBarSignUp" xml:space="preserve">
     <value>Rejestracja</value>
+  </data>
+  <data name="JumbotronAboutUserContent_1" xml:space="preserve">
+    <value>Jestem początkującym programistą .NET z ukierunkowaniem na rozwiązania internetowe -
+                        tworzenie stron www, portali internetowych i systemów zarządzania treścią (CMS).</value>
+  </data>
+  <data name="JumbotronAboutUserContent_2" xml:space="preserve">
+    <value>Realizując swoje projekty dbam o ich responsywność. W ten sposób tworzony projekt działa prawidłowo
+                        na różnego rodzaju urządzeniach (smartfony, tablety, komputery, TV).</value>
+  </data>
+  <data name="JumbotronAboutUserContent_3" xml:space="preserve">
+    <value>Wykorzystuję najnowsze technologie zapewniając tym samym, że projekt jest nowoczesny, estetyczny,
+                        a zarazem wydajny w działaniu.</value>
+  </data>
+  <data name="JumbotronAboutUserGreeting" xml:space="preserve">
+    <value>Cześć! Nazywam się Robert Winkler</value>
+  </data>
+  <data name="SignUpFormLabel_1" xml:space="preserve">
+    <value>Podaj adres E-mail:</value>
+  </data>
+  <data name="SignUpFormLabel_2" xml:space="preserve">
+    <value>Wprowadź hasło:</value>
+  </data>
+  <data name="SignUpFormLabel_3" xml:space="preserve">
+    <value>Potwierdź wprowadzone hasło:</value>
+  </data>
+  <data name="SignUpFormLabel_4" xml:space="preserve">
+    <value>Oświadczam, że zapoznałem/am się i akceptuję</value>
+  </data>
+  <data name="SignUpFormLabel_4Cd" xml:space="preserve">
+    <value>serwisu StudentNotes.</value>
   </data>
 </root>
