@@ -306,5 +306,61 @@ namespace StudentNotesWeb.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ConstTermsOfUse"); }
         }
+        public static string ConstAddUniversity
+        {
+            get { return ResourceFinder.GetResource("ConstAddUniversity"); }
+        }
+        public static string ConstAddGroup
+        {
+            get { return ResourceFinder.GetResource("ConstAddGroup"); }
+        }
+        public static string ConstAddNote
+        {
+            get { return ResourceFinder.GetResource("ConstAddNote"); }
+        }
+        public static string ConstMyAccount
+        {
+            get { return ResourceFinder.GetResource("ConstMyAccount"); }
+        }
+        public static string ConstOptions
+        {
+            get { return ResourceFinder.GetResource("ConstOptions"); }
+        }
+        public static string ConstSignOut
+        {
+            get { return ResourceFinder.GetResource("ConstSignOut"); }
+        }
+        public static string ConstNewest
+        {
+            get { return ResourceFinder.GetResource("ConstNewest"); }
+        }
+        public static string ConstPrivate
+        {
+            get { return ResourceFinder.GetResource("ConstPrivate"); }
+        }
+        public static string ConstUniversityNotes
+        {
+            get { return ResourceFinder.GetResource("ConstUniversityNotes"); }
+        }
+        public static string ConstSharedNotes
+        {
+            get { return ResourceFinder.GetResource("ConstSharedNotes"); }
+        }
+        public static string ConstAllNotes
+        {
+            get { return ResourceFinder.GetResource("ConstAllNotes"); }
+        }
+        public static string ConstMyNotes
+        {
+            get { return ResourceFinder.GetResource("ConstMyNotes"); }
+        }
+        public static string ConstMyGroups
+        {
+            get { return ResourceFinder.GetResource("ConstMyGroups"); }
+        }
+        public static string ConstMyUniversities
+        {
+            get { return ResourceFinder.GetResource("ConstMyUniversities"); }
+        }
     }
 }

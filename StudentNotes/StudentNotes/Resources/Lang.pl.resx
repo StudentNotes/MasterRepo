@@ -244,6 +244,18 @@
   <data name="AccordionRulesTitle" xml:space="preserve">
     <value>Zasady korzystania z serwisu</value>
   </data>
+  <data name="ConstAddGroup" xml:space="preserve">
+    <value>Dodaj grupę</value>
+  </data>
+  <data name="ConstAddNote" xml:space="preserve">
+    <value>Dodaj Notatkę</value>
+  </data>
+  <data name="ConstAddUniversity" xml:space="preserve">
+    <value>Dodaj Uczelnię</value>
+  </data>
+  <data name="ConstAllNotes" xml:space="preserve">
+    <value>Wszystkie</value>
+  </data>
   <data name="ConstComfortable" xml:space="preserve">
     <value>Wygodne</value>
   </data>
@@ -256,8 +268,29 @@
   <data name="ConstManagement" xml:space="preserve">
     <value>Zarządzanie</value>
   </data>
+  <data name="ConstMyAccount" xml:space="preserve">
+    <value>Moje konto</value>
+  </data>
+  <data name="ConstMyGroups" xml:space="preserve">
+    <value>Moje grupy</value>
+  </data>
+  <data name="ConstMyNotes" xml:space="preserve">
+    <value>Moje notatki</value>
+  </data>
+  <data name="ConstMyUniversities" xml:space="preserve">
+    <value>Moje uczelnie</value>
+  </data>
+  <data name="ConstNewest" xml:space="preserve">
+    <value>Najnowsze</value>
+  </data>
+  <data name="ConstOptions" xml:space="preserve">
+    <value>Opcje</value>
+  </data>
   <data name="ConstPortal" xml:space="preserve">
     <value>Portal</value>
+  </data>
+  <data name="ConstPrivate" xml:space="preserve">
+    <value>Prywatne</value>
   </data>
   <data name="ConstSearching" xml:space="preserve">
     <value>wyszukiwania</value>
@@ -265,8 +298,14 @@
   <data name="ConstService" xml:space="preserve">
     <value>Serwis</value>
   </data>
+  <data name="ConstSharedNotes" xml:space="preserve">
+    <value>Udostępnione</value>
+  </data>
   <data name="ConstSharing" xml:space="preserve">
     <value>udostępnianie</value>
+  </data>
+  <data name="ConstSignOut" xml:space="preserve">
+    <value>Wyloguj</value>
   </data>
   <data name="ConstSignUp" xml:space="preserve">
     <value>Zarejestruj się</value>
@@ -285,6 +324,9 @@
   </data>
   <data name="ConstTermsOfUse" xml:space="preserve">
     <value>Regulamin</value>
+  </data>
+  <data name="ConstUniversityNotes" xml:space="preserve">
+    <value>Uczelniane</value>
   </data>
   <data name="ConstYou" xml:space="preserve">
     <value>Ty</value>

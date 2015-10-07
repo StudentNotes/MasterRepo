@@ -1,28 +1,29 @@
-﻿<div id="navbar-side">
+﻿@using StudentNotesWeb.Models.ResourcesFinderLogic
+<div id="navbar-side">
     <ul class="sidebar-nav">
         <li>
-            <a class="sidebar-cattegory collapsed" href="javascript:;" data-toggle="collapse" data-target="#my-notes">Moje notatki<span class="glyphicon glyphicon-chevron-down"></span></a>
+            <a class="sidebar-cattegory collapsed" href="javascript:;" data-toggle="collapse" data-target="#my-notes">@ResourceKeyResolver.ConstSharedNotes<span class="glyphicon glyphicon-chevron-down"></span></a>
             <ul id="my-notes" class="collapse">
                 <li>
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Najnowsze</a>
+                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstNewest</a>
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Prywatne</a>
+                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstPrivate</a>
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Uczelniane</a>
+                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstUniversityNotes</a>
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Udostępnione</a>
+                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstSharedNotes</a>
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Wszystkie</a>
+                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstAllNotes</a>
                 </li>
                 
             </ul>
         </li>
         <li>
-            <a class="sidebar-cattegory collapsed" href="javascript:;" data-toggle="collapse" data-target="#my-groups">Moje grupy<span class="glyphicon glyphicon-chevron-down"></span></a>
+            <a class="sidebar-cattegory collapsed" href="javascript:;" data-toggle="collapse" data-target="#my-groups">@ResourceKeyResolver.ConstMyGroups<span class="glyphicon glyphicon-chevron-down"></span></a>
             <ul id="my-groups" class="collapse">
                 <li>
                     <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Grupa_1</a>
@@ -42,7 +43,7 @@
             </ul>
         </li>
         <li>
-            <a class="sidebar-cattegory collapsed" href="javascript:;" data-toggle="collapse" data-target="#my-universities">Moje uczelnie<span class="glyphicon glyphicon-chevron-down"></span></a>
+            <a class="sidebar-cattegory collapsed" href="javascript:;" data-toggle="collapse" data-target="#my-universities">@ResourceKeyResolver.ConstMyUniversities<span class="glyphicon glyphicon-chevron-down"></span></a>
             <ul id="my-universities" class="collapse">
                 <li>
                     <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Uczelnia_1</a>
