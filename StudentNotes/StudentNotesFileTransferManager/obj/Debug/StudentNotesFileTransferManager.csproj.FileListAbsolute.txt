@@ -1,0 +1,4 @@
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesFileTransferManager\bin\Debug\StudentNotesFileTransferManager.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesFileTransferManager\bin\Debug\StudentNotesFileTransferManager.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesFileTransferManager\obj\Debug\StudentNotesFileTransferManager.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesFileTransferManager\obj\Debug\StudentNotesFileTransferManager.pdb
