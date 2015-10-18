@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject.Modules;
+using StudentNotes.FileTransferManager.Base;
+using StudentNotes.FileTransferManager.FtpClient;
+using StudentNotes.FileTransferManager.FtpClient.FileTypes;
 
 namespace StudentNotes.DependencyResolver.Modules
 {
@@ -11,8 +14,9 @@ namespace StudentNotes.DependencyResolver.Modules
     {
         public override void Load()
         {
-            throw new NotImplementedException();
-            //Bind<IBottomClass>().To<BottomClass>();
+            Bind<File>().To<CommonFile>();
+            Bind<FileServer>().To<FtpServer>();
+            Bind<FileServerUser>().To<FtpUser>();
         }
     }
 }

@@ -362,5 +362,27 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ConstMyUniversities"); }
         }
+        public static string SignUpFormLabel_0
+        {
+            get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        }
+        public static string SignUpFormPlaceholder_0
+        {
+            get { return ResourceFinder.GetResource("SignUpFormPlaceholder_0"); }
+        }
+        
+        
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
     }
 }

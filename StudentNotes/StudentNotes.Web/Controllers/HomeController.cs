@@ -25,5 +25,12 @@ namespace StudentNotes.Web.Controllers
             }
             return View("~/Views/Home/Index.cshtml");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(string login, string email, string password, string confirmPassword, string termsOfUse)
+        {
+            return View("~/Views/Home/Index.cshtml");
+        }
     }
 }

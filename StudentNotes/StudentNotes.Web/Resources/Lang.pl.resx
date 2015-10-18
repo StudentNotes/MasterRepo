@@ -373,6 +373,9 @@
   <data name="JumbotronAboutUserGreeting" xml:space="preserve">
     <value>Cześć! Nazywam się Robert Winkler</value>
   </data>
+  <data name="SignUpFormLabel_0" xml:space="preserve">
+    <value>Podaj nazwę użytkownika (login):</value>
+  </data>
   <data name="SignUpFormLabel_1" xml:space="preserve">
     <value>Podaj adres E-mail:</value>
   </data>
@@ -387,5 +390,8 @@
   </data>
   <data name="SignUpFormLabel_4Cd" xml:space="preserve">
     <value>serwisu StudentNotes.</value>
+  </data>
+  <data name="SignUpFormPlaceholder_0" xml:space="preserve">
+    <value>Login</value>
   </data>
 </root>

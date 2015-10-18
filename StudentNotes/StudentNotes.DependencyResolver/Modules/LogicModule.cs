@@ -11,7 +11,7 @@ namespace DependencyResolver.Modules
     {
         public override void Load()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             //Bind<IMiddleClass>().To<MiddleClass>();
         }
     }

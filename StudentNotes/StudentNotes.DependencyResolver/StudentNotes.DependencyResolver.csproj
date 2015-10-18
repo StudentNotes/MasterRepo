@@ -49,6 +49,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StudentNotes.FileTransferManager\StudentNotes.FileTransferManager.csproj">
+      <Project>{45461541-3ce7-49db-ad6e-f7f9c171e89d}</Project>
+      <Name>StudentNotes.FileTransferManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentNotes.Logic\StudentNotes.Logic.csproj">
+      <Project>{921a6f78-ac3a-4f8b-b292-bccdedb33c49}</Project>
+      <Name>StudentNotes.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

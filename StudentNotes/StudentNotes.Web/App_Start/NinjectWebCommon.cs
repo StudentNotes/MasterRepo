@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using DependencyResolver.Modules;
+using Ninject.Modules;
+using StudentNotes.DependencyResolver.Modules;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StudentNotesWeb.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StudentNotesWeb.App_Start.NinjectWebCommon), "Stop")]
 
@@ -61,6 +66,17 @@ namespace StudentNotesWeb.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            //  registering top level services
+            //  kernel.Bind<ITaxService>().To<TaxService>();
+            //  kernel.Bind<ITaxService>().To<TaxService>();
+
+            var modules = new List<INinjectModule>
+            {
+                new FileTransferManagerModule(),
+                new LogicModule()
+            };
+
+            kernel.Load(modules);
         }        
     }
 }

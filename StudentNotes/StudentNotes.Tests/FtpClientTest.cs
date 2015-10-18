@@ -63,8 +63,6 @@ namespace StudentNotes.Web.Tests
             FtpUser user = new FtpUser("robson081192", "pck5LT099r", server);
 
             user.DeleteFile();
-
-            return;
         }
     }
 }

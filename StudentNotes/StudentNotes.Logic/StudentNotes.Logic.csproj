@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DBModels\File.cs">
       <DependentUpon>StudentNotesDB.tt</DependentUpon>
     </Compile>
@@ -109,6 +108,8 @@
     <Compile Include="DBModels\UserVisitedSchool.cs">
       <DependentUpon>StudentNotesDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="LogicInterfaces\INote.cs" />
+    <Compile Include="LogicModels\Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,12 @@
   <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StudentNotes.FileTransferManager\StudentNotes.FileTransferManager.csproj">
+      <Project>{45461541-3ce7-49db-ad6e-f7f9c171e89d}</Project>
+      <Name>StudentNotes.FileTransferManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

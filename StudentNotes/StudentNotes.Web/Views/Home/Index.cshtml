@@ -206,21 +206,27 @@
             </div>
             <div class="col-lg-7">
 
-                <form class="form-horizontal" role="form" method="POST" action="/LoggedIn/Register">
+                <form class="form-horizontal" role="form" method="POST" action="/Home/Register">
                     <div class="form-group">
-                        <label for="loginName" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_1</label>
+                        <label for="loginName" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_0</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupEmail" name="login">
+                            <input type="text" class="form-control" placeholder="@ResourceKeyResolver.SignUpFormPlaceholder_0" name="login">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="loginName" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_2</label>
+                        <label for="email" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_1</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupEmail" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_2</label>
                         <div class="col-sm-7">
                             <input type="password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupPassword" name="password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="loginName" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_3</label>
+                        <label for="confirmPassword" class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_3</label>
                         <div class="col-sm-7">
                             <input type="password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupConfirmPassword" name="confirmPassword">
                         </div>
@@ -231,14 +237,15 @@
                                 <label>
                                     @Html.CheckBox("termsOfUse", new {Value = true}) @ResourceKeyResolver.SignUpFormLabel_4
                                     <a id="terms-of-use-link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">@ResourceKeyResolver.ConstTermsOfUse</a>
-                                     @ResourceKeyResolver.SignUpFormLabel_4Cd
+                                    @ResourceKeyResolver.SignUpFormLabel_4Cd
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         @*@Html.ActionLink("Zarejestruj się", "LoggedIn", "LoggedIn", null, new { @class = "btn btn-success", type = "button", style = "border-radius:0px; width:inherit;" })*@
-                        <input type="submit" value="Zarejestruj się" class="btn btn-success" style="border-radius: 0px; width: inherit;" />
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Zarejestruj się" class="btn btn-success" style="border-radius: 0px; width: inherit;"/>
                     </div>
                 </form>
             </div>
