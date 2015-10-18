@@ -57,10 +57,6 @@
       <Project>{45461541-3ce7-49db-ad6e-f7f9c171e89d}</Project>
       <Name>StudentNotesFileTransferManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StudentNotes\StudentNotesWeb.csproj">
-      <Project>{2A1B6EF9-62AA-409B-B775-F2D44C3CC949}</Project>
-      <Name>StudentNotesWeb</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
