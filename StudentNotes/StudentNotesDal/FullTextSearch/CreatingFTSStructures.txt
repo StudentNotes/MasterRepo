@@ -1,0 +1,18 @@
+﻿CREATE FULLTEXT CATALOG [file_catalog] AS DEFAULT
+
+//	Creating an unique index to identify to searched row
+CREATE UNIQUE INDEX fts_file_id ON [dbo].[File](FileId)
+
+//	Creating a FullTextSearch Index to perform the searching mechanism.
+CREATE FULLTEXT INDEX ON [dbo].[File]
+(
+	FileTags LANGUAGE 1045
+)
+KEY INDEX fts_file_id
+
+
+//	important resources:
+//	http://kurzyniec.pl/artykuly/full-text-search/
+//	http://kurzyniec.pl/artykuly/full-text-search-query/
+//	https://msdn.microsoft.com/en-us/library/ms142497.aspx
+//	http://tagging.pui.ch/post/37027746608/tagsystems-performance-tests

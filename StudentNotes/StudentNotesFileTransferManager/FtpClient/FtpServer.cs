@@ -11,6 +11,12 @@ namespace StudentNotesFileTransferManager.FtpClient
     {
         public FtpServer(string serverUrl) : base(serverUrl)
         {
+            
+        }
+
+        public FtpServer(string serverUrl, string fileDestination)
+            : base(serverUrl, fileDestination)
+        {
         }
 
         public override string ToString()

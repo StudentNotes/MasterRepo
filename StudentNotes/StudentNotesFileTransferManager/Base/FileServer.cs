@@ -8,15 +8,19 @@ namespace StudentNotesFileTransferManager.Base
 {
     public abstract class FileServer
     {
-        public string ServerUrl
-        {
-            get;
-            private set;
-        }
+        public string FileDestination { get; private set; }
+        public string ServerUrl { get; private set; }
 
         protected FileServer(string serverUrl)
         {
             ServerUrl = serverUrl;
+            FileDestination = "/";
+        }
+
+        protected FileServer(string serverUrl, string fileDestination)
+        {
+            ServerUrl = serverUrl;
+            FileDestination = fileDestination;
         }
 
         public abstract override string ToString();

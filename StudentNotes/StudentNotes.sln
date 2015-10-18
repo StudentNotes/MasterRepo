@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotesWeb", "StudentN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotes.Tests", "StudentNotes.Tests\StudentNotes.Tests.csproj", "{9339B13F-9F42-4055-91B8-253DC90ADBAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotesDal", "StudentNotesDal\StudentNotesDal.csproj", "{921A6F78-AC3A-4F8B-B292-BCCDEDB33C49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotesLogic", "StudentNotesDal\StudentNotesLogic.csproj", "{921A6F78-AC3A-4F8B-B292-BCCDEDB33C49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotesFileTransferManager", "StudentNotesFileTransferManager\StudentNotesFileTransferManager.csproj", "{45461541-3CE7-49DB-AD6E-F7F9C171E89D}"
 EndProject

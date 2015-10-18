@@ -39,10 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\File.cs" />
     <Compile Include="Base\FileServer.cs" />
     <Compile Include="Base\FileServerUser.cs" />
     <Compile Include="Abstraction\IDownloadBehavior.cs" />
-    <Compile Include="Abstraction\IFile.cs" />
     <Compile Include="Abstraction\IUploadBehavior.cs" />
     <Compile Include="FtpClient\FileTypes\CommonFile.cs" />
     <Compile Include="FtpClient\FtpServer.cs" />

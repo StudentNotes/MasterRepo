@@ -9,6 +9,6 @@ namespace StudentNotesFileTransferManager.Abstraction
 {
     public interface IUploadBehavior<T>
     {
-        T UploadFile(IFile file, FileServer server, FileServerUser user);
+        T UploadFile(File file, FileServer server, FileServerUser user);
     }
 }

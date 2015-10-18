@@ -2,4 +2,4 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesDal\bin\Debug\StudentNotesDal.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesDal\obj\Debug\StudentNotesDal.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesDal\obj\Debug\StudentNotesDal.pdb
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesDal\obj\Debug\StudentNotesDal.csprojResolveAssemblyReference.cache
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotesDal\obj\Debug\StudentNotesLogic.csprojResolveAssemblyReference.cache

@@ -7,19 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using StudentNotesFileTransferManager.Abstraction;
 using StudentNotesFileTransferManager.Base;
+using File = StudentNotesFileTransferManager.Base.File;
 
 namespace StudentNotesFileTransferManager.FtpClient.TransferBehavior
 {
     public class FtpDownloadBehavior : IDownloadBehavior<byte[]>
     {
-        public const int SEGMENT_SIZE = 1024000;
+        public const int SEGMENT_SIZE = 1024000;    //  1 MB segment!
+        public string ServerResponseMessage { get; private set; }
 
-        public byte[] DownloadFile(IFile file, FileServer server, FileServerUser user)
+        public byte[] DownloadFile(File file, FileServer server, FileServerUser user)
         {
             byte[] downloadedFilePart;
             byte[] completeFile = new byte[0];
 
-            string requestPath = string.Format("ftp://{0}{1}{2}", server.ServerUrl, file.Path, file.Name);
+            string requestPath = string.Format("ftp://{0}{1}", server.ServerUrl, server.FileDestination);
+
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(requestPath);
             ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
 
@@ -27,54 +30,32 @@ namespace StudentNotesFileTransferManager.FtpClient.TransferBehavior
 
             FtpWebResponse ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
 
-            Stream ftpDownloadStream = ftpResponse.GetResponseStream();
-            //StreamReader reader = new StreamReader(responseStream);
-            //BinaryReader reader = new BinaryReader(ftpDownloadStream);
-            using (BinaryReader reader = new BinaryReader(ftpDownloadStream))
+            using (Stream ftpDownloadStream = ftpResponse.GetResponseStream())
             {
-                downloadedFilePart = reader.ReadBytes(SEGMENT_SIZE);
-
-                while (downloadedFilePart.Length > 0)
+                using (BinaryReader reader = new BinaryReader(ftpDownloadStream))
                 {
-                    if (downloadedFilePart.Length < SEGMENT_SIZE)
-                    {
-                        DumpData(downloadedFilePart, ref completeFile);
-                        break;
-                    }
-
-                    DumpData(downloadedFilePart, ref completeFile);
                     downloadedFilePart = reader.ReadBytes(SEGMENT_SIZE);
 
-                    
+                    while (downloadedFilePart.Length > 0)
+                    {
+                        if (downloadedFilePart.Length < SEGMENT_SIZE)
+                        {
+                            file.DumpData(downloadedFilePart);
+                            break;
+                        }
+                        file.DumpData(downloadedFilePart);
+                        downloadedFilePart = reader.ReadBytes(SEGMENT_SIZE);
+                    }
                 }
-
-                reader.Close();
             }
 
-            string statusDescription = ftpResponse.StatusDescription;
+            ServerResponseMessage = ftpResponse.StatusDescription;
 
             ftpResponse.Close();
 
             return completeFile;
         }
 
-        private void DumpData(byte[] sourceBytes, ref byte[] allBytes)
-        {
-            int destinationArrayLength = sourceBytes.Length + allBytes.Length;
-            byte[] destinationArray = new byte[destinationArrayLength];
-
-            for (int i = 0; i < allBytes.Length; i++)
-            {
-                destinationArray[i] = allBytes[i];
-            }
-
-            //  Appending the sourceBytes to the allBytes array!
-            for (int i = allBytes.Length, j = 0; i < destinationArray.Length; i++, j++)
-            {
-                destinationArray[i] = sourceBytes[j];
-            }
-
-            allBytes = destinationArray;
-        }
+        
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentNotesDal
+namespace StudentNotesLogic
 {
     public class Class1
     {

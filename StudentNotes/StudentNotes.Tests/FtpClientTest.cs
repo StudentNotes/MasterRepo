@@ -35,11 +35,24 @@ namespace StudentNotesWeb.Tests
         [TestMethod]
         public void TestFileDownload()
         {
-            FtpServer server = new FtpServer("192.168.1.1");
+            FtpServer server = new FtpServer("192.168.1.1", "/FTP/Ruda.mp3");
             FtpUser user = new FtpUser("robson", "4019551", server);
 
-            CommonFile file = new CommonFile("ftp_info.txt", "/FTP/");
+            CommonFile file = new CommonFile(@"C:\Users\Robson\Desktop\Test_FTP_dll\Ruda.mp3");
             user.DownloadFile(file);
+
+            file.SafeContentOnDrive();
+        }
+
+        [TestMethod]
+        public void TestFileUpload()
+        {
+            //  83.10.110.250 
+            FtpServer server = new FtpServer("91.219.122.70", "/FTP/ET - Prazan stan.mp3");
+            FtpUser user = new FtpUser("robson081192", "pck5LT099r", server);
+
+            CommonFile file = new CommonFile(@"C:\Users\Robson\Desktop\Test_FTP_dll\ET - Prazan stan.mp3");
+            user.UploadFile(file);
 
             return;
         }

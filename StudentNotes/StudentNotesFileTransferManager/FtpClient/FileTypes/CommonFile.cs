@@ -1,33 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StudentNotesFileTransferManager.Abstraction;
+using File = StudentNotesFileTransferManager.Base.File;
 
 namespace StudentNotesFileTransferManager.FtpClient.FileTypes
 {
-    public class CommonFile : IFile
+    public class CommonFile : File
     {
-        public CommonFile(string name, string path)
+        public CommonFile(string path) : base(path)
         {
-            Name = name;
-            Path = path;
-            Size = 0;
-            Content = new byte[]{0};
         }
 
-        public CommonFile(string name, string path, double size, byte[] content)
-        {
-            Name = name;
-            Path = path;
-            Size = size;
-            Content = content;
-        }
-
-        public string Name { get; private set; }
-        public double Size { get; private set; }
-        public byte[] Content { get; private set; }
-        public string Path { get; private set; }
     }
 }
