@@ -53,9 +53,13 @@
     <Compile Include="FtpClientTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StudentNotesFileTransferManager\StudentNotesFileTransferManager.csproj">
+    <ProjectReference Include="..\StudentNotes.FileTransferManager\StudentNotes.FileTransferManager.csproj">
       <Project>{45461541-3ce7-49db-ad6e-f7f9c171e89d}</Project>
-      <Name>StudentNotesFileTransferManager</Name>
+      <Name>StudentNotes.FileTransferManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentNotes.Web\StudentNotes.Web.csproj">
+      <Project>{2a1b6ef9-62aa-409b-b775-f2d44c3cc949}</Project>
+      <Name>StudentNotes.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="58a91af32ef14fa0a54650fcd50ed2da" Name="Diagram1">
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.File" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.FileSharedGroup" Width="1.5" PointX="5.875" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.FileTagPattern" Width="1.5" PointX="0.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.Grade" Width="1.5" PointX="10.625" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.Group" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.GroupSemester" Width="1.5" PointX="7.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.GroupUser" Width="1.5" PointX="8.125" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.School" Width="1.5" PointX="8.625" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.Semester" Width="1.5" PointX="11.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.SemesterSubject" Width="1.5" PointX="11.125" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.StudySubject" Width="1.5" PointX="11.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.User" Width="1.5" PointX="3.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.UserInfo" Width="1.5" PointX="0.625" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.UserSharedFile" Width="1.5" PointX="5.125" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.UserVisitedSchool" Width="1.5" PointX="6.375" PointY="10.375" IsExpanded="true" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_File_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_FileSharedGroup_ToFile" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserSharedFile_ToFile" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_FileSharedGroup_ToGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_FileSharedGroup_ToSemesterSubject" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_Grade_ToSchool" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_StudySubject_ToGrade" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_Group_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupSemester_ToGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupSemester_ToSemester" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupUser_ToGroupSemester" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupUser_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserVisitedSchool_ToSchool" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_Semester_ToStudySubject" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_SemesterSubject_ToSemester" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserInfo_User" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserSharedFile_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserVisitedSchool_ToUser" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

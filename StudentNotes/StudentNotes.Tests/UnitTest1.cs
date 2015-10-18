@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StudentNotesWeb.Models.ResourcesFinderLogic;
+using StudentNotes.Web.Models.ResourcesFinderLogic;
 
 namespace StudentNotesWeb.Tests
 {

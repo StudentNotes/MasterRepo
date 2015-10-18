@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StudentNotesFileTransferManager.FtpClient;
 using StudentNotesFileTransferManager.FtpClient.FileTypes;
 
-namespace StudentNotesWeb.Tests
+namespace StudentNotes.Web.Tests
 {
     [TestClass]
     public class FtpClientTest
@@ -35,10 +35,10 @@ namespace StudentNotesWeb.Tests
         [TestMethod]
         public void TestFileDownload()
         {
-            FtpServer server = new FtpServer("192.168.1.1", "/FTP/Ruda.mp3");
-            FtpUser user = new FtpUser("robson", "4019551", server);
+            FtpServer server = new FtpServer("91.219.122.70", "/FTP/ET - Prazan stan.mp3");
+            FtpUser user = new FtpUser("robson081192", "pck5LT099r", server);
 
-            CommonFile file = new CommonFile(@"C:\Users\Robson\Desktop\Test_FTP_dll\Ruda.mp3");
+            CommonFile file = new CommonFile(@"C:\Users\Robson\Desktop\Test_FTP_dll\ET - Prazan stan.mp3");
             user.DownloadFile(file);
 
             file.SafeContentOnDrive();
