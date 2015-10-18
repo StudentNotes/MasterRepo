@@ -7,8 +7,9 @@ using StudentNotes.FileTransferManager.Base;
 
 namespace StudentNotes.FileTransferManager.Abstraction
 {
-    public interface IUploadBehavior<T>
+    public interface IDeleteBehavior<T>
     {
-        T UploadFile(File file, FileServer server, FileServerUser user);
+        T DeleteFile(FileServer server, FileServerUser user);
+        T DeleteFile(string remoteLocation, FileServer server, FileServerUser user);
     }
 }

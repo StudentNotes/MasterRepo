@@ -5,11 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using StudentNotesFileTransferManager.Abstraction;
-using StudentNotesFileTransferManager.Base;
-using File = StudentNotesFileTransferManager.Base.File;
+using StudentNotes.FileTransferManager.Abstraction;
+using StudentNotes.FileTransferManager.Base;
+using File = StudentNotes.FileTransferManager.Base.File;
 
-namespace StudentNotesFileTransferManager.FtpClient.TransferBehavior
+namespace StudentNotes.FileTransferManager.FtpClient.TransferBehavior
 {
     class FtpUploadBehavior : IUploadBehavior<int>
     {

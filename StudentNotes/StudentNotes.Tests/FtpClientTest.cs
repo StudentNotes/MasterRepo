@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StudentNotesFileTransferManager.FtpClient;
-using StudentNotesFileTransferManager.FtpClient.FileTypes;
+using StudentNotes.FileTransferManager.FtpClient;
+using StudentNotes.FileTransferManager.FtpClient.FileTypes;
 
 namespace StudentNotes.Web.Tests
 {
@@ -53,6 +53,16 @@ namespace StudentNotes.Web.Tests
 
             CommonFile file = new CommonFile(@"C:\Users\Robson\Desktop\Test_FTP_dll\ET - Prazan stan.mp3");
             user.UploadFile(file);
+        }
+
+        [TestMethod]
+        public void TestFileDelete()
+        {
+            //  83.10.110.250 
+            FtpServer server = new FtpServer("91.219.122.70", "/FTP/ET - Prazan stan.mp3");
+            FtpUser user = new FtpUser("robson081192", "pck5LT099r", server);
+
+            user.DeleteFile();
 
             return;
         }

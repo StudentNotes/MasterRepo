@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StudentNotesFileTransferManager.Base;
-using StudentNotesFileTransferManager.FtpClient.TransferBehavior;
+using StudentNotes.FileTransferManager.Base;
+using StudentNotes.FileTransferManager.FtpClient.TransferBehavior;
 
-namespace StudentNotesFileTransferManager.FtpClient
+namespace StudentNotes.FileTransferManager.FtpClient
 {
     public class FtpUser : FileServerUser
     {
@@ -14,6 +14,7 @@ namespace StudentNotesFileTransferManager.FtpClient
         {
             downloadBehavior = new FtpDownloadBehavior();
             uploadBehavior = new FtpUploadBehavior();
+            deleteBehavior = new FtpDeleteBehavior();
         }
 
         public override string ToString()

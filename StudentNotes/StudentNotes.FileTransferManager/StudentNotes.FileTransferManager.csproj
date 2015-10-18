@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\IDeleteBehavior.cs" />
     <Compile Include="Base\File.cs" />
     <Compile Include="Base\FileServer.cs" />
     <Compile Include="Base\FileServerUser.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="FtpClient\FileTypes\CommonFile.cs" />
     <Compile Include="FtpClient\FtpServer.cs" />
     <Compile Include="FtpClient\FtpUser.cs" />
+    <Compile Include="FtpClient\TransferBehavior\FtpDeleteBehavior.cs" />
     <Compile Include="FtpClient\TransferBehavior\FtpDownloadBehavior.cs" />
     <Compile Include="FtpClient\TransferBehavior\FtpUploadBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

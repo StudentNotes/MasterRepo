@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StudentNotesFileTransferManager.Abstraction;
+using StudentNotes.FileTransferManager.Abstraction;
 
-namespace StudentNotesFileTransferManager.Base
+namespace StudentNotes.FileTransferManager.Base
 {
     public abstract class FileServerUser
     {
@@ -15,6 +15,7 @@ namespace StudentNotesFileTransferManager.Base
 
         protected IDownloadBehavior<byte[]> downloadBehavior;
         protected IUploadBehavior<int> uploadBehavior;
+        protected IDeleteBehavior<int> deleteBehavior; 
 
         protected FileServerUser(string login, string password, FileServer server)
         {
@@ -34,5 +35,16 @@ namespace StudentNotesFileTransferManager.Base
         {
             return uploadBehavior.UploadFile(file, server, this);
         }
+
+        public int DeleteFile()
+        {
+            return deleteBehavior.DeleteFile(server, this);
+        }
+
+        public int DeleteFile(string remoteLocation)
+        {
+            return deleteBehavior.DeleteFile(remoteLocation, server, this);
+        }
+
     }
 }

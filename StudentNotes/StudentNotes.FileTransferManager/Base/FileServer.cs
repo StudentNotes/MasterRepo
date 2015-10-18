@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentNotesFileTransferManager.Base
+namespace StudentNotes.FileTransferManager.Base
 {
     public abstract class FileServer
     {

@@ -4,10 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StudentNotesFileTransferManager.Abstraction;
-using File = StudentNotesFileTransferManager.Base.File;
+using File = StudentNotes.FileTransferManager.Base.File;
 
-namespace StudentNotesFileTransferManager.FtpClient.FileTypes
+namespace StudentNotes.FileTransferManager.FtpClient.FileTypes
 {
     public class CommonFile : File
     {
