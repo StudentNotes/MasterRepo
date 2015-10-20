@@ -37,6 +37,9 @@ h6 {
     font-weight: 700;
 }
 
+h1 {
+    font-size: 48px;
+}
 header {
     text-align: center;
     color: #fff;
@@ -236,7 +239,7 @@ section {
 
 /************************************** ABOUT PROJECT SECTION *********************************************/
 #about-project {
-    background-color: #ffffff; /*zmiana z ffe68b*/
+    background-color: #505050; /*zmiana z ffe68b*/
 }
 #about-project h1 {
     color: #000000;
@@ -277,7 +280,7 @@ section {
     font-size: larger;
 }
 #accordion .panel{
-    background-color: #ffe68b; /*zmiana z fdd017*/
+    background-color: #ffe68b; /*zmiana z fdd017 => ffe68b*/
     border-color: #000000;
 }
 #accordion .panel .panel-heading{
@@ -310,7 +313,7 @@ section {
 }
 /************************************** ABOUT ME SECTION *********************************************/
 #about-me {
-    background-color: #f05557;
+    background-color: #ffa85c;
 }
 #about-me h1 {
     color: #ffffff;
@@ -318,8 +321,8 @@ section {
 #about-me .jumbotron .jumbotron-title h1{
     text-align: center;
     font-size: 4rem;
-    color: #f05557;
-    border: solid thin #f05557;
+    color: #333333;
+    border: solid thin #333333;
     border-radius: 20px;
     padding-top: 10px;
     padding-bottom: 5px;
@@ -327,7 +330,7 @@ section {
     text-transform: none;
 }
 #about-me .jumbotron .jumbotron-about p{
-    color: #f05557;
+    color: #333333;
 }
 /************************************** REGISTER SECTION *********************************************/
 #register {
