@@ -35,10 +35,3 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\StudentNotes.FileTransferManager.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\StudentNotes.Logic.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\StudentNotes.Logic.pdb
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\Microsoft.AspNet.Identity.EntityFramework.dll
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\Microsoft.AspNet.Identity.Core.dll
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\Microsoft.AspNet.Identity.Owin.dll
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\Owin.dll
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\Microsoft.AspNet.Identity.Owin.xml
