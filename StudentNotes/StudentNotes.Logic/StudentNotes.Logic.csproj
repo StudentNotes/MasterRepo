@@ -7,8 +7,8 @@
     <ProjectGuid>{921A6F78-AC3A-4F8B-B292-BCCDEDB33C49}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentNotesDal</RootNamespace>
-    <AssemblyName>StudentNotesDal</AssemblyName>
+    <RootNamespace>StudentNotes.Logic</RootNamespace>
+    <AssemblyName>StudentNotes.Logic</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

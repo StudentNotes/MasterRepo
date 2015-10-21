@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StudentNotesDal.DBModels
+namespace StudentNotes.Logic.DBModels
 {
     using System;
     using System.Collections.Generic;

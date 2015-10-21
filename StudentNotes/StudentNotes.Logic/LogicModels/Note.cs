@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StudentNotesDal.LogicInterfaces;
+using StudentNotes.Logic.LogicInterfaces;
 
-namespace StudentNotesDal.LogicModels
+namespace StudentNotes.Logic.LogicModels
 {
     public class Note : INote
     {

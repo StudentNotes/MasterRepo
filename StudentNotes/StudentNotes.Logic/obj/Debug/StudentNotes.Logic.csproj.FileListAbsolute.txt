@@ -1,12 +1,12 @@
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotesDal.dll.config
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotesDal.dll
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotesDal.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\EntityFramework.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\EntityFramework.xml
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\obj\Debug\StudentNotesDal.dll
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\obj\Debug\StudentNotesDal.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\obj\Debug\StudentNotes.Logic.csprojResolveAssemblyReference.cache
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotes.FileTransferManager.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotes.FileTransferManager.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotes.Logic.dll.config
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotes.Logic.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotes.Logic.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\obj\Debug\StudentNotes.Logic.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\obj\Debug\StudentNotes.Logic.pdb
