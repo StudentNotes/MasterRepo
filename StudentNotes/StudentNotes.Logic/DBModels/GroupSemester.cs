@@ -14,17 +14,11 @@ namespace StudentNotes.Logic.DBModels
     
     public partial class GroupSemester
     {
-        public GroupSemester()
-        {
-            this.GroupUser = new HashSet<GroupUser>();
-        }
-    
         public int GroupSemesterId { get; set; }
         public int GroupId { get; set; }
         public int SemesterId { get; set; }
     
         public virtual Group Group { get; set; }
         public virtual Semester Semester { get; set; }
-        public virtual ICollection<GroupUser> GroupUser { get; set; }
     }
 }

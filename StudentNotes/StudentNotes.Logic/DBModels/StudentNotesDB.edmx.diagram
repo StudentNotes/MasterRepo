@@ -30,7 +30,6 @@
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_Group_ToUser" ManuallyRouted="false" />
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupSemester_ToGroup" ManuallyRouted="false" />
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupSemester_ToSemester" ManuallyRouted="false" />
-        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupUser_ToGroupSemester" ManuallyRouted="false" />
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupUser_ToUser" ManuallyRouted="false" />
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserVisitedSchool_ToSchool" ManuallyRouted="false" />
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_Semester_ToStudySubject" ManuallyRouted="false" />
@@ -38,6 +37,13 @@
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserInfo_User" ManuallyRouted="false" />
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserSharedFile_ToUser" ManuallyRouted="false" />
         <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_UserVisitedSchool_ToUser" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.SemesterSubjectFile" Width="1.5" PointX="13.375" PointY="2" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.SemesterUser" Width="1.5" PointX="13.5" PointY="8.375" />
+        <EntityTypeShape EntityType="robson081192_StudentNotesDBModel.sysdiagrams" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_GroupUser_ToGroup" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_SemesterUser_ToSemester" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_SemesterSubjectFile_ToSemesterSubject" />
+        <AssociationConnector Association="robson081192_StudentNotesDBModel.FK_SemesterUser_ToUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

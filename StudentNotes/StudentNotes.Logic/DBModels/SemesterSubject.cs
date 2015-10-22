@@ -17,6 +17,7 @@ namespace StudentNotes.Logic.DBModels
         public SemesterSubject()
         {
             this.FileSharedGroup = new HashSet<FileSharedGroup>();
+            this.SemesterSubjectFile = new HashSet<SemesterSubjectFile>();
         }
     
         public int SemesterSubjectId { get; set; }
@@ -25,5 +26,6 @@ namespace StudentNotes.Logic.DBModels
     
         public virtual ICollection<FileSharedGroup> FileSharedGroup { get; set; }
         public virtual Semester Semester { get; set; }
+        public virtual ICollection<SemesterSubjectFile> SemesterSubjectFile { get; set; }
     }
 }

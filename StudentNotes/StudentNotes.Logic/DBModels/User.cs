@@ -21,12 +21,13 @@ namespace StudentNotes.Logic.DBModels
             this.GroupUser = new HashSet<GroupUser>();
             this.UserSharedFile = new HashSet<UserSharedFile>();
             this.UserVisitedSchool = new HashSet<UserVisitedSchool>();
+            this.SemesterUser = new HashSet<SemesterUser>();
         }
     
         public int UserId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Login { get; set; }
+        public Nullable<System.Guid> Salt { get; set; }
     
         public virtual ICollection<File> File { get; set; }
         public virtual ICollection<Group> Group { get; set; }
@@ -34,5 +35,6 @@ namespace StudentNotes.Logic.DBModels
         public virtual UserInfo UserInfo { get; set; }
         public virtual ICollection<UserSharedFile> UserSharedFile { get; set; }
         public virtual ICollection<UserVisitedSchool> UserVisitedSchool { get; set; }
+        public virtual ICollection<SemesterUser> SemesterUser { get; set; }
     }
 }

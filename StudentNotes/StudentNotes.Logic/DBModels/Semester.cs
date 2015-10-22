@@ -18,6 +18,7 @@ namespace StudentNotes.Logic.DBModels
         {
             this.GroupSemester = new HashSet<GroupSemester>();
             this.SemesterSubject = new HashSet<SemesterSubject>();
+            this.SemesterUser = new HashSet<SemesterUser>();
         }
     
         public int SemesterId { get; set; }
@@ -27,5 +28,6 @@ namespace StudentNotes.Logic.DBModels
         public virtual ICollection<GroupSemester> GroupSemester { get; set; }
         public virtual StudySubject StudySubject { get; set; }
         public virtual ICollection<SemesterSubject> SemesterSubject { get; set; }
+        public virtual ICollection<SemesterUser> SemesterUser { get; set; }
     }
 }

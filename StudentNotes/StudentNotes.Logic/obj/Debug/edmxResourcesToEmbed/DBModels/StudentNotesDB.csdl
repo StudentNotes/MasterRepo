@@ -58,6 +58,7 @@
     <NavigationProperty Name="FileSharedGroup" Relationship="Self.FK_FileSharedGroup_ToGroup" FromRole="Group" ToRole="FileSharedGroup" />
     <NavigationProperty Name="User" Relationship="Self.FK_Group_ToUser" FromRole="Group" ToRole="User" />
     <NavigationProperty Name="GroupSemester" Relationship="Self.FK_GroupSemester_ToGroup" FromRole="Group" ToRole="GroupSemester" />
+    <NavigationProperty Name="GroupUser" Relationship="robson081192_StudentNotesDBModel.FK_GroupUser_ToGroup" FromRole="Group" ToRole="GroupUser" />
   </EntityType>
   <EntityType Name="GroupSemester">
     <Key>
@@ -68,7 +69,6 @@
     <Property Name="SemesterId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Group" Relationship="Self.FK_GroupSemester_ToGroup" FromRole="GroupSemester" ToRole="Group" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_GroupSemester_ToSemester" FromRole="GroupSemester" ToRole="Semester" />
-    <NavigationProperty Name="GroupUser" Relationship="Self.FK_GroupUser_ToGroupSemester" FromRole="GroupSemester" ToRole="GroupUser" />
   </EntityType>
   <EntityType Name="GroupUser">
     <Key>
@@ -76,9 +76,9 @@
     </Key>
     <Property Name="GroupUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="GroupSemesterId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="GroupSemester" Relationship="Self.FK_GroupUser_ToGroupSemester" FromRole="GroupUser" ToRole="GroupSemester" />
     <NavigationProperty Name="User" Relationship="Self.FK_GroupUser_ToUser" FromRole="GroupUser" ToRole="User" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group" Relationship="robson081192_StudentNotesDBModel.FK_GroupUser_ToGroup" FromRole="GroupUser" ToRole="Group" />
   </EntityType>
   <EntityType Name="School">
     <Key>
@@ -100,6 +100,7 @@
     <NavigationProperty Name="GroupSemester" Relationship="Self.FK_GroupSemester_ToSemester" FromRole="Semester" ToRole="GroupSemester" />
     <NavigationProperty Name="StudySubject" Relationship="Self.FK_Semester_ToStudySubject" FromRole="Semester" ToRole="StudySubject" />
     <NavigationProperty Name="SemesterSubject" Relationship="Self.FK_SemesterSubject_ToSemester" FromRole="Semester" ToRole="SemesterSubject" />
+    <NavigationProperty Name="SemesterUser" Relationship="robson081192_StudentNotesDBModel.FK_SemesterUser_ToSemester" FromRole="Semester" ToRole="SemesterUser" />
   </EntityType>
   <EntityType Name="SemesterSubject">
     <Key>
@@ -110,6 +111,7 @@
     <Property Name="SemesterId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="FileSharedGroup" Relationship="Self.FK_FileSharedGroup_ToSemesterSubject" FromRole="SemesterSubject" ToRole="FileSharedGroup" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterSubject_ToSemester" FromRole="SemesterSubject" ToRole="Semester" />
+    <NavigationProperty Name="SemesterSubjectFile" Relationship="robson081192_StudentNotesDBModel.FK_SemesterSubjectFile_ToSemesterSubject" FromRole="SemesterSubject" ToRole="SemesterSubjectFile" />
   </EntityType>
   <EntityType Name="StudySubject">
     <Key>
@@ -128,14 +130,15 @@
     </Key>
     <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="File" Relationship="Self.FK_File_ToUser" FromRole="User" ToRole="File" />
     <NavigationProperty Name="Group" Relationship="Self.FK_Group_ToUser" FromRole="User" ToRole="Group" />
     <NavigationProperty Name="GroupUser" Relationship="Self.FK_GroupUser_ToUser" FromRole="User" ToRole="GroupUser" />
     <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserInfo_User" FromRole="User" ToRole="UserInfo" />
     <NavigationProperty Name="UserSharedFile" Relationship="Self.FK_UserSharedFile_ToUser" FromRole="User" ToRole="UserSharedFile" />
     <NavigationProperty Name="UserVisitedSchool" Relationship="Self.FK_UserVisitedSchool_ToUser" FromRole="User" ToRole="UserVisitedSchool" />
+    <Property Name="Salt" Type="Guid" />
+    <NavigationProperty Name="SemesterUser" Relationship="robson081192_StudentNotesDBModel.FK_SemesterUser_ToUser" FromRole="User" ToRole="SemesterUser" />
   </EntityType>
   <EntityType Name="UserInfo">
     <Key>
@@ -293,18 +296,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_GroupUser_ToGroupSemester">
-    <End Role="GroupSemester" Type="Self.GroupSemester" Multiplicity="1" />
-    <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GroupSemester">
-        <PropertyRef Name="GroupSemesterId" />
-      </Principal>
-      <Dependent Role="GroupUser">
-        <PropertyRef Name="GroupSemesterId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_GroupUser_ToUser">
     <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="*" />
@@ -445,10 +436,6 @@
       <End Role="Semester" EntitySet="Semester" />
       <End Role="GroupSemester" EntitySet="GroupSemester" />
     </AssociationSet>
-    <AssociationSet Name="FK_GroupUser_ToGroupSemester" Association="Self.FK_GroupUser_ToGroupSemester">
-      <End Role="GroupSemester" EntitySet="GroupSemester" />
-      <End Role="GroupUser" EntitySet="GroupUser" />
-    </AssociationSet>
     <AssociationSet Name="FK_GroupUser_ToUser" Association="Self.FK_GroupUser_ToUser">
       <End Role="User" EntitySet="User" />
       <End Role="GroupUser" EntitySet="GroupUser" />
@@ -477,5 +464,101 @@
       <End Role="User" EntitySet="User" />
       <End Role="UserVisitedSchool" EntitySet="UserVisitedSchool" />
     </AssociationSet>
+    <EntitySet Name="SemesterSubjectFile" EntityType="robson081192_StudentNotesDBModel.SemesterSubjectFile" />
+    <EntitySet Name="SemesterUser" EntityType="robson081192_StudentNotesDBModel.SemesterUser" />
+    <EntitySet Name="sysdiagrams" EntityType="robson081192_StudentNotesDBModel.sysdiagrams" />
+    <AssociationSet Name="FK_GroupUser_ToGroup" Association="robson081192_StudentNotesDBModel.FK_GroupUser_ToGroup">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="GroupUser" EntitySet="GroupUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterUser_ToSemester" Association="robson081192_StudentNotesDBModel.FK_SemesterUser_ToSemester">
+      <End Role="Semester" EntitySet="Semester" />
+      <End Role="SemesterUser" EntitySet="SemesterUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterSubjectFile_ToSemesterSubject" Association="robson081192_StudentNotesDBModel.FK_SemesterSubjectFile_ToSemesterSubject">
+      <End Role="SemesterSubject" EntitySet="SemesterSubject" />
+      <End Role="SemesterSubjectFile" EntitySet="SemesterSubjectFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterUser_ToUser" Association="robson081192_StudentNotesDBModel.FK_SemesterUser_ToUser">
+      <End Role="User" EntitySet="User" />
+      <End Role="SemesterUser" EntitySet="SemesterUser" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="SemesterSubjectFile">
+    <Key>
+      <PropertyRef Name="SemesterSubjectFileId" />
+    </Key>
+    <Property Name="SemesterSubjectFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SemesterSubjectId" Type="Int32" Nullable="false" />
+    <Property Name="FileId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SemesterSubject" Relationship="robson081192_StudentNotesDBModel.FK_SemesterSubjectFile_ToSemesterSubject" FromRole="SemesterSubjectFile" ToRole="SemesterSubject" />
+  </EntityType>
+  <EntityType Name="SemesterUser">
+    <Key>
+      <PropertyRef Name="SemesterUserId" />
+    </Key>
+    <Property Name="SemesterUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SemesterId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Semester" Relationship="robson081192_StudentNotesDBModel.FK_SemesterUser_ToSemester" FromRole="SemesterUser" ToRole="Semester" />
+    <NavigationProperty Name="User" Relationship="robson081192_StudentNotesDBModel.FK_SemesterUser_ToUser" FromRole="SemesterUser" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_GroupUser_ToGroup">
+    <End Type="robson081192_StudentNotesDBModel.Group" Role="Group" Multiplicity="1" />
+    <End Type="robson081192_StudentNotesDBModel.GroupUser" Role="GroupUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="GroupUser">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterUser_ToSemester">
+    <End Type="robson081192_StudentNotesDBModel.Semester" Role="Semester" Multiplicity="1" />
+    <End Type="robson081192_StudentNotesDBModel.SemesterUser" Role="SemesterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="SemesterUser">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterSubjectFile_ToSemesterSubject">
+    <End Type="robson081192_StudentNotesDBModel.SemesterSubject" Role="SemesterSubject" Multiplicity="1" />
+    <End Type="robson081192_StudentNotesDBModel.SemesterSubjectFile" Role="SemesterSubjectFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SemesterSubject">
+        <PropertyRef Name="SemesterSubjectId" />
+      </Principal>
+      <Dependent Role="SemesterSubjectFile">
+        <PropertyRef Name="SemesterSubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterUser_ToUser">
+    <End Type="robson081192_StudentNotesDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="robson081192_StudentNotesDBModel.SemesterUser" Role="SemesterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SemesterUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -18,6 +18,7 @@ namespace StudentNotes.Logic.DBModels
         {
             this.FileSharedGroup = new HashSet<FileSharedGroup>();
             this.GroupSemester = new HashSet<GroupSemester>();
+            this.GroupUser = new HashSet<GroupUser>();
         }
     
         public int GroupId { get; set; }
@@ -29,5 +30,6 @@ namespace StudentNotes.Logic.DBModels
         public virtual ICollection<FileSharedGroup> FileSharedGroup { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<GroupSemester> GroupSemester { get; set; }
+        public virtual ICollection<GroupUser> GroupUser { get; set; }
     }
 }

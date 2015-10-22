@@ -1,0 +1,114 @@
+﻿@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.Authorization.RegisterViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>@ResourceKeyResolver.ConstSignUpInService</h1>
+            <hr class="star-light star-even">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5 hello">
+            <img src="~/Resources/logo_STARE.png" class="img-responsive" />
+        </div>
+        <div class="col-lg-7">
+            @if (Model == null)
+            {
+                using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_1</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupEmail" name="model.Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_2</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupPassword" name="model.Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_3</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupConfirmPassword" name="model.ConfirmPassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBox("model.TermsOfUse", false) @ResourceKeyResolver.SignUpFormLabel_4
+                                    <a id="terms-of-use-link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">@ResourceKeyResolver.ConstTermsOfUse</a>
+                                    @ResourceKeyResolver.SignUpFormLabel_4Cd
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Zarejestruj się" class="btn btn-success" style="border-radius: 0px; width: inherit;" />
+                    </div>
+                }
+            }
+            else
+            {
+                using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        @if (Model.ErrorList.ContainsKey("Email"))
+                        {
+                            <span class="label label-danger col-sm-12">@Model.ErrorList["Email"]</span><br/>
+                        }
+                        <label class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_1</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="model.Email" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupEmail" value="@Model.Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @if (Model.ErrorList.ContainsKey("Password"))
+                        {
+                            <span class="label label-danger col-sm-12">@Model.ErrorList["Password"]</span><br/>
+                        }
+                        <label class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_2</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" name="model.Password" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupPassword" value="@Model.Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @if (Model.ErrorList.ContainsKey("ConfirmPassword"))
+                        {
+                            <span class="label label-danger col-sm-12">@Model.ErrorList["ConfirmPassword"]</span><br/>
+                        }
+                        <label class="col-sm-5 control-label">@ResourceKeyResolver.SignUpFormLabel_3</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" name="model.ConfirmPassword" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupConfirmPassword" value="@Model.ConfirmPassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @if (Model.ErrorList.ContainsKey("TermsOfUse"))
+                        {
+                            <span class="label label-danger col-sm-12">@Model.ErrorList["TermsOfUse"]</span><br />
+                        }
+                        <div class="col-sm-12">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBox("model.TermsOfUse", Model.TermsOfUse) @ResourceKeyResolver.SignUpFormLabel_4
+                                    <a id="terms-of-use-link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">@ResourceKeyResolver.ConstTermsOfUse</a>
+                                    @ResourceKeyResolver.SignUpFormLabel_4Cd
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Zarejestruj się" class="btn btn-success" style="border-radius: 0px; width: inherit;" />
+                    </div>
+                }
+            }
+
+            
+        </div>
+    </div>
+</div>

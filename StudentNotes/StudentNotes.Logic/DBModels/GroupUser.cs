@@ -16,9 +16,9 @@ namespace StudentNotes.Logic.DBModels
     {
         public int GroupUserId { get; set; }
         public int UserId { get; set; }
-        public int GroupSemesterId { get; set; }
+        public int GroupId { get; set; }
     
-        public virtual GroupSemester GroupSemester { get; set; }
         public virtual User User { get; set; }
+        public virtual Group Group { get; set; }
     }
 }

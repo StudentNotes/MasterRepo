@@ -16,7 +16,7 @@ namespace StudentNotes.Logic.DBModels
     public partial class robson081192_StudentNotesDBEntities : DbContext
     {
         public robson081192_StudentNotesDBEntities()
-            : base("name=robson081192_StudentNotesDBEntities")
+            : base("robson081192_StudentNotesDBEntities")
         {
         }
     
@@ -40,5 +40,8 @@ namespace StudentNotes.Logic.DBModels
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<UserSharedFile> UserSharedFile { get; set; }
         public virtual DbSet<UserVisitedSchool> UserVisitedSchool { get; set; }
+        public virtual DbSet<SemesterSubjectFile> SemesterSubjectFile { get; set; }
+        public virtual DbSet<SemesterUser> SemesterUser { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

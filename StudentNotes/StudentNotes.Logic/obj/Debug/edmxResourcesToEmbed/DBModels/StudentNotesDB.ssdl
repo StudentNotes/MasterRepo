@@ -62,7 +62,7 @@
     </Key>
     <Property Name="GroupUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="GroupSemesterId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="School">
     <Key>
@@ -88,6 +88,22 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="SemesterId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="SemesterSubjectFile">
+    <Key>
+      <PropertyRef Name="SemesterSubjectFileId" />
+    </Key>
+    <Property Name="SemesterSubjectFileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SemesterSubjectId" Type="int" Nullable="false" />
+    <Property Name="FileId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SemesterUser">
+    <Key>
+      <PropertyRef Name="SemesterUserId" />
+    </Key>
+    <Property Name="SemesterUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SemesterId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="StudySubject">
     <Key>
       <PropertyRef Name="StudySubjectId" />
@@ -97,14 +113,24 @@
     <Property Name="Description" Type="text" />
     <Property Name="GradeId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserId" />
     </Key>
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Login" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salt" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="UserInfo">
     <Key>
@@ -233,15 +259,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_GroupUser_ToGroupSemester">
-    <End Role="GroupSemester" Type="Self.GroupSemester" Multiplicity="1" />
+  <Association Name="FK_GroupUser_ToGroup">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
     <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="GroupSemester">
-        <PropertyRef Name="GroupSemesterId" />
+      <Principal Role="Group">
+        <PropertyRef Name="GroupId" />
       </Principal>
       <Dependent Role="GroupUser">
-        <PropertyRef Name="GroupSemesterId" />
+        <PropertyRef Name="GroupId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -278,6 +304,42 @@
       </Principal>
       <Dependent Role="SemesterSubject">
         <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterSubjectFile_ToSemesterSubject">
+    <End Role="SemesterSubject" Type="Self.SemesterSubject" Multiplicity="1" />
+    <End Role="SemesterSubjectFile" Type="Self.SemesterSubjectFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SemesterSubject">
+        <PropertyRef Name="SemesterSubjectId" />
+      </Principal>
+      <Dependent Role="SemesterSubjectFile">
+        <PropertyRef Name="SemesterSubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterUser_ToSemester">
+    <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+    <End Role="SemesterUser" Type="Self.SemesterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="SemesterUser">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterUser_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="SemesterUser" Type="Self.SemesterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SemesterUser">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -364,7 +426,10 @@
     <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SemesterSubject" EntityType="Self.SemesterSubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SemesterSubjectFile" EntityType="Self.SemesterSubjectFile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SemesterUser" EntityType="Self.SemesterUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudySubject" EntityType="Self.StudySubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserSharedFile" EntityType="Self.UserSharedFile" Schema="dbo" store:Type="Tables" />
@@ -401,8 +466,8 @@
       <End Role="Semester" EntitySet="Semester" />
       <End Role="GroupSemester" EntitySet="GroupSemester" />
     </AssociationSet>
-    <AssociationSet Name="FK_GroupUser_ToGroupSemester" Association="Self.FK_GroupUser_ToGroupSemester">
-      <End Role="GroupSemester" EntitySet="GroupSemester" />
+    <AssociationSet Name="FK_GroupUser_ToGroup" Association="Self.FK_GroupUser_ToGroup">
+      <End Role="Group" EntitySet="Group" />
       <End Role="GroupUser" EntitySet="GroupUser" />
     </AssociationSet>
     <AssociationSet Name="FK_GroupUser_ToUser" Association="Self.FK_GroupUser_ToUser">
@@ -416,6 +481,18 @@
     <AssociationSet Name="FK_SemesterSubject_ToSemester" Association="Self.FK_SemesterSubject_ToSemester">
       <End Role="Semester" EntitySet="Semester" />
       <End Role="SemesterSubject" EntitySet="SemesterSubject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterSubjectFile_ToSemesterSubject" Association="Self.FK_SemesterSubjectFile_ToSemesterSubject">
+      <End Role="SemesterSubject" EntitySet="SemesterSubject" />
+      <End Role="SemesterSubjectFile" EntitySet="SemesterSubjectFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterUser_ToSemester" Association="Self.FK_SemesterUser_ToSemester">
+      <End Role="Semester" EntitySet="Semester" />
+      <End Role="SemesterUser" EntitySet="SemesterUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterUser_ToUser" Association="Self.FK_SemesterUser_ToUser">
+      <End Role="User" EntitySet="User" />
+      <End Role="SemesterUser" EntitySet="SemesterUser" />
     </AssociationSet>
     <AssociationSet Name="FK_StudySubject_ToGrade" Association="Self.FK_StudySubject_ToGrade">
       <End Role="Grade" EntitySet="Grade" />
