@@ -77,79 +77,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorization\StudentNotesUser.cs" />
-    <Compile Include="DBModels\File.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\FileSharedGroup.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\FileTagPattern.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\Grade.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\Group.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\GroupSemester.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\GroupUser.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\School.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\Semester.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\SemesterSubject.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\SemesterSubjectFile.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\SemesterUser.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\StudentNotesDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StudentNotesDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\StudentNotesDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\StudentNotesDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StudentNotesDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\StudySubject.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\sysdiagrams.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\User.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\UserInfo.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\UserSharedFile.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModels\UserVisitedSchool.cs">
-      <DependentUpon>StudentNotesDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Consts\LogicConstants.cs" />
+    <Compile Include="DBModels\File.cs" />
+    <Compile Include="DBModels\FileSharedGroup.cs" />
+    <Compile Include="DBModels\FileTagPattern.cs" />
+    <Compile Include="DBModels\Grade.cs" />
+    <Compile Include="DBModels\Group.cs" />
+    <Compile Include="DBModels\GroupSemester.cs" />
+    <Compile Include="DBModels\GroupUser.cs" />
+    <Compile Include="DBModels\School.cs" />
+    <Compile Include="DBModels\Semester.cs" />
+    <Compile Include="DBModels\SemesterSubject.cs" />
+    <Compile Include="DBModels\SemesterSubjectFile.cs" />
+    <Compile Include="DBModels\SemesterUser.cs" />
+    <Compile Include="DBModels\StudentNotesContext.cs" />
+    <Compile Include="DBModels\StudySubject.cs" />
+    <Compile Include="DBModels\User.cs" />
+    <Compile Include="DBModels\UserInfo.cs" />
+    <Compile Include="DBModels\UserSharedFile.cs" />
+    <Compile Include="DBModels\UserVisitedSchool.cs" />
     <Compile Include="LogicInterfaces\INote.cs" />
+    <Compile Include="LogicModels\BrowserFile\BrowserNoteUploader.cs" />
     <Compile Include="LogicModels\Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Authorization\LoginViewModel.cs" />
     <Compile Include="ViewModels\Authorization\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\File\UserNotesViewModel.cs" />
+    <Compile Include="ViewModels\File\FileUploadViewModel.cs" />
+    <Compile Include="ViewModels\Home\HomeViewModel.cs" />
     <Compile Include="ViewModels\Validation\FormInputValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,23 +113,6 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
-    </None>
-    <EntityDeploy Include="DBModels\StudentNotesDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>StudentNotesDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DBModels\StudentNotesDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StudentNotesDB.edmx</DependentUpon>
-      <LastGenOutput>StudentNotesDB.Context.cs</LastGenOutput>
-    </None>
-    <None Include="DBModels\StudentNotesDB.edmx.diagram">
-      <DependentUpon>StudentNotesDB.edmx</DependentUpon>
-    </None>
-    <None Include="DBModels\StudentNotesDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StudentNotesDB.edmx</DependentUpon>
-      <LastGenOutput>StudentNotesDB.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

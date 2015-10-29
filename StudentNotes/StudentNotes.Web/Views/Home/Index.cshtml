@@ -1,12 +1,24 @@
 ﻿@using StudentNotes.Logic.ViewModels.Authorization
 @using StudentNotes.Web.Models.ResourcesFinderLogic
-@model StudentNotes.Logic.ViewModels.Authorization.RegisterViewModel
+@model StudentNotes.Logic.ViewModels.Home.HomeViewModel
 
 @{
     Layout = "~/Views/Shared/_HomePageLayout.cshtml";
 }
 
+
+
 <header id="myCarousel" class="carousel slide" data-rider="carousel">
+    <div id="login-errors">
+        @if (Model.LoginViewModel.ErrorList.Count > 0)
+        {
+            foreach (var error in Model.LoginViewModel.ErrorList)
+            {
+                <span class="label label-danger">@error.Value</span>
+                <br />
+            }
+        }
+    </div>
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -18,7 +30,7 @@
     <div class="carousel-inner">
         <div class="item active">
             <!-- Set the first background image using inline CSS below. -->
-            <img class="img-responsive" src="~/Resources/mobile_devices.png" />
+            <img class="img-responsive" src="~/Resources/mobile_devices.png"/>
         </div>
         <div class="item">
             <!-- Set the second background image using inline CSS below. -->
@@ -26,7 +38,7 @@
         </div>
         <div class="item">
             <!-- Set the third background image using inline CSS below. -->
-            <img class="img-responsive" src="~/Resources/data steal.png" />
+            <img class="img-responsive" src="~/Resources/data steal.png"/>
         </div>
     </div>
 
@@ -196,7 +208,7 @@
 
 <!-- Register Section -->
 <section id="register">
-    @Html.Partial("~/Views/Partials/Account/Register.cshtml", Model)
+    @Html.Partial("~/Views/Partials/Account/Register.cshtml", Model.RegisterViewModel)
 </section>
 
 

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace StudentNotes.FileTransferManager.Base
 {
@@ -16,8 +17,8 @@ namespace StudentNotes.FileTransferManager.Base
             Path = path;
             Content = new byte[0];
             Size = Content.Length;
-            
 
+            Name = GetFileName(Path);
         }
 
         protected File(string name, string path, byte[] content)
@@ -27,6 +28,14 @@ namespace StudentNotes.FileTransferManager.Base
             Size = Content.Length;
 
             Name = name;
+        }
+
+        protected File(string name, byte[] content)
+        {
+            Name = name;
+            Content = content;
+            Size = Content.Length;
+            Path = "";
         }
 
         //public static void DumpData(byte[] sourceBytes, ref byte[] allBytes)
@@ -112,6 +121,12 @@ namespace StudentNotes.FileTransferManager.Base
                     fileWriter.Write(Content);
                 }
             }
+        }
+
+        private string GetFileName(string filePath)
+        {
+            var directoryTree = filePath.Split('\\').ToList();
+            return directoryTree.Last();
         }
     }
 }

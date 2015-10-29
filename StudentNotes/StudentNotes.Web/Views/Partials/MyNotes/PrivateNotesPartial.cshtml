@@ -1,2 +1,16 @@
 ﻿@*Moje Notatki -> Prywatne*@
+@model StudentNotes.Logic.ViewModels.File.UserNotesViewModel
+
+<table>
+    @foreach (var privateFile in Model.UserNotesList)
+    {
+        <tr>
+            <td>@privateFile.Name</td>
+            <td>@privateFile.Category</td>
+            <td>@privateFile.DestinationPath</td>
+            <td>@privateFile.Size</td>
+            <td>@privateFile.UploadDate.ToString()</td>
+        </tr>
+    }
+</table>
 

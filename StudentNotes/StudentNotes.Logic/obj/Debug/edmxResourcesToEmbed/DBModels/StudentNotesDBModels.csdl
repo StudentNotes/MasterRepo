@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentNotesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="File">
+    <Key>
+      <PropertyRef Name="FileId" />
+    </Key>
+    <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Path" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsShared" Type="Boolean" Nullable="false" />
+    <Property Name="FileTags" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_File_ToUser" FromRole="File" ToRole="User" />
+    <NavigationProperty Name="FileSharedGroup" Relationship="Self.FK_FileSharedGroup_ToFile" FromRole="File" ToRole="FileSharedGroup" />
+    <NavigationProperty Name="SemesterSubjectFile" Relationship="Self.FK_SemesterSubjectFile_ToFile" FromRole="File" ToRole="SemesterSubjectFile" />
+    <NavigationProperty Name="UserSharedFile" Relationship="Self.FK_UserSharedFile_ToFile" FromRole="File" ToRole="UserSharedFile" />
+  </EntityType>
+  <EntityType Name="FileSharedGroup">
+    <Key>
+      <PropertyRef Name="FileSharedGroupId" />
+    </Key>
+    <Property Name="FileSharedGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileId" Type="Int32" Nullable="false" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="SemesterSubjectId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="File" Relationship="Self.FK_FileSharedGroup_ToFile" FromRole="FileSharedGroup" ToRole="File" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_FileSharedGroup_ToGroup" FromRole="FileSharedGroup" ToRole="Group" />
+    <NavigationProperty Name="SemesterSubject" Relationship="Self.FK_FileSharedGroup_ToSemesterSubject" FromRole="FileSharedGroup" ToRole="SemesterSubject" />
+  </EntityType>
+  <EntityType Name="FileTagPattern">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="GradeId" />
+    </Key>
+    <Property Name="GradeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Year" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SchoolId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="School" Relationship="Self.FK_Grade_ToSchool" FromRole="Grade" ToRole="School" />
+    <NavigationProperty Name="StudySubject" Relationship="Self.FK_StudySubject_ToGrade" FromRole="Grade" ToRole="StudySubject" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdminId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FileSharedGroup" Relationship="Self.FK_FileSharedGroup_ToGroup" FromRole="Group" ToRole="FileSharedGroup" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Group_ToUser" FromRole="Group" ToRole="User" />
+    <NavigationProperty Name="GroupSemester" Relationship="Self.FK_GroupSemester_ToGroup" FromRole="Group" ToRole="GroupSemester" />
+    <NavigationProperty Name="GroupUser" Relationship="Self.FK_GroupUser_ToGroup" FromRole="Group" ToRole="GroupUser" />
+  </EntityType>
+  <EntityType Name="GroupSemester">
+    <Key>
+      <PropertyRef Name="GroupSemesterId" />
+    </Key>
+    <Property Name="GroupSemesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="SemesterId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_GroupSemester_ToGroup" FromRole="GroupSemester" ToRole="Group" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK_GroupSemester_ToSemester" FromRole="GroupSemester" ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="GroupUser">
+    <Key>
+      <PropertyRef Name="GroupUserId" />
+    </Key>
+    <Property Name="GroupUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_GroupUser_ToGroup" FromRole="GroupUser" ToRole="Group" />
+    <NavigationProperty Name="User" Relationship="Self.FK_GroupUser_ToUser" FromRole="GroupUser" ToRole="User" />
+  </EntityType>
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="SchoolId" />
+    </Key>
+    <Property Name="SchoolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Grade" Relationship="Self.FK_Grade_ToSchool" FromRole="School" ToRole="Grade" />
+    <NavigationProperty Name="UserVisitedSchool" Relationship="Self.FK_UserVisitedSchool_ToSchool" FromRole="School" ToRole="UserVisitedSchool" />
+  </EntityType>
+  <EntityType Name="Semester">
+    <Key>
+      <PropertyRef Name="SemesterId" />
+    </Key>
+    <Property Name="SemesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
+    <Property Name="StudySubjectId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GroupSemester" Relationship="Self.FK_GroupSemester_ToSemester" FromRole="Semester" ToRole="GroupSemester" />
+    <NavigationProperty Name="StudySubject" Relationship="Self.FK_Semester_ToStudySubject" FromRole="Semester" ToRole="StudySubject" />
+    <NavigationProperty Name="SemesterSubject" Relationship="Self.FK_SemesterSubject_ToSemester" FromRole="Semester" ToRole="SemesterSubject" />
+    <NavigationProperty Name="SemesterUser" Relationship="Self.FK_SemesterUser_ToSemester" FromRole="Semester" ToRole="SemesterUser" />
+  </EntityType>
+  <EntityType Name="SemesterSubject">
+    <Key>
+      <PropertyRef Name="SemesterSubjectId" />
+    </Key>
+    <Property Name="SemesterSubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SemesterId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FileSharedGroup" Relationship="Self.FK_FileSharedGroup_ToSemesterSubject" FromRole="SemesterSubject" ToRole="FileSharedGroup" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterSubject_ToSemester" FromRole="SemesterSubject" ToRole="Semester" />
+    <NavigationProperty Name="SemesterSubjectFile" Relationship="Self.FK_SemesterSubjectFile_ToSemesterSubject" FromRole="SemesterSubject" ToRole="SemesterSubjectFile" />
+  </EntityType>
+  <EntityType Name="SemesterSubjectFile">
+    <Key>
+      <PropertyRef Name="SemesterSubjectFileId" />
+    </Key>
+    <Property Name="SemesterSubjectFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SemesterSubjectId" Type="Int32" Nullable="false" />
+    <Property Name="FileId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="File" Relationship="Self.FK_SemesterSubjectFile_ToFile" FromRole="SemesterSubjectFile" ToRole="File" />
+    <NavigationProperty Name="SemesterSubject" Relationship="Self.FK_SemesterSubjectFile_ToSemesterSubject" FromRole="SemesterSubjectFile" ToRole="SemesterSubject" />
+  </EntityType>
+  <EntityType Name="SemesterUser">
+    <Key>
+      <PropertyRef Name="SemesterUserId" />
+    </Key>
+    <Property Name="SemesterUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SemesterId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterUser_ToSemester" FromRole="SemesterUser" ToRole="Semester" />
+    <NavigationProperty Name="User" Relationship="Self.FK_SemesterUser_ToUser" FromRole="SemesterUser" ToRole="User" />
+  </EntityType>
+  <EntityType Name="StudySubject">
+    <Key>
+      <PropertyRef Name="StudySubjectId" />
+    </Key>
+    <Property Name="StudySubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="GradeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Grade" Relationship="Self.FK_StudySubject_ToGrade" FromRole="StudySubject" ToRole="Grade" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK_Semester_ToStudySubject" FromRole="StudySubject" ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salt" Type="Guid" />
+    <NavigationProperty Name="File" Relationship="Self.FK_File_ToUser" FromRole="User" ToRole="File" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_Group_ToUser" FromRole="User" ToRole="Group" />
+    <NavigationProperty Name="GroupUser" Relationship="Self.FK_GroupUser_ToUser" FromRole="User" ToRole="GroupUser" />
+    <NavigationProperty Name="SemesterUser" Relationship="Self.FK_SemesterUser_ToUser" FromRole="User" ToRole="SemesterUser" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserInfo_User" FromRole="User" ToRole="UserInfo" />
+    <NavigationProperty Name="UserSharedFile" Relationship="Self.FK_UserSharedFile_ToUser" FromRole="User" ToRole="UserSharedFile" />
+    <NavigationProperty Name="UserVisitedSchool" Relationship="Self.FK_UserVisitedSchool_ToUser" FromRole="User" ToRole="UserVisitedSchool" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Profession" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Street" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserInfo_User" FromRole="UserInfo" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserSharedFile">
+    <Key>
+      <PropertyRef Name="UserSharedFileId" />
+    </Key>
+    <Property Name="UserSharedFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="FileId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="File" Relationship="Self.FK_UserSharedFile_ToFile" FromRole="UserSharedFile" ToRole="File" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserSharedFile_ToUser" FromRole="UserSharedFile" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserVisitedSchool">
+    <Key>
+      <PropertyRef Name="UserVisitedSchoolId" />
+    </Key>
+    <Property Name="UserVisitedSchoolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="SchoolId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="School" Relationship="Self.FK_UserVisitedSchool_ToSchool" FromRole="UserVisitedSchool" ToRole="School" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserVisitedSchool_ToUser" FromRole="UserVisitedSchool" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_File_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="File" Type="Self.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="File">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedGroup_ToFile">
+    <End Role="File" Type="Self.File" Multiplicity="1" />
+    <End Role="FileSharedGroup" Type="Self.FileSharedGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="File">
+        <PropertyRef Name="FileId" />
+      </Principal>
+      <Dependent Role="FileSharedGroup">
+        <PropertyRef Name="FileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterSubjectFile_ToFile">
+    <End Role="File" Type="Self.File" Multiplicity="1" />
+    <End Role="SemesterSubjectFile" Type="Self.SemesterSubjectFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="File">
+        <PropertyRef Name="FileId" />
+      </Principal>
+      <Dependent Role="SemesterSubjectFile">
+        <PropertyRef Name="FileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSharedFile_ToFile">
+    <End Role="File" Type="Self.File" Multiplicity="1" />
+    <End Role="UserSharedFile" Type="Self.UserSharedFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="File">
+        <PropertyRef Name="FileId" />
+      </Principal>
+      <Dependent Role="UserSharedFile">
+        <PropertyRef Name="FileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedGroup_ToGroup">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="FileSharedGroup" Type="Self.FileSharedGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="FileSharedGroup">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedGroup_ToSemesterSubject">
+    <End Role="SemesterSubject" Type="Self.SemesterSubject" Multiplicity="1" />
+    <End Role="FileSharedGroup" Type="Self.FileSharedGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SemesterSubject">
+        <PropertyRef Name="SemesterSubjectId" />
+      </Principal>
+      <Dependent Role="FileSharedGroup">
+        <PropertyRef Name="SemesterSubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grade_ToSchool">
+    <End Role="School" Type="Self.School" Multiplicity="1" />
+    <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="SchoolId" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudySubject_ToGrade">
+    <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
+    <End Role="StudySubject" Type="Self.StudySubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grade">
+        <PropertyRef Name="GradeId" />
+      </Principal>
+      <Dependent Role="StudySubject">
+        <PropertyRef Name="GradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Group" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupSemester_ToGroup">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="GroupSemester" Type="Self.GroupSemester" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="GroupSemester">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupUser_ToGroup">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="GroupUser">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupSemester_ToSemester">
+    <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+    <End Role="GroupSemester" Type="Self.GroupSemester" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="GroupSemester">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupUser_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="GroupUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserVisitedSchool_ToSchool">
+    <End Role="School" Type="Self.School" Multiplicity="1" />
+    <End Role="UserVisitedSchool" Type="Self.UserVisitedSchool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="SchoolId" />
+      </Principal>
+      <Dependent Role="UserVisitedSchool">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Semester_ToStudySubject">
+    <End Role="StudySubject" Type="Self.StudySubject" Multiplicity="1" />
+    <End Role="Semester" Type="Self.Semester" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudySubject">
+        <PropertyRef Name="StudySubjectId" />
+      </Principal>
+      <Dependent Role="Semester">
+        <PropertyRef Name="StudySubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterSubject_ToSemester">
+    <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+    <End Role="SemesterSubject" Type="Self.SemesterSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="SemesterSubject">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterUser_ToSemester">
+    <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+    <End Role="SemesterUser" Type="Self.SemesterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="SemesterUser">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterSubjectFile_ToSemesterSubject">
+    <End Role="SemesterSubject" Type="Self.SemesterSubject" Multiplicity="1" />
+    <End Role="SemesterSubjectFile" Type="Self.SemesterSubjectFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SemesterSubject">
+        <PropertyRef Name="SemesterSubjectId" />
+      </Principal>
+      <Dependent Role="SemesterSubjectFile">
+        <PropertyRef Name="SemesterSubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterUser_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="SemesterUser" Type="Self.SemesterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SemesterUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSharedFile_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserSharedFile" Type="Self.UserSharedFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserSharedFile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserVisitedSchool_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserVisitedSchool" Type="Self.UserVisitedSchool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserVisitedSchool">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentNotesDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="File" EntityType="Self.File" />
+    <EntitySet Name="FileSharedGroup" EntityType="Self.FileSharedGroup" />
+    <EntitySet Name="FileTagPattern" EntityType="Self.FileTagPattern" />
+    <EntitySet Name="Grade" EntityType="Self.Grade" />
+    <EntitySet Name="Group" EntityType="Self.Group" />
+    <EntitySet Name="GroupSemester" EntityType="Self.GroupSemester" />
+    <EntitySet Name="GroupUser" EntityType="Self.GroupUser" />
+    <EntitySet Name="School" EntityType="Self.School" />
+    <EntitySet Name="Semester" EntityType="Self.Semester" />
+    <EntitySet Name="SemesterSubject" EntityType="Self.SemesterSubject" />
+    <EntitySet Name="SemesterSubjectFile" EntityType="Self.SemesterSubjectFile" />
+    <EntitySet Name="SemesterUser" EntityType="Self.SemesterUser" />
+    <EntitySet Name="StudySubject" EntityType="Self.StudySubject" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+    <EntitySet Name="UserSharedFile" EntityType="Self.UserSharedFile" />
+    <EntitySet Name="UserVisitedSchool" EntityType="Self.UserVisitedSchool" />
+    <AssociationSet Name="FK_File_ToUser" Association="Self.FK_File_ToUser">
+      <End Role="User" EntitySet="User" />
+      <End Role="File" EntitySet="File" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedGroup_ToFile" Association="Self.FK_FileSharedGroup_ToFile">
+      <End Role="File" EntitySet="File" />
+      <End Role="FileSharedGroup" EntitySet="FileSharedGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterSubjectFile_ToFile" Association="Self.FK_SemesterSubjectFile_ToFile">
+      <End Role="File" EntitySet="File" />
+      <End Role="SemesterSubjectFile" EntitySet="SemesterSubjectFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSharedFile_ToFile" Association="Self.FK_UserSharedFile_ToFile">
+      <End Role="File" EntitySet="File" />
+      <End Role="UserSharedFile" EntitySet="UserSharedFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedGroup_ToGroup" Association="Self.FK_FileSharedGroup_ToGroup">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="FileSharedGroup" EntitySet="FileSharedGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedGroup_ToSemesterSubject" Association="Self.FK_FileSharedGroup_ToSemesterSubject">
+      <End Role="SemesterSubject" EntitySet="SemesterSubject" />
+      <End Role="FileSharedGroup" EntitySet="FileSharedGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grade_ToSchool" Association="Self.FK_Grade_ToSchool">
+      <End Role="School" EntitySet="School" />
+      <End Role="Grade" EntitySet="Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudySubject_ToGrade" Association="Self.FK_StudySubject_ToGrade">
+      <End Role="Grade" EntitySet="Grade" />
+      <End Role="StudySubject" EntitySet="StudySubject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_ToUser" Association="Self.FK_Group_ToUser">
+      <End Role="User" EntitySet="User" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupSemester_ToGroup" Association="Self.FK_GroupSemester_ToGroup">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="GroupSemester" EntitySet="GroupSemester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupUser_ToGroup" Association="Self.FK_GroupUser_ToGroup">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="GroupUser" EntitySet="GroupUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupSemester_ToSemester" Association="Self.FK_GroupSemester_ToSemester">
+      <End Role="Semester" EntitySet="Semester" />
+      <End Role="GroupSemester" EntitySet="GroupSemester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupUser_ToUser" Association="Self.FK_GroupUser_ToUser">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupUser" EntitySet="GroupUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserVisitedSchool_ToSchool" Association="Self.FK_UserVisitedSchool_ToSchool">
+      <End Role="School" EntitySet="School" />
+      <End Role="UserVisitedSchool" EntitySet="UserVisitedSchool" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Semester_ToStudySubject" Association="Self.FK_Semester_ToStudySubject">
+      <End Role="StudySubject" EntitySet="StudySubject" />
+      <End Role="Semester" EntitySet="Semester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterSubject_ToSemester" Association="Self.FK_SemesterSubject_ToSemester">
+      <End Role="Semester" EntitySet="Semester" />
+      <End Role="SemesterSubject" EntitySet="SemesterSubject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterUser_ToSemester" Association="Self.FK_SemesterUser_ToSemester">
+      <End Role="Semester" EntitySet="Semester" />
+      <End Role="SemesterUser" EntitySet="SemesterUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterSubjectFile_ToSemesterSubject" Association="Self.FK_SemesterSubjectFile_ToSemesterSubject">
+      <End Role="SemesterSubject" EntitySet="SemesterSubject" />
+      <End Role="SemesterSubjectFile" EntitySet="SemesterSubjectFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterUser_ToUser" Association="Self.FK_SemesterUser_ToUser">
+      <End Role="User" EntitySet="User" />
+      <End Role="SemesterUser" EntitySet="SemesterUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_User" Association="Self.FK_UserInfo_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSharedFile_ToUser" Association="Self.FK_UserSharedFile_ToUser">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserSharedFile" EntitySet="UserSharedFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserVisitedSchool_ToUser" Association="Self.FK_UserVisitedSchool_ToUser">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserVisitedSchool" EntitySet="UserVisitedSchool" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

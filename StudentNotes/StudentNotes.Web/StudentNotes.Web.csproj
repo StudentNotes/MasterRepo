@@ -176,6 +176,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,6 +207,10 @@
     <Content Include="Views\Partials\MyUniversities\UniversitySemesterSubjectNotesPartial.cshtml" />
     <Content Include="Views\Partials\MyGroups\GroupSubjectsPartial.cshtml" />
     <Content Include="Views\Partials\Account\Register.cshtml" />
+    <Content Include="Views\Partials\TopMenu\UploadFilePartial.cshtml" />
+    <Content Include="Views\Partials\TopMenu\AddUniversityPartial.cshtml" />
+    <Content Include="Views\Partials\TopMenu\AddGroupPartial.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

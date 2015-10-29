@@ -13,6 +13,14 @@ namespace StudentNotes.FileTransferManager.FtpClient.FileTypes
         public CommonFile(string path) : base(path)
         {
         }
+        public CommonFile(string name, string path, byte[] content)
+            : base(name, path, content)
+        {
+        }
+        public CommonFile(string name, byte[] content)
+            : base(name, content)
+        {
+        }
 
     }
 }

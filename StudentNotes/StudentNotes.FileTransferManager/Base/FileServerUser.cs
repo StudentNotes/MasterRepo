@@ -13,9 +13,10 @@ namespace StudentNotes.FileTransferManager.Base
         public string password;
         protected FileServer server;
 
-        protected IDownloadBehavior<byte[]> downloadBehavior;
-        protected IUploadBehavior<int> uploadBehavior;
-        protected IDeleteBehavior<int> deleteBehavior; 
+        protected IDownloadBehavior<byte[]> DownloadBehavior;
+        protected IUploadBehavior<int> UploadBehavior;
+        protected IDeleteBehavior<int> DeleteBehavior;
+        protected IServerDirectoryTreeBehavior DirectoryBehavior;
 
         protected FileServerUser(string login, string password, FileServer server)
         {
@@ -28,23 +29,34 @@ namespace StudentNotes.FileTransferManager.Base
 
         public byte[] DownloadFile(File file)
         {
-            return downloadBehavior.DownloadFile(file, server, this);
+            return DownloadBehavior.DownloadFile(file, server, this);
         }
 
         public int UploadFile(File file)
         {
-            return uploadBehavior.UploadFile(file, server, this);
+            return UploadBehavior.UploadFile(file, server, this);
+        }
+
+        public int DeleteDirectory()
+        {
+            return DeleteBehavior.DeleteDirectory(server, this);
         }
 
         public int DeleteFile()
         {
-            return deleteBehavior.DeleteFile(server, this);
+            return DeleteBehavior.DeleteFile(server, this);
         }
 
         public int DeleteFile(string remoteLocation)
         {
-            return deleteBehavior.DeleteFile(remoteLocation, server, this);
+            return DeleteBehavior.DeleteFile(remoteLocation, server, this);
         }
+
+        public int GoToOrCreatePath(string destinationPath)
+        {
+            return (int)DirectoryBehavior.GoToOrCreatePath(destinationPath);
+        }
+
 
     }
 }

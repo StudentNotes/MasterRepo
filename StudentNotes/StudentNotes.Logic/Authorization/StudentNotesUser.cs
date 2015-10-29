@@ -12,15 +12,34 @@ namespace StudentNotes.Logic.Authorization
 {
     public class StudentNotesUser
     {
+        public string Name
+        {
+            get { return _name; }
+        }
+
+        public string LastName
+        {
+            get
+            {
+                return _lastName;
+            }
+        }
+
         private int ID;
         private string _email;
         private string _plainTextPassword;
+        private string _name;
+        private string _lastName;
         private Guid _userGuid;
 
         public StudentNotesUser(string email, string password)
         {
             _email = email;
             _plainTextPassword = password;
+        }
+
+        public StudentNotesUser()
+        {
         }
 
         private string EncryptPassword(string decryptedPassword, Guid salt)
@@ -31,7 +50,8 @@ namespace StudentNotes.Logic.Authorization
             byte[] byteArray = Encoding.Unicode.GetBytes(passwordAndSalt);
             using (var sha256 = SHA256.Create())
             {
-                hashedPassword = sha256.ComputeHash(byteArray).ToString();
+                byte[] hashedByteArray = sha256.ComputeHash(byteArray);
+                hashedPassword = System.Text.Encoding.Unicode.GetString(hashedByteArray);
             }
 
             return hashedPassword;
@@ -39,7 +59,7 @@ namespace StudentNotes.Logic.Authorization
 
         public bool UserExistsInDatabase()
         {
-            using (robson081192_StudentNotesDBEntities context = new robson081192_StudentNotesDBEntities())
+            using (StudentNotesContext context = new StudentNotesContext())
             {
                 var users = from u in context.User where u.Email == _email select u;
                 if (users.Any())
@@ -56,20 +76,26 @@ namespace StudentNotes.Logic.Authorization
             {
                 _userGuid = Guid.NewGuid();
 
-                using (robson081192_StudentNotesDBEntities context = new robson081192_StudentNotesDBEntities())
+                using (StudentNotesContext context = new StudentNotesContext())
                 {
                     try
                     {
-                        context.User.Add(new User()
+                        User newStudentNotesUser = new User()
                         {
                             Email = _email,
                             Password = EncryptPassword(_plainTextPassword, _userGuid),
-                            Salt = _userGuid
-                        });
+                            Salt = _userGuid,
+                        };
+                        context.User.Add(newStudentNotesUser);
+
                         context.UserInfo.Add(new UserInfo()
                         {
-                            CreatedOn = DateTime.Today
+                            UserId = context.User.Local.ToArray().Last().UserId,
+                            CreatedOn = DateTime.Now
                         });
+
+                        context.SaveChanges();
+                        return 0;
                     }
                     catch (Exception ex)
                     {
@@ -83,7 +109,7 @@ namespace StudentNotes.Logic.Authorization
 
         public bool IsServiceUser()
         {
-            using (robson081192_StudentNotesDBEntities context = new robson081192_StudentNotesDBEntities())
+            using (StudentNotesContext context = new StudentNotesContext())
             {
                 var users = from u in context.User where u.Email == _email select u;
                 if (users.Any())
@@ -101,7 +127,64 @@ namespace StudentNotes.Logic.Authorization
 
         public int GetStudentNotesUserId()
         {
+            using (var context = new StudentNotesContext())
+            {
+                var users = from u in context.User where u.Email == _email select u;
+                var currentUser = users.First();
+                ID = currentUser.UserId;
+            }
             return ID;
+        }
+
+        public void SetModelName()
+        {
+            using (var context = new StudentNotesContext())
+            {
+                var users = from u in context.User where u.Email == _email select u;
+                var currentUser = users.First();
+
+                if (currentUser.UserInfo.Name == null)
+                {
+                    _name = "nieznajomy";
+                }
+                else
+                {
+                    _name = currentUser.UserInfo.Name;
+                }
+                if (currentUser.UserInfo.LastName == null)
+                {
+                    _lastName = "";
+                }
+                else
+                {
+                    _lastName = currentUser.UserInfo.LastName;
+                }
+            }
+        }
+        public void SetModelName(int userId)
+        {
+            using (var context = new StudentNotesContext())
+            {
+                var users = from u in context.User where u.UserId == userId select u;
+                var currentUser = users.First();
+
+                if (currentUser.UserInfo.Name == null)
+                {
+                    _name = "nieznajomy";
+                }
+                else
+                {
+                    _name = currentUser.UserInfo.Name;
+                }
+                if (currentUser.UserInfo.LastName == null)
+                {
+                    _lastName = "";
+                }
+                else
+                {
+                    _lastName = currentUser.UserInfo.LastName;
+                }
+            }
         }
     }
 }

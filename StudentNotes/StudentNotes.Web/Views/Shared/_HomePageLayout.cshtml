@@ -1,4 +1,5 @@
 ﻿@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.Home.HomeViewModel
 
 @{
     Layout = null;
@@ -44,7 +45,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand hovertest" href="#page-top" style="">
-                    StudentNotes
+                    @ResourceKeyResolver.ConstStudentNotes
                 </a>
             </div>
 
@@ -65,10 +66,10 @@
                     </li>
                     <li class="col-lg-offset-1"></li>
                     <li>
-                        <form class="form-inline" role="search" action="/Home/SignIn" method="post">
+                        <form class="form-inline" role="search" action="/Account/Login" method="post">
                             <div class="form-group">
-                                <input type="text" name="email" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupEmail">
-                                <input type="password" name="password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupPassword">
+                                <input type="text" name="model.Email" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupEmail">
+                                <input type="password" name="model.Password" class="form-control" placeholder="@ResourceKeyResolver.HomePageNavBarFormGroupPassword">
                             </div>
                             @Html.AntiForgeryToken()
                             <input type="submit" value="@ResourceKeyResolver.HomePageNavBarFormGroupSignIn" class="btn btn-success" />

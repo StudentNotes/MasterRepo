@@ -156,3 +156,61 @@
     min-height: 900px;
     background-color: #e6e6e6;
 }
+
+/****************************************   UPLOAD FILE MODAL  *****************************************/
+#uploadFileModal .modal-content{
+    background-color: #262626;
+    border-color: #fdd017;
+    color: #fdd017;
+}
+#uploadFileModal .modal-header {
+    text-align: center;
+    border-color: #fdd017;
+}
+#uploadFileModal button span{
+    color: #fdd017;
+}
+#uploadFileModal .modal-body .label{
+
+    font-size: 16px;
+    text-align: left;
+    color: #fdd017;
+    font-weight: bold;
+}
+#uploadFileModal .modal-body .label.file-path{
+    background-color: #ffe68b;
+    padding: 6px;
+    color: #000000;
+    border: 2px solid #fdd017;
+    font-weight: 200;
+}
+#uploadFileModal .modal-body .btn.btn-default{
+    background-color: #262626;
+    padding: 4px;
+    color: #fdd017;
+    border: 2px solid;
+    border-color: #c6c6c6;
+}
+#uploadFileModal .modal-body .btn.btn-default:hover{
+    padding: 4px;
+    color: #fdd017;
+    border-color: #fdd017;
+}
+#uploadFileModal .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+#uploadFileModal .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: inherit;
+    display: block;
+}

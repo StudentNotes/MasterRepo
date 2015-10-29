@@ -9,19 +9,29 @@ namespace StudentNotes.Logic.LogicModels
 {
     public class Note : INote
     {
+        public int UserId { get; private set; }
         public string Name { get; set; }
         public string Category { get; set; }
-        public string SourcePath { get; set; }
         public string DestinationPath { get; set; }
         public string Size { get; set; }
-        public string UploadDate { get; set; }
+        public DateTime UploadDate { get; set; }
+        public string FileType { get; set; }
         public bool IsShared { get; set; }
         public List<string> Tags { get; set; }
+        public byte[] Content { get; set; }
 
+        public Note()
+        {
+        }
+
+        public Note(int userId)
+        {
+            UserId = userId;
+        }
 
         public int UploadNote()
         {
-            throw new NotImplementedException();
+            throw  new NotImplementedException();
         }
 
         public int DownloadNote()

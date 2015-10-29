@@ -2,8 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StudentNotes.FileTransferManager.FtpClient;
 using StudentNotes.FileTransferManager.FtpClient.FileTypes;
-
-namespace StudentNotes.Web.Tests
+namespace StudentNotes.Tests
 {
     [TestClass]
     public class FtpClientTest
@@ -22,6 +21,18 @@ namespace StudentNotes.Web.Tests
             FtpUser user = new FtpUser("robson", "4019551", server);
 
             return user.ToString() == "Ftp user credentials\nlogin: robson\npassword: 4019551\nserver address: 192.168.1.1" ? 0 : 1;
+        }
+
+        [TestMethod]
+        public void TestDirectoryCreationLocal()
+        {
+            //  83.10.110.250 
+            FtpServer server = new FtpServer("192.168.1.1", "/FTP/ET - Prazan stan.mp3");
+            FtpUser user = new FtpUser("robson", "4019551", server);
+
+            user.GoToOrCreatePath("FTP/folder4/filder4_2/");
+            CommonFile file = new CommonFile(@"C:\Users\Robson\Desktop\Test_FTP_dll\ET - Prazan stan.mp3");
+            user.UploadFile(file);
         }
 
         [TestMethod]
@@ -59,10 +70,32 @@ namespace StudentNotes.Web.Tests
         public void TestFileDelete()
         {
             //  83.10.110.250 
-            FtpServer server = new FtpServer("91.219.122.70", "/FTP/ET - Prazan stan.mp3");
+            FtpServer server = new FtpServer("91.219.122.70", "FTP/folder4/filder4_2/ET - Prazan stan.mp3");
             FtpUser user = new FtpUser("robson081192", "pck5LT099r", server);
 
             user.DeleteFile();
+        }
+
+        [TestMethod]
+        public void TestDirectoryDelete()
+        {
+            //  83.10.110.250 
+            FtpServer server = new FtpServer("91.219.122.70", "FTP/folder4/filder4_2");
+            FtpUser user = new FtpUser("robson081192", "pck5LT099r", server);
+
+            user.DeleteDirectory();
+        }
+
+        [TestMethod]
+        public void TestDirectoryCreation()
+        {
+            //  83.10.110.250 
+            FtpServer server = new FtpServer("91.219.122.70", "/FTP/ET - Prazan stan.mp3");
+            FtpUser user = new FtpUser("robson081192", "pck5LT099r", server);
+
+            user.GoToOrCreatePath("FTP/folder4/filder4_2/");
+            CommonFile file = new CommonFile(@"C:\Users\Robson\Desktop\Test_FTP_dll\ET - Prazan stan.mp3");
+            user.UploadFile(file);
         }
     }
 }

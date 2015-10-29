@@ -40,17 +40,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstraction\IDeleteBehavior.cs" />
+    <Compile Include="Abstraction\IServerDirectoryTreeBehavior.cs" />
     <Compile Include="Base\File.cs" />
     <Compile Include="Base\FileServer.cs" />
     <Compile Include="Base\FileServerUser.cs" />
     <Compile Include="Abstraction\IDownloadBehavior.cs" />
     <Compile Include="Abstraction\IUploadBehavior.cs" />
+    <Compile Include="Consts\FtpResponseCode.cs" />
     <Compile Include="FtpClient\FileTypes\CommonFile.cs" />
+    <Compile Include="FtpClient\FtpBehavior\FtpBehaviorBase.cs" />
+    <Compile Include="FtpClient\FtpBehavior\FtpDirectoryBehavior.cs" />
     <Compile Include="FtpClient\FtpServer.cs" />
     <Compile Include="FtpClient\FtpUser.cs" />
-    <Compile Include="FtpClient\TransferBehavior\FtpDeleteBehavior.cs" />
-    <Compile Include="FtpClient\TransferBehavior\FtpDownloadBehavior.cs" />
-    <Compile Include="FtpClient\TransferBehavior\FtpUploadBehavior.cs" />
+    <Compile Include="FtpClient\FtpBehavior\FtpDeleteBehavior.cs" />
+    <Compile Include="FtpClient\FtpBehavior\FtpDownloadBehavior.cs" />
+    <Compile Include="FtpClient\FtpBehavior\FtpUploadBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -4,7 +4,7 @@ using StudentNotes.FileTransferManager.Abstraction;
 using StudentNotes.FileTransferManager.Base;
 using File = StudentNotes.FileTransferManager.Base.File;
 
-namespace StudentNotes.FileTransferManager.FtpClient.TransferBehavior
+namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
 {
     public class FtpDownloadBehavior : IDownloadBehavior<byte[]>
     {
@@ -13,7 +13,6 @@ namespace StudentNotes.FileTransferManager.FtpClient.TransferBehavior
 
         public byte[] DownloadFile(File file, FileServer server, FileServerUser user)
         {
-            byte[] downloadedFilePart;
             byte[] completeFile = new byte[0];
 
             string requestPath = string.Format("ftp://{0}{1}", server.ServerUrl, server.FileDestination);
@@ -29,7 +28,7 @@ namespace StudentNotes.FileTransferManager.FtpClient.TransferBehavior
             {
                 using (BinaryReader reader = new BinaryReader(ftpDownloadStream))
                 {
-                    downloadedFilePart = reader.ReadBytes(SEGMENT_SIZE);
+                    var downloadedFilePart = reader.ReadBytes(SEGMENT_SIZE);
 
                     while (downloadedFilePart.Length > 0)
                     {
