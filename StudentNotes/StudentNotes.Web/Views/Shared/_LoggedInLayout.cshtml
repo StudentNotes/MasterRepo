@@ -1,5 +1,4 @@
 ﻿@using StudentNotes.Web.Models.ResourcesFinderLogic;
-@model StudentNotes.Logic.Authorization.StudentNotesUser
 
 @{
     Layout = null;
@@ -13,6 +12,7 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
     <link href="~/Content/custom-logged-in.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
 </head>
 <body>
     <div id="wrapper">
@@ -31,7 +31,7 @@
                 @Html.ActionLink(ResourceKeyResolver.ConstStudentNotes, "Logoff", "Account", null, new { @class = "navbar-brand" })
             </div>
             <!-- Top Menu Items -->
-            @Html.Partial("~/Views/Partials/NavbarTopPartial.cshtml", Model)
+            @Html.Action("GetNavbarTopPartial", "Account")
 
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             @Html.Partial("~/Views/Partials/NavbarSidePartial.cshtml")
@@ -39,7 +39,7 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <div id="page-content" class="container-fluid">
 
                 @RenderBody()
             </div>
@@ -72,19 +72,27 @@
 
         document.getElementById("filePath").innerHTML = allFiles;
     }
+
+    
+
 </script>
 
 <!-- jQuery -->
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <!--Plugin JavaScript files-->
+    @*<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>*@
+
+    <!--Custom JavaScript-->
+    <script src="~/Scripts/customScripts.js"></script>
 
     <!--Bootstrap Core JavaScript-->
     <script src="~/Scripts/bootstrap.min.js"></script>
+    
 
-    <!--Custom JavaScript-->
-    <!--script src="~/Scripts/custom.js"></!--script>
-
-    <!--Plugin JavaScript files-->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    
 
 </body>
 </html>

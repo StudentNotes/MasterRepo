@@ -6,19 +6,29 @@ using System.Web;
 using System.Web.Mvc;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.LogicModels.BrowserFile;
+using StudentNotes.Logic.ServiceInterfaces;
+using StudentNotes.Logic.Services;
 using StudentNotes.Logic.ViewModels.File;
 
 namespace StudentNotes.Web.Controllers
 {
     public class FileController : Controller
     {
+        private readonly IUploadService _uploadService;
+
+        public FileController(IUploadService uploadService)
+        {
+            _uploadService = uploadService;
+        }
         // GET: File
         [HttpPost]
         public ActionResult SendFile(IEnumerable<HttpPostedFileBase> files, string fileType)
         {
-            if (files == null || !files.Any())
+            var anyFile = files.First();
+            if (anyFile == null)
             {
                 //  Obsłużyć przypadek, że użytkownik nie wybrał pliku...
+                return RedirectToAction("LoginRedirect", "Account");
             }
             foreach (var file in files)
             {
@@ -30,22 +40,36 @@ namespace StudentNotes.Web.Controllers
                 {
                     Name = fileName,
                     Content = fileContent,
-                    FileType = fileType
+                    Size = fileContent.Length.ToString()
+                    //Category = file.category
+                    //Tags = fileTags
                 };
 
-                var browserNoteUploader = new BrowserNoteUploader((int)Session["CurrentUserId"]);
 
-                if (browserNoteUploader.UploadBrowserNote(note) == 0)
+                if (_uploadService.UploadPrivateNote(note, (int) Session["CurrentUserId"]) == 0)
                 {
+                    _uploadService.SaveUpload();
                     //  Prawidłowo wysłano plik na serwer
                 }
+
+
+                //var browserNoteUploader = new BrowserNoteUploader((int)Session["CurrentUserId"]);
+
+                //if (browserNoteUploader.UploadPrivateNote(note) == 0)
+                //{
+                //    //  Prawidłowo wysłano plik na serwer
+                //}
             }
 
-            UserNotesViewModel viewModel = new UserNotesViewModel();
-            viewModel.GetPrivateUserNotes((int)Session["CurrentUserId"]);
-
             //return PartialView("~/Views/Partials/MyNotes/PrivateNotesPartial.cshtml", viewModel);
-            return View("~/Views/File/Index.cshtml", viewModel);
+            return RedirectToAction("RetriveInfo");
+        }
+
+
+        [HttpGet]
+        public ActionResult RetriveInfo()
+        {
+            return View("~/Views/Note/NoteUploaded.cshtml");
         }
 
     }

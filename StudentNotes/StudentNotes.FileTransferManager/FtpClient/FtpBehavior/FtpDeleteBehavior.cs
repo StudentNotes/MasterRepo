@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using StudentNotes.FileTransferManager.Abstraction;
 using StudentNotes.FileTransferManager.Base;
 using StudentNotes.FileTransferManager.Consts;
-using File = StudentNotes.FileTransferManager.Base.File;
+using File = StudentNotes.FileTransferManager.Base.FileServerFile;
 
 namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
 {

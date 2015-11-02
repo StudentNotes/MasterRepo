@@ -99,7 +99,10 @@
     <Compile Include="LogicInterfaces\INote.cs" />
     <Compile Include="LogicModels\BrowserFile\BrowserNoteUploader.cs" />
     <Compile Include="LogicModels\Note.cs" />
+    <Compile Include="LogicModels\University.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceInterfaces\IUploadService.cs" />
+    <Compile Include="Services\UploadService.cs" />
     <Compile Include="ViewModels\Authorization\LoginViewModel.cs" />
     <Compile Include="ViewModels\Authorization\RegisterViewModel.cs" />
     <Compile Include="ViewModels\File\UserNotesViewModel.cs" />
@@ -124,6 +127,10 @@
     <ProjectReference Include="..\StudentNotes.FileTransferManager\StudentNotes.FileTransferManager.csproj">
       <Project>{45461541-3ce7-49db-ad6e-f7f9c171e89d}</Project>
       <Name>StudentNotes.FileTransferManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentNotes.Repositories\StudentNotes.Repositories.csproj">
+      <Project>{5c1ce73e-6dac-48ed-b4ff-6e4bda53688b}</Project>
+      <Name>StudentNotes.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

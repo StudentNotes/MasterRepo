@@ -34,6 +34,21 @@
         <ul class="dropdown-menu" aria-labelledby="dropdown1">
             <li><a href="#">@ResourceKeyResolver.ConstMyAccount</a></li>
             <li><a href="#">@ResourceKeyResolver.ConstOptions</a></li>
+            @if (Model.IsServiceAdmin)
+            {
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstManageUniversities, "ManageUniversities", "Management", null,
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "page-content",
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading"
+                                }
+                    //new { @class = "fa fa-fw fa-dashboard" })
+                                )
+                </li>
+            }         
             <li>@Html.ActionLink(ResourceKeyResolver.ConstSignOut, "Logoff", "Account")</li>
         </ul>
     </div>

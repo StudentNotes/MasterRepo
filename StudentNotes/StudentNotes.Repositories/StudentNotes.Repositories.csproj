@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C1CE73E-6DAC-48ED-B4FF-6E4BDA53688B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StudentNotes.Repositories</RootNamespace>
+    <AssemblyName>StudentNotes.Repositories</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\Disposable.cs" />
+    <Compile Include="Base\RepositoryBase.cs" />
+    <Compile Include="Base\UnitOfWork.cs" />
+    <Compile Include="DbModels\File.cs" />
+    <Compile Include="DbModels\FileSharedGroup.cs" />
+    <Compile Include="DbModels\FileTagPattern.cs" />
+    <Compile Include="DbModels\Grade.cs" />
+    <Compile Include="DbModels\Group.cs" />
+    <Compile Include="DbModels\GroupSemester.cs" />
+    <Compile Include="DbModels\GroupUser.cs" />
+    <Compile Include="DbModels\School.cs" />
+    <Compile Include="DbModels\Semester.cs" />
+    <Compile Include="DbModels\SemesterSubject.cs" />
+    <Compile Include="DbModels\SemesterSubjectFile.cs" />
+    <Compile Include="DbModels\SemesterUser.cs" />
+    <Compile Include="DbModels\StudentNotesContext.cs" />
+    <Compile Include="DbModels\StudySubject.cs" />
+    <Compile Include="DbModels\User.cs" />
+    <Compile Include="DbModels\UserInfo.cs" />
+    <Compile Include="DbModels\UserSharedFile.cs" />
+    <Compile Include="DbModels\UserVisitedSchool.cs" />
+    <Compile Include="Base\DbFactory.cs" />
+    <Compile Include="Infrastructure\IDbFactory.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\FileRepository.cs" />
+    <Compile Include="Repositories\FileSharedGroupRepository.cs" />
+    <Compile Include="Repositories\FileTagPatternRepository.cs" />
+    <Compile Include="Repositories\GradeRepository.cs" />
+    <Compile Include="Repositories\GroupRepository.cs" />
+    <Compile Include="Repositories\GroupSemesterRepository.cs" />
+    <Compile Include="Repositories\GroupUserRepository.cs" />
+    <Compile Include="Repositories\SchoolRepository.cs" />
+    <Compile Include="Repositories\SemesterRepository.cs" />
+    <Compile Include="Repositories\SemesterSubjectFileRepository.cs" />
+    <Compile Include="Repositories\SemesterSubjectRepository.cs" />
+    <Compile Include="Repositories\SemesterUserRepository.cs" />
+    <Compile Include="Repositories\StudySubjectRepository.cs" />
+    <Compile Include="Repositories\UserInfoRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\UserSharedFileRepository.cs" />
+    <Compile Include="Repositories\UserVisitedSchoolRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IFileRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IFileSharedGroupRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IFileTagPatternRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IGradeRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IGroupRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IGroupSemesterRepositorycs.cs" />
+    <Compile Include="RepositoryInterfaces\IGroupUserRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISchoolRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISemesterRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISemesterSubjectFileRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISemesterSubjectRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISemesterUserRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IStudySubjectRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IUserInfoRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IUserRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IUserSharedFileRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IUserVisitedSchoolRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

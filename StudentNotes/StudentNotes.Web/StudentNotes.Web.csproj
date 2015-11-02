@@ -99,6 +99,39 @@
     <Content Include="Content\custom.css" />
     <Content Include="Content\custom-logged-in.css" />
     <Content Include="Content\sb-admin.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
@@ -159,10 +192,15 @@
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\contact_me.js" />
     <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\customScripts.js" />
     <Content Include="Scripts\freelancer.js" />
     <Content Include="Scripts\jqBootstrapValidation.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -178,6 +216,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\NoteController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,7 +251,8 @@
     <Content Include="Views\Partials\TopMenu\UploadFilePartial.cshtml" />
     <Content Include="Views\Partials\TopMenu\AddUniversityPartial.cshtml" />
     <Content Include="Views\Partials\TopMenu\AddGroupPartial.cshtml" />
-    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\Note\NoteUploaded.cshtml" />
+    <Content Include="Views\Partials\Management\ManageUniversities.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -221,6 +263,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Views\Management\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Lang.pl.resx">
@@ -236,6 +280,10 @@
     <ProjectReference Include="..\StudentNotes.Logic\StudentNotes.Logic.csproj">
       <Project>{921a6f78-ac3a-4f8b-b292-bccdedb33c49}</Project>
       <Name>StudentNotes.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentNotes.Repositories\StudentNotes.Repositories.csproj">
+      <Project>{5c1ce73e-6dac-48ed-b4ff-6e4bda53688b}</Project>
+      <Name>StudentNotes.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

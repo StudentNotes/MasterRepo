@@ -25,17 +25,31 @@ namespace StudentNotes.Logic.Authorization
             }
         }
 
+        public bool IsServiceAdmin
+        {
+            get { return _isServiceAdmin; }
+        }
+
         private int ID;
         private string _email;
         private string _plainTextPassword;
         private string _name;
         private string _lastName;
         private Guid _userGuid;
+        private bool _isServiceAdmin;
+
+        public StudentNotesUser(string email, string password, bool isServiceAdmin)
+        {
+            _email = email;
+            _plainTextPassword = password;
+            _isServiceAdmin = isServiceAdmin;
+        }
 
         public StudentNotesUser(string email, string password)
         {
             _email = email;
             _plainTextPassword = password;
+            _isServiceAdmin = false;
         }
 
         public StudentNotesUser()
@@ -85,6 +99,7 @@ namespace StudentNotes.Logic.Authorization
                             Email = _email,
                             Password = EncryptPassword(_plainTextPassword, _userGuid),
                             Salt = _userGuid,
+                            IsServiceAdmin = _isServiceAdmin
                         };
                         context.User.Add(newStudentNotesUser);
 
@@ -184,6 +199,7 @@ namespace StudentNotes.Logic.Authorization
                 {
                     _lastName = currentUser.UserInfo.LastName;
                 }
+                _isServiceAdmin = currentUser.IsServiceAdmin;
             }
         }
     }

@@ -9,6 +9,6 @@ namespace StudentNotes.FileTransferManager.Abstraction
 {
     public interface IDownloadBehavior<T>
     {
-        T DownloadFile(File file, FileServer server, FileServerUser user);
+        T DownloadFile(FileServerFile file, FileServer server, FileServerUser user);
     }
 }

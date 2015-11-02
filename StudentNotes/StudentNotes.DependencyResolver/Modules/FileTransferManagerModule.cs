@@ -14,7 +14,7 @@ namespace StudentNotes.DependencyResolver.Modules
     {
         public override void Load()
         {
-            Bind<File>().To<CommonFile>();
+            Bind<FileServerFile>().To<CommonFile>();
             Bind<FileServer>().To<FtpServer>();
             Bind<FileServerUser>().To<FtpUser>();
         }

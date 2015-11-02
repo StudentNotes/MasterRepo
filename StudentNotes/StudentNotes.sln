@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotes.Logic", "Stude
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotes.DependencyResolver", "StudentNotes.DependencyResolver\StudentNotes.DependencyResolver.csproj", "{A8374E3C-1EB6-44C2-94B9-6718161FB631}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNotes.Repositories", "StudentNotes.Repositories\StudentNotes.Repositories.csproj", "{5C1CE73E-6DAC-48ED-B4FF-6E4BDA53688B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A8374E3C-1EB6-44C2-94B9-6718161FB631}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8374E3C-1EB6-44C2-94B9-6718161FB631}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8374E3C-1EB6-44C2-94B9-6718161FB631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C1CE73E-6DAC-48ED-B4FF-6E4BDA53688B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C1CE73E-6DAC-48ED-B4FF-6E4BDA53688B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C1CE73E-6DAC-48ED-B4FF-6E4BDA53688B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C1CE73E-6DAC-48ED-B4FF-6E4BDA53688B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

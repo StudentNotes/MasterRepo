@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using File = StudentNotes.FileTransferManager.Base.File;
+using File = StudentNotes.FileTransferManager.Base.FileServerFile;
 
 namespace StudentNotes.FileTransferManager.FtpClient.FileTypes
 {

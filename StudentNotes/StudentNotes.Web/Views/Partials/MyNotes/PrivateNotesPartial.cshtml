@@ -1,5 +1,8 @@
 ﻿@*Moje Notatki -> Prywatne*@
 @model StudentNotes.Logic.ViewModels.File.UserNotesViewModel
+           @{
+               Layout = null;
+           }
 
 <table>
     @foreach (var privateFile in Model.UserNotesList)

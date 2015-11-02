@@ -35,3 +35,5 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\obj\Debug\pl\StudentNotes.Web.resources.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\obj\Debug\StudentNotes.Web.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\obj\Debug\StudentNotes.Web.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\StudentNotes.Repositories.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Web\bin\StudentNotes.Repositories.pdb

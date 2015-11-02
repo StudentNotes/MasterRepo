@@ -58,6 +58,10 @@
       <Project>{921a6f78-ac3a-4f8b-b292-bccdedb33c49}</Project>
       <Name>StudentNotes.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StudentNotes.Repositories\StudentNotes.Repositories.csproj">
+      <Project>{5C1CE73E-6DAC-48ED-B4FF-6E4BDA53688B}</Project>
+      <Name>StudentNotes.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

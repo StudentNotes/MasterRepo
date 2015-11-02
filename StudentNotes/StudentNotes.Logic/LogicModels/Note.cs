@@ -15,18 +15,20 @@ namespace StudentNotes.Logic.LogicModels
         public string DestinationPath { get; set; }
         public string Size { get; set; }
         public DateTime UploadDate { get; set; }
-        public string FileType { get; set; }
         public bool IsShared { get; set; }
         public List<string> Tags { get; set; }
         public byte[] Content { get; set; }
 
         public Note()
         {
+            Tags = new List<string>();
+
         }
 
         public Note(int userId)
         {
             UserId = userId;
+            Tags = new List<string>();
         }
 
         public int UploadNote()

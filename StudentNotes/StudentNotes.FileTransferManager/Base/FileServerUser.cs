@@ -27,12 +27,12 @@ namespace StudentNotes.FileTransferManager.Base
 
         public abstract override string ToString();
 
-        public byte[] DownloadFile(File file)
+        public byte[] DownloadFile(FileServerFile file)
         {
             return DownloadBehavior.DownloadFile(file, server, this);
         }
 
-        public int UploadFile(File file)
+        public int UploadFile(FileServerFile file)
         {
             return UploadBehavior.UploadFile(file, server, this);
         }

@@ -23,3 +23,5 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\obj\Debug\StudentNotes.Logic.csprojResolveAssemblyReference.cache
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\obj\Debug\StudentNotes.Logic.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\obj\Debug\StudentNotes.Logic.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotes.Repositories.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Logic\bin\Debug\StudentNotes.Repositories.pdb

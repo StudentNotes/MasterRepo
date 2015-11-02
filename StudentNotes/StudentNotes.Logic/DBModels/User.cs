@@ -31,6 +31,8 @@ namespace StudentNotes.Logic.DBModels
 
         public Guid? Salt { get; set; }
 
+        public bool IsServiceAdmin { get; set; }
+
         public virtual ICollection<File> File { get; set; }
 
         public virtual ICollection<Group> Group { get; set; }

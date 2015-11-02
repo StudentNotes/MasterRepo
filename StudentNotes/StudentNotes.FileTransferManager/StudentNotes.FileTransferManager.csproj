@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="Abstraction\IDeleteBehavior.cs" />
     <Compile Include="Abstraction\IServerDirectoryTreeBehavior.cs" />
-    <Compile Include="Base\File.cs" />
+    <Compile Include="Base\FileServerFile.cs" />
     <Compile Include="Base\FileServer.cs" />
     <Compile Include="Base\FileServerUser.cs" />
     <Compile Include="Abstraction\IDownloadBehavior.cs" />

@@ -12,7 +12,20 @@ namespace StudentNotes.Web.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
+        // Akcja służąca do sprawnego dodawania administratorów serwisu StudentNotes (bardzo bezpieczna :] )
+        //[HttpGet]
+        //public string RegisterAdmin(string login, string password, bool isServiceAdmin)
+        //{
+        //    StudentNotesUser serviceAdmin = new StudentNotesUser(login, password, isServiceAdmin);
+        //    if (serviceAdmin.UserExistsInDatabase())
+        //    {
+        //        return "UŻYTKOWNIK JUŻ ISTNIEJE W BAZIE DANYCH I NIE MOŻE MIEĆ ROLI ADMINISTRATORA SERWISU!";
+        //    }
+        //    serviceAdmin.SaveUserInDatabase();
+        //    return string.Format("WITAMY {0}, JESTEŚ NOWYM ADMINISTRATOREM SERWISU STUDENTNOTES", login);
+        //}
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model)
@@ -91,16 +104,22 @@ namespace StudentNotes.Web.Controllers
                 return View("~/Views/Home/Index.cshtml", new HomeViewModel());
             }
 
-            StudentNotesUser serviceUser = new StudentNotesUser();
-            serviceUser.SetModelName((int)Session["CurrentUserId"]);
-
-            return View("~/Views/LoggedIn/Index.cshtml", serviceUser);
+            return View("~/Views/LoggedIn/Index.cshtml");
         }
 
         public ActionResult Logoff()
         {
             Session.Abandon();
             return View("~/Views/Home/Index.cshtml", new HomeViewModel());
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetNavbarTopPartial()
+        {
+            StudentNotesUser user = new StudentNotesUser();
+            user.SetModelName((int)Session["CurrentUserId"]);
+
+            return PartialView("~/Views/Partials/NavbarTopPartial.cshtml", user);
         }
 
         private void ValidateRegisterViewModel(RegisterViewModel model)
