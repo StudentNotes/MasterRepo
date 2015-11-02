@@ -10,6 +10,7 @@ namespace StudentNotes.Repositories.Infrastructure
     public interface IRepository<T> where T : class
     {
         void Add(T entity);
+        void AddAndSave(T entity);
         void Update(T entity);
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> where);
@@ -17,5 +18,6 @@ namespace StudentNotes.Repositories.Infrastructure
         T Get(Expression<Func<T, bool>> where);
         IEnumerable<T> GetAll();
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
+        void Commit();
     }
 }

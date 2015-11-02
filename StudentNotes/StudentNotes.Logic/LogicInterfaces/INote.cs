@@ -8,11 +8,11 @@ namespace StudentNotes.Logic.LogicInterfaces
 {
     public interface INote
     {
-        int UploadNote();
-        int DownloadNote();
-        int DeleteNote();
-        int MoveNote();
-        int AddTag(string tag);
-        int RemoveTag(string tag);
+        //int UploadNote();
+        //int DownloadNote();
+        //int DeleteNote();
+        //int MoveNote();
+        //int AddTag(string tag);
+        //int RemoveTag(string tag);
     }
 }

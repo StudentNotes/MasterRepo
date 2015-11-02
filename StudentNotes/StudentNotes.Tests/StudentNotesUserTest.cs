@@ -10,15 +10,7 @@ namespace StudentNotesWeb.Tests
         [TestMethod]
         public void TestUserAuth()
         {
-            StudentNotesUser serviceUser = new StudentNotesUser("test1@mail.com", "dupa");
-            
-            //Assert.IsFalse(serviceUser.UserExistsInDatabase());
 
-            //serviceUser.SaveUserInDatabase();
-
-            //Assert.IsTrue(serviceUser.UserExistsInDatabase());
-
-            serviceUser.IsServiceUser();
 
         }
     }

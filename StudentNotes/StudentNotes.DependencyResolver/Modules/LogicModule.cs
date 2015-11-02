@@ -20,7 +20,6 @@ namespace DependencyResolver.Modules
             //throw new NotImplementedException();
             //Bind<IMiddleClass>().To<MiddleClass>();
             Bind<IDbFactory>().To<DbFactory>();
-            Bind<IUnitOfWork>().To<UnitOfWork>();
 
             Bind<IFileRepository>().To<FileRepository>();
             Bind<IFileSharedGroupRepository>().To<FileSharedGroupRepository>();
@@ -41,6 +40,9 @@ namespace DependencyResolver.Modules
             Bind<IUserVisitedSchoolRepository>().To<UserVisitedSchoolRepository>();
 
             Bind<IUploadService>().To<UploadService>();
+            Bind<IUserService>().To<UserService>();
+            Bind<IFileService>().To<FileService>();
+            Bind<ISchoolService>().To<SchoolService>();
 
             //Bind<IFileSharedGroupRepository>().To<FileSharedGroupRepository>();
         }

@@ -41,6 +41,8 @@ namespace StudentNotes.Repositories.DbModels
 
         public virtual ICollection<SemesterUser> SemesterUser { get; set; }
 
+        public virtual UserInfo UserInfo { get; set; }
+
         public virtual ICollection<UserSharedFile> UserSharedFile { get; set; }
 
         public virtual ICollection<UserVisitedSchool> UserVisitedSchool { get; set; }

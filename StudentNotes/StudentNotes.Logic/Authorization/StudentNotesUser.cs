@@ -6,7 +6,6 @@ using System.Security.Permissions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using StudentNotes.Logic.DBModels;
 
 namespace StudentNotes.Logic.Authorization
 {
@@ -56,151 +55,151 @@ namespace StudentNotes.Logic.Authorization
         {
         }
 
-        private string EncryptPassword(string decryptedPassword, Guid salt)
-        {
-            string hashedPassword;
-            string passwordAndSalt = decryptedPassword + salt;
+        //private string EncryptPassword(string decryptedPassword, Guid salt)
+        //{
+        //    string hashedPassword;
+        //    string passwordAndSalt = decryptedPassword + salt;
 
-            byte[] byteArray = Encoding.Unicode.GetBytes(passwordAndSalt);
-            using (var sha256 = SHA256.Create())
-            {
-                byte[] hashedByteArray = sha256.ComputeHash(byteArray);
-                hashedPassword = System.Text.Encoding.Unicode.GetString(hashedByteArray);
-            }
+        //    byte[] byteArray = Encoding.Unicode.GetBytes(passwordAndSalt);
+        //    using (var sha256 = SHA256.Create())
+        //    {
+        //        byte[] hashedByteArray = sha256.ComputeHash(byteArray);
+        //        hashedPassword = System.Text.Encoding.Unicode.GetString(hashedByteArray);
+        //    }
 
-            return hashedPassword;
-        }
+        //    return hashedPassword;
+        //}
 
-        public bool UserExistsInDatabase()
-        {
-            using (StudentNotesContext context = new StudentNotesContext())
-            {
-                var users = from u in context.User where u.Email == _email select u;
-                if (users.Any())
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        //public bool UserExistsInDatabase()
+        //{
+        //    using (StudentNotesContext context = new StudentNotesContext())
+        //    {
+        //        var users = from u in context.User where u.Email == _email select u;
+        //        if (users.Any())
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
 
-        public int SaveUserInDatabase()
-        {
-            if (!UserExistsInDatabase())
-            {
-                _userGuid = Guid.NewGuid();
+        //public int SaveUserInDatabase()
+        //{
+        //    if (!UserExistsInDatabase())
+        //    {
+        //        _userGuid = Guid.NewGuid();
 
-                using (StudentNotesContext context = new StudentNotesContext())
-                {
-                    try
-                    {
-                        User newStudentNotesUser = new User()
-                        {
-                            Email = _email,
-                            Password = EncryptPassword(_plainTextPassword, _userGuid),
-                            Salt = _userGuid,
-                            IsServiceAdmin = _isServiceAdmin
-                        };
-                        context.User.Add(newStudentNotesUser);
+        //        using (StudentNotesContext context = new StudentNotesContext())
+        //        {
+        //            try
+        //            {
+        //                User newStudentNotesUser = new User()
+        //                {
+        //                    Email = _email,
+        //                    Password = EncryptPassword(_plainTextPassword, _userGuid),
+        //                    Salt = _userGuid,
+        //                    IsServiceAdmin = _isServiceAdmin
+        //                };
+        //                context.User.Add(newStudentNotesUser);
 
-                        context.UserInfo.Add(new UserInfo()
-                        {
-                            UserId = context.User.Local.ToArray().Last().UserId,
-                            CreatedOn = DateTime.Now
-                        });
+        //                context.UserInfo.Add(new UserInfo()
+        //                {
+        //                    UserId = context.User.Local.ToArray().Last().UserId,
+        //                    CreatedOn = DateTime.Now
+        //                });
 
-                        context.SaveChanges();
-                        return 0;
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine("Error while updating the database...sorry");
-                    }
-                }
-            }
+        //                context.SaveChanges();
+        //                return 0;
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Debug.WriteLine("Error while updating the database...sorry");
+        //            }
+        //        }
+        //    }
 
-            return 1;   //  User exists allready in database :/
-        }
+        //    return 1;   //  User exists allready in database :/
+        //}
 
-        public bool IsServiceUser()
-        {
-            using (StudentNotesContext context = new StudentNotesContext())
-            {
-                var users = from u in context.User where u.Email == _email select u;
-                if (users.Any())
-                {
-                    User user = users.First();
-                    if (user.Password == EncryptPassword(_plainTextPassword, (Guid)user.Salt))
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-                return false;
-            }
-        }
+        //public bool IsServiceUser()
+        //{
+        //    using (StudentNotesContext context = new StudentNotesContext())
+        //    {
+        //        var users = from u in context.User where u.Email == _email select u;
+        //        if (users.Any())
+        //        {
+        //            User user = users.First();
+        //            if (user.Password == EncryptPassword(_plainTextPassword, (Guid)user.Salt))
+        //            {
+        //                return true;
+        //            }
+        //            return false;
+        //        }
+        //        return false;
+        //    }
+        //}
 
-        public int GetStudentNotesUserId()
-        {
-            using (var context = new StudentNotesContext())
-            {
-                var users = from u in context.User where u.Email == _email select u;
-                var currentUser = users.First();
-                ID = currentUser.UserId;
-            }
-            return ID;
-        }
+        //public int GetStudentNotesUserId()
+        //{
+        //    using (var context = new StudentNotesContext())
+        //    {
+        //        var users = from u in context.User where u.Email == _email select u;
+        //        var currentUser = users.First();
+        //        ID = currentUser.UserId;
+        //    }
+        //    return ID;
+        //}
 
-        public void SetModelName()
-        {
-            using (var context = new StudentNotesContext())
-            {
-                var users = from u in context.User where u.Email == _email select u;
-                var currentUser = users.First();
+        //public void SetModelName()
+        //{
+        //    using (var context = new StudentNotesContext())
+        //    {
+        //        var users = from u in context.User where u.Email == _email select u;
+        //        var currentUser = users.First();
 
-                if (currentUser.UserInfo.Name == null)
-                {
-                    _name = "nieznajomy";
-                }
-                else
-                {
-                    _name = currentUser.UserInfo.Name;
-                }
-                if (currentUser.UserInfo.LastName == null)
-                {
-                    _lastName = "";
-                }
-                else
-                {
-                    _lastName = currentUser.UserInfo.LastName;
-                }
-            }
-        }
-        public void SetModelName(int userId)
-        {
-            using (var context = new StudentNotesContext())
-            {
-                var users = from u in context.User where u.UserId == userId select u;
-                var currentUser = users.First();
+        //        if (currentUser.UserInfo.Name == null)
+        //        {
+        //            _name = "nieznajomy";
+        //        }
+        //        else
+        //        {
+        //            _name = currentUser.UserInfo.Name;
+        //        }
+        //        if (currentUser.UserInfo.LastName == null)
+        //        {
+        //            _lastName = "";
+        //        }
+        //        else
+        //        {
+        //            _lastName = currentUser.UserInfo.LastName;
+        //        }
+        //    }
+        //}
+        //public void SetModelName(int userId)
+        //{
+        //    using (var context = new StudentNotesContext())
+        //    {
+        //        var users = from u in context.User where u.UserId == userId select u;
+        //        var currentUser = users.First();
 
-                if (currentUser.UserInfo.Name == null)
-                {
-                    _name = "nieznajomy";
-                }
-                else
-                {
-                    _name = currentUser.UserInfo.Name;
-                }
-                if (currentUser.UserInfo.LastName == null)
-                {
-                    _lastName = "";
-                }
-                else
-                {
-                    _lastName = currentUser.UserInfo.LastName;
-                }
-                _isServiceAdmin = currentUser.IsServiceAdmin;
-            }
-        }
+        //        if (currentUser.UserInfo.Name == null)
+        //        {
+        //            _name = "nieznajomy";
+        //        }
+        //        else
+        //        {
+        //            _name = currentUser.UserInfo.Name;
+        //        }
+        //        if (currentUser.UserInfo.LastName == null)
+        //        {
+        //            _lastName = "";
+        //        }
+        //        else
+        //        {
+        //            _lastName = currentUser.UserInfo.LastName;
+        //        }
+        //        _isServiceAdmin = currentUser.IsServiceAdmin;
+        //    }
+        //}
     }
 }

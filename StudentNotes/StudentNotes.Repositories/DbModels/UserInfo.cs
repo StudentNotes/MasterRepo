@@ -38,5 +38,7 @@ namespace StudentNotes.Repositories.DbModels
         public string Street { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

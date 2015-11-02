@@ -4,14 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StudentNotes.Logic.Authorization;
+using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Authorization;
 using StudentNotes.Logic.ViewModels.Home;
+using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Logic.ViewModels.Validation;
+using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Web.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IUserService _userService;
+
+        public AccountController(IUserService userService)
+        {
+            _userService = userService;
+        }
         // Akcja służąca do sprawnego dodawania administratorów serwisu StudentNotes (bardzo bezpieczna :] )
         //[HttpGet]
         //public string RegisterAdmin(string login, string password, bool isServiceAdmin)
@@ -36,18 +45,15 @@ namespace StudentNotes.Web.Controllers
             ValidateRegisterViewModel(model);
             if (model.ErrorList.Count == 0)
             {
-                StudentNotesUser serviceUser = new StudentNotesUser(model.Email, model.Password);
-
-                if (serviceUser.UserExistsInDatabase())
+                
+                if (_userService.UserExists(model.Email))
                 {
                     model.ErrorList.Add("UserExistsInDatabase", "Użytkownik o podanym adresie E-mail jest już zarejestrowany w systemie.");
-
                     return View("~/Views/Home/Index.cshtml", viewModelContainer);
                 }
-                serviceUser.SaveUserInDatabase();
 
-                Session.Add("CurrentUserId", serviceUser.GetStudentNotesUserId());
-                //TempData.Add("serviceUser", serviceUser);
+                _userService.AddUser(model.Email, model.Password);
+                Session.Add("CurrentUserId", _userService.GetServiceUserId(model.Email));
 
                 return RedirectToAction("RegisterRedirect");
             }
@@ -61,10 +67,7 @@ namespace StudentNotes.Web.Controllers
                 return View("~/Views/Home/Index.cshtml", new HomeViewModel());
             }
 
-            StudentNotesUser serviceUser = new StudentNotesUser();
-            serviceUser.SetModelName((int)Session["CurrentUserId"]);
-
-            return View("~/Views/LoggedIn/Index.cshtml", serviceUser);
+            return View("~/Views/LoggedIn/Index.cshtml");
         }
 
         [HttpPost]
@@ -78,20 +81,19 @@ namespace StudentNotes.Web.Controllers
             if (model.ErrorList.Count == 0)
             {
                 //  Sprawdzamy dane logowania
-                StudentNotesUser serviceUser = new StudentNotesUser(model.Email, model.Password);
-                if (!serviceUser.UserExistsInDatabase())
-                {
+                if (!_userService.UserExists(model.Email))
+                {          
                     model.ErrorList.Add("NoUserInSystem", "W systemie nie ma użytkownika o podanym adresie E-mail.");
                     return View("~/Views/Home/Index.cshtml", viewModelContainer);
                 }
-                if (!serviceUser.IsServiceUser())
+                
+                if (!_userService.UserAuthorized(model.Email, model.Password))
                 {
                     model.ErrorList.Add("WrongPassword", "Podaj prawdziwe hasło dostępu do serwisu.");
                     return View("~/Views/Home/Index.cshtml", viewModelContainer);
                 }
-                Session.Add("CurrentUserId", serviceUser.GetStudentNotesUserId());
+                Session.Add("CurrentUserId", _userService.GetServiceUserId(model.Email));
 
-                //return View("~/Views/LoggedIn/Index.cshtml", serviceUser);
                 return RedirectToAction("LoginRedirect");
             }
             //  Zwracamy błędy
@@ -116,10 +118,30 @@ namespace StudentNotes.Web.Controllers
         [ChildActionOnly]
         public ActionResult GetNavbarTopPartial()
         {
-            StudentNotesUser user = new StudentNotesUser();
-            user.SetModelName((int)Session["CurrentUserId"]);
+            UserViewModel model = new UserViewModel();
+            UserInfo userInfo = _userService.GetAllServiceUserInfo((int) Session["CurrentUserId"]);
 
-            return PartialView("~/Views/Partials/NavbarTopPartial.cshtml", user);
+            if (userInfo.Name == null || userInfo.Name == "")
+            {
+                model.Name = "Nieznajomy";
+            }
+            else
+            {
+                model.Name = userInfo.Name;
+            }
+
+            if (userInfo.LastName == null)
+            {
+                model.LastName = "";
+            }
+            else
+            {
+                model.LastName = userInfo.LastName;
+            }
+
+            model.IsServiceAdmin = _userService.IsServiceAdmin((int) Session["CurrentUserId"]);
+
+            return PartialView("~/Views/Partials/NavbarTopPartial.cshtml", model);
         }
 
         private void ValidateRegisterViewModel(RegisterViewModel model)

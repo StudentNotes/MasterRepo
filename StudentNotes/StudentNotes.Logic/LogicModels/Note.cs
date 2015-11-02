@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.Logic.LogicInterfaces;
+using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.LogicModels
 {
@@ -25,40 +26,36 @@ namespace StudentNotes.Logic.LogicModels
 
         }
 
+        public Note(File file)
+        {
+            UserId = file.UserId;
+            Name = file.Name;
+            Category = file.Category;
+            DestinationPath = file.Path;
+            Size = file.Size;
+            UploadDate = file.UploadDate;
+            IsShared = file.IsShared;
+            Tags = DenormalizeTags(file.FileTags);
+        }
+
         public Note(int userId)
         {
             UserId = userId;
             Tags = new List<string>();
         }
 
-        public int UploadNote()
+        private List<string> DenormalizeTags(string tagString)
         {
-            throw  new NotImplementedException();
+            var splitTagString = tagString.Split(';').ToList();
+
+            splitTagString.RemoveAll(IsEmptyString);
+
+            return splitTagString;
         }
 
-        public int DownloadNote()
+        private bool IsEmptyString(string s)
         {
-            throw new NotImplementedException();
-        }
-
-        public int DeleteNote()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int MoveNote()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int AddTag(string tag)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int RemoveTag(string tag)
-        {
-            throw new NotImplementedException();
+            return s.Equals("");
         }
     }
 }

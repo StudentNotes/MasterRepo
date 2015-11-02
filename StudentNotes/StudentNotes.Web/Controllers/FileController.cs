@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StudentNotes.Logic.LogicModels;
-using StudentNotes.Logic.LogicModels.BrowserFile;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.Services;
 using StudentNotes.Logic.ViewModels.File;
@@ -49,16 +48,8 @@ namespace StudentNotes.Web.Controllers
                 if (_uploadService.UploadPrivateNote(note, (int) Session["CurrentUserId"]) == 0)
                 {
                     _uploadService.SaveUpload();
-                    //  Prawidłowo wysłano plik na serwer
                 }
 
-
-                //var browserNoteUploader = new BrowserNoteUploader((int)Session["CurrentUserId"]);
-
-                //if (browserNoteUploader.UploadPrivateNote(note) == 0)
-                //{
-                //    //  Prawidłowo wysłano plik na serwer
-                //}
             }
 
             //return PartialView("~/Views/Partials/MyNotes/PrivateNotesPartial.cshtml", viewModel);

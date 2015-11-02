@@ -36,6 +36,12 @@ namespace StudentNotes.Repositories.Base
             dbSet.Add(entity);
         }
 
+        public virtual void AddAndSave(T entity)
+        {
+            dbSet.Add(entity);
+            _dbContext.SaveChanges();
+        }
+
         public virtual void Update(T entity)
         {
             dbSet.Attach(entity);
@@ -72,6 +78,11 @@ namespace StudentNotes.Repositories.Base
         public T Get(Expression<Func<T, bool>> where)
         {
             return dbSet.Where(where).FirstOrDefault<T>();
+        }
+
+        public void Commit()
+        {
+            _dbContext.SaveChanges();
         }
         #endregion
     }

@@ -25,6 +25,7 @@ namespace StudentNotes.Repositories.DbModels
         public virtual DbSet<SemesterSubjectFile> SemesterSubjectFile { get; set; }
         public virtual DbSet<SemesterUser> SemesterUser { get; set; }
         public virtual DbSet<StudySubject> StudySubject { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<UserSharedFile> UserSharedFile { get; set; }
@@ -135,6 +136,10 @@ namespace StudentNotes.Repositories.DbModels
                 .HasMany(e => e.SemesterUser)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasOptional(e => e.UserInfo)
+                .WithRequired(e => e.User);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.UserSharedFile)
