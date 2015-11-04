@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Repositories.DbModels;
+using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Repositories.RepositoryInterfaces;
 
 namespace StudentNotes.Logic.Services
@@ -13,12 +14,14 @@ namespace StudentNotes.Logic.Services
     {
         private readonly ISchoolRepository _schoolRepository;
         private readonly IUserVisitedSchoolRepository _userVisitedSchoolRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public SchoolService(ISchoolRepository schoolRepository,
-            IUserVisitedSchoolRepository userVisitedSchoolRepository)
+            IUserVisitedSchoolRepository userVisitedSchoolRepository, IUnitOfWork unitOfWork)
         {
             _schoolRepository = schoolRepository;
             _userVisitedSchoolRepository = userVisitedSchoolRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public School GetSchoolByName(string schoolName)
@@ -55,6 +58,11 @@ namespace StudentNotes.Logic.Services
             });
 
             return 0;
+        }
+
+        public void Commit()
+        {
+            _unitOfWork.Commit();
         }
     }
 }

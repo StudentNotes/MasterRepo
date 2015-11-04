@@ -2,4 +2,3 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileTransferManager\bin\Debug\StudentNotes.FileTransferManager.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileTransferManager\obj\Debug\StudentNotes.FileTransferManager.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileTransferManager\obj\Debug\StudentNotes.FileTransferManager.pdb
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileTransferManager\obj\Debug\StudentNotes.FileTransferManager.csprojResolveAssemblyReference.cache

@@ -83,14 +83,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\IFileService.cs" />
     <Compile Include="ServiceInterfaces\ISchoolService.cs" />
+    <Compile Include="ServiceInterfaces\IStudySubjectService.cs" />
     <Compile Include="ServiceInterfaces\IUploadService.cs" />
     <Compile Include="ServiceInterfaces\IUserService.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\SchoolService.cs" />
+    <Compile Include="Services\StudySubjectService.cs" />
     <Compile Include="Services\UploadService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\Authorization\LoginViewModel.cs" />
     <Compile Include="ViewModels\Authorization\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Common\SubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\UniversityViewModel.cs" />
     <Compile Include="ViewModels\File\UserNotesViewModel.cs" />
     <Compile Include="ViewModels\File\FileUploadViewModel.cs" />

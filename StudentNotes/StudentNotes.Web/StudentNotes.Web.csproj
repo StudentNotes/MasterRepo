@@ -253,6 +253,7 @@
     <Content Include="Views\Partials\TopMenu\AddGroupPartial.cshtml" />
     <Content Include="Views\Note\NoteUploaded.cshtml" />
     <Content Include="Views\Partials\Management\ManageUniversities.cshtml" />
+    <Content Include="Views\Partials\Management\ManageSubjects.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

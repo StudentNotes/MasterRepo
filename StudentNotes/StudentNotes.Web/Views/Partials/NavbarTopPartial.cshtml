@@ -39,15 +39,27 @@
             {
                 <li>
                     @Ajax.ActionLink(ResourceKeyResolver.ConstManageUniversities, "ManageUniversities", "Management", null,
-                                new AjaxOptions()
-                                {
-                                    UpdateTargetId = "page-content",
-                                    HttpMethod = "GET",
-                                    InsertionMode = InsertionMode.Replace,
-                                    LoadingElementId = "loading"
-                                }
-                    //new { @class = "fa fa-fw fa-dashboard" })
-                                )
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        }
+                        //new { @class = "fa fa-fw fa-dashboard" })
+                        )
+                </li>
+                <li>
+                    @Ajax.ActionLink("Zarządzaj przedmiotami", "ManageSubjectsList", "Management", null,
+                                            new AjaxOptions()
+                                            {
+                                                UpdateTargetId = "page-content",
+                                                HttpMethod = "GET",
+                                                InsertionMode = InsertionMode.Replace,
+                                                LoadingElementId = "loading"
+                                            }
+                                //new { @class = "fa fa-fw fa-dashboard" })
+                                            )
                 </li>
             }         
             <li>@Html.ActionLink(ResourceKeyResolver.ConstSignOut, "Logoff", "Account")</li>

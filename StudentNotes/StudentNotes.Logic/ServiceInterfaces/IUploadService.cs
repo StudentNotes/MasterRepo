@@ -11,5 +11,6 @@ namespace StudentNotes.Logic.ServiceInterfaces
     {
         int UploadPrivateNote(Note note, int userId);
         void SaveUpload();
+        void Commit();
     }
 }

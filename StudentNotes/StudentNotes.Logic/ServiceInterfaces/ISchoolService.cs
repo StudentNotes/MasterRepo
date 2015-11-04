@@ -14,6 +14,6 @@ namespace StudentNotes.Logic.ServiceInterfaces
         IEnumerable<School> GetByUser(int userId);
         IEnumerable<School> GetAllSchhools();
         int AddSchool(string name, string description);
-
+        void Commit();
     }
 }

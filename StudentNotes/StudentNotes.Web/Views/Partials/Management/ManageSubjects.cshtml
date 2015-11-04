@@ -1,0 +1,97 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.SubjectViewModel
+
+<div id="subjectManagement" class="col-xs-12">
+    @using (Ajax.BeginForm(
+        "RemoveSubjects", "Management",
+        null,
+        new AjaxOptions()
+        {
+            UpdateTargetId = "page-content",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
+        },
+        new {}
+
+        ))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="col-xs-12">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="col-xs-2 lp">
+                        Lp.
+                    </div>
+                    <div class="col-xs-7 subjectName">
+                        Nazwa przedmiotu
+                    </div>
+                    <div class="col-xs-2 buttonArea">
+                        Operacja
+                    </div>
+                    <div class="col-xs-1 checkboxArea">
+                        @Html.CheckBox("Zaznacz wszystkie")
+                    </div>
+                </li>
+
+                @for (int i = 0; i < Model.Subjects.Count; i++)
+                {
+                    <li class="list-group-item lp">
+                        <div class="col-xs-2 lp">
+                            @(i+1)
+                        </div>
+                        <div class="col-xs-7 subjectName">
+                            @*@Model.Subjects.ElementAt(i).Key.Name*@
+                            @Html.DisplayFor(m => m.Subjects.ElementAt(i).Key)
+                        </div>
+                        <div class="col-xs-2 buttonArea">
+                            @Ajax.ActionLink("Usuń przedmiot", "RemoveSubject", "Management",
+                            new {subjectName = Model.Subjects.ElementAt(i).Key},
+                            new AjaxOptions()
+                            {
+                                UpdateTargetId = "page-content",
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                            new {@class="btn btn-danger"})
+                        </div>
+                        <div class="col-xs-1 checkboxArea">
+                            @*@Html.CheckBox(string.Format("model.Subjects[{0}].Value", Model.Subjects.ElementAt(i).Key), false)*@
+                            <input type="checkbox" name="@("Subjects[" + Model.Subjects.ElementAt(i).Key + "]")" value="true"/>
+                            <input name="@("Subjects[" + Model.Subjects.ElementAt(i).Key + "]")" type="hidden" value="false"/>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <button type="submit" id="deleteSubjectsButton" class="btn btn-danger col-sm-3" target="blank">Usuń zaznaczone przedmioty</button>
+    }
+
+    @using (Ajax.BeginForm("AddSubject", "Management",null,
+    new AjaxOptions()
+    {
+        UpdateTargetId = "page-content",
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace
+    },
+    new {}
+
+    ))
+    {
+        @Html.AntiForgeryToken()
+    <div id="addSubjectForm" class="col-xs-12">
+        <label class="label col-sm-3">Nazwa nowego przedmiotu:</label>
+        <input class="col-sm-3" id="searchSubjectInput" type="text" name="subjectName" placeholder="Nazwa przedmiotu" />
+        <button type="submit" id="addSubjectButton" class="btn btn-success col-sm-3" target="blank">Dodaj przedmiot</button>
+    </div>
+    }
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#searchSubjectInput").autocomplete({
+            source: '@Url.Action("SubjectSuggestions", "Search")'
+        });
+    });
+</script>
+

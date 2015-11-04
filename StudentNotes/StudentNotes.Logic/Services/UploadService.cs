@@ -23,13 +23,15 @@ namespace StudentNotes.Logic.Services
         private readonly FileServerUser _fileServerUser;
         private readonly IUserRepository _userRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UploadService(IUserRepository userRepository, IFileRepository fileRepository)
+        public UploadService(IUserRepository userRepository, IFileRepository fileRepository, IUnitOfWork unitOfWork)
         {
             _fileServer = new FtpServer(LogicConstants.FtpServerAddress);
             _fileServerUser = new FtpUser(LogicConstants.FtpUserLogin, LogicConstants.FtpUserPassword, _fileServer);
             _userRepository = userRepository;
             _fileRepository = fileRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public int UploadPrivateNote(Note note, int userId)
@@ -61,6 +63,11 @@ namespace StudentNotes.Logic.Services
         public void SaveUpload()
         {
             _fileRepository.Commit();
+        }
+
+        public void Commit()
+        {
+            _unitOfWork.Commit();
         }
 
         private string GetFileServerRoot(int userId)

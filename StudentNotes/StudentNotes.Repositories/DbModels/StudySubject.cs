@@ -23,6 +23,8 @@ namespace StudentNotes.Repositories.DbModels
         [Column(TypeName = "text")]
         public string Description { get; set; }
 
+        public int Duration { get; set; }
+
         public int GradeId { get; set; }
 
         public virtual Grade Grade { get; set; }

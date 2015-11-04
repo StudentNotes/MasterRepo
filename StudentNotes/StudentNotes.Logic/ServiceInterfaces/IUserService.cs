@@ -19,5 +19,6 @@ namespace StudentNotes.Logic.ServiceInterfaces
         string GetServiceUserName(int userid);
         string GetServiceUserLastName(int userId);
         UserInfo GetAllServiceUserInfo(int userId);
+        void SaveUser();
     }
 }

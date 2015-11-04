@@ -22,17 +22,13 @@ namespace StudentNotes.Web.Controllers
             _userService = userService;
         }
         // Akcja służąca do sprawnego dodawania administratorów serwisu StudentNotes (bardzo bezpieczna :] )
-        //[HttpGet]
-        //public string RegisterAdmin(string login, string password, bool isServiceAdmin)
-        //{
-        //    StudentNotesUser serviceAdmin = new StudentNotesUser(login, password, isServiceAdmin);
-        //    if (serviceAdmin.UserExistsInDatabase())
-        //    {
-        //        return "UŻYTKOWNIK JUŻ ISTNIEJE W BAZIE DANYCH I NIE MOŻE MIEĆ ROLI ADMINISTRATORA SERWISU!";
-        //    }
-        //    serviceAdmin.SaveUserInDatabase();
-        //    return string.Format("WITAMY {0}, JESTEŚ NOWYM ADMINISTRATOREM SERWISU STUDENTNOTES", login);
-        //}
+        [HttpGet]
+        public string RegisterAdmin(string login, string password)
+        {
+            _userService.AddAdmin(login, password);
+
+            return string.Format("WITAMY {0}, JESTEŚ NOWYM ADMINISTRATOREM SERWISU STUDENTNOTES", login);
+        }
 
 
         [HttpPost]

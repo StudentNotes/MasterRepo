@@ -10,10 +10,12 @@ namespace StudentNotes.Web.Controllers
     public class SearchController : Controller
     {
         private readonly ISchoolService _schoolService;
+        private readonly IStudySubjectService _studySubjectService;
 
-        public SearchController(ISchoolService schoolService)
+        public SearchController(ISchoolService schoolService, IStudySubjectService studySubjectService)
         {
             _schoolService = schoolService;
+            _studySubjectService = studySubjectService;
         }
 
         // GET: Search
@@ -108,6 +110,19 @@ namespace StudentNotes.Web.Controllers
                 );
 
             return Json(filteredUniversities, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult SubjectSuggestions(string term)
+        {
+            var subjectList = _studySubjectService.GetAllSubjects();
+            var subjectNames = subjectList.Select(subject => subject.Name).ToList();
+
+            var filteredSubjects = subjectNames.Where(
+                subject => subject.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
+                );
+
+            return Json(filteredSubjects, JsonRequestBehavior.AllowGet);
         }
     }
 }

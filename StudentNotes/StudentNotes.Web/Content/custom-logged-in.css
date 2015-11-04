@@ -216,3 +216,45 @@
     cursor: inherit;
     display: block;
 }
+
+/****************************************   SUBJECT MANAGEMENT PARTIAL  *****************************************/
+#subjectManagement {
+    margin-top: 2rem;
+}
+#subjectManagement li {
+    height: 42px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+#subjectManagement li .lp,
+#subjectManagement li .checkboxArea,
+#subjectManagement li .subjectName{
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+#subjectManagement li .buttonArea .btn{
+    height: 32px;
+}
+#addSubjectForm #searchSubjectInput{
+    height: 34px;
+}
+#addSubjectForm {
+    margin: 2rem 0 2rem 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+#addSubjectForm label{
+    font-size: 16px;
+    text-align: left;
+    color: #262626;
+    height: 34px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    margin: 0;
+}
+#addSubjectForm .btn {
+    margin-left: 1rem;
+}
+#deleteSubjectsButton {
+    float: right;
+}

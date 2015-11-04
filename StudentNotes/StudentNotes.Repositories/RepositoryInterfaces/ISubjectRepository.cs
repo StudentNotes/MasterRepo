@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.Repositories.DbModels;
+using StudentNotes.Repositories.Infrastructure;
 
-namespace StudentNotes.Logic.ServiceInterfaces
+namespace StudentNotes.Repositories.RepositoryInterfaces
 {
-    public interface IFileService
+    public interface ISubjectRepository : IRepository<Subject>
     {
-        IEnumerable<File> GetPrivateFiles(int userId);
-        void SaveFile();
     }
 }

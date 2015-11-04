@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Repositories.DbModels;
+using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Repositories.RepositoryInterfaces;
 
 namespace StudentNotes.Logic.Services
@@ -14,12 +15,13 @@ namespace StudentNotes.Logic.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserInfoRepository _userInfoRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository userRepository, IUserInfoRepository userInfoRepository)
+        public UserService(IUserRepository userRepository, IUserInfoRepository userInfoRepository,IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _userInfoRepository = userInfoRepository;
-
+            _unitOfWork = unitOfWork;
         }
         public bool UserExists(string email)
         {
@@ -79,17 +81,14 @@ namespace StudentNotes.Logic.Services
                 Email = email,
                 Password = EncryptPassword(password, userGuid),
                 Salt = userGuid,
-                IsServiceAdmin = true
+                IsServiceAdmin = true,
+                UserInfo = new UserInfo()
+                {
+                    CreatedOn = DateTime.Now
+                }
             });
 
-            _userInfoRepository.Add(new UserInfo()
-            {
-                UserId = _userRepository.Get(u => u.Email == email).UserId,
-                CreatedOn = DateTime.Now
-            });
-
-            _userRepository.Commit();
-            _userInfoRepository.Commit();
+            _unitOfWork.Commit();
 
             return 0;
         }
@@ -116,6 +115,11 @@ namespace StudentNotes.Logic.Services
         {
             var userInfo = _userInfoRepository.Get(ui => ui.UserId == userId);
             return userInfo;
+        }
+
+        public void SaveUser()
+        {
+            _unitOfWork.Commit();
         }
 
         private string EncryptPassword(string decryptedPassword, Guid salt)
