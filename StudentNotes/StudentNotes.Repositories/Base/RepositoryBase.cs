@@ -44,7 +44,7 @@ namespace StudentNotes.Repositories.Base
 
         public virtual void Update(T entity)
         {
-            dbSet.Attach(entity);
+            //dbSet.Attach(entity);
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 

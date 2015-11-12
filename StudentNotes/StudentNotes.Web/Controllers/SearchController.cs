@@ -10,9 +10,9 @@ namespace StudentNotes.Web.Controllers
     public class SearchController : Controller
     {
         private readonly ISchoolService _schoolService;
-        private readonly IStudySubjectService _studySubjectService;
+        private readonly ISemesterSubjectService _studySubjectService;
 
-        public SearchController(ISchoolService schoolService, IStudySubjectService studySubjectService)
+        public SearchController(ISchoolService schoolService, ISemesterSubjectService studySubjectService)
         {
             _schoolService = schoolService;
             _studySubjectService = studySubjectService;
@@ -22,36 +22,10 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public JsonResult UniversitySuggestions(string term)
         {
-            //var universitiesList = new List<string>()
-            //{
-            //    "university_1",
-            //    "university_2",
-            //    "university_3",
-            //    "university_4"
-            //};
+            var universitiesList = _schoolService.GetSchoolsByTerm(term).ToList();
+            var schoolNames = universitiesList.Select(university => university.Name).ToList();
 
-            var universitiesList = _schoolService.GetAllSchhools();
-
-
-            var filteredUniversities = universitiesList.Where(
-                university => university.Name.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
-                );
-
-            return Json(filteredUniversities, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public JsonResult GradeSuggestions(string term)
-        {
-            var universitiesList = new List<string>()
-            {
-                "2012/2016",
-                "2013/2017",
-                "2014/2018",
-                "2014/2019"
-            };
-
-            var filteredUniversities = universitiesList.Where(
+            var filteredUniversities = schoolNames.Where(
                 university => university.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
                 );
 
@@ -59,18 +33,44 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult StudySubjectSuggestions(string term)
+        public JsonResult GradeSuggestions(string universityNameGuess, string term)
         {
-            var universitiesList = new List<string>()
+            var university = _schoolService.GetSchoolByName(universityNameGuess);
+            if (university == null)
             {
-                "Informatyka",
-                "Budownictwo",
-                "Medycyna",
-                "Mechatronika"
-            };
+                return null;
+            }
+            var gradesList = _schoolService.GetAllSchoolGrades(university.SchoolId);
+            if (gradesList == null)
+            {
+                return null;
+            }
 
-            var filteredUniversities = universitiesList.Where(
-                university => university.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
+            List<string> gradeYears = gradesList.Select(g => g.Year).ToList();
+            var filteredGrades = gradeYears.Where(
+                grade => grade.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
+                );
+
+            return Json(filteredGrades, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult StudySubjectSuggestions(string universityNameGuess, string gradeYearGuess, string term)
+        {
+            var school = _schoolService.GetSchoolByName(universityNameGuess);
+            if (school == null)
+            {
+                return null;
+            }
+            var grade = _schoolService.GetAllSchoolGrades(school.SchoolId).ToList().FirstOrDefault(g => g.Year == gradeYearGuess);
+            if (grade == null)
+            {
+                return null;
+            }
+            List<string> studySubjects = grade.StudySubject.Select(ss => ss.Name).ToList();
+
+            var filteredUniversities = studySubjects.Where(
+                subject => subject.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
                 );
 
             return Json(filteredUniversities, JsonRequestBehavior.AllowGet);

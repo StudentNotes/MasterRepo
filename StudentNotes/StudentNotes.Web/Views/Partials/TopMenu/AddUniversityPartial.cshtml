@@ -5,43 +5,41 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h2 class="modal-title" id="myModalLabel">@ResourceKeyResolver.ConstAddUniversity</h2>
+                <h2 class="modal-title" id="myModalLabel">@ResourceKeyResolver.ConstJoinUniversity</h2>
             </div>
-            @using (Html.BeginForm("SendFile", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("JoinToUniversity", "University", FormMethod.Post))
             {
                 <div class="modal-body">
-                    <p>
-                        <span class="label col-xs-12">Wybierz plik z dysku:</span><br />
-                        <span id="filePath" class="col-xs-7 label file-path">Nazwa pliku</span>
-                        <span class="btn btn-default btn-file col-xs-offset-1 col-xs-4">
-                            Przeglądaj...
-                            <input id="fileInput" type="file" multiple name="files" onchange="fileSelected()">
-                        </span>
-                    </p>
-                    <br /><br />
-                    <p>
-                        <span class="label col-xs-12">Zdefiniuj typ pliku:</span><br />
-                        @Html.RadioButton("fileType", "Private", true, new { @class = "file-radio-button" }) prywatny<br />
-                        @Html.RadioButton("fileType", "University", new { @class = "file-radio-button" }) uczelniany/szkolny
-                    </p>
-                    <br /><br />
-                    <p>
-                        <span class="label col-xs-12">Dodaj tagi do pliku</span><br />
-                        <div class="col-xs-12">
-                            <div class="label col-xs-6">
-                                Tag1, Tag2, Tag3
-                            </div>
-                            <div class="label col-xs-6">
-                                <div class="label">Dodaj tag</div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Nazwa uczelni:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <input class="form-control" type="text" name="universityName" id="universityNameGuess"/>
                             </div>
                         </div>
-                    </p>
-                    <br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Rocznik:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <input class="form-control" type="text" name="year" id="gradeYearGuess"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Kierunek:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <input class="form-control" type="text" name="universitySubject" id="universtitySubjectGuess"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/><br/>
+                    <br/><br/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
-                    <input type="submit" name="Wyślij!" class="btn btn-primary" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                    <input type="submit" name="Dołącz!" class="btn btn-primary"/>
                 </div>
             }
         </div>

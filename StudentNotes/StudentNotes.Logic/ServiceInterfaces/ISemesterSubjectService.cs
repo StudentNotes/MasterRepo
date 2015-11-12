@@ -7,7 +7,7 @@ using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.ServiceInterfaces
 {
-    public interface IStudySubjectService
+    public interface ISemesterSubjectService
     {
         IEnumerable<Subject> GetAllSubjects(); 
         void AddAndSaveSubject(string subjectName);

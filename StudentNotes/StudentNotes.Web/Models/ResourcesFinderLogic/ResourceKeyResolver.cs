@@ -310,6 +310,10 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ConstAddUniversity"); }
         }
+        public static string ConstJoinUniversity
+        {
+            get { return ResourceFinder.GetResource("ConstJoinUniversity"); }
+        }
         public static string ConstAddGroup
         {
             get { return ResourceFinder.GetResource("ConstAddGroup"); }

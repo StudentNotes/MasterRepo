@@ -12,10 +12,12 @@ namespace StudentNotes.Logic.ViewModels.Authorization
         public string Password { get; set; }
 
         public Dictionary<string, string> ErrorList { get; set; }
+        public Dictionary<string, string> SuccessList { get; set; }
 
         public LoginViewModel()
         {
             ErrorList = new Dictionary<string, string>();
+            SuccessList = new Dictionary<string, string>();
         }
     }
 }

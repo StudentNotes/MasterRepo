@@ -47,7 +47,8 @@ namespace DependencyResolver.Modules
             Bind<IUserService>().To<UserService>();
             Bind<IFileService>().To<FileService>();
             Bind<ISchoolService>().To<SchoolService>();
-            Bind<IStudySubjectService>().To<StudySubjectService>();
+            Bind<ISemesterSubjectService>().To<SemesterSubjectService>();
+            Bind<IGroupService>().To<GroupService>();
 
             //Bind<IFileSharedGroupRepository>().To<FileSharedGroupRepository>();
         }

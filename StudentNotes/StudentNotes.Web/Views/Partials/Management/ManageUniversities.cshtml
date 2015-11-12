@@ -1,49 +1,71 @@
-﻿
+﻿@using System.Diagnostics
+@model StudentNotes.Logic.ViewModels.Common.UniversityViewModel
 
-<div class="col-xs-12">
-    @using (Ajax.BeginForm(
-        "SaveUniversitySettings", "Management",
-        null,
-        new AjaxOptions()
-        {
-            HttpMethod = "POST"
-        },
-        new {}
+<div id="subjectManagement" class="col-xs-12">
+        <div class="col-xs-12">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="col-xs-1 lp">
+                        Lp.
+                    </div>
+                    <div class="col-xs-2 universityName">
+                        Nazwa
+                    </div>
+                    <div class="col-xs-4 descriptionArea">
+                        Opis
+                    </div>
+                    <div class="col-xs-5 buttonArea">
+                        Operacje
+                    </div>
+                </li>
+                
+                @for(int i=0; i<Model.Universities.Count; i++)
+                {
+                    <li class="list-group-item lp">
+                        <div class="col-xs-1 lp">
+                            @(i + 1)
+                        </div>
+                        <div class="col-xs-2 universityName">
+                            @Model.Universities[i].Name
+                        </div>
+                        <div class="col-xs-4 descriptionArea">
+                            @Model.Universities[i].Description
+                        </div>
+                        <div class="col-xs-5 buttonArea">
+                            <button class="btn btn-info">Szczegóły</button>
+                            @Ajax.ActionLink("Konfiguruj", "ConfigureUniversity", "Management",
+                            new { schoolId = Model.Universities.ElementAt(i).SchoolId },
+                            new AjaxOptions()
+                            {
+                                UpdateTargetId = "page-content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                            new { @class = "btn btn-warning" })
+                            @Ajax.ActionLink("Usuń", "DeleteUniversity", "Management",
+                            new{ id = Model.Universities.ElementAt(i).SchoolId},
+                            new AjaxOptions()
+                            {
+                                UpdateTargetId = "page-content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                            new { @class = "btn btn-danger" })
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
 
-        ))
-    {
+    @Ajax.ActionLink("Dodaj uczelnię", "AddNewUniversity", "Management",
+                            null,
+                            new AjaxOptions()
+                            {
+                                UpdateTargetId = "page-content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                            new { @class = "btn btn-success" })
 
-        @Html.AntiForgeryToken()
-
-        <input id="searchUniversity" type="text" name="university" placeholder="Podaj nazwę szkoły" />
-        <input id="searchGrade" type="text" name="grade" placeholder="Wprowadź rocznik"/>
-        <input id="searchStudySubject" type="text" name="studySubject" placeholder="Wprowadź kierunek studiów"/>
-        <input id="searchSemester" type="text" name="semester" placeholder="Wprowadź numer semestru"/>
-        <input id="searchSemesterSubjects" type="text" name="semesterSubjectList" placeholder="Wprowadź listę przedmiotów"/>
-
-        <button type="submit" class="btn btn-success" style="border-radius: 0; width: 140px;" target="blank">Zapisz uczelnię</button>
-
-        //data-autocomplete-url="@Url.Action("UniversitySuggestions", "Search")"
-
-
-    }
 </div>
-<script type="text/javascript">
-    $(function () {
-        $("#searchUniversity").autocomplete({
-            source: '@Url.Action("UniversitySuggestions", "Search")'
-        });
-        $("#searchGrade").autocomplete({
-            source: '@Url.Action("GradeSuggestions", "Search")'
-        });
-        $("#searchStudySubject").autocomplete({
-            source: '@Url.Action("StudySubjectSuggestions", "Search")'
-        });
-        $("#searchSemester").autocomplete({
-            source: '@Url.Action("SemesterSuggestions", "Search")'
-        });
-        $("#searchSemesterSubjects").autocomplete({
-            source: '@Url.Action("SemesterSubjectsSuggestions", "Search")'
-        });
-    });
-</script>
+

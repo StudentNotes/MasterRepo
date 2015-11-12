@@ -10,12 +10,12 @@ using StudentNotes.Repositories.RepositoryInterfaces;
 
 namespace StudentNotes.Logic.Services
 {
-    public class StudySubjectService : IStudySubjectService
+    public class SemesterSubjectService : ISemesterSubjectService
     {
         private readonly ISubjectRepository _subjectRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public StudySubjectService(ISubjectRepository subjectRepository, IUnitOfWork unitOfWork)
+        public SemesterSubjectService(ISubjectRepository subjectRepository, IUnitOfWork unitOfWork)
         {
             _subjectRepository = subjectRepository;
             _unitOfWork = unitOfWork;

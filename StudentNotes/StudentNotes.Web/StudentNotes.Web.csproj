@@ -184,6 +184,7 @@
     <Content Include="Resources\avatar_baba.jpg" />
     <Content Include="Resources\data steal.png" />
     <Content Include="Resources\file-sharing.jpg" />
+    <Content Include="Resources\folder-symbol.jpg" />
     <Content Include="Resources\mobile_devices.png" />
     <Content Include="Resources\triangles-back.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -216,9 +217,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoggedInController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\UniversityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +257,16 @@
     <Content Include="Views\Note\NoteUploaded.cshtml" />
     <Content Include="Views\Partials\Management\ManageUniversities.cshtml" />
     <Content Include="Views\Partials\Management\ManageSubjects.cshtml" />
+    <Content Include="Views\Partials\Management\AddUniversity.cshtml" />
+    <Content Include="Views\Partials\Management\AddGrade.cshtml" />
+    <Content Include="Views\Partials\Management\GradeList.cshtml" />
+    <Content Include="Views\Partials\Management\AddStudySubject.cshtml" />
+    <Content Include="Views\Partials\Management\StudySubjectList.cshtml" />
+    <Content Include="Views\Partials\Management\AddSemesterSubject.cshtml" />
+    <Content Include="Views\Partials\Management\TakeStudySubject.cshtml" />
+    <Content Include="Views\Partials\Management\TakeSemesterAssignSubject.cshtml" />
+    <Content Include="Views\Partials\Management\AssignSemesterSubjects.cshtml" />
+    <Content Include="Views\Partials\MyUniversities\UniversitySubjectsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -266,6 +279,7 @@
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Management\" />
     <Folder Include="Views\Search\" />
+    <Folder Include="Views\University\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Lang.pl.resx">

@@ -1,3 +1,25 @@
 ﻿@*Moje Uczelnie -> Konkretna Uczelnia -> Konkretny semestr -> Widok na poszczególne przedmioty*@
+@model List<StudentNotes.Repositories.DbModels.SemesterSubject>
+           
+<div class="col-xs-12 folder-view">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-2 col-xs-1 folder">
+            <img src="~/Resources/folder-symbol.jpg" class="img-responsive img-rounded" />
+            <div class="folder-name">
 
+                @Ajax.ActionLink(item.Name, "ShowNotes", "University",
+                     new { semesterId = item.SemesterId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "folder-name" })
+            </div>
+        </div>
+    }
+</div>
 

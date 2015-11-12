@@ -10,6 +10,7 @@ namespace StudentNotes.Logic.ServiceInterfaces
     public interface IFileService
     {
         IEnumerable<File> GetPrivateFiles(int userId);
+        IEnumerable<File> GetFilesBySemesterSubjectId(int semesterSubjectId); 
         void SaveFile();
     }
 }

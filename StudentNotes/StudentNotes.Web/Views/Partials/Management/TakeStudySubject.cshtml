@@ -1,0 +1,18 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.StudySubjectViewModel
+           
+<h3>Wybierz kierunek</h3>
+
+<div class="list-group">
+    @for (int i = 0; i < Model.StudySubjects.Count; i++)
+    {
+        @Ajax.ActionLink(Model.StudySubjects.ElementAt(i).Name, "TakeStudySubject", "Management",
+                             new { studySubjectId = Model.StudySubjects.ElementAt(i).StudySubjectId, schoolId = Model.UniversityId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "semesterSubjectAssignArea",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace
+                        },
+                        new { @class = "list-group-item" })
+    }
+</div>

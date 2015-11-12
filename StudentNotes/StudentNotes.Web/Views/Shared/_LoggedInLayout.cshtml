@@ -34,7 +34,8 @@
             @Html.Action("GetNavbarTopPartial", "Account")
 
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            @Html.Partial("~/Views/Partials/NavbarSidePartial.cshtml")
+            @*@Html.Partial("~/Views/Partials/NavbarSidePartial.cshtml")*@
+            @Html.Action("GetNavbarSidePartial", "LoggedIn")
         </nav>
 
         <div id="page-wrapper">
@@ -58,24 +59,7 @@
     @Html.Partial("~/Views/Partials/TopMenu/AddGroupPartial.cshtml")
 
 
-<script>
-    function fileSelected() {
-        var fileInput = document.getElementById("fileInput");
-        var files = fileInput.files;
 
-        var allFiles = "";
-
-        for (var i = 0; i < files.length; i++) {
-            allFiles += files[i].name;
-            allFiles += "<br>";
-        }
-
-        document.getElementById("filePath").innerHTML = allFiles;
-    }
-
-    
-
-</script>
 
 <!-- jQuery -->
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
@@ -90,9 +74,53 @@
 
     <!--Bootstrap Core JavaScript-->
     <script src="~/Scripts/bootstrap.min.js"></script>
-    
 
-    
+    <script>
+    function fileSelected() {
+        var fileInput = document.getElementById("fileInput");
+        var files = fileInput.files;
+
+        var allFiles = "";
+
+        for (var i = 0; i < files.length; i++) {
+            allFiles += files[i].name;
+            allFiles += "<br>";
+        }
+
+        document.getElementById("filePath").innerHTML = allFiles;
+    }
+
+    $(document).ready(function () {
+        setUp();
+    });
+    function setUp() {
+        $("#universityNameGuess").autocomplete({
+            source: '@Url.Action("UniversitySuggestions", "Search")'
+        });
+    }
+
+    $("#gradeYearGuess").keypress(function () {
+        setupAutocompleteGradeGuess();
+    });
+
+    $('#universtitySubjectGuess').keypress(function() {
+        setupAutocompleteStudySubjectGuess()
+    })
+    function setupAutocompleteGradeGuess() {
+        $("#gradeYearGuess").autocomplete({
+            source: ('@Url.Action("GradeSuggestions", "Search")' + '?universityNameGuess=' + encodeURIComponent($('#universityNameGuess').val()))
+        });
+    }
+
+    function setupAutocompleteStudySubjectGuess() {
+        $("#universtitySubjectGuess").autocomplete({
+            source: ('@Url.Action("StudySubjectSuggestions", "Search")' + '?universityNameGuess=' + encodeURIComponent($('#universityNameGuess').val()) + '&gradeYearGuess=' + encodeURIComponent($('#gradeYearGuess').val()))
+
+        });
+    }
+</script>
+
+
 
 </body>
 </html>

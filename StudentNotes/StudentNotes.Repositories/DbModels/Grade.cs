@@ -16,8 +16,9 @@ namespace StudentNotes.Repositories.DbModels
 
         public int GradeId { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime Year { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string Year { get; set; }
 
         public int SchoolId { get; set; }
 

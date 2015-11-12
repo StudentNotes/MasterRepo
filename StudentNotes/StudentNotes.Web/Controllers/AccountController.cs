@@ -114,6 +114,10 @@ namespace StudentNotes.Web.Controllers
         [ChildActionOnly]
         public ActionResult GetNavbarTopPartial()
         {
+            if (Session["CurrentUserId"] == null)
+            {
+                return View("~/Views/Home/Index.cshtml", new HomeViewModel());
+            }
             UserViewModel model = new UserViewModel();
             UserInfo userInfo = _userService.GetAllServiceUserInfo((int) Session["CurrentUserId"]);
 

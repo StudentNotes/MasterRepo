@@ -1,0 +1,25 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.NewUniversityViewModel
+
+@for (int i = 0; i < Model.GradeList.Count; i++)
+{
+    <li class="list-group-item">
+        <div class="col-xs-2 lp">
+            @(i+1)
+        </div>
+        <div class="col-xs-7 subjectName">
+            @Model.GradeList.ElementAt(i).Year
+        </div>
+        <div class="col-xs-2 buttonArea">
+            @Ajax.ActionLink("Usuń ", "DeleteGradeFromSchool", "Management",
+            new { schoolId = Model.UniversityId, year = Model.GradeList.ElementAt(i).Year },
+            new AjaxOptions()
+            {
+                UpdateTargetId = "gradeList",
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace
+            },
+            new { @class = "btn btn-danger" })
+        </div>
+    </li>
+}
+
