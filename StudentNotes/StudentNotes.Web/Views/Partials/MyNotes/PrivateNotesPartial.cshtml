@@ -1,19 +1,42 @@
 ﻿@*Moje Notatki -> Prywatne*@
+@using StudentNotes.Logic.LogicModels
 @model StudentNotes.Logic.ViewModels.File.UserNotesViewModel
            @{
                Layout = null;
            }
 
-<table>
-    @foreach (var privateFile in Model.UserNotesList)
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Lp.</th>
+            <th>Nazwa</th>
+            <th>Kategoria</th>
+            <th>Rozmiar</th>
+            <th>Data wstawienia</th>
+            <th>Tagi</th>
+            <th></th>
+        </tr>
+    </thead>
+    @for (int i = 0; i < Model.UserNotesList.Count; i++)
     {
         <tr>
-            <td>@privateFile.Name</td>
-            <td>@privateFile.Category</td>
-            <td>@privateFile.DestinationPath</td>
-            <td>@privateFile.Size</td>
-            <td>@privateFile.UploadDate.ToString()</td>
+            <td>@(i+1)</td>
+            <td>
+                <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.UserNotesList[i].Category)" style="max-height: 34px;"/>
+                @Model.UserNotesList[i].Name
+            </td>
+            <td>@Model.UserNotesList[i].Category</td>
+            <td>@Model.UserNotesList[i].Size</td>
+            <td>@Model.UserNotesList[i].UploadDate.ToString()</td>
+            <td>
+                @foreach (var tag in @Model.UserNotesList[i].Tags)
+                {
+                    <text>@tag,</text>
+                }
+            </td>
+            <td>
+                <button class="btn btn-danger">Duuuuzy guzik</button>
+            </td>
         </tr>
     }
 </table>
-

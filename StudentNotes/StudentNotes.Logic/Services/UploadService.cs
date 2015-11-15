@@ -23,14 +23,16 @@ namespace StudentNotes.Logic.Services
         private readonly FileServerUser _fileServerUser;
         private readonly IUserRepository _userRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly ISemesterSubjectFileRepository _semesterSubjectFileRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UploadService(IUserRepository userRepository, IFileRepository fileRepository, IUnitOfWork unitOfWork)
+        public UploadService(IUserRepository userRepository, IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IUnitOfWork unitOfWork)
         {
             _fileServer = new FtpServer(LogicConstants.FtpServerAddress);
             _fileServerUser = new FtpUser(LogicConstants.FtpUserLogin, LogicConstants.FtpUserPassword, _fileServer);
             _userRepository = userRepository;
             _fileRepository = fileRepository;
+            _semesterSubjectFileRepository = semesterSubjectFileRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -54,6 +56,40 @@ namespace StudentNotes.Logic.Services
                     UserId = userId,
                     FileTags = tagsWithSeparator
                 });
+                _fileRepository.Commit();
+                return 0;
+            }
+            return -1;
+        }
+
+        public int UploadUniversityNote(Note note, int userId, string filePath, int semesterSubjectId)
+        {
+            var targetDirectory = string.Format("/FTP/{0}/{1}", GetFileServerRoot(userId), filePath);
+            _fileServerUser.GoToOrCreatePath(targetDirectory);
+
+            var uploadResult = _fileServerUser.UploadFile(new CommonFile(note.Name, note.Content));
+            if (uploadResult == 226)
+            {
+                string tagsWithSeparator = note.Tags.Aggregate("", (current, tag) => current + string.Format("{0};", tag));
+                _fileRepository.Add(new File()
+                {
+                    Name = note.Name,
+                    Category = note.Category,
+                    Path = targetDirectory,
+                    Size = note.Size,
+                    UploadDate = DateTime.Now,
+                    IsShared = false,
+                    UserId = userId,
+                    FileTags = tagsWithSeparator,
+                    SemesterSubjectFile = new List<SemesterSubjectFile>()
+                    {
+                        new SemesterSubjectFile()
+                        {
+                            SemesterSubjectId = semesterSubjectId
+                        }
+                    }
+                });
+
                 _fileRepository.Commit();
                 return 0;
             }

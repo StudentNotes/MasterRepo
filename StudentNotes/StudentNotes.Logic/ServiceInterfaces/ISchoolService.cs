@@ -30,8 +30,9 @@ namespace StudentNotes.Logic.ServiceInterfaces
         int RemoveGradeFromSchool(int schoolId, string year);
         int RemoveSchool(int schoolId);
         IEnumerable<Grade> GetAllSchoolGrades(int schoolId);
-        
-        #endregion
+        IEnumerable<Grade> GetAllGrades();
+
+            #endregion
 
         #region StudySubjectServies
 

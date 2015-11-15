@@ -10,6 +10,7 @@ namespace StudentNotes.Logic.Consts
     {
         public static string JoinedSchool { get { return "Gratuluję! Dołączyłeś do wybranej uczelni/szkoły."; } }
         public static string JoinedStudySubject { get { return "Gratuluję! Zapisałeś sie na wybrany kierunek studiów."; } }
+        public static string FileUploadedSuccessfully { get { return "Pliki zostały zapisane w serwisie StudentNotes. Możesz zacząć je udostępniać."; } }
 
         public static string UniversityDoesntExist { get { return "Niestety taka szkoła nie istnieje w serwisie StudentNotes."; } }
         public static string StudySubjectDoesntExist { get { return "Wybrana uczelnia nie oferuje podanego kierunku kształcenia"; } }

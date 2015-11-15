@@ -39,6 +39,18 @@ namespace StudentNotes.Logic.Services
             return files;
         }
 
+        public IEnumerable<File> GetSemesterSubjectFilesByUserId(int semesterSubjectId, int userId)
+        {
+            var semesterSubjectFileIds =
+                _semesterSubjectFileRepository.GetMany(f => f.SemesterSubjectId == semesterSubjectId).Select(f => f.FileId);
+
+            var userFiles = from f in _fileRepository.GetMany(sf => semesterSubjectFileIds.Contains(sf.FileId))
+                where f.UserId == userId
+                select f;
+
+            return userFiles;
+        }
+
         public void SaveFile()
         {
             _unitOfWork.Commit();

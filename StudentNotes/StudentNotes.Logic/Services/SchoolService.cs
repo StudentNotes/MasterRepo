@@ -151,6 +151,11 @@ namespace StudentNotes.Logic.Services
             return _gradeRepository.GetMany(gr => gr.SchoolId == schoolId);
         }
 
+        public IEnumerable<Grade> GetAllGrades()
+        {
+            return _gradeRepository.GetAll();
+        }
+
         public MyUniversitiesViewModel GetStudySubjectsBySchoolAndUserId(int schoolId, int userId)
         {
             MyUniversitiesViewModel model = new MyUniversitiesViewModel();

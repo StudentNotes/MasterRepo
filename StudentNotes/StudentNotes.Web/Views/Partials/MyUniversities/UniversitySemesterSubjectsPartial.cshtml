@@ -9,7 +9,7 @@
             <div class="folder-name">
 
                 @Ajax.ActionLink(item.Name, "ShowNotes", "University",
-                     new { semesterId = item.SemesterId },
+                     new { semesterSubjectId = item.SemesterSubjectId },
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",

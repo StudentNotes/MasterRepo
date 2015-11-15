@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.Logic.LogicInterfaces;
-using StudentNotes.Repositories.DbModels;
+using File = StudentNotes.Repositories.DbModels.File;
 
 namespace StudentNotes.Logic.LogicModels
 {
     public class Note : INote
     {
         public int UserId { get; private set; }
+        public int NoteId { get; set; }
+
         public string Name { get; set; }
         public string Category { get; set; }
         public string DestinationPath { get; set; }
@@ -29,6 +32,7 @@ namespace StudentNotes.Logic.LogicModels
         public Note(File file)
         {
             UserId = file.UserId;
+            NoteId = file.FileId;
             Name = file.Name;
             Category = file.Category;
             DestinationPath = file.Path;

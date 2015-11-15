@@ -105,7 +105,7 @@ namespace StudentNotes.Web.Controllers
         public ActionResult ShowStudySubjects(int universityId)
         {
             MyUniversitiesViewModel model = _schoolService.GetStudySubjectsBySchoolAndUserId(universityId,
-                (int) Session["CurrentUserID"]);
+                (int) Session["CurrentUserId"]);
 
             
             return PartialView("~/Views/Partials/MyUniversities/UniversitySubjectsPartial.cshtml", model);
@@ -114,9 +114,7 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult ShowSemesters(int studySubjectId)
         {
-            List<Semester> semesters;
-
-            semesters = _schoolService.GetSemestersByStudySubjectId(studySubjectId).ToList();
+            List<Semester> semesters = _schoolService.GetSemestersByStudySubjectId(studySubjectId).ToList();
             return PartialView("~/Views/Partials/MyUniversities/UniversitySemestersPartial.cshtml", semesters);
         }
 
@@ -132,8 +130,9 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult ShowNotes(int semesterSubjectId)
         {
+            //  Dodać kryterium wyszukiwwania, któorym jest id użytkownika, bo teraz można wyświetlić wszystkie pliki, które należą do danego serwisu
             List<Note> notes = new List<Note>();
-            var files = _fileService.GetFilesBySemesterSubjectId(semesterSubjectId).ToList();
+            var files = _fileService.GetSemesterSubjectFilesByUserId(semesterSubjectId, (int)Session["CurrentUserId"]).ToList();
             foreach (var file in files)
             {
                 notes.Add(new Note(file));

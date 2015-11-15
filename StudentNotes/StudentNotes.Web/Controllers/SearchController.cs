@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using StudentNotes.Logic.ServiceInterfaces;
 
 namespace StudentNotes.Web.Controllers
@@ -35,18 +36,34 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public JsonResult GradeSuggestions(string universityNameGuess, string term)
         {
-            var university = _schoolService.GetSchoolByName(universityNameGuess);
-            if (university == null)
-            {
-                return null;
-            }
-            var gradesList = _schoolService.GetAllSchoolGrades(university.SchoolId);
-            if (gradesList == null)
-            {
-                return null;
-            }
+            List<string> gradeYears;
 
-            List<string> gradeYears = gradesList.Select(g => g.Year).ToList();
+            if (universityNameGuess.IsEmpty())
+            {
+                gradeYears = _schoolService.GetAllGrades().Select(g => g.Year).ToList();
+                List<string> tmpList = new List<string>();
+                foreach (var year in gradeYears.Where(year => !tmpList.Contains(year)))
+                {
+                    tmpList.Add(year);
+                }
+                gradeYears = tmpList;
+            }
+            else
+            {
+                var university = _schoolService.GetSchoolByName(universityNameGuess);
+                if (university == null)
+                {
+                    return null;
+                }
+                var gradesList = _schoolService.GetAllSchoolGrades(university.SchoolId);
+                if (gradesList == null)
+                {
+                    return null;
+                }
+
+                gradeYears = gradesList.Select(g => g.Year).ToList();
+            }
+            
             var filteredGrades = gradeYears.Where(
                 grade => grade.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
                 );
