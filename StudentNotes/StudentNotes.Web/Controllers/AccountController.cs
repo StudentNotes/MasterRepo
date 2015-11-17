@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StudentNotes.Logic.Authorization;
+using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Authorization;
 using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Logic.ViewModels.Validation;
 using StudentNotes.Repositories.DbModels;
+using StudentNotes.Web.Filters;
 
 namespace StudentNotes.Web.Controllers
 {
@@ -109,6 +111,13 @@ namespace StudentNotes.Web.Controllers
         {
             Session.Abandon();
             return View("~/Views/Home/Index.cshtml", new HomeViewModel());
+        }
+
+        public ActionResult SessionExpired()
+        {
+            HomeViewModel viewModel = new HomeViewModel();
+            viewModel.LoginViewModel.ErrorList.Add("SessionExpired", WebResponseCode.SessionExpired);
+            return View("~/Views/Home/Index.cshtml", viewModel);
         }
 
         [ChildActionOnly]

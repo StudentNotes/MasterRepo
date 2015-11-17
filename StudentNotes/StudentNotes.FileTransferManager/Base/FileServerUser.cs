@@ -32,9 +32,9 @@ namespace StudentNotes.FileTransferManager.Base
             return DownloadBehavior.DownloadFile(file, server, this);
         }
 
-        public int UploadFile(FileServerFile file)
+        public async Task<int> UploadFile(FileServerFile file)
         {
-            return UploadBehavior.UploadFile(file, server, this);
+            return await UploadBehavior.UploadFile(file, server, this);
         }
 
         public int DeleteDirectory()
@@ -42,14 +42,14 @@ namespace StudentNotes.FileTransferManager.Base
             return DeleteBehavior.DeleteDirectory(server, this);
         }
 
-        public int DeleteFile()
+        public async Task<int> DeleteFile()
         {
-            return DeleteBehavior.DeleteFile(server, this);
+            return await DeleteBehavior.DeleteFile(server, this);
         }
 
-        public int DeleteFile(string remoteLocation)
+        public async Task<int> DeleteFile(string remoteLocation)
         {
-            return DeleteBehavior.DeleteFile(remoteLocation, server, this);
+            return await DeleteBehavior.DeleteFile(remoteLocation, server, this);
         }
 
         public int GoToOrCreatePath(string destinationPath)

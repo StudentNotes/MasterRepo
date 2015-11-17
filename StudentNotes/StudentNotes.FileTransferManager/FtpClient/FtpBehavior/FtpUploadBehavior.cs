@@ -16,7 +16,7 @@ namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
     {
         public FtpResponseCode ServerResponseMessage { get; private set; }
 
-        public int UploadFile(File file, FileServer server, FileServerUser user)
+        public async Task<int> UploadFile(File file, FileServer server, FileServerUser user)
         {
             if (file.Size == 0)
             {
@@ -35,7 +35,7 @@ namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
 
             using (Stream ftpUploadStream = ftpRequest.GetRequestStream())
             {
-                ftpUploadStream.Write(file.Content, 0, file.Content.Length);
+                await ftpUploadStream.WriteAsync(file.Content, 0, file.Content.Length);
             }
 
             var response = ((FtpWebResponse) ftpRequest.GetResponse()).StatusDescription;

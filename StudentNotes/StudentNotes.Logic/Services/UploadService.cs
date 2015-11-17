@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.FileTransferManager.Base;
+using StudentNotes.FileTransferManager.Consts;
 using StudentNotes.FileTransferManager.FtpClient;
 using StudentNotes.FileTransferManager.FtpClient.FileTypes;
 using StudentNotes.Logic.Consts;
@@ -36,12 +37,12 @@ namespace StudentNotes.Logic.Services
             _unitOfWork = unitOfWork;
         }
 
-        public int UploadPrivateNote(Note note, int userId)
+        public async Task<int> UploadPrivateNote(Note note, int userId)
         {
             var targetDirectory = string.Format("/FTP/{0}/{1}", GetFileServerRoot(userId), "Private");
             _fileServerUser.GoToOrCreatePath(targetDirectory);
 
-            var uploadResult = _fileServerUser.UploadFile(new CommonFile(note.Name, note.Content));
+            var uploadResult = await _fileServerUser.UploadFile(new CommonFile(note.Name, note.Content));
             if (uploadResult == 226)
             {
                 string tagsWithSeparator = note.Tags.Aggregate("", (current, tag) => current + string.Format("{0};", tag));
@@ -62,12 +63,12 @@ namespace StudentNotes.Logic.Services
             return -1;
         }
 
-        public int UploadUniversityNote(Note note, int userId, string filePath, int semesterSubjectId)
+        public async Task<int> UploadUniversityNote(Note note, int userId, string filePath, int semesterSubjectId)
         {
             var targetDirectory = string.Format("/FTP/{0}/{1}", GetFileServerRoot(userId), filePath);
             _fileServerUser.GoToOrCreatePath(targetDirectory);
 
-            var uploadResult = _fileServerUser.UploadFile(new CommonFile(note.Name, note.Content));
+            var uploadResult = await _fileServerUser.UploadFile(new CommonFile(note.Name, note.Content));
             if (uploadResult == 226)
             {
                 string tagsWithSeparator = note.Tags.Aggregate("", (current, tag) => current + string.Format("{0};", tag));
@@ -95,6 +96,49 @@ namespace StudentNotes.Logic.Services
             }
             return -1;
         }
+
+        public async Task<int> DeletePrivateNoteAsync(int fileId)
+        {
+            var privateFile = _fileRepository.GetById(fileId);
+            var  remoteFilePath = privateFile.Path + "/" + privateFile.Name;
+
+            var responseCode = await _fileServerUser.DeleteFile(remoteFilePath);
+            if (responseCode == (int)FtpResponseCode.FileDeleted)
+            {
+                _fileRepository.Delete(f => f.FileId == fileId);
+                _unitOfWork.Commit();
+            }
+
+            return responseCode;
+        }
+
+        public async Task<int> DeleteSemesterSubjectNoteAsync(int fileId, int semesterSubjectId)
+        {
+            var semesterSubjectFile =
+                _semesterSubjectFileRepository.GetMany(
+                    sf => sf.FileId == fileId && sf.SemesterSubjectId == semesterSubjectId).FirstOrDefault();
+            if (semesterSubjectFile == null)
+            {
+                return (int) FtpResponseCode.FileDoesntExist;
+            }
+            var file = _fileRepository.GetById(semesterSubjectFile.FileId);
+            var remoteFilePath = file.Path + "/" + file.Name;
+            var responseCode = await _fileServerUser.DeleteFile(remoteFilePath);
+
+            if (responseCode != (int) FtpResponseCode.FileDeleted)
+            {
+                return (int) FtpResponseCode.GlobalError;
+            }
+            _fileRepository.Delete(file);
+            _semesterSubjectFileRepository.Delete(semesterSubjectFile);
+            _unitOfWork.Commit();
+            return (int)FtpResponseCode.FileDeleted;
+        }
+
+        //public async Task<int> DeleteUniversityFileTask(int fileId, int semesterSubjectId)
+        //{
+            
+        //}
 
         public void SaveUpload()
         {

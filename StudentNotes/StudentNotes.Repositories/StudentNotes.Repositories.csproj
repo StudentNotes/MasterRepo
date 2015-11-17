@@ -67,7 +67,6 @@
     <Compile Include="DbModels\StudentNotesContext.cs" />
     <Compile Include="DbModels\StudySubject.cs" />
     <Compile Include="DbModels\Subject.cs" />
-    <Compile Include="DbModels\sysdiagrams.cs" />
     <Compile Include="DbModels\User.cs" />
     <Compile Include="DbModels\UserInfo.cs" />
     <Compile Include="DbModels\UserSharedFile.cs" />

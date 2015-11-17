@@ -105,7 +105,7 @@
 
     $('#universtitySubjectGuess').keypress(function() {
         setupAutocompleteStudySubjectGuess()
-    })
+    });
     function setupAutocompleteGradeGuess() {
         $("#gradeYearGuess").autocomplete({
             source: ('@Url.Action("GradeSuggestions", "Search")' + '?universityNameGuess=' + encodeURIComponent($('#universityNameGuess').val()))
@@ -116,9 +116,16 @@
         $("#universtitySubjectGuess").autocomplete({
             source: ('@Url.Action("StudySubjectSuggestions", "Search")' + '?universityNameGuess=' + encodeURIComponent($('#universityNameGuess').val()) + '&gradeYearGuess=' + encodeURIComponent($('#gradeYearGuess').val()))
 
+            });
+        }
+
+        $(document).ajaxComplete(function (event, xhr, options) {
+            if (xhr.status == 401) {
+                var pathParts = window.location.href.split('/').filter(Boolean);
+                window.location.href = "/Account/SessionExpired";
+            }
         });
-    }
-</script>
+    </script>
 
 
 

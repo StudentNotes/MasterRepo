@@ -12,6 +12,8 @@ namespace StudentNotes.FileTransferManager.Consts
         NotLoggedIn = 530,
         FileNotFoundOrNoAccess = 550,
         GlobalError = 666,
-        CommandsExecutedSuccessfully = 777
+        CommandsExecutedSuccessfully = 777,
+
+        FileDoesntExist = 667
     }
 }

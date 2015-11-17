@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -14,17 +16,19 @@ using StudentNotes.Logic.ViewModels.Home;
 
 namespace StudentNotes.Web.Controllers
 {
-    public class FileController : Controller
+    public class FileController : AsyncController
     {
         private readonly IUploadService _uploadService;
+        private readonly IFileService _fileService;
 
-        public FileController(IUploadService uploadService)
+        public FileController(IUploadService uploadService, IFileService fileService)
         {
             _uploadService = uploadService;
+            _fileService = fileService;
         }
         // GET: File
         [HttpPost]
-        public ActionResult SendFile(IEnumerable<HttpPostedFileBase> files, string fileType, string uploadPath, string semesterSubjectId)
+        public async Task<ActionResult> SendFile(IEnumerable<HttpPostedFileBase> files, string fileType, string uploadPath, string semesterSubjectId)
         {
             var anyFile = files.First();
             if (anyFile == null)
@@ -51,7 +55,7 @@ namespace StudentNotes.Web.Controllers
 
                 if (fileType == "Private")
                 {
-                    if (_uploadService.UploadPrivateNote(note, (int)Session["CurrentUserId"]) == 0)
+                    if (await _uploadService.UploadPrivateNote(note, (int)Session["CurrentUserId"]) == 0)
                     {
                         _uploadService.SaveUpload();
                     }
@@ -62,7 +66,7 @@ namespace StudentNotes.Web.Controllers
                     {
                         return RedirectToAction("RetriveInfo", new { errorCode = 1 });
                     }
-                    if (_uploadService.UploadUniversityNote(note, (int)Session["CurrentUserId"], uploadPath, int.Parse(semesterSubjectId)) == 0)
+                    if (await _uploadService.UploadUniversityNote(note, (int)Session["CurrentUserId"], uploadPath, int.Parse(semesterSubjectId)) == 0)
                     {
                         _uploadService.SaveUpload();
                     }
@@ -75,7 +79,7 @@ namespace StudentNotes.Web.Controllers
 
 
         [HttpGet]
-        public ActionResult RetriveInfo(int errorCode)
+        public  ActionResult RetriveInfo(int errorCode)
         {
             switch (errorCode)
             {
@@ -96,5 +100,19 @@ namespace StudentNotes.Web.Controllers
             return View("~/Views/Note/NoteUploaded.cshtml");
         }
 
+
+
+        //[HttpGet]
+        //public async Task<string> HeavyAction(int holdTime)
+        //{
+        //    Debug.WriteLine(GetMessage(holdTime));
+        //    return "Now I'm done!";
+        //}
+
+        //private async Task<ActionResult> GetMessage(int holdTime)
+        //{
+        //    await Task.Delay(holdTime);
+        //    return RedirectToAction("RetriveInfo", new { errorCode = 0 });
+        //}
     }
 }

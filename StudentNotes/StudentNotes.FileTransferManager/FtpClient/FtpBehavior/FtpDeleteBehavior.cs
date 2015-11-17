@@ -14,7 +14,7 @@ namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
 {
     public class FtpDeleteBehavior : FtpBehaviorBase, IDeleteBehavior<int>
     {
-        public int DeleteFile(FileServer server, FileServerUser user)
+        public async Task<int> DeleteFile(FileServer server, FileServerUser user)
         {
             string requestPath = string.Format(@"ftp://{0}/{1}", server.ServerUrl, server.FileDestination);
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(requestPath);
@@ -23,7 +23,8 @@ namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
 
             ftpRequest.Method = WebRequestMethods.Ftp.DeleteFile;
 
-            var serverResponseMessage = ((FtpWebResponse)ftpRequest.GetResponse()).StatusDescription;
+            var response = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+            var serverResponseMessage = response.StatusDescription;
             if (GetResponseCode(serverResponseMessage) == (int) FtpResponseCode.FileDeleted)
             {
                 return (int) FtpResponseCode.FileDeleted;
@@ -32,16 +33,16 @@ namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
             return (int)FtpResponseCode.GlobalError;
         }
 
-        public int DeleteFile(string remoteLocation, FileServer server, FileServerUser user)
+        public async Task<int> DeleteFile(string remoteLocation, FileServer server, FileServerUser user)
         {
-            string requestPath = string.Format(@"ftp://{0}/{1}", server.ServerUrl, remoteLocation);
+            string requestPath = string.Format(@"ftp://{0}{1}", server.ServerUrl, remoteLocation);
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(requestPath);
 
             ftpRequest.Credentials = new NetworkCredential(user.login, user.password);
 
-            ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
-
-            var serverResponseMessage = ((FtpWebResponse)ftpRequest.GetResponse()).StatusDescription;
+            ftpRequest.Method = WebRequestMethods.Ftp.DeleteFile;
+            var response = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+            var serverResponseMessage = response.StatusDescription;
             if (GetResponseCode(serverResponseMessage) == (int)FtpResponseCode.FileDeleted)
             {
                 return (int)FtpResponseCode.FileDeleted;

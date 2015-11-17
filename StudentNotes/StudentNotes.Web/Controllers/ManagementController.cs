@@ -7,9 +7,11 @@ using System.Web.WebPages;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Repositories.DbModels;
+using StudentNotes.Web.Filters;
 
 namespace StudentNotes.Web.Controllers
 {
+    [SessionFilter]
     public class ManagementController : Controller
     {
         private readonly ISemesterSubjectService _semesterSubjectService;

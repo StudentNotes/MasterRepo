@@ -35,7 +35,16 @@
                 }
             </td>
             <td>
-                <button class="btn btn-danger">Duuuuzy guzik</button>
+                @Ajax.ActionLink("Usuń notatkę", "DeletePrivateNote", "Note",
+                     new { fileId = Model.UserNotesList[i].NoteId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

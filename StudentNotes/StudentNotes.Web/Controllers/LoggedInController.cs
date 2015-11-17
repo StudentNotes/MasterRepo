@@ -8,9 +8,11 @@ using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.JSON;
 using StudentNotes.Logic.ViewModels.LoggedIn;
 using StudentNotes.Repositories.DbModels;
+using StudentNotes.Web.Filters;
 
 namespace StudentNotes.Web.Controllers
 {
+    [SessionFilter]
     public class LoggedInController : Controller
     {
         private readonly ISchoolService _schoolService;

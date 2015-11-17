@@ -18,7 +18,7 @@ namespace StudentNotes.Repositories.DbModels
 
         public int FileId { get; set; }
 
-        [StringLength(30)]
+        [StringLength(100)]
         public string Name { get; set; }
 
         [StringLength(40)]

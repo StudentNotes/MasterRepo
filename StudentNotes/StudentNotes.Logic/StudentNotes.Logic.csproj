@@ -116,6 +116,7 @@
     <Compile Include="ViewModels\JSON\UniversityJson.cs" />
     <Compile Include="ViewModels\LoggedIn\MyUniversitiesViewModel.cs" />
     <Compile Include="ViewModels\LoggedIn\NavbarSideViewModel.cs" />
+    <Compile Include="ViewModels\University\SemesterSubjectNoteViewModel.cs" />
     <Compile Include="ViewModels\Validation\FormInputValidator.cs" />
   </ItemGroup>
   <ItemGroup>

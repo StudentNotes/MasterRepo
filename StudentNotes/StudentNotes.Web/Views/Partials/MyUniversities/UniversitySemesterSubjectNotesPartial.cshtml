@@ -1,6 +1,6 @@
 ﻿@*Moje Uczelnie -> Konkretna Uczelnia -> Konkretny semestr -> Konkretny przedmiot -> Widok na poszczególne notatki*@
 @using StudentNotes.Logic.LogicModels
-@model List<StudentNotes.Logic.LogicModels.Note>
+@model StudentNotes.Logic.ViewModels.University.SemesterSubjectNoteViewModel
 
 <table class="table table-striped">
     <thead>
@@ -14,25 +14,34 @@
             <th></th>
         </tr>
     </thead>
-    @for (int i = 0; i < Model.Count; i++)
+    @for (int i = 0; i < Model.NoteList.Count; i++)
     {
         <tr>
             <td>@(i + 1)</td>
             <td>
-                <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model[i].Category)" style="max-height: 34px;" />
-                @Model[i].Name
+                <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.NoteList[i].Category)" style="max-height: 34px;" />
+                @Model.NoteList[i].Name
             </td>
-            <td>@Model[i].Category</td>
-            <td>@Model[i].Size</td>
-            <td>@Model[i].UploadDate.ToString()</td>
+            <td>@Model.NoteList[i].Category</td>
+            <td>@Model.NoteList[i].Size</td>
+            <td>@Model.NoteList[i].UploadDate.ToString()</td>
             <td>
-                @foreach (var tag in @Model[i].Tags)
+                @foreach (var tag in @Model.NoteList[i].Tags)
                 {
                     <text>@tag,</text>
                 }
             </td>
             <td>
-                <button class="btn btn-danger">Duuuuzy guzik</button>
+                @Ajax.ActionLink("Usuń plik", "DeleteSemesterSubjectNote", "Note",
+               new { noteId = Model.NoteList[i].NoteId, semesterSubjectId = Model.SemesterSubjectId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

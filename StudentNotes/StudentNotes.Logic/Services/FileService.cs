@@ -25,9 +25,14 @@ namespace StudentNotes.Logic.Services
 
         public IEnumerable<File> GetPrivateFiles(int userId)
         {
-            var privateFiles = _fileRepository.GetMany(f => f.UserId == userId);
+            var allUserFiles = _fileRepository.GetMany(f => f.UserId == userId).ToList();
+            var allUserFileIds = allUserFiles.Select(f => f.FileId).ToList();
 
-            return privateFiles;
+            var semesterSubjectFiles = _semesterSubjectFileRepository.GetMany(ss => allUserFileIds.Contains(ss.FileId)).Select(f => f.FileId).ToList();
+
+            allUserFiles.RemoveAll(file => semesterSubjectFiles.Contains(file.FileId));
+
+            return allUserFiles;
         }
 
         public IEnumerable<File> GetFilesBySemesterSubjectId(int semesterSubjectId)
@@ -49,6 +54,17 @@ namespace StudentNotes.Logic.Services
                 select f;
 
             return userFiles;
+        }
+
+        public IEnumerable<File> GetSharedUserFiles(int userId)
+        {
+            var sharedFiles = _fileRepository.GetMany(u => u.UserId == userId && u.IsShared == false);
+            return sharedFiles;
+        }
+
+        public File GetFileById(int fileId)
+        {
+            return _fileRepository.GetById(fileId);
         }
 
         public void SaveFile()

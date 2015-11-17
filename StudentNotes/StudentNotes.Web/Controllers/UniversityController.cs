@@ -10,10 +10,13 @@ using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.LoggedIn;
+using StudentNotes.Logic.ViewModels.University;
 using StudentNotes.Repositories.DbModels;
+using StudentNotes.Web.Filters;
 
 namespace StudentNotes.Web.Controllers
 {
+    [SessionFilter]
     public class UniversityController : Controller
     {
         private readonly ISchoolService _schoolService;
@@ -130,15 +133,16 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult ShowNotes(int semesterSubjectId)
         {
-            //  Dodać kryterium wyszukiwwania, któorym jest id użytkownika, bo teraz można wyświetlić wszystkie pliki, które należą do danego serwisu
-            List<Note> notes = new List<Note>();
+            SemesterSubjectNoteViewModel model = new SemesterSubjectNoteViewModel();
+
             var files = _fileService.GetSemesterSubjectFilesByUserId(semesterSubjectId, (int)Session["CurrentUserId"]).ToList();
             foreach (var file in files)
             {
-                notes.Add(new Note(file));
+                model.NoteList.Add(new Note(file));
             }
+            model.SemesterSubjectId = semesterSubjectId;
 
-            return PartialView("~/Views/Partials/MyUniversities/UniversitySemesterSubjectNotesPartial.cshtml", notes);
+            return PartialView("~/Views/Partials/MyUniversities/UniversitySemesterSubjectNotesPartial.cshtml", model);
         }
         
     }

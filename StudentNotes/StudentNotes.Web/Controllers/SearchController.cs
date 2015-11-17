@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using StudentNotes.Logic.ServiceInterfaces;
+using StudentNotes.Web.Filters;
 
 namespace StudentNotes.Web.Controllers
 {
+    [SessionFilter]
     public class SearchController : Controller
     {
         private readonly ISchoolService _schoolService;
