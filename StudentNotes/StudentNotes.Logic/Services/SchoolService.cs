@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.LoggedIn;
 using StudentNotes.Repositories.DbModels;
@@ -20,12 +21,13 @@ namespace StudentNotes.Logic.Services
         private readonly ISemesterRepository _semesterRepository;
         private readonly ISemesterSubjectRepository _semesterSubjectRepository;
         private readonly ISemesterUserRepository _semesterUserRepository;
+        private readonly IUserRepository _userRepository;
 
         private readonly IUnitOfWork _unitOfWork;
 
         public SchoolService(ISchoolRepository schoolRepository,
             IUserVisitedSchoolRepository userVisitedSchoolRepository, IGradeRepository gradeRepository, IStudySubjectRepository studySubjectRepository, ISemesterRepository semesterRepository, 
-            ISemesterSubjectRepository semesterSubjectRepository, ISemesterUserRepository semesterUserRepository, IUnitOfWork unitOfWork)
+            ISemesterSubjectRepository semesterSubjectRepository, ISemesterUserRepository semesterUserRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _schoolRepository = schoolRepository;
             _userVisitedSchoolRepository = userVisitedSchoolRepository;
@@ -34,6 +36,7 @@ namespace StudentNotes.Logic.Services
             _semesterRepository = semesterRepository;
             _semesterSubjectRepository = semesterSubjectRepository;
             _semesterUserRepository = semesterUserRepository;
+            _userRepository = userRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -246,6 +249,30 @@ namespace StudentNotes.Logic.Services
         public IEnumerable<Semester> GetSemestersByStudySubjectId(int studySubjectId)
         {
             return _semesterRepository.GetMany(s => s.StudySubjectId == studySubjectId);
+        }
+
+        public IEnumerable<SecureUserModel> GetUsersBySemesterId(int semesterId)
+        {
+            var userIds =
+                _semesterUserRepository.GetMany(su => su.SemesterId == semesterId).Select(u => u.UserId).ToList();
+            var users = _userRepository.GetMany(u => userIds.Contains(u.UserId));
+
+            List<SecureUserModel> secureUserList = users.Select(user => new SecureUserModel()
+            {
+                UserId = user.UserId,
+                Email = user.Email,
+                Name = user.UserInfo.Name,
+                LastName = user.UserInfo.LastName,
+                CreatedOn = user.UserInfo.CreatedOn,
+                City = user.UserInfo.City,
+                Country = user.UserInfo.Country,
+                PhoneNumber = user.UserInfo.PhoneNumber,
+                PostalCode = user.UserInfo.PostalCode,
+                Profession = user.UserInfo.Profession,
+                Street = user.UserInfo.Street
+            }).ToList();
+
+            return secureUserList;
         }
 
         public IEnumerable<SemesterSubject> GetSemesterSubjectsBySemesterId(int semesterId)

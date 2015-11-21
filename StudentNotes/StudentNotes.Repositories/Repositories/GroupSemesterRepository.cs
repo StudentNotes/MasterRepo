@@ -10,7 +10,7 @@ using StudentNotes.Repositories.RepositoryInterfaces;
 
 namespace StudentNotes.Repositories.Repositories
 {
-    public class GroupSemesterRepository : RepositoryBase<GroupSemester>, IGroupSemesterRepositorycs
+    public class GroupSemesterRepository : RepositoryBase<GroupSemester>, IGroupSemesterRepository
     {
         public GroupSemesterRepository(IDbFactory dbFactory) : base(dbFactory)
         {

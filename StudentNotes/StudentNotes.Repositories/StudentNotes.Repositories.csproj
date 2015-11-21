@@ -98,7 +98,7 @@
     <Compile Include="RepositoryInterfaces\IFileTagPatternRepository.cs" />
     <Compile Include="RepositoryInterfaces\IGradeRepository.cs" />
     <Compile Include="RepositoryInterfaces\IGroupRepository.cs" />
-    <Compile Include="RepositoryInterfaces\IGroupSemesterRepositorycs.cs" />
+    <Compile Include="RepositoryInterfaces\IGroupSemesterRepository.cs" />
     <Compile Include="RepositoryInterfaces\IGroupUserRepository.cs" />
     <Compile Include="RepositoryInterfaces\ISchoolRepository.cs" />
     <Compile Include="RepositoryInterfaces\ISemesterRepository.cs" />

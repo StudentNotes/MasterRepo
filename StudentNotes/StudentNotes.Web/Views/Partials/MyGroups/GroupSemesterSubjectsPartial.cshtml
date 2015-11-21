@@ -1,0 +1,51 @@
+﻿@* MOJE GRYPY -> KONKRETNA GRUPA -> KONKRENTY SEMESTR -> WSZYSTKIE PRZEDMIOTY NA SEMESTRZE*@
+@model StudentNotes.Logic.ViewModels.Group.GroupSemesterSubjectsViewModel
+
+<div class="col-xs-12 folder-view">
+    <ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink(Model.GroupName, "ShowGroupSemesters", "Group",
+                new {groupId = Model.GroupId, groupName = Model.GroupName},
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(Model.SemesterName, "ShowSubjects", "Group",
+                new { semesterId = Model.SemesterId, groupId = Model.GroupId, semesterName = Model.SemesterName, groupName = Model.GroupName },
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+    </ol>
+    @foreach (var item in Model.SemesterSubjectList)
+    {
+        <div class="col-sm-2 col-xs-1 folder">
+            <img src="~/Resources/folder-symbol.jpg" class="img-responsive img-rounded"/>
+            <div class="folder-name">
+
+                @Ajax.ActionLink(item.Name, "ShowGroupNotes", "Group",
+                    new {semesterSubjectId = item.SemesterSubjectId, semesterId = Model.SemesterId, groupId = Model.GroupId},
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new {@class = "folder-name"})
+            </div>
+        </div>
+    }
+</div>
+

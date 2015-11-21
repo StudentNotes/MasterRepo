@@ -37,9 +37,16 @@
             <ul id="my-groups" class="collapse">
                 @foreach (var group in Model.GroupList)
                 {
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-dashboard"></i>@group.Value</a>
-                    </li>
+                    @Ajax.ActionLink(group.Value, "ShowGroupSemesters", "Group",
+                        new { groupId = group.Key, groupName = group.Value},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "fa fa-fw fa-dashboard" })
                 }
             </ul>
         </li>

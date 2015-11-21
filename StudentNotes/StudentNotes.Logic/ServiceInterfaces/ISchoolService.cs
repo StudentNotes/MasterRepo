@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ViewModels.LoggedIn;
 using StudentNotes.Repositories.DbModels;
 
@@ -50,8 +51,9 @@ namespace StudentNotes.Logic.ServiceInterfaces
         #region SemesterServices
 
         IEnumerable<Semester> GetSemestersByStudySubjectId(int studySubjectId);
-        
-        #endregion
+        IEnumerable<SecureUserModel> GetUsersBySemesterId(int semesterId);
+
+            #endregion
 
         #region SemesterSubjectServices
 

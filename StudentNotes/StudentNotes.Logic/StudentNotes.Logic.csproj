@@ -83,6 +83,7 @@
     <Compile Include="LogicInterfaces\INote.cs" />
     <Compile Include="LogicModels\CategorySelector.cs" />
     <Compile Include="LogicModels\Note.cs" />
+    <Compile Include="LogicModels\SecureUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\IFileService.cs" />
     <Compile Include="ServiceInterfaces\IGroupService.cs" />
@@ -108,14 +109,21 @@
     <Compile Include="ViewModels\Common\UniversityViewModel.cs" />
     <Compile Include="ViewModels\File\UserNotesViewModel.cs" />
     <Compile Include="ViewModels\File\FileUploadViewModel.cs" />
+    <Compile Include="ViewModels\Group\GroupSemestersModel.cs" />
+    <Compile Include="ViewModels\Group\GroupSemesterSubjectsViewModel.cs" />
+    <Compile Include="ViewModels\Group\GroupSubjectNotesViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeViewModel.cs" />
     <Compile Include="ViewModels\Common\UserViewModel.cs" />
+    <Compile Include="ViewModels\JSON\SearchJson.cs" />
     <Compile Include="ViewModels\JSON\SemesterJson.cs" />
     <Compile Include="ViewModels\JSON\SemesterSubjectJson.cs" />
     <Compile Include="ViewModels\JSON\StudySubjectJson.cs" />
     <Compile Include="ViewModels\JSON\UniversityJson.cs" />
     <Compile Include="ViewModels\LoggedIn\MyUniversitiesViewModel.cs" />
     <Compile Include="ViewModels\LoggedIn\NavbarSideViewModel.cs" />
+    <Compile Include="ViewModels\ManageGroups\AddUserViewModel.cs" />
+    <Compile Include="ViewModels\ManageGroups\GroupDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ManageGroups\ManageGroupViewModel.cs" />
     <Compile Include="ViewModels\University\SemesterSubjectNoteViewModel.cs" />
     <Compile Include="ViewModels\Validation\FormInputValidator.cs" />
   </ItemGroup>

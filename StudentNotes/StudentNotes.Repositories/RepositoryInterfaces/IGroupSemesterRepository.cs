@@ -8,7 +8,7 @@ using StudentNotes.Repositories.Infrastructure;
 
 namespace StudentNotes.Repositories.RepositoryInterfaces
 {
-    public interface IGroupSemesterRepositorycs : IRepository<GroupSemester>
+    public interface IGroupSemesterRepository : IRepository<GroupSemester>
     {
     }
 }

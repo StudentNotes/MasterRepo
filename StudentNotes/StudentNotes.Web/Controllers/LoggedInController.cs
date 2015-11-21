@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
+using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.JSON;
@@ -52,9 +54,9 @@ namespace StudentNotes.Web.Controllers
         public JsonResult GetSchoolsJson()
         {
             var schools = _schoolService.GetByUser((int) Session["CurrentUserId"]).ToList();
-            var universities = schools.Select(school => new UniversityJson()
+            var universities = schools.Select(school => new SearchJson()
             {
-                UniversityId = school.SchoolId, UniversityName = school.Name
+                FieldId = school.SchoolId, FieldName = school.Name
             }).ToList();
 
             return Json(universities, JsonRequestBehavior.AllowGet);
@@ -65,14 +67,13 @@ namespace StudentNotes.Web.Controllers
         {
             MyUniversitiesViewModel tmpModel = _schoolService.GetStudySubjectsBySchoolAndUserId(
                 int.Parse(universityId), (int) Session["CurrentUserId"]);
-            List<StudySubjectJson> studySubjects = new List<StudySubjectJson>();
+            List<SearchJson> studySubjects = new List<SearchJson>();
             for (int i = 0; i < tmpModel.StudySubjects.Count; i++)
             {
-                studySubjects.Add(new StudySubjectJson()
+                studySubjects.Add(new SearchJson()
                 {
-                    StudySubjectId = tmpModel.StudySubjects[i].StudySubjectId,
-                    StudySubjectName = tmpModel.StudySubjects[i].Name,
-                    Grade = tmpModel.Grades[i].Year
+                    FieldId = tmpModel.StudySubjects[i].StudySubjectId,
+                    FieldName = tmpModel.Grades[i].Year + " - "  + tmpModel.StudySubjects[i].Name
                 });
             }
 
@@ -83,13 +84,13 @@ namespace StudentNotes.Web.Controllers
         public JsonResult GetSemestersJson(string studySubjectId)
         {
             List<Semester> semesterList = _schoolService.GetSemestersByStudySubjectId(int.Parse(studySubjectId)).ToList();
-            List<SemesterJson> semesters = new List<SemesterJson>();
+            List<SearchJson> semesters = new List<SearchJson>();
             foreach (var semester in semesterList)
             {
-                semesters.Add(new SemesterJson()
+                semesters.Add(new SearchJson()
                 {
-                    SemesterId = semester.SemesterId,
-                    SemesterNumber = semester.SemesterNumber.ToString()
+                    FieldId = semester.SemesterId,
+                    FieldName = "Semestr " + semester.SemesterNumber.ToString()
                 });
             }
             return Json(semesters, JsonRequestBehavior.AllowGet);
@@ -101,17 +102,85 @@ namespace StudentNotes.Web.Controllers
             List<SemesterSubject> semesterSubjectList =
                 _schoolService.GetSemesterSubjectsBySemesterId(int.Parse(semesterId)).OrderBy(g => g.Name).ToList();
 
-            List<SemesterSubjectJson> semesterSubjects = new List<SemesterSubjectJson>();
+            List<SearchJson> semesterSubjects = new List<SearchJson>();
 
             foreach (var semesterSubject in semesterSubjectList)
             {
-                semesterSubjects.Add(new SemesterSubjectJson()
+                semesterSubjects.Add(new SearchJson()
                 {
-                    SemesterSubjectId = semesterSubject.SemesterSubjectId,
-                    SemesterSubjectName = semesterSubject.Name
+                    FieldId = semesterSubject.SemesterSubjectId,
+                    FieldName = semesterSubject.Name
                 });
             }
             return Json(semesterSubjects, JsonRequestBehavior.AllowGet);
-        } 
+        }
+
+        [HttpGet]
+        public JsonResult GetSemesterUsersJson(int semesterId)
+        {
+            var secureUsers = _schoolService.GetUsersBySemesterId(semesterId).ToList().OrderBy(u => u.LastName).ToList();
+            var me = secureUsers.First(u => u.UserId == (int) Session["CurrentUserId"]);
+            secureUsers.Remove(me);
+            List<SearchJson> users = new List<SearchJson>();
+
+            foreach (var secureUser in secureUsers)
+            {
+                string fieldName;
+                if (secureUser.Name.IsEmpty() || secureUser.LastName.IsEmpty())
+                {
+                    fieldName = secureUser.Email;
+                }
+                else
+                {
+                    fieldName = string.Format("{0} {1}", secureUser.Name, secureUser.LastName);
+                }
+
+                users.Add(new SearchJson()
+                {
+                    FieldId = secureUser.UserId,
+                    FieldName = fieldName
+                });
+            }
+            return Json(users, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetGroupsJson()
+        {
+            var groups = _groupService.GetUserGroups((int) Session["CurrentUserId"]).ToList();
+            List<SearchJson> resultList = groups.Select(@group => new SearchJson()
+            {
+                FieldId = @group.GroupId, 
+                FieldName = @group.Name
+            }).ToList();
+
+            return Json(resultList, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetGroupSemestersJson(int groupId)
+        {
+            var semesters = _groupService.GetGroupSemesters(groupId);
+            List<SearchJson> resultList = semesters.Select(semester => new SearchJson()
+            {
+                FieldId = semester.SemesterId,
+                FieldName = string.Format("Semestr {0}", semester.SemesterNumber)
+            }).ToList();
+
+            return Json(resultList, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetGroupSemesterSubjectsJson(int semesterId)
+        {
+            var semesterSubjects = _schoolService.GetSemesterSubjectsBySemesterId(semesterId);
+            List<SearchJson> resultList = semesterSubjects.Select(subject => new SearchJson()
+            {
+                FieldId = subject.SemesterSubjectId,
+                FieldName = subject.Name
+            }).ToList();
+
+            return Json(resultList, JsonRequestBehavior.AllowGet);
+        }
     }
 }

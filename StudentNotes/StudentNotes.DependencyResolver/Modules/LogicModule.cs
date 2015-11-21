@@ -29,7 +29,7 @@ namespace DependencyResolver.Modules
             Bind<IFileTagPatternRepository>().To<FileTagPatternRepository>();
             Bind<IGradeRepository>().To<GradeRepository>();
             Bind<IGroupRepository>().To<GroupRepository>();
-            Bind<IGroupSemesterRepositorycs>().To<GroupSemesterRepository>();
+            Bind<IGroupSemesterRepository>().To<GroupSemesterRepository>();
             Bind<IGroupUserRepository>().To<GroupUserRepository>();
             Bind<ISchoolRepository>().To<SchoolRepository>();
             Bind<ISemesterRepository>().To<SemesterRepository>();

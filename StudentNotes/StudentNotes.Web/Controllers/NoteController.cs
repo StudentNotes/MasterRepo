@@ -71,5 +71,29 @@ namespace StudentNotes.Web.Controllers
 
             return RedirectToAction("ShowNotes", "University", new { semesterSubjectId });
         }
+
+        [HttpPost]
+        public ActionResult ShareNoteToGroup(int fileId, int groupId, int semesterSubjectId)
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult ShareNoteToUser(int fileId, int userId = 0, string userEmail = "")
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult RemoveShareToGroup(int fileId, int groupId, int semesterSubjectId)
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult RemoveShareToUser(int fileId, int userId)
+        {
+            return null;
+        }
     }
 }

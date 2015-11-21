@@ -12,13 +12,33 @@ namespace StudentNotes.Logic.Services
 {
     public class SemesterSubjectService : ISemesterSubjectService
     {
+        private readonly ISemesterRepository _semesterRepository;
         private readonly ISubjectRepository _subjectRepository;
+        private readonly ISemesterSubjectRepository _semesterSubjectRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SemesterSubjectService(ISubjectRepository subjectRepository, IUnitOfWork unitOfWork)
+        public SemesterSubjectService(ISemesterRepository semesterRepository, ISubjectRepository subjectRepository, ISemesterSubjectRepository semesterSubjectRepository, IUnitOfWork unitOfWork)
         {
+            _semesterRepository = semesterRepository;
             _subjectRepository = subjectRepository;
+            _semesterSubjectRepository = semesterSubjectRepository;
             _unitOfWork = unitOfWork;
+        }
+
+        public Semester GetSemesterById(int semesterId)
+        {
+            return _semesterRepository.GetById(semesterId);
+        }
+
+        public SemesterSubject GetSemesterSubjectById(int semesterSubjectId)
+        {
+            return _semesterSubjectRepository.GetById(semesterSubjectId);
+        }
+
+        public IEnumerable<SemesterSubject> GetSemesterSubjects(int semesterId)
+        {
+            var semesterSubjects = _semesterSubjectRepository.GetMany(ss => ss.SemesterId == semesterId);
+            return semesterSubjects;
         }
 
         public IEnumerable<Subject> GetAllSubjects()

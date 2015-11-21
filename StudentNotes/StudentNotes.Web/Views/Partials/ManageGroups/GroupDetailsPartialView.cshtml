@@ -1,0 +1,101 @@
+﻿@model StudentNotes.Logic.ViewModels.ManageGroups.GroupDetailsViewModel
+
+<div class="col-xs-12">
+    <ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink("Zarządzanie grupami", "ManageGroups", "Management",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(string.Format("{0} - szczegóły", Model.GroupName), "GroupDetails", "Management",
+                new { groupId = Model.GroupId },
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+    </ol>
+
+    <div class="col-sm-3">
+        <img class="img-thumbnail img-responsive" src="~/Resources/groupIcon.png" alt="StudentNotes group icon" />
+    </div>
+    <div class="col-sm-9">
+        <h3>@Model.GroupName</h3>
+        <p>@Model.GroupDescription</p>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Groupę utworzono</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">@Model.CreatedOn</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <h4>Administrator groupy</h4>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Imię</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@Model.Admin.Name</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Nazwisko</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@Model.Admin.LastName</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Kontakt</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@Model.Admin.Email</p>
+            </div>
+        </div>
+    </div>
+
+    @if ((int)Session["CurrentUserId"] == Model.Admin.UserId)
+    {
+        using (Ajax.BeginForm(
+             "UpdateGroup", "Management",
+             new { groupId = Model.GroupId },
+             new AjaxOptions()
+             {
+                 UpdateTargetId = "page-content",
+                 HttpMethod = "POST",
+                 InsertionMode = InsertionMode.Replace
+             },
+             new { @class = "form-horizontal" }
+             )
+           )
+        {
+            <h4>Edytuj nazwę i opis</h4>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Nazwa</label>
+                <div class="col-sm-10">
+                    <input type="text" name="groupName" class="form-control" value="@Model.GroupName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Opis</label>
+                <div class="col-sm-10">
+                    <textarea rows="5" name="groupDescription" style="width: 100%">@Model.GroupDescription</textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info">Zapisz zmiany</button>
+        
+        }
+    }
+</div>
+

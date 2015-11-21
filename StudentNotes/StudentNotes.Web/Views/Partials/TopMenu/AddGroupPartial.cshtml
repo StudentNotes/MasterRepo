@@ -7,45 +7,56 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h2 class="modal-title" id="myModalLabel">@ResourceKeyResolver.ConstAddGroup</h2>
             </div>
-            @using (Html.BeginForm("SendFile", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <div class="modal-body">
-                    <p>
-                        <span class="label col-xs-12">Wybierz plik z dysku:</span><br />
-                        <span id="filePath" class="col-xs-7 label file-path">Nazwa pliku</span>
-                        <span class="btn btn-default btn-file col-xs-offset-1 col-xs-4">
-                            Przeglądaj...
-                            <input id="fileInput" type="file" multiple name="files" onchange="fileSelected()">
-                        </span>
-                    </p>
-                    <br /><br />
-                    <p>
-                        <span class="label col-xs-12">Zdefiniuj typ pliku:</span><br />
-                        @Html.RadioButton("fileType", "Private", true, new { @class = "file-radio-button" }) prywatny<br />
-                        @Html.RadioButton("fileType", "University", new { @class = "file-radio-button" }) uczelniany/szkolny
-                    </p>
-                    <br /><br />
-                    <p>
-                        <span class="label col-xs-12">Dodaj tagi do pliku</span><br />
-                        <div class="col-xs-12">
-                            <div class="label col-xs-6">
-                                Tag1, Tag2, Tag3
-                            </div>
-                            <div class="label col-xs-6">
-                                <div class="label">Dodaj tag</div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Nazwa grupy:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <input class="form-control" type="text" name="groupName" id="groupNameProp"/>
                             </div>
                         </div>
-                    </p>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Opis grupy:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <textarea class="form-control" rows="5" type="text" name="groupDescription"></textarea>
+                            </div>
+                        </div>
+
+                        <span class="label col-xs-12">Pod jaki semestr chcesz podpiąć grupę?</span><br />
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Uczelnia:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select id="universitiesAddGroupSelect" class="form-control"></select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Kierunek:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select id="studySubjectsAddGroupSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Semestr:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select id="semestersAddGroupSelect" class="form-control"></select>
+                            </div>
+                            <input id="semesterIdForGroup" type="text" name="semesterId" value="" hidden />
+                        </div>
+                    </div>
                     <br /><br />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
-                    <input type="submit" name="Wyślij!" class="btn btn-primary" />
+                    <input id="createGroupButton" type="submit" name="Utwórz grupę!" class="btn btn-primary" />
                 </div>
             }
         </div>
     </div>
 </div>
-
 

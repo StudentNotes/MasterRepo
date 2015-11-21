@@ -35,6 +35,17 @@
         <ul class="dropdown-menu" aria-labelledby="dropdown1" style="float: right;">
             <li><a href="#">@ResourceKeyResolver.ConstMyAccount</a></li>
             <li><a href="#">@ResourceKeyResolver.ConstOptions</a></li>
+            <li>
+                @Ajax.ActionLink("Zarządzaj grupami", "ManageGroups", "Management", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        }
+                        )
+            </li>
             @if (Model.IsServiceAdmin)
             {
                 <li>

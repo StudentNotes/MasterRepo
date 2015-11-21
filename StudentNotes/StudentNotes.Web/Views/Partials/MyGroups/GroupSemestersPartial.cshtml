@@ -1,0 +1,42 @@
+﻿@*Moje Grupy -> Konkretna grupa -> Wszystkie semestry w grupie*@
+@model StudentNotes.Logic.ViewModels.Group.GroupSemestersModel
+
+<div class="col-xs-12 folder-view">
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(Model.GroupName, "ShowGroupSemesters", "Group",
+                    new { groupId = Model.GroupId, groupName = Model.GroupName },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new {})
+        </li>
+    </ol>
+
+    @foreach (var item in Model.SemesterList)
+    {
+        <div class="col-sm-2 col-xs-1 folder">
+            <img src="~/Resources/folder-symbol.jpg" class="img-responsive img-rounded"/>
+            <div class="folder-name">
+
+                @Ajax.ActionLink(string.Format("Semestr {0}", item.SemesterNumber), "ShowSubjects", "Group",
+                 new { semesterId = item.SemesterId, groupId = Model.GroupId, semesterName = string.Format("Semestr {0}", item.SemesterNumber), groupName = Model.GroupName},
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new {@class = "folder-name"})
+
+
+            </div>
+        </div>
+    }
+</div>
+

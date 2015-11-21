@@ -256,6 +256,33 @@
         text-align: left;
     }
 }*/
+
+/****************************************    ADD NEW GROUP MODAL    *********************************************/
+#addGroupModal .modal-content{
+    background-color: #262626;
+    border-color: #fdd017;
+    color: #fdd017;
+}
+#addGroupModal .modal-header {
+    text-align: center;
+    border-color: #fdd017;
+}
+#addGroupModal button span{
+    color: #fdd017;
+}
+#addGroupModal .modal-body {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#addGroupModal .modal-body .label{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    text-align: left;
+    color: #fdd017;
+    font-weight: bold;
+}
+
 /****************************************   SUBJECT MANAGEMENT PARTIAL  *****************************************/
 #subjectManagement {
     margin-top: 2rem;
@@ -339,7 +366,7 @@
     padding-right: 17px;
     color: #d43f3a;
 }
-/*********************************************************************************************************/
+/****************************************   GRID TREE STRUCTURE VIEW    *****************************************************************/
 .folder-view .folder {
     background-color: #000000;
     border: 1px solid #fdd017;
@@ -359,3 +386,36 @@
     color: #fdd017;
     font-size: 1vw;
 }
+
+/***************************************    SHARE NOTE MODAL    **********************************************************************/
+.share-note-modal .modal-content {
+    background-color: #262626;
+    color: #fdd017;
+    border-color: #fdd017;
+}
+.share-note-modal .modal-header {
+    text-align: center;
+    border-color: #fdd017;
+}
+.share-note-modal .modal-body .label {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    text-align: left;
+    color: #fdd017;
+    font-weight: bold;
+}
+
+/*#addGroupModal  {
+    
+}
+#addGroupModal button span{
+    color: #fdd017;
+}
+#addGroupModal .modal-body {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#addGroupModal {
+    
+}*/

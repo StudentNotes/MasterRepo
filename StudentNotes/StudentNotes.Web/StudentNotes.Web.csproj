@@ -187,6 +187,7 @@
     <Content Include="Resources\file-sharing.jpg" />
     <Content Include="Resources\folder-symbol.jpg" />
     <Content Include="Resources\graphics.jpg" />
+    <Content Include="Resources\groupIcon.png" />
     <Content Include="Resources\mobile_devices.png" />
     <Content Include="Resources\otherFile.jpg" />
     <Content Include="Resources\presentationFile.jpg" />
@@ -202,6 +203,7 @@
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\customScripts.js" />
     <Content Include="Scripts\freelancer.js" />
+    <Content Include="Scripts\filterJoinedUniversity.js" />
     <Content Include="Scripts\jqBootstrapValidation.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -210,6 +212,7 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\shareNoteScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -223,6 +226,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggedInController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
@@ -257,7 +261,7 @@
     <Content Include="Views\Partials\MyUniversities\UniversitySemestersPartial.cshtml" />
     <Content Include="Views\Partials\MyUniversities\UniversitySemesterSubjectsPartial.cshtml" />
     <Content Include="Views\Partials\MyUniversities\UniversitySemesterSubjectNotesPartial.cshtml" />
-    <Content Include="Views\Partials\MyGroups\GroupSubjectsPartial.cshtml" />
+    <Content Include="Views\Partials\MyGroups\GroupSemestersPartial.cshtml" />
     <Content Include="Views\Partials\Account\Register.cshtml" />
     <Content Include="Views\Partials\TopMenu\UploadFilePartial.cshtml" />
     <Content Include="Views\Partials\TopMenu\AddUniversityPartial.cshtml" />
@@ -275,6 +279,10 @@
     <Content Include="Views\Partials\Management\TakeSemesterAssignSubject.cshtml" />
     <Content Include="Views\Partials\Management\AssignSemesterSubjects.cshtml" />
     <Content Include="Views\Partials\MyUniversities\UniversitySubjectsPartial.cshtml" />
+    <Content Include="Views\Partials\MyGroups\GroupSemesterSubjectsPartial.cshtml" />
+    <Content Include="Views\Partials\ManageGroups\ManageGroupsPartial.cshtml" />
+    <Content Include="Views\Partials\ManageGroups\AddUsersPartial.cshtml" />
+    <Content Include="Views\Partials\ManageGroups\GroupDetailsPartialView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -285,6 +293,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Views\Group\" />
     <Folder Include="Views\Management\" />
     <Folder Include="Views\Search\" />
     <Folder Include="Views\University\" />

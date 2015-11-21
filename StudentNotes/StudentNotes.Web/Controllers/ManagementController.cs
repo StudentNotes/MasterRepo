@@ -4,8 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using StudentNotes.Logic.Consts;
+using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Common;
+using StudentNotes.Logic.ViewModels.Home;
+using StudentNotes.Logic.ViewModels.ManageGroups;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Web.Filters;
 
@@ -15,11 +19,13 @@ namespace StudentNotes.Web.Controllers
     public class ManagementController : Controller
     {
         private readonly ISemesterSubjectService _semesterSubjectService;
+        private readonly IGroupService _groupService;
         private readonly ISchoolService _schoolService;
 
-        public ManagementController(ISemesterSubjectService studySubjectService, ISchoolService schoolService)
+        public ManagementController(ISemesterSubjectService studySubjectService, IGroupService groupService, ISchoolService schoolService)
         {
             _semesterSubjectService = studySubjectService;
+            _groupService = groupService;
             _schoolService = schoolService;
         }
 
@@ -311,6 +317,145 @@ namespace StudentNotes.Web.Controllers
             SubjectViewModel model = new SubjectViewModel(_semesterSubjectService.GetAllSubjects().OrderBy(s => s.Name).ToList());
 
             return PartialView("~/Views/Partials/Management/ManageSubjects.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult ManageGroups()
+        {
+            List<ManageGroupViewModel> modelList = new List<ManageGroupViewModel>();
+            var groups = _groupService.GetAdminGroups((int) Session["CurrentUserId"]).ToList();
+            foreach (var group in groups)
+            {
+                var groupSemesters = _groupService.GetGroupSemesters(group.GroupId).ToList();
+                string semesters = "";
+                foreach (var semester in groupSemesters)
+                {
+                    semesters += semester.SemesterNumber + "; ";
+                }
+
+                modelList.Add(new ManageGroupViewModel()
+                {
+                    GroupId = group.GroupId,
+                    GroupName = group.Name,
+                    MemberNumber = _groupService.GetAllGroupUsers(group.GroupId).Count,
+                    Semesters = semesters,
+                    StudySubject = _groupService.GetStudySubjectByGroupId(group.GroupId).Name
+                });
+            }
+
+            return PartialView("~/Views/Partials/ManageGroups/ManageGroupsPartial.cshtml", modelList);
+        }
+
+        [HttpGet]
+        public ActionResult AddUsers(int groupId)
+        {
+            AddUserViewModel model = new AddUserViewModel();
+
+            var group = _groupService.GetGroupById(groupId);
+            var groupUsers = _groupService.GetAllGroupUsers(groupId).ToList();
+            var semesterIds = _groupService.GetGroupSemesters(groupId).Select(s => s.SemesterId).ToList();
+            List<SecureUserModel> allUsers = new List<SecureUserModel>();
+            foreach (var semesterId in semesterIds)
+            {
+                var tmpSecureModel = _schoolService.GetUsersBySemesterId(semesterId);
+                allUsers.AddRange(tmpSecureModel);
+            }
+            allUsers = allUsers.Distinct().ToList();
+
+            RemoveAddedUsers(ref allUsers, ref groupUsers);
+
+            model.GroupId = group.GroupId;
+            model.GroupName = group.Name;
+            model.GroupUsers = groupUsers;
+            model.SemesterUsers = allUsers;
+
+
+            return PartialView("~/Views/Partials/ManageGroups/AddUsersPartial.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveUserFromGroup(int userId, int groupId)
+        {
+            var group = _groupService.GetGroupById(groupId);
+            if (group.AdminId == userId)
+            {
+                HomeViewModel model = new HomeViewModel();
+                model.LoginViewModel.ErrorList.Add("Can't delete the group admin", WebResponseCode.YouAreTheAdmin);
+                return View("~/Views/LoggedIn/Index.cshtml", model);
+            }
+
+            _groupService.RemoveUserFromGroup(userId, groupId);
+            _groupService.Commit();
+            return RedirectToAction("AddUsers", new{groupId});
+        }
+
+        [HttpPost]
+        public ActionResult AddUserToGroup(int userId, int groupId)
+        {
+            _groupService.AddUserToGroup(userId, groupId);
+            _groupService.Commit();
+            return RedirectToAction("AddUsers", new { groupId });
+        }
+
+        [HttpGet]
+        public ActionResult UserDetails(int userId)
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult DeleteGroup(int groupId)
+        {
+            _groupService.DeleteGroup(groupId);
+            _groupService.Commit();
+            return RedirectToAction("ManageGroups");
+        }
+
+        [HttpGet]
+        public ActionResult GroupDetails(int groupId)
+        {
+            var group = _groupService.GetGroupById(groupId);
+            var admin = _groupService.GetGroupAdminDetails(groupId);
+
+            GroupDetailsViewModel model = new GroupDetailsViewModel()
+            {
+                GroupId = group.GroupId,
+                GroupName = group.Name,
+                GroupDescription = group.Description,
+                CreatedOn = group.CreatedOn.ToString(),
+                Admin = admin
+            };
+            return PartialView("~/Views/Partials/ManageGroups/GroupDetailsPartialView.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult ChangeGroupPermissions(int userId, int groupId)
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult UpdateGroup(int groupId, string groupName, string groupDescription)
+        {
+            if (groupName.IsEmpty())
+            {
+                HomeViewModel model = new HomeViewModel();
+                model.LoginViewModel.ErrorList.Add("Can't delete the group admin", WebResponseCode.YouAreTheAdmin);
+                return View("~/Views/LoggedIn/Index.cshtml", model);
+            }
+            _groupService.UpdateGroup(groupName, groupDescription, groupId);
+            _groupService.Commit();
+
+            return RedirectToAction("GroupDetails", new {groupId});
+        }
+
+        private static void RemoveAddedUsers(ref List<SecureUserModel> semesterUsers, ref List<SecureUserModel> groupUsers)
+        {
+            foreach (var groupUser in groupUsers)
+            {
+                var userToDelete = semesterUsers.Find(u => u.UserId == groupUser.UserId);
+                semesterUsers.Remove(userToDelete);
+            }
         }
     }
 
