@@ -1,6 +1,7 @@
 ﻿@*Moje Notatki -> Udostępnione*@
+@using StudentNotes.Logic.Consts
 @using StudentNotes.Logic.LogicModels
-@model StudentNotes.Logic.ViewModels.File.UserNotesViewModel
+@model List<StudentNotes.Logic.ViewModels.File.SharedNotesViewModel>
 @{
     Layout = null;
 }
@@ -11,40 +12,38 @@
             <th>Lp.</th>
             <th>Nazwa</th>
             <th>Kategoria</th>
-            <th>Rozmiar</th>
-            <th>Data wstawienia</th>
-            <th>Tagi</th>
+            <th>Typ notatki</th>
             <th></th>
         </tr>
     </thead>
-    @for (int i = 0; i < Model.UserNotesList.Count; i++)
+    @for (int i = 0; i < Model.Count; i++)
     {
         <tr>
             <td>@(i + 1)</td>
             <td>
-                <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.UserNotesList[i].Category)" style="max-height: 34px;" />
-                @Model.UserNotesList[i].Name
+                <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model[i].Category)" style="max-height: 34px;" />
+                @Model[i].Name
             </td>
-            <td>@Model.UserNotesList[i].Category</td>
-            <td>@Model.UserNotesList[i].Size</td>
-            <td>@Model.UserNotesList[i].UploadDate.ToString()</td>
+            <td>@Model[i].Category</td>
+            @if (Model[i].Type == NoteType.Private)
+            {
+                <td>Prywatna</td>
+            }
+            else
+            {
+                <td>Uczelniana</td>
+            }
             <td>
-                @foreach (var tag in @Model.UserNotesList[i].Tags)
-                {
-                    <text>@tag,</text>
-                }
-            </td>
-            <td>
-                @Ajax.ActionLink("Usuń notatkę", "DeletePrivateNote", "Note",
-                     new { fileId = Model.UserNotesList[i].NoteId },
-                        new AjaxOptions()
-                        {
-                            UpdateTargetId = "page-content",
-                            HttpMethod = "POST",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        },
-                        new { @class = "btn btn-danger" })
+                @Ajax.ActionLink("Szczegóły udostępnienia", "SharedNoteDetails", "Note",
+                    new { fileId = Model[i].NoteId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { @class = "btn btn-info" })
             </td>
         </tr>
     }

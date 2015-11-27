@@ -82,6 +82,7 @@
     <Compile Include="Consts\WebResponseCode.cs" />
     <Compile Include="LogicInterfaces\INote.cs" />
     <Compile Include="LogicModels\CategorySelector.cs" />
+    <Compile Include="LogicModels\GroupBasics.cs" />
     <Compile Include="LogicModels\Note.cs" />
     <Compile Include="LogicModels\SecureUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="ViewModels\Common\SubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\UniversityGradeStudySubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\UniversityViewModel.cs" />
+    <Compile Include="ViewModels\File\SharedNotesViewModel.cs" />
     <Compile Include="ViewModels\File\UserNotesViewModel.cs" />
     <Compile Include="ViewModels\File\FileUploadViewModel.cs" />
     <Compile Include="ViewModels\Group\GroupSemestersModel.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="ViewModels\ManageGroups\AddUserViewModel.cs" />
     <Compile Include="ViewModels\ManageGroups\GroupDetailsViewModel.cs" />
     <Compile Include="ViewModels\ManageGroups\ManageGroupViewModel.cs" />
+    <Compile Include="ViewModels\ManageNotes\SharedNoteDetailsViewModel.cs" />
     <Compile Include="ViewModels\University\SemesterSubjectNoteViewModel.cs" />
     <Compile Include="ViewModels\Validation\FormInputValidator.cs" />
   </ItemGroup>

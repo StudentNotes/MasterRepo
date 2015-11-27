@@ -13,6 +13,9 @@ namespace StudentNotes.Logic.ServiceInterfaces
         Group GetGroupById(int groupId);
         StudySubject GetStudySubjectByGroupId(int groupId);
         SecureUserModel GetGroupAdminDetails(int groupId);
+        Semester GetSemesterBySemesterSubject(int semesterSubjectId);
+        GroupBasics GetGroupBasics(int groupId, int fileId);
+        List<GroupBasics> GetGroupsWithFileAccess(int fileId); 
 
         int AddGroup(string groupName, string description, int adminId, int semesterId);
         int UpdateGroup(string name, string description, int groupId);
@@ -38,6 +41,7 @@ namespace StudentNotes.Logic.ServiceInterfaces
         bool SemesterExists(int semesterId);
         bool GroupExists(int groupId);
         bool GroupInSemesterExists(string groupName, int semesterId);
+        bool SemesterSubjectExists(int semesterSubjectId);
 
         void Commit();
     }

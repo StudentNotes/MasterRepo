@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
@@ -14,13 +14,30 @@ namespace StudentNotes.Logic.Services
     {
         private readonly IFileRepository _fileRepository;
         private readonly ISemesterSubjectFileRepository _semesterSubjectFileRepository;
+        private readonly IFileSharedGroupRepository _fileSharedGroupRepository;
+        private readonly IUserSharedFileRepository _userSharedFileRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public FileService(IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IUnitOfWork unitOfWork)
+        public FileService(IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IFileSharedGroupRepository fileSharedGroupRepository,
+            IUserSharedFileRepository userSharedFileRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _fileRepository = fileRepository;
             _semesterSubjectFileRepository = semesterSubjectFileRepository;
+            _fileSharedGroupRepository = fileSharedGroupRepository;
+            _userSharedFileRepository = userSharedFileRepository;
+            _userRepository = userRepository;
             _unitOfWork = unitOfWork;
+        }
+
+
+        public List<SecureUserModel> GetUsersWithFileAccess(int fileId)
+        {
+            var userIds = _userSharedFileRepository.GetMany(usf => usf.FileId == fileId).Select(file => file.UserId).ToList();
+            var users = _userRepository.GetMany(u => userIds.Contains(u.UserId));
+            var secureUsers = users.Select(user => new SecureUserModel(user)).ToList();
+
+            return secureUsers;
         }
 
         public IEnumerable<File> GetPrivateFiles(int userId)
@@ -58,13 +75,151 @@ namespace StudentNotes.Logic.Services
 
         public IEnumerable<File> GetSharedUserFiles(int userId)
         {
-            var sharedFiles = _fileRepository.GetMany(u => u.UserId == userId && u.IsShared == false);
+            var sharedFiles = _fileRepository.GetMany(u => u.UserId == userId && u.IsShared);
             return sharedFiles;
+        }
+
+        public List<File> GetSharedGroupFiles(int userId)
+        {
+            var userFiles = _fileRepository.GetMany(f => f.UserId == userId).ToList();
+            var userFileIds = userFiles.Select(f => f.FileId).ToList();
+
+            var sharedFilesToGroupIds =
+                _fileSharedGroupRepository.GetMany(fsg => userFileIds.Contains(fsg.FileId))
+                    .Select(f => f.FileId)
+                    .ToList();
+
+            userFiles.RemoveAll(file => !sharedFilesToGroupIds.Contains(file.FileId));
+
+            return userFiles;
         }
 
         public File GetFileById(int fileId)
         {
             return _fileRepository.GetById(fileId);
+        }
+
+        public SecureUserModel GetSecureUser(int userId)
+        {
+            var user = _userRepository.GetById(userId);
+            return new SecureUserModel(user);
+        }
+
+        public bool IsPrivateFile(int fileId)
+        {
+            var file = _semesterSubjectFileRepository.GetMany(f => f.FileId == fileId);
+            return file != null;
+        }
+
+        public bool UserHasAccess(int fileId, int userId)
+        {
+            var userSharedFile = _userSharedFileRepository.GetMany(usf => usf.FileId == fileId && usf.UserId == userId);
+            return userSharedFile != null;
+        }
+
+        public int AddFileToUser(int fileId, int userId)
+        {
+            
+            try
+            {
+                _userSharedFileRepository.Add(new UserSharedFile()
+                {
+                    FileId = fileId,
+                    UserId = userId
+                });
+                var fileToUpdate = _fileRepository.GetById(fileId);
+                fileToUpdate.IsShared = true;
+                _fileRepository.Update(fileToUpdate);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return -1;
+            }
+            _unitOfWork.Commit();
+            return 0;
+        }
+
+        public int AddFileToUser(int fileId, string email)
+        {
+            var user = _userRepository.GetMany(u => u.Email == email).FirstOrDefault();
+            if (user == null)
+            {
+                return -1;
+            }
+            var userId = user.UserId;
+            try
+            {
+                _userSharedFileRepository.Add(new UserSharedFile()
+                {
+                    FileId = fileId,
+                    UserId = userId
+                });
+                var fileToUpdate = _fileRepository.GetById(fileId);
+                fileToUpdate.IsShared = true;
+                _fileRepository.Update(fileToUpdate);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return -1;
+            }
+            _unitOfWork.Commit();
+            return 0;
+        }
+
+        public int RemoveFileFromUser(int fileId, int userId)
+        {
+            try
+            {
+                var entityToDelete = _userSharedFileRepository.GetMany(usf => usf.FileId == fileId && usf.UserId == userId).FirstOrDefault();
+                _userSharedFileRepository.Delete(entityToDelete);
+
+                var fileSharedUser = _userSharedFileRepository.GetMany(f => f.FileId == fileId);
+                var fileSharedGroup = _fileSharedGroupRepository.GetMany(f => f.FileId == fileId);
+
+                if (fileSharedUser.Any() || fileSharedGroup.Any()) return 0;
+
+                var fileToUpdate = _fileRepository.GetById(fileId);
+                fileToUpdate.IsShared = false;
+                _fileRepository.Update(fileToUpdate);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return -1;
+            }
+            return 0;
+        }
+
+        public int RemoveFileFromUser(int fileId, string email)
+        {
+            var user = _userRepository.GetMany(u => u.Email == email).FirstOrDefault();
+            if (user == null)
+            {
+                return -1;
+            }
+            var userId = user.UserId;
+            try
+            {
+                var entityToDelete = _userSharedFileRepository.GetMany(usf => usf.FileId == fileId && usf.UserId == userId).FirstOrDefault();
+                _userSharedFileRepository.Delete(entityToDelete);
+
+                var fileSharedUser = _userSharedFileRepository.GetMany(f => f.FileId == fileId);
+                var fileSharedGroup = _fileSharedGroupRepository.GetMany(f => f.FileId == fileId);
+
+                if (fileSharedUser.Any() || fileSharedGroup.Any()) return 0;
+
+                var fileToUpdate = _fileRepository.GetById(fileId);
+                fileToUpdate.IsShared = false;
+                _fileRepository.Update(fileToUpdate);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return -1;
+            }
+            return 0;
         }
 
         public void SaveFile()

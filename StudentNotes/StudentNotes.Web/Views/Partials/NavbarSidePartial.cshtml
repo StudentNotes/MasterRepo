@@ -24,7 +24,15 @@
                     <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstUniversityNotes</a>
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstSharedNotes</a>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstSharedNotes, "SharedNotes", "Note", null,
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "page-content",
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading"
+                                },
+                                new { @class = "fa fa-fw fa-dashboard" })
                 </li>
                 <li>
                     <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstAllNotes</a>

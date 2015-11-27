@@ -1,11 +1,22 @@
-﻿public enum ErrorCode
+﻿namespace StudentNotes.Logic.Consts
 {
-    AllreadyJoinedToUniversity = 1,
-    AllreadyJoinedToStudySubject,
-    UniversityDoesntExist,
-    StudySubjectDoesntExist,
-    UniversityGradeDoesntExist,
+    public enum ErrorCode
+    {
+        AllreadyJoinedToUniversity = 1,
+        AllreadyJoinedToStudySubject,
+        UniversityDoesntExist,
+        StudySubjectDoesntExist,
+        UniversityGradeDoesntExist,
 
-    WrongDataPassed,
+        WrongDataPassed,
 
+    }
+
+    public enum NoteType
+    {
+        Private,
+        University
+    }
 }
+
+

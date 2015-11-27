@@ -1,0 +1,94 @@
+﻿@using StudentNotes.Logic.LogicModels
+@model StudentNotes.Logic.LogicModels.Note
+ 
+<div class="col-xs-12">
+    @*<ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink("Zarządzanie grupami", "ManageGroups", "Management",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(string.Format("{0} - szczegóły", Model.GroupName), "GroupDetails", "Management",
+                new { groupId = Model.GroupId },
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+    </ol>*@
+
+    <div class="col-sm-3 col-xs-12">
+        <img class="img-thumbnail img-responsive" src="@CategorySelector.GetCategoryPicturePath(Model.Category)" alt="Note icon" />
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <ul class="list-group">
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>NAZWA:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Name
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>KATEGORIA:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Category
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>ROZMIAR:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Size
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>DATA WSTAWIENIA:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.UploadDate
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>WSPÓŁDZIELONY:</b>
+                </div>
+                <div class="col-sm-6">
+                    @if (Model.IsShared)
+                    {
+                        <text>Notatka jest udostępniana</text>
+                    }
+                    else
+                    {
+                        <text>Notatka nie jest udostępniana</text>
+                    }
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-sm-3 col-xs-12">
+        <h3>TAGI:</h3>
+
+    </div>
+</div>
+
+          
+

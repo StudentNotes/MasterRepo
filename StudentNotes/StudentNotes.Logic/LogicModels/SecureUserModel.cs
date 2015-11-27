@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.LogicModels
 {
@@ -20,5 +21,23 @@ namespace StudentNotes.Logic.LogicModels
         public string Street { get; set; }
         public DateTime CreatedOn { get; set; }
 
+        public SecureUserModel()
+        {
+        }
+
+        public SecureUserModel(User user)
+        {
+            UserId = user.UserId;
+            Email = user.Email;
+            Name = user.UserInfo.Name;
+            LastName = user.UserInfo.LastName;
+            Profession = user.UserInfo.Profession;
+            PhoneNumber = user.UserInfo.PhoneNumber;
+            Country = user.UserInfo.Country;
+            City = user.UserInfo.City;
+            PostalCode = user.UserInfo.PostalCode;
+            Street = user.UserInfo.Street;
+            CreatedOn = user.UserInfo.CreatedOn;
+        }
     }
 }

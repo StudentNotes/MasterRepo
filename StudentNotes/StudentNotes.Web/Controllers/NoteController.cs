@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.File;
+using StudentNotes.Logic.ViewModels.ManageNotes;
 using StudentNotes.Web.Filters;
 
 namespace StudentNotes.Web.Controllers
@@ -16,11 +15,15 @@ namespace StudentNotes.Web.Controllers
     {
         private readonly IFileService _fileService;
         private readonly IUploadService _uploadService;
+        private readonly IUserService _userService;
+        private readonly IGroupService _groupService;
 
-        public NoteController(IFileService fileService, IUploadService uploadService)
+        public NoteController(IFileService fileService, IUploadService uploadService, IUserService userService, IGroupService groupService)
         {
             _fileService = fileService;
             _uploadService = uploadService;
+            _userService = userService;
+            _groupService = groupService;
         }
 
         // GET: Note
@@ -42,13 +45,17 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult SharedNotes()
         {
-            UserNotesViewModel model = new UserNotesViewModel();
             var sharedFiles = _fileService.GetSharedUserFiles((int) Session["CurrentUserId"]);
 
-            foreach (var sharedFile in sharedFiles)
-            {
-                model.UserNotesList.Add(new Note(sharedFile));
-            }
+            var model = (from sharedFile in sharedFiles
+                let type = _fileService.IsPrivateFile(sharedFile.FileId) ? NoteType.Private : NoteType.University
+                select new SharedNotesViewModel()
+                {
+                    NoteId = sharedFile.FileId,
+                    Name = sharedFile.Name,
+                    Category = sharedFile.Category,
+                    Type = type
+                }).ToList();
 
             return PartialView("~/Views/Partials/MyNotes/SharedNotesPartial.cshtml", model);
         }
@@ -56,9 +63,6 @@ namespace StudentNotes.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> DeletePrivateNote(int fileId)
         {
-            var file = _fileService.GetFileById(fileId);
-            string remoteFilePath = file.Path + "/" + file.Name;
-
             await _uploadService.DeletePrivateNoteAsync(fileId);
 
             return RedirectToAction("PrivateNotes");
@@ -67,7 +71,7 @@ namespace StudentNotes.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> DeleteSemesterSubjectNote(int noteId, int semesterSubjectId)
         {
-            var responseCode = await _uploadService.DeleteSemesterSubjectNoteAsync(noteId, semesterSubjectId);
+            await _uploadService.DeleteSemesterSubjectNoteAsync(noteId, semesterSubjectId);
 
             return RedirectToAction("ShowNotes", "University", new { semesterSubjectId });
         }
@@ -75,13 +79,38 @@ namespace StudentNotes.Web.Controllers
         [HttpPost]
         public ActionResult ShareNoteToGroup(int fileId, int groupId, int semesterSubjectId)
         {
-            return null;
+            if (_fileService.GetFileById(fileId) == null || !_groupService.GroupExists(groupId) || !_groupService.SemesterSubjectExists(semesterSubjectId))
+            {
+                //  Dopisac obsługę, gdy jakieś dane nie zostały przekazane
+            }
+            _groupService.AddFileToGroup(fileId, groupId, semesterSubjectId);
+            _groupService.Commit();
+
+            var semesterId = _groupService.GetSemesterBySemesterSubject(semesterSubjectId).SemesterId;
+
+            return RedirectToAction("ShowGroupNotes", "Group", new {semesterSubjectId, semesterId, groupId});
         }
 
         [HttpPost]
         public ActionResult ShareNoteToUser(int fileId, int userId = 0, string userEmail = "")
         {
+            if (_fileService.GetFileById(fileId) == null)
+            {
+                
+            }
+            if (_userService.UserExists(userEmail))
+            {
+                _fileService.AddFileToUser(fileId, userEmail);
+                return RedirectToAction("SharedNotes");
+            }
+            if (_userService.UserExists(userId))
+            {
+                _fileService.AddFileToUser(fileId, userId);
+                return RedirectToAction("SharedNotes");
+            }
             return null;
+
+
         }
 
         [HttpPost]
@@ -94,6 +123,19 @@ namespace StudentNotes.Web.Controllers
         public ActionResult RemoveShareToUser(int fileId, int userId)
         {
             return null;
+        }
+
+        [HttpGet]
+        public ActionResult SharedNoteDetails(int fileId)
+        {
+            var model = new SharedNoteDetailsViewModel
+            {
+                Note = new Note(_fileService.GetFileById(fileId)),
+                SharedToUsersList = _fileService.GetUsersWithFileAccess(fileId),
+                SharedToGroupsList = _groupService.GetGroupsWithFileAccess(fileId)
+            };
+
+            return PartialView("~/Views/Partials/ManageNotes/SharedNoteDetailsPartial.cshtml", model);
         }
     }
 }

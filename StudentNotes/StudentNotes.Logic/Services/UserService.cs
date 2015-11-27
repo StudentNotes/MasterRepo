@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
@@ -17,7 +14,7 @@ namespace StudentNotes.Logic.Services
         private readonly IUserInfoRepository _userInfoRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository userRepository, IUserInfoRepository userInfoRepository,IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository, IUserInfoRepository userInfoRepository,  IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _userInfoRepository = userInfoRepository;
@@ -26,25 +23,20 @@ namespace StudentNotes.Logic.Services
         public bool UserExists(string email)
         {
             var user = _userRepository.Get(u => u.Email == email);
-            if (user == null)
-            {
-                return false;
-            }
-            return true;
+            return user != null;
+        }
+
+        public bool UserExists(int userId)
+        {
+            var user = _userRepository.GetById(userId);
+            return user != null;
         }
 
         public bool UserAuthorized(string email, string password)
         {
             var user = _userRepository.Get(u => u.Email == email);
-            if (user == null)
-            {
-                return false;;
-            }
-            if (user.Password != EncryptPassword(password, (Guid) user.Salt))
-            {
-                return false;
-            }
-            return true;
+            if (user != null) return user.Salt != null && user.Password == EncryptPassword(password, (Guid) user.Salt);
+            return false;
         }
 
         public bool IsServiceAdmin(int userId)
@@ -98,6 +90,7 @@ namespace StudentNotes.Logic.Services
             var user = _userRepository.Get(u => u.Email == email);
             return user.UserId;
         }
+       
 
         public string GetServiceUserName(int userId)
         {

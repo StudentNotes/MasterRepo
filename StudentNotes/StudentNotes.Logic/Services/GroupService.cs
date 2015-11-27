@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
@@ -22,11 +21,12 @@ namespace StudentNotes.Logic.Services
         private readonly ISemesterSubjectRepository _semesterSubjectRepository;
         private readonly IStudySubjectRepository _studySubjectRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IUserSharedFileRepository _userSharedFileRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public GroupService(IGroupRepository groupRepository, IGroupUserRepository groupUserRepository, IFileSharedGroupRepository fileSharedGroupRepository,
             IGroupSemesterRepository groupSemesterRepository, IFileRepository fileRepository, ISemesterRepository semesterRepository, ISemesterSubjectRepository semesterSubjectRepository,
-            IUserRepository userRepository, IStudySubjectRepository studySubjectRepository, IUnitOfWork unitOfWork)
+            IUserRepository userRepository, IStudySubjectRepository studySubjectRepository, IUserSharedFileRepository userSharedFileRepository, IUnitOfWork unitOfWork)
         {
             _groupRepository = groupRepository;
             _groupUserRepository = groupUserRepository;
@@ -37,6 +37,7 @@ namespace StudentNotes.Logic.Services
             _semesterSubjectRepository = semesterSubjectRepository;
             _userRepository = userRepository;
             _studySubjectRepository = studySubjectRepository;
+            _userSharedFileRepository = userSharedFileRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -48,8 +49,7 @@ namespace StudentNotes.Logic.Services
         public StudySubject GetStudySubjectByGroupId(int groupId)
         {
             var semester = GetGroupSemesters(groupId).FirstOrDefault();
-
-            return _studySubjectRepository.GetById(semester.StudySubjectId);
+            return semester != null ? _studySubjectRepository.GetById(semester.StudySubjectId) : null;
         }
 
         public SecureUserModel GetGroupAdminDetails(int groupId)
@@ -72,6 +72,92 @@ namespace StudentNotes.Logic.Services
             };
 
             return secureUser;
+        }
+
+        public Semester GetSemesterBySemesterSubject(int semesterSubjectId)
+        {
+            var semesterSubject = _semesterSubjectRepository.GetById(semesterSubjectId);
+            if (semesterSubject == null)
+            {
+                return null;
+            }
+            var semester = _semesterRepository.GetById(semesterSubject.SemesterId);
+            return semester;
+        }
+
+        public GroupBasics GetGroupBasics(int groupId, int fileId)
+        {
+            var groupBasics = new GroupBasics();
+            var file = _fileRepository.GetById(fileId);
+            if (!GroupExists(groupId) || file == null)
+            {
+                return groupBasics;
+            }
+            var group = _groupRepository.GetById(groupId);
+            groupBasics.GroupId = group.GroupId;
+            groupBasics.AdminId = group.AdminId;
+            groupBasics.CreatedOn = group.CreatedOn;
+            groupBasics.Description = group.Description;
+            groupBasics.GroupName = group.Name;
+            
+            var fileSharedGroup =
+                _fileSharedGroupRepository.GetMany(fsg => fsg.FileId == fileId && fsg.GroupId == groupId)
+                    .FirstOrDefault();
+            if (fileSharedGroup == null)
+            {
+                return groupBasics;
+            }
+
+            var semesterSubject = fileSharedGroup.SemesterSubject;
+            groupBasics.StudySubjectId = semesterSubject.SemesterId;
+            groupBasics.StudySubjectName = semesterSubject.Name;
+
+            var semester = semesterSubject.Semester;
+            groupBasics.SemesterId = semester.SemesterId;
+            groupBasics.SemesterName = string.Format("Semestr {0}", semester.SemesterNumber);
+
+            var studySubject = semester.StudySubject;
+            groupBasics.StudySubjectId = studySubject.StudySubjectId;
+            groupBasics.StudySubjectName = studySubject.Name;
+
+            var grade = studySubject.Grade;
+            groupBasics.GradeId = grade.GradeId;
+            groupBasics.GradeName = grade.Year;
+
+            var school = grade.School;
+            groupBasics.UniversityId = school.SchoolId;
+            groupBasics.UniversityName = school.Name;
+
+            return groupBasics;
+        }
+
+        public List<GroupBasics> GetGroupsWithFileAccess(int fileId)
+        {
+            var sharedList = _fileSharedGroupRepository.GetMany(fsg => fsg.FileId == fileId);
+
+            return (from share in sharedList
+                let @group = _groupRepository.GetById(share.GroupId)
+                let semesterSubject = share.SemesterSubject
+                let semester = semesterSubject.Semester
+                let studySubject = semester.StudySubject
+                let grade = studySubject.Grade
+                let school = grade.School
+                select new GroupBasics()
+                {
+                    GroupId = @group.GroupId, 
+                    SemesterId = semester.SemesterId, 
+                    StudySubjectId = studySubject.StudySubjectId, 
+                    GradeId = grade.GradeId, 
+                    UniversityName = school.Name, 
+                    UniversityId = school.SchoolId, 
+                    CreatedOn = @group.CreatedOn, 
+                    SemesterSubjectId = semesterSubject.SemesterSubjectId, 
+                    AdminId = @group.AdminId, Description = @group.Description, 
+                    GroupName = @group.Name, SemesterName = string.Format("Semestr {0}", semester.SemesterNumber), 
+                    SemesterSubjectName = semesterSubject.Name, 
+                    StudySubjectName = studySubject.Name, 
+                    GradeName = grade.Year
+                }).ToList();
         }
 
         public int AddGroup(string groupName, string description, int adminId, int semesterId)
@@ -124,6 +210,9 @@ namespace StudentNotes.Logic.Services
                 GroupId = groupId,
                 SemesterSubjectId = semesterSubjectId
             });
+            var fileToUpdate = _fileRepository.GetById(fileId);
+            fileToUpdate.IsShared = true;
+            _fileRepository.Update(fileToUpdate);
 
             return 0;
         }
@@ -143,6 +232,13 @@ namespace StudentNotes.Logic.Services
         {
             _fileSharedGroupRepository.Delete(f => f.FileId == fileId && f.GroupId == groupId);
 
+            var fileSharedUser = _userSharedFileRepository.GetMany(f => f.FileId == fileId);
+            var fileSharedGroup = _fileSharedGroupRepository.GetMany(f => f.FileId == fileId);
+
+            if (fileSharedUser.Any() || fileSharedGroup.Any()) return 0;
+            var fileToUpdate = _fileRepository.GetById(fileId);
+            fileToUpdate.IsShared = false;
+            _fileRepository.Update(fileToUpdate);
             return 0;
         }
 
@@ -295,6 +391,12 @@ namespace StudentNotes.Logic.Services
             var group = _groupRepository.GetMany(g => g.Name == groupName && groupSemesterIds.Contains(g.GroupId));
 
             return group.Any();
+        }
+
+        public bool SemesterSubjectExists(int semesterSubjectId)
+        {
+            var semesterSubject = _semesterSubjectRepository.GetById(semesterSubjectId);
+            return semesterSubject != null;
         }
 
         public void Commit()

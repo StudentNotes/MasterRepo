@@ -283,6 +283,8 @@
     <Content Include="Views\Partials\ManageGroups\ManageGroupsPartial.cshtml" />
     <Content Include="Views\Partials\ManageGroups\AddUsersPartial.cshtml" />
     <Content Include="Views\Partials\ManageGroups\GroupDetailsPartialView.cshtml" />
+    <Content Include="Views\Partials\ManageNotes\SharedNoteDetailsPartial.cshtml" />
+    <Content Include="Views\Partials\Note\NoteDetailsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -3,6 +3,8 @@
         console.log("Show share modal");
         var fileName = $(this).attr("name");
         $("#fileNameSpan").text(fileName);
+        $("#tmpNoteIdTb").val($(this).val());
+        console.log($("#tmpNoteIdTb").val());
 
         ClearSelect(document.getElementById("privateSchoolSelect"));
         ClearSelect(document.getElementById("privateSubjectSelect"));
@@ -15,11 +17,18 @@
 
         $.getJSON("/LoggedIn/GetSchoolsJson", null, handleJsonSchoolsPrivate);
         $("#shareFileWithUserButton").attr("disabled", "true");
-
+        $("#privateUserEmailTb").val("");
     });
 });
 
 $("#shareUserCheckBox").on("change", function () {
+    SetUpShareUserCheckBox();
+    $("#privateUserEmailTb").val("");
+    console.log("Ukrywanie forma grupowego");
+});
+
+function SetUpShareUserCheckBox() {
+    $("#fileIdTb1").val($("#shareFileButton").val());
     $("#shareUserForm").removeAttr("hidden");
     $("#shareGroupForm").attr("hidden", true);
 
@@ -34,14 +43,22 @@ $("#shareUserCheckBox").on("change", function () {
 
     $.getJSON("/LoggedIn/GetSchoolsJson", null, handleJsonSchoolsPrivate);
     $("#shareFileWithUserButton").attr("disabled", "true");
-
-    console.log("Ukrywanie forma grupowego");
-});
-
+    
+}
 $("#privateSchoolSelect").on("change", PrivateSchoolChosen);
 $("#privateSubjectSelect").on("change", PrivateSubjectChosen);
 $("#privateSemesterSelect").on("change", PrivateSemesterChosen);
 $("#privateUserSelect").on("change", PrivateUserChosen);
+$("#privateUserEmailTb").on("change", function () {
+    SetUpShareUserCheckBox();
+    var email = $("#privateUserEmailTb").val();
+    console.log("Email: " + email);
+    if (email != "") {
+        $("#shareFileWithUserButton").removeAttr("disabled");
+    } else {
+        $("#shareFileWithUserButton").attr("disabled", "true");
+    }
+});
 
 $("#shareGroupCheckBox").on("change", function () {
     $("#shareGroupForm").removeAttr("hidden");
@@ -136,7 +153,7 @@ function SemesterSubjectChosen() {
 
     if (groupSemesterSubjectSelectValue != 0) {
         console.log("Wybrałeś przedmiot. " + groupSemesterSubjectSelectValue);
-        $("#fileIdTb2").val($("#shareFileButton").val());
+        $("#fileIdTb2").val($("#tmpNoteIdTb").val());
         $("#shareFileWithGroupButton").removeAttr("disabled");
     } else {
         $("#shareFileWithGroupButton").attr("disabled", "true");
@@ -145,6 +162,7 @@ function SemesterSubjectChosen() {
 }
 
 function PrivateSchoolChosen() {
+    $("#privateUserEmailTb").val("");
     var schoolSelectValue = $("#privateSchoolSelect").val();
 
     ClearSelect(document.getElementById("privateSubjectSelect"));
@@ -164,6 +182,7 @@ function PrivateSchoolChosen() {
 }
 
 function PrivateSubjectChosen() {
+    $("#privateUserEmailTb").val("");
     var subjectSelectValue = $("#privateSubjectSelect").val();
 
     ClearSelect(document.getElementById("privateSemesterSelect"));
@@ -181,6 +200,7 @@ function PrivateSubjectChosen() {
 }
 
 function PrivateSemesterChosen() {
+    $("#privateUserEmailTb").val("");
     var semesterSelectValue = $("#privateSemesterSelect").val();
 
     ClearSelect(document.getElementById("privateUserSelect"));
@@ -196,11 +216,12 @@ function PrivateSemesterChosen() {
 }
 
 function PrivateUserChosen() {
+    $("#privateUserEmailTb").val("");
     var userSelectValue = $("#privateUserSelect").val();
 
     if (userSelectValue != 0) {
         console.log("Wybrałeś użytkownika. " + userSelectValue);
-        $("#fileIdTb1").val($("#shareFileButton").val());
+        $("#fileIdTb1").val($("#tmpNoteIdTb").val());
         $("#shareFileWithUserButton").removeAttr("disabled");
     } else {
         $("#shareFileWithUserButton").attr("disabled", "true");

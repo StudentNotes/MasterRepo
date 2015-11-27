@@ -11,6 +11,5 @@ namespace StudentNotes.Logic.ViewModels.Common
         public string Name { get; set; }
         public string LastName { get; set; }
         public bool IsServiceAdmin { get; set; }
-
     }
 }

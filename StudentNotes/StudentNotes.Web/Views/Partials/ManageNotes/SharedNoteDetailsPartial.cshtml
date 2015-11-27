@@ -1,0 +1,82 @@
+﻿@*Moje notatki -> Udostępnione -> Szczegóły udostępnienia*@
+@model StudentNotes.Logic.ViewModels.ManageNotes.SharedNoteDetailsViewModel
+
+@Html.Partial("~/Views/Partials/Note/NoteDetailsPartial.cshtml", Model.Note)
+
+<div class="col-xs-12 col-sm-6">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Adres email</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.SharedToUsersList.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    @Model.SharedToUsersList[i].Name
+                </td>
+                <td>
+                    @Model.SharedToUsersList[i].LastName
+                </td>
+                <td>
+                    @Model.SharedToUsersList[i].Email
+                </td>
+                <td>
+                    @Ajax.ActionLink("Nie udostępniaj", "RemoveShareToUser", "Note",
+                  new { fileId = Model.Note.NoteId, userId = Model.SharedToUsersList[i].UserId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="col-xs-12 col-sm-6">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa</th>
+                <th>Lokalizacja</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.SharedToGroupsList.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    @Model.SharedToGroupsList[i].GroupName
+                </td>
+                <td>
+                    @Model.SharedToGroupsList[i].GetSharePath()
+                </td>
+                <td>
+                    @Ajax.ActionLink("Nie udostępniaj", "RemoveShareToGroup", "Note",
+                  new { fileId = Model.Note.NoteId, groupId = Model.SharedToGroupsList[i].GradeId, semesterSubjectId = Model.SharedToGroupsList[i].SemesterSubjectId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

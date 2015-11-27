@@ -78,7 +78,6 @@ namespace StudentNotes.Web.Controllers
             ValidateLoginViewModel(model);
             if (model.ErrorList.Count == 0)
             {
-                //  Sprawdzamy dane logowania
                 if (!_userService.UserExists(model.Email))
                 {          
                     model.ErrorList.Add("NoUserInSystem", "W systemie nie ma użytkownika o podanym adresie E-mail.");
@@ -94,7 +93,6 @@ namespace StudentNotes.Web.Controllers
 
                 return RedirectToAction("LoginRedirect");
             }
-            //  Zwracamy błędy
             return View("~/Views/Home/Index.cshtml", viewModelContainer);
         }
         public ActionResult LoginRedirect()
