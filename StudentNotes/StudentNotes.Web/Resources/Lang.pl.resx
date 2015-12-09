@@ -400,4 +400,13 @@
   <data name="ConstJoinUniversity" xml:space="preserve">
     <value>Zapisz się na kierunek</value>
   </data>
+  <data name="ErrorFileNotChoosen" xml:space="preserve">
+    <value>Nie wybrałeś żadnego pliku do wysłania!</value>
+  </data>
+  <data name="ErrorWrongDataPassed" xml:space="preserve">
+    <value>Nie wprowadziłeś wszystkich wymaganych danych. Dlatego nie mogę przeprowadzić wybranej operacji.</value>
+  </data>
+  <data name="SuccessNoteUploaded" xml:space="preserve">
+    <value>Notatka została zapisana na serwerze!</value>
+  </data>
 </root>

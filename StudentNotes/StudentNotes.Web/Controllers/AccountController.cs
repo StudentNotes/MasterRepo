@@ -80,13 +80,13 @@ namespace StudentNotes.Web.Controllers
             {
                 if (!_userService.UserExists(model.Email))
                 {          
-                    model.ErrorList.Add("NoUserInSystem", "W systemie nie ma użytkownika o podanym adresie E-mail.");
+                    model.ErrorList.Add("W systemie nie ma użytkownika o podanym adresie E-mail.");
                     return View("~/Views/Home/Index.cshtml", viewModelContainer);
                 }
                 
                 if (!_userService.UserAuthorized(model.Email, model.Password))
                 {
-                    model.ErrorList.Add("WrongPassword", "Podaj prawdziwe hasło dostępu do serwisu.");
+                    model.ErrorList.Add("Podaj prawdziwe hasło dostępu do serwisu.");
                     return View("~/Views/Home/Index.cshtml", viewModelContainer);
                 }
                 Session.Add("CurrentUserId", _userService.GetServiceUserId(model.Email));
@@ -114,7 +114,7 @@ namespace StudentNotes.Web.Controllers
         public ActionResult SessionExpired()
         {
             HomeViewModel viewModel = new HomeViewModel();
-            viewModel.LoginViewModel.ErrorList.Add("SessionExpired", WebResponseCode.SessionExpired);
+            viewModel.LoginViewModel.ErrorList.Add(WebResponseCode.SessionExpired);
             return View("~/Views/Home/Index.cshtml", viewModel);
         }
 
@@ -175,9 +175,9 @@ namespace StudentNotes.Web.Controllers
             var passwordError = FormInputValidator.ValidatePassword(model.Password);
 
             if (emailError != null)
-                model.ErrorList.Add("Email", emailError);
+                model.ErrorList.Add(emailError);
             if (passwordError != null)
-                model.ErrorList.Add("Password", passwordError);
+                model.ErrorList.Add(passwordError);
         }
     }
 }

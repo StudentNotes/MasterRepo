@@ -31,23 +31,23 @@ namespace StudentNotes.Web.Controllers
 
             if (groupName.IsEmpty() || semesterId == null || semesterId == 0)
             {
-                model.LoginViewModel.ErrorList.Add("Group name not defined", WebResponseCode.GroupNameEmpty);
+                model.LoginViewModel.ErrorList.Add(WebResponseCode.GroupNameEmpty);
                 return View("~/Views/LoggedIn/Index.cshtml", model);
             }
             if (_groupService.GroupInSemesterExists(groupName, semesterId))
             {               
-                model.LoginViewModel.ErrorList.Add("Group already exists", WebResponseCode.SemesterAlreadyContainsGroup);
+                model.LoginViewModel.ErrorList.Add(WebResponseCode.SemesterAlreadyContainsGroup);
                 return View("~/Views/LoggedIn/Index.cshtml", model);
             }
             var response = _groupService.AddGroup(groupName, groupDescription, (int) Session["CurrentUserId"], semesterId);
             if (response != 0)
             {
-                model.LoginViewModel.ErrorList.Add("Something went wrong", WebResponseCode.GlobalError);
+                model.LoginViewModel.ErrorList.Add(WebResponseCode.GlobalError);
                 return View("~/Views/LoggedIn/Index.cshtml", model);
             }
 
             _groupService.Commit();
-            model.LoginViewModel.SuccessList.Add("Group added", WebResponseCode.GroupAddedSuccessfully);
+            model.LoginViewModel.SuccessList.Add(WebResponseCode.GroupAddedSuccessfully);
             return View("~/Views/LoggedIn/Index.cshtml", model);
 
         }
@@ -107,6 +107,13 @@ namespace StudentNotes.Web.Controllers
             model.SemesterSubjectName = semesterSubject.Name;
 
             return PartialView("~/Views/Partials/MyGroups/GroupSubjectNotesPartial.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteGroupSemesterSubjectNote(int noteId, int groupId, int semesterSubjectId)
+        {
+
+            return RedirectToAction("ShowGroupNotes");
         }
     }
 }

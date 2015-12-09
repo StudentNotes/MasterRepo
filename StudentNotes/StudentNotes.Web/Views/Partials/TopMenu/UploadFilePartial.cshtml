@@ -15,14 +15,14 @@
                         <span id="filePath" class="col-xs-7 label file-path">Nazwa pliku</span>
                         <span class="btn btn-default btn-file col-xs-offset-1 col-xs-4">
                             Przeglądaj...
-                            <input id="fileInput" type="file" multiple name="files" onchange="fileSelected()">
+                            <input id="fileInput" type="file" multiple name="Files" onchange="fileSelected()">
                         </span>
                     </p>
                     <br /><br />
                     <p>
                         <span class="label col-xs-12">Zdefiniuj typ pliku:</span><br />
-                        @Html.RadioButton("fileType", "Private", true, new {@id="privateFileUploadCheckBox", @class = "file-radio-button" }) prywatny<br />
-                        @Html.RadioButton("fileType", "University", new { @id = "universityFileUploadCheckBox", @class = "file-radio-button" }) uczelniany/szkolny
+                        @Html.RadioButton("FileType", "Private", true, new {@id="privateFileUploadCheckBox", @class = "file-radio-button" }) prywatny<br />
+                        @Html.RadioButton("FileType", "University", new { @id = "universityFileUploadCheckBox", @class = "file-radio-button" }) uczelniany/szkolny
                     </p>
 
                     <div id="showUploadFileForm" class="form-horizontal hidden">
@@ -55,8 +55,8 @@
                                 <select id="semesterSubjectsSelect" class="form-control"></select>
                             </div>
                         </div>
-                        <input id="inputPath" type="text" name="uploadPath" value="" hidden/>
-                        <input id="inputStudySubjectId" type="text" name="semesterSubjectId" value="" hidden />
+                        <input id="inputPath" type="text" name="UploadPath" value="" hidden/>
+                        <input id="inputStudySubjectId" type="text" name="SemesterSubjectId" value="" hidden />
                     </div>
 
                     <br /><br />

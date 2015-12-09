@@ -11,8 +11,11 @@ using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.Services;
+using StudentNotes.Logic.ViewModels.Authorization;
 using StudentNotes.Logic.ViewModels.File;
 using StudentNotes.Logic.ViewModels.Home;
+using StudentNotes.Web.Models.ResourcesFinderLogic;
+using StudentNotes.Web.RequestViewModels;
 
 namespace StudentNotes.Web.Controllers
 {
@@ -28,17 +31,16 @@ namespace StudentNotes.Web.Controllers
         }
         // GET: File
         [HttpPost]
-        public async Task<ActionResult> SendFile(IEnumerable<HttpPostedFileBase> files, string fileType, string uploadPath, string semesterSubjectId)
+        public async Task<ActionResult> SendFile(SendFileRequest request)
         {
-            var anyFile = files.First();
-            if (anyFile == null)
+            var response = request.Validate();
+            if (!request.IsValid)
             {
-                HomeViewModel model = new HomeViewModel();
-                model.LoginViewModel.ErrorList.Add("No file selected", "Nie wybrałeś żadnego pliku do wysłania!");
-
-                return View("~/Views/LoggedIn/Index.cshtml", model);
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("RetriveInfo");
             }
-            foreach (var file in files)
+                
+            foreach (var file in request.Files)
             {
                 var fileName = Path.GetFileName(file.FileName);
                 BinaryReader fileReader = new BinaryReader(file.InputStream);
@@ -53,51 +55,38 @@ namespace StudentNotes.Web.Controllers
                     //Tags = fileTags
                 };
 
-                if (fileType == "Private")
+                if (request.FileType == "Private")
                 {
                     if (await _uploadService.UploadPrivateNote(note, (int)Session["CurrentUserId"]) == 0)
                     {
                         _uploadService.SaveUpload();
                     }
                 }
-                else if (fileType == "University")
+                else if (request.FileType == "University")
                 {
-                    if (uploadPath.IsEmpty())
-                    {
-                        return RedirectToAction("RetriveInfo", new { errorCode = 1 });
-                    }
-                    if (await _uploadService.UploadUniversityNote(note, (int)Session["CurrentUserId"], uploadPath, int.Parse(semesterSubjectId)) == 0)
+                    if (await _uploadService.UploadUniversityNote(note, (int)Session["CurrentUserId"], request.UploadPath, int.Parse(request.SemesterSubjectId)) == 0)
                     {
                         _uploadService.SaveUpload();
                     }
                 }
-                
-
             }
-            return RedirectToAction("RetriveInfo", new{errorCode = 0});
+            response.AddSuccess(ResourceKeyResolver.SuccessNoteUploaded);
+            TempData["ResponseViewModel"] = response;
+
+            return RedirectToAction("RetriveInfo");
         }
 
 
         [HttpGet]
-        public  ActionResult RetriveInfo(int errorCode)
+        public  ActionResult RetriveInfo()
         {
-            switch (errorCode)
+            HomeViewModel responseModel = new HomeViewModel();
+            if (TempData["ResponseViewModel"] != null)
             {
-                case 0:
-                {
-                    HomeViewModel model = new HomeViewModel();
-                    model.LoginViewModel.SuccessList.Add("UploadSuccess", WebResponseCode.FileUploadedSuccessfully);
-                    return View("~/Views/LoggedIn/Index.cshtml", model);
-                }
-                case 1:
-                {
-                    HomeViewModel model = new HomeViewModel();
-                    model.LoginViewModel.ErrorList.Add("NotAllDataPassed", WebResponseCode.WrongDataPassed);
-                    return View("~/Views/LoggedIn/Index.cshtml", model);
-                }
-                    
+                responseModel.LoginViewModel = (LoginViewModel) TempData["ResponseViewModel"];
             }
-            return View("~/Views/Note/NoteUploaded.cshtml");
+
+            return View("~/Views/LoggedIn/Index.cshtml", responseModel);
         }
 
 

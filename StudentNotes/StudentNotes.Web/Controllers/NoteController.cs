@@ -83,6 +83,10 @@ namespace StudentNotes.Web.Controllers
             {
                 //  Dopisac obsługę, gdy jakieś dane nie zostały przekazane
             }
+            if (_groupService.FileSharedToGroup(fileId, groupId, semesterSubjectId))
+            {
+                
+            }
             _groupService.AddFileToGroup(fileId, groupId, semesterSubjectId);
             _groupService.Commit();
 
@@ -116,13 +120,21 @@ namespace StudentNotes.Web.Controllers
         [HttpPost]
         public ActionResult RemoveShareToGroup(int fileId, int groupId, int semesterSubjectId)
         {
-            return null;
+            if (_groupService.RemoveFileFromGroup(fileId, groupId) == 0)
+            {
+                return RedirectToAction("SharedNotes");
+            }
+            return RedirectToAction("SharedNoteDetails", new { fileId });
         }
 
         [HttpPost]
         public ActionResult RemoveShareToUser(int fileId, int userId)
         {
-            return null;
+            if (_fileService.RemoveFileFromUser(fileId, userId) == 0)
+            {
+                return RedirectToAction("SharedNotes");
+            }
+            return RedirectToAction("SharedNoteDetails", new {fileId});
         }
 
         [HttpGet]

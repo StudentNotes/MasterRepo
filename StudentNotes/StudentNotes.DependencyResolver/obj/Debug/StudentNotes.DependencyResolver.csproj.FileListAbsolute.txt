@@ -25,3 +25,4 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.WebPages.xml
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.Razor.xml
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\Microsoft.Web.Infrastructure.dll

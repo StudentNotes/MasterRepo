@@ -378,12 +378,20 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ConstManageUniversities"); }
         }
+        public static string ErrorFileNotChoosen
+        {
+            get { return ResourceFinder.GetResource("ErrorFileNotChoosen"); }
+        }
+        public static string ErrorWrongDataPassed
+        {
+            get { return ResourceFinder.GetResource("ErrorWrongDataPassed"); }
+        }
+        public static string SuccessNoteUploaded
+        {
+            get { return ResourceFinder.GetResource("SuccessNoteUploaded"); }
+        }
 
 
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

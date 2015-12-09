@@ -83,22 +83,22 @@ namespace StudentNotes.Web.Controllers
             switch (errorCode)
             {
                 case 0:
-                    model.LoginViewModel.SuccessList.Add("JoinedUniversity", WebResponseCode.JoinedStudySubject);
+                    model.LoginViewModel.SuccessList.Add(WebResponseCode.JoinedStudySubject);
                     break;
                 case (int)ErrorCode.UniversityDoesntExist:
-                    model.LoginViewModel.ErrorList.Add("UniversityDoesntExist", WebResponseCode.UniversityDoesntExist);
+                    model.LoginViewModel.ErrorList.Add(WebResponseCode.UniversityDoesntExist);
                     break;
                 case (int)ErrorCode.UniversityGradeDoesntExist:
-                    model.LoginViewModel.ErrorList.Add("UniversityGradeDoesntExist", WebResponseCode.UniversityGradeDoesntExist);
+                    model.LoginViewModel.ErrorList.Add(WebResponseCode.UniversityGradeDoesntExist);
                     break;
                 case (int)ErrorCode.StudySubjectDoesntExist:
-                    model.LoginViewModel.ErrorList.Add("StudySubjectDoesntExist", WebResponseCode.StudySubjectDoesntExist);
+                    model.LoginViewModel.ErrorList.Add(WebResponseCode.StudySubjectDoesntExist);
                     break;
                 case (int)ErrorCode.WrongDataPassed:
-                    model.LoginViewModel.ErrorList.Add("WrongDataPassed", WebResponseCode.WrongDataPassed);
+                    model.LoginViewModel.ErrorList.Add(WebResponseCode.WrongDataPassed);
                     break;
                 case (int)ErrorCode.AllreadyJoinedToStudySubject:
-                    model.LoginViewModel.ErrorList.Add("WrongDataPassed", WebResponseCode.AllreadyJoinedToStudySubject);
+                    model.LoginViewModel.ErrorList.Add(WebResponseCode.AllreadyJoinedToStudySubject);
                     break;
             }
             return View("~/Views/LoggedIn/Index.cshtml", model);

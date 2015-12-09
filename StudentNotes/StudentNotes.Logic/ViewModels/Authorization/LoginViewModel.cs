@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentNotes.Logic.LogicAbstraction;
 
 namespace StudentNotes.Logic.ViewModels.Authorization
 {
-    public class LoginViewModel
+    public class LoginViewModel : ResponseViewModelBase
     {
         public string Email { get; set; }
         public string Password { get; set; }
-
-        public Dictionary<string, string> ErrorList { get; set; }
-        public Dictionary<string, string> SuccessList { get; set; }
-
-        public LoginViewModel()
-        {
-            ErrorList = new Dictionary<string, string>();
-            SuccessList = new Dictionary<string, string>();
-        }
     }
 }

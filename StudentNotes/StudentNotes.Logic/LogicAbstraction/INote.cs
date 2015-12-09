@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentNotes.Logic.LogicInterfaces
+namespace StudentNotes.Logic.LogicAbstraction
 {
     public interface INote
     {

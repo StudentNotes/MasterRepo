@@ -172,13 +172,17 @@ namespace StudentNotes.Logic.Services
         {
             try
             {
-                var entityToDelete = _userSharedFileRepository.GetMany(usf => usf.FileId == fileId && usf.UserId == userId).FirstOrDefault();
+                var entityToDelete = _userSharedFileRepository.Get(usf => usf.FileId == fileId && usf.UserId == userId);
                 _userSharedFileRepository.Delete(entityToDelete);
+                _userSharedFileRepository.Commit();
 
                 var fileSharedUser = _userSharedFileRepository.GetMany(f => f.FileId == fileId);
                 var fileSharedGroup = _fileSharedGroupRepository.GetMany(f => f.FileId == fileId);
 
-                if (fileSharedUser.Any() || fileSharedGroup.Any()) return 0;
+                if (fileSharedUser.Any() || fileSharedGroup.Any())
+                {
+                    return 1;
+                }
 
                 var fileToUpdate = _fileRepository.GetById(fileId);
                 fileToUpdate.IsShared = false;
@@ -189,6 +193,7 @@ namespace StudentNotes.Logic.Services
                 Debug.WriteLine(ex.Message);
                 return -1;
             }
+            _unitOfWork.Commit();
             return 0;
         }
 

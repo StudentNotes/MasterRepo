@@ -380,7 +380,7 @@ namespace StudentNotes.Web.Controllers
             if (group.AdminId == userId)
             {
                 HomeViewModel model = new HomeViewModel();
-                model.LoginViewModel.ErrorList.Add("Can't delete the group admin", WebResponseCode.YouAreTheAdmin);
+                model.LoginViewModel.ErrorList.Add(WebResponseCode.YouAreTheAdmin);
                 return View("~/Views/LoggedIn/Index.cshtml", model);
             }
 
@@ -440,7 +440,7 @@ namespace StudentNotes.Web.Controllers
             if (groupName.IsEmpty())
             {
                 HomeViewModel model = new HomeViewModel();
-                model.LoginViewModel.ErrorList.Add("Can't delete the group admin", WebResponseCode.YouAreTheAdmin);
+                model.LoginViewModel.ErrorList.Add(WebResponseCode.YouAreTheAdmin);
                 return View("~/Views/LoggedIn/Index.cshtml", model);
             }
             _groupService.UpdateGroup(groupName, groupDescription, groupId);

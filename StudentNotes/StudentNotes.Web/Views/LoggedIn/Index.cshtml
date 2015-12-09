@@ -10,12 +10,12 @@
     {
         foreach (var error in Model.LoginViewModel.ErrorList)
         {
-            <div class="error-code">@error.Value</div>
+            <div class="error-code">@error</div>
 
         }
         foreach (var success in Model.LoginViewModel.SuccessList)
         {
-            <div class="success-code">@success.Value</div>
+            <div class="success-code">@success</div>
         }
     }
 </div>

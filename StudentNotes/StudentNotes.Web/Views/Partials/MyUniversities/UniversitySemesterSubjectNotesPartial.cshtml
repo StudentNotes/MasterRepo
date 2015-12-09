@@ -32,7 +32,7 @@
                 }
             </td>
             <td>
-                @Ajax.ActionLink("Usuń plik", "DeleteSemesterSubjectNote", "Note",
+                @Ajax.ActionLink("Usuń notatkę", "DeleteSemesterSubjectNote", "Note",
                new { noteId = Model.NoteList[i].NoteId, semesterSubjectId = Model.SemesterSubjectId },
                         new AjaxOptions()
                         {
@@ -83,7 +83,7 @@
                     HttpMethod = "POST",
                     InsertionMode = InsertionMode.Replace,
                     LoadingElementId = "loading",
-                    OnComplete = "HideModal"
+                    OnBegin = "HideModal"
                 },
                 new { enctype = "multipart/form-data", id = "shareUserForm" }))
                 {
@@ -138,7 +138,17 @@
                     
                 }*@
 
-                @using (Html.BeginForm("ShareNoteToGroup", "Note", FormMethod.Post, new { enctype = "multipart/form-data", hidden = true, id = "shareGroupForm" }))
+                @*@using (Html.BeginForm("ShareNoteToGroup", "Note", FormMethod.Post, new { enctype = "multipart/form-data", hidden = true, id = "shareGroupForm" }))
+                {*@
+                @using (Ajax.BeginForm("ShareNoteToGroup", "Note", null, new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading",
+                    OnBegin = "HideModal"
+                },
+                new { enctype = "multipart/form-data", id = "shareGroupForm", hidden = true}))
                 {
                     <label class="label col-xs-12">Udostępnij notatkę grupie:</label><br />
                     <input type="text" name="fileId" hidden id="fileIdTb2"/>

@@ -231,14 +231,20 @@ namespace StudentNotes.Logic.Services
         public int RemoveFileFromGroup(int fileId, int groupId)
         {
             _fileSharedGroupRepository.Delete(f => f.FileId == fileId && f.GroupId == groupId);
+            _fileSharedGroupRepository.Commit();
 
             var fileSharedUser = _userSharedFileRepository.GetMany(f => f.FileId == fileId);
             var fileSharedGroup = _fileSharedGroupRepository.GetMany(f => f.FileId == fileId);
 
-            if (fileSharedUser.Any() || fileSharedGroup.Any()) return 0;
+            if (fileSharedUser.Any() || fileSharedGroup.Any())
+            {
+                return 1;
+            }
             var fileToUpdate = _fileRepository.GetById(fileId);
             fileToUpdate.IsShared = false;
             _fileRepository.Update(fileToUpdate);
+
+            _unitOfWork.Commit();
             return 0;
         }
 
@@ -397,6 +403,15 @@ namespace StudentNotes.Logic.Services
         {
             var semesterSubject = _semesterSubjectRepository.GetById(semesterSubjectId);
             return semesterSubject != null;
+        }
+
+        public bool FileSharedToGroup(int fileId, int groupId, int semesterSubjectId)
+        {
+            var fstgEntity =
+                _fileSharedGroupRepository.Get(
+                    fsg => fsg.FileId == fileId && fsg.GroupId == groupId && fsg.SemesterSubjectId == semesterSubjectId);
+
+            return fstgEntity != null;
         }
 
         public void Commit()

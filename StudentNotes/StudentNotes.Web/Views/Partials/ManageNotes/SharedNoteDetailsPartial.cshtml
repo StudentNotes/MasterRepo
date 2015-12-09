@@ -66,7 +66,7 @@
                 </td>
                 <td>
                     @Ajax.ActionLink("Nie udostępniaj", "RemoveShareToGroup", "Note",
-                  new { fileId = Model.Note.NoteId, groupId = Model.SharedToGroupsList[i].GradeId, semesterSubjectId = Model.SharedToGroupsList[i].SemesterSubjectId },
+                  new { fileId = Model.Note.NoteId, groupId = Model.SharedToGroupsList[i].GroupId, semesterSubjectId = Model.SharedToGroupsList[i].SemesterSubjectId },
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",

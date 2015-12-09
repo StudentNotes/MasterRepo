@@ -42,6 +42,7 @@ namespace StudentNotes.Logic.ServiceInterfaces
         bool GroupExists(int groupId);
         bool GroupInSemesterExists(string groupName, int semesterId);
         bool SemesterSubjectExists(int semesterSubjectId);
+        bool FileSharedToGroup(int fileId, int groupId, int semesterSubjectId);
 
         void Commit();
     }

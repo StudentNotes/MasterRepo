@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StudentNotes.Logic.LogicInterfaces;
+using StudentNotes.Logic.LogicAbstraction;
 using File = StudentNotes.Repositories.DbModels.File;
 
 namespace StudentNotes.Logic.LogicModels

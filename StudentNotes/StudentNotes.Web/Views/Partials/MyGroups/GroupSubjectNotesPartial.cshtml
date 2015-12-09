@@ -73,8 +73,8 @@
                     }
                 </td>
                 <td>
-                    @Ajax.ActionLink("Usuń plik", "DeleteSemesterSubjectNote", "Note",
-            new { noteId = Model.GroupNotes[i].NoteId, semesterSubjectId = Model.SemesterSubjectId },
+                    @Ajax.ActionLink("Usuń plik", "DeleteGroupSemesterSubjectNote", "Group",
+            new { noteId = Model.GroupNotes[i].NoteId, groupId = Model.GroupId, semesterSubjectId = Model.SemesterSubjectId },
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",

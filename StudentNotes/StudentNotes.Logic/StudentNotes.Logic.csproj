@@ -80,7 +80,9 @@
     <Compile Include="Consts\Enums.cs" />
     <Compile Include="Consts\LogicConstants.cs" />
     <Compile Include="Consts\WebResponseCode.cs" />
-    <Compile Include="LogicInterfaces\INote.cs" />
+    <Compile Include="LogicAbstraction\INote.cs" />
+    <Compile Include="LogicAbstraction\RequestModelBase.cs" />
+    <Compile Include="LogicAbstraction\ResponseViewModelBase.cs" />
     <Compile Include="LogicModels\CategorySelector.cs" />
     <Compile Include="LogicModels\GroupBasics.cs" />
     <Compile Include="LogicModels\Note.cs" />
