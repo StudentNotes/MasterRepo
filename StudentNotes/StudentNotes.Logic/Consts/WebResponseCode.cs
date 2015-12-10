@@ -23,7 +23,7 @@ namespace StudentNotes.Logic.Consts
         public static string YouAreTheAdmin { get { return "Na osoba nie może zostać usunięta z grupy, gdyż jest jej administratorem."; } }
 
         public static string AllreadyJoinedToStudySubject { get { return "Nie możesz sie zapisać na ten kierunek studiów, gdyż juz jesteś do niego przypisany.";} }
-        public static string SemesterAlreadyContainsGroup { get { return "Ten semestr zawiera już grupę o wskazanej nazwie. Aby zapewnić unikalność grup w obrębie semestrów podaj inną nazwę"; } }
+        public static string SemesterAlreadyContainsGroup { get { return "Ten semestr zawiera już grupę o wskazanej nazwie. Aby zapewnić unikalność grup w obrębie semestrów podaj inną nazwę."; } }
 
         public static string SessionExpired { get { return "Twoja sesja wygasła. Zaloguj sie proszę ponownie."; } }
         public static string GlobalError { get { return "Akcja zakończona niepowodzeniem - błąd krytyczny!"; } }

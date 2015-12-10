@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using System.Web.WebPages;
-using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
+using StudentNotes.Logic.ViewModels.Authorization;
 using StudentNotes.Logic.ViewModels.Group;
 using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Web.Filters;
+using StudentNotes.Web.Models.ResourcesFinderLogic;
+using StudentNotes.Web.RequestViewModels.Group;
 
 namespace StudentNotes.Web.Controllers
 {
@@ -25,61 +23,73 @@ namespace StudentNotes.Web.Controllers
             _semesterSubjectService = semesterSubjectService;
         }
 
-        public ActionResult CreateGroup(string groupName, string groupDescription, int semesterId)
+        [HttpPost]
+        public ActionResult CreateGroup(CreateGroupRequest request)
         {
-            HomeViewModel model = new HomeViewModel();
+            var response = request.Validate();
+            if (!request.IsValid)
+            {
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("GroupCreatedRedirect");
+            }
 
-            if (groupName.IsEmpty() || semesterId == null || semesterId == 0)
+            var responseCode = _groupService.AddGroup(request.GroupName, request.GroupDescription, (int) Session["CurrentUserId"], request.SemesterId);
+            if (responseCode != 0)
             {
-                model.LoginViewModel.ErrorList.Add(WebResponseCode.GroupNameEmpty);
-                return View("~/Views/LoggedIn/Index.cshtml", model);
-            }
-            if (_groupService.GroupInSemesterExists(groupName, semesterId))
-            {               
-                model.LoginViewModel.ErrorList.Add(WebResponseCode.SemesterAlreadyContainsGroup);
-                return View("~/Views/LoggedIn/Index.cshtml", model);
-            }
-            var response = _groupService.AddGroup(groupName, groupDescription, (int) Session["CurrentUserId"], semesterId);
-            if (response != 0)
-            {
-                model.LoginViewModel.ErrorList.Add(WebResponseCode.GlobalError);
-                return View("~/Views/LoggedIn/Index.cshtml", model);
+                response.AddError(ResourceKeyResolver.ErrorCriticalFailure);
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("GroupCreatedRedirect");
             }
 
             _groupService.Commit();
-            model.LoginViewModel.SuccessList.Add(WebResponseCode.GroupAddedSuccessfully);
-            return View("~/Views/LoggedIn/Index.cshtml", model);
 
+            response.AddSuccess(ResourceKeyResolver.SuccessGroupAdded);
+            TempData["ResponseViewModel"] = response;
+
+            return RedirectToAction("GroupCreatedRedirect");
         }
 
         [HttpGet]
-        public ActionResult ShowGroupSemesters(int groupId, string groupName)
+        public ActionResult GroupCreatedRedirect()
+        {
+            HomeViewModel model = new HomeViewModel();
+            var responseModel = TempData["ResponseViewModel"];
+            if (responseModel != null)
+            {
+                model.LoginViewModel = (LoginViewModel)responseModel;
+            }
+
+            return View("~/Views/LoggedIn/Index.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult ShowGroupSemesters(ShowGroupSemestersRequest request)
         {
             GroupSemestersModel model = new GroupSemestersModel();
-            model.SemesterList = _groupService.GetGroupSemesters(groupId).ToList();
-            model.GroupId = groupId;
-            model.GroupName = groupName;
+            model.SemesterList = _groupService.GetGroupSemesters(request.GroupId).ToList();
+            model.GroupId = request.GroupId;
+            model.GroupName = request.GroupName;
 
             //if (model.SemesterList.Count == 1)
             //{
-            //    var semesterId = model.SemesterList[0].SemesterId;
-            //    var semesterName = string.Format("Semestr {0}", model.SemesterList[0].SemesterNumber);
-            //    return RedirectToAction("ShowSubjects", new{semesterId, groupId, semesterName, groupName});
+            //    var SemesterId = model.SemesterList[0].SemesterId;
+            //    var SemesterName = string.Format("Semestr {0}", model.SemesterList[0].SemesterNumber);
+            //    return RedirectToAction("ShowSubjects", new { SemesterId, request.GroupId, SemesterName, request.GroupName });
             //}
 
             return PartialView("~/Views/Partials/MyGroups/GroupSemestersPartial.cshtml", model);
         }
 
         [HttpGet]
-        public ActionResult ShowSubjects(int semesterId, int groupId, string semesterName, string groupName)
+        public ActionResult ShowSubjects(ShowGroupSubjectsRequest request)
         {
             GroupSemesterSubjectsViewModel model = new GroupSemesterSubjectsViewModel
             {
-                SemesterSubjectList = _semesterSubjectService.GetSemesterSubjects(semesterId).ToList(),
-                SemesterId = semesterId,
-                SemesterName = semesterName,
-                GroupId = groupId,
-                GroupName = groupName
+                SemesterSubjectList = _semesterSubjectService.GetSemesterSubjects(request.SemesterId).ToList(),
+                SemesterId = request.SemesterId,
+                SemesterName = request.SemesterName,
+                GroupId = request.GroupId,
+                GroupName = request.GroupName
             };
 
             return PartialView("~/Views/Partials/MyGroups/GroupSemesterSubjectsPartial.cshtml", model);
@@ -87,17 +97,17 @@ namespace StudentNotes.Web.Controllers
 
         
         [HttpGet]
-        public ActionResult ShowGroupNotes(int semesterSubjectId, int semesterId, int groupId)
+        public ActionResult ShowGroupNotes(ShowGroupNotesRequest request)
         {
-            GroupSubjectNotesViewModel model = new GroupSubjectNotesViewModel();
-            var groupNotes = _groupService.GetGroupSemesterSubjectFiles(groupId, semesterSubjectId).ToList();
+            var model = new GroupSubjectNotesViewModel();
+            var groupNotes = _groupService.GetGroupSemesterSubjectFiles(request.GroupId, request.SemesterSubjectId).ToList();
             foreach (var file in groupNotes)
             {
                 model.GroupNotes.Add(new Note(file));
             }
-            var semesterSubject = _semesterSubjectService.GetSemesterSubjectById(semesterSubjectId);
-            var group = _groupService.GetGroupById(groupId);
-            var semester = _semesterSubjectService.GetSemesterById(semesterId);
+            var semesterSubject = _semesterSubjectService.GetSemesterSubjectById(request.SemesterSubjectId);
+            var group = _groupService.GetGroupById(request.GroupId);
+            var semester = _semesterSubjectService.GetSemesterById(request.SemesterId);
 
             model.SemesterId = semester.SemesterId;
             model.SemesterName = string.Format("Semestr {0}", semester.SemesterNumber);
@@ -110,7 +120,7 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteGroupSemesterSubjectNote(int noteId, int groupId, int semesterSubjectId)
+        public ActionResult DeleteGroupSemesterSubjectNote(DeleteGroupNoteRequest request)
         {
 
             return RedirectToAction("ShowGroupNotes");

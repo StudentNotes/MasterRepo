@@ -424,4 +424,19 @@
   <data name="SuccessNoteUploaded" xml:space="preserve">
     <value>Notatka została zapisana na serwerze!</value>
   </data>
+  <data name="ErrorCriticalFailure" xml:space="preserve">
+    <value>Akcja zakończona niepowodzeniem - błąd krytyczny!</value>
+  </data>
+  <data name="ErrorGroupNameEmpty" xml:space="preserve">
+    <value>Nie podałeś nazwy grupy!</value>
+  </data>
+  <data name="ErrorSemesterAlreadyContainsGroup" xml:space="preserve">
+    <value>Ten semestr zawiera już grupę o wskazanej nazwie. Aby zapewnić unikalność grup w obrębie semestrów podaj inną nazwę.</value>
+  </data>
+  <data name="ErrorSemesterDoesntExist" xml:space="preserve">
+    <value>Przepraszamy, ale na wybranym kierunku nie ma takiego semestru.</value>
+  </data>
+  <data name="SuccessGroupAdded" xml:space="preserve">
+    <value>Grupa została dodana do semestru z powodzeniem, a Ty jesteś jej administratorem!</value>
+  </data>
 </root>

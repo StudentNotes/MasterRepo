@@ -241,9 +241,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\NinjectResolver.cs" />
     <Compile Include="Models\ResourcesFinderLogic\ResourceFinder.cs" />
     <Compile Include="Models\ResourcesFinderLogic\ResourceKeyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestViewModels\Group\CreateGroupRequest.cs" />
+    <Compile Include="RequestViewModels\Group\DeleteGroupNoteRequest.cs" />
+    <Compile Include="RequestViewModels\Group\ShowGroupNotesRequest.cs" />
+    <Compile Include="RequestViewModels\Group\ShowGroupSemestersRequest.cs" />
+    <Compile Include="RequestViewModels\Group\ShowGroupSubjectsRequest.cs" />
     <Compile Include="RequestViewModels\SendFileRequest.cs" />
     <Compile Include="RequestViewModels\University\JoinUniversityRequest.cs" />
     <Compile Include="Resources\Lang.pl.Designer.cs">

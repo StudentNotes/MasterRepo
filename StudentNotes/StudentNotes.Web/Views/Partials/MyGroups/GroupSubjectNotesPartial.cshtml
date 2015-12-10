@@ -6,7 +6,7 @@
     <ol class="breadcrumb">
         <li>
             @Ajax.ActionLink(Model.GroupName, "ShowGroupSemesters", "Group",
-                new { groupId = Model.GroupId, groupName = Model.GroupName },
+                new { Model.GroupId, Model.GroupName },
                 new AjaxOptions()
                 {
                     UpdateTargetId = "page-content",
@@ -18,7 +18,7 @@
         </li>
         <li>
             @Ajax.ActionLink(Model.SemesterName, "ShowSubjects", "Group",
-                new {semesterId = Model.SemesterId, groupId = Model.GroupId, semesterName = Model.SemesterName, groupName = Model.GroupName},
+                new {Model.SemesterId, Model.GroupId, Model.SemesterName, Model.GroupName},
                 new AjaxOptions()
                 {
                     UpdateTargetId = "page-content",
@@ -30,7 +30,7 @@
         </li>
         <li class="active">
             @Ajax.ActionLink(Model.SemesterSubjectName, "ShowGroupNotes", "Group",
-                new { semesterSubjectId = Model.SemesterSubjectId, semesterId = Model.SemesterId, groupId = Model.GroupId},
+                new { Model.SemesterSubjectId, Model.SemesterId, Model.GroupId},
                 new AjaxOptions()
                 {
                     UpdateTargetId = "page-content",
@@ -74,7 +74,7 @@
                 </td>
                 <td>
                     @Ajax.ActionLink("Usuń plik", "DeleteGroupSemesterSubjectNote", "Group",
-            new { noteId = Model.GroupNotes[i].NoteId, groupId = Model.GroupId, semesterSubjectId = Model.SemesterSubjectId },
+            new { Model.GroupNotes[i].NoteId, Model.GroupId, Model.SemesterSubjectId },
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",

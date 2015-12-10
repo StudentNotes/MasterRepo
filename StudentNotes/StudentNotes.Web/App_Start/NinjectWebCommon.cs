@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DependencyResolver.Modules;
 using Ninject.Modules;
 using StudentNotes.DependencyResolver.Modules;
+using StudentNotes.Web.Models;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StudentNotes.Web.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StudentNotes.Web.NinjectWebCommon), "Stop")]
@@ -44,7 +45,7 @@ namespace StudentNotes.Web
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            var kernel = NinjectResolver.GetKernel();
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);

@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using System.Web.WebPages;
-
+using Ninject.Web.Mvc;
 using StudentNotes.Logic.LogicAbstraction;
 using StudentNotes.Logic.ServiceInterfaces;
+using StudentNotes.Logic.Services;
 using StudentNotes.Logic.ViewModels.Authorization;
+using StudentNotes.Web.Models;
 using StudentNotes.Web.Models.ResourcesFinderLogic;
 
 namespace StudentNotes.Web.RequestViewModels.University
@@ -13,10 +15,6 @@ namespace StudentNotes.Web.RequestViewModels.University
         public string UniversityName { get; set; }
         public string Year { get; set; }
         public string UniversitySubject { get; set; }
-
-        //public JoinUniversityRequest() { }
-
-        public JoinUniversityRequest(ISchoolService schoolService):base(schoolService){}
 
         public override ResponseViewModelBase Validate()
         {
@@ -28,8 +26,7 @@ namespace StudentNotes.Web.RequestViewModels.University
                 response.AddError(ResourceKeyResolver.ErrorWrongDataPassed);
                 return response;
             }
-
-            var university = SchoolService.GetSchoolByName(UniversityName);
+            var university = NinjectResolver.GetInstance<ISchoolService>().GetSchoolByName(UniversityName);
             if (university == null)
             {
                 IsValid = false;

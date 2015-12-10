@@ -46,7 +46,7 @@
                 @foreach (var group in Model.GroupList)
                 {
                     @Ajax.ActionLink(group.Value, "ShowGroupSemesters", "Group",
-                        new { groupId = group.Key, groupName = group.Value},
+                        new { GroupId = group.Key, GroupName = group.Value},
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",

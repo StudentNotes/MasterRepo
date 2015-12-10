@@ -5,7 +5,7 @@
     <ol class="breadcrumb">
         <li class="active">
             @Ajax.ActionLink(Model.GroupName, "ShowGroupSemesters", "Group",
-                    new { groupId = Model.GroupId, groupName = Model.GroupName },
+                    new { Model.GroupId, Model.GroupName },
                     new AjaxOptions()
                     {
                         UpdateTargetId = "page-content",
@@ -24,7 +24,7 @@
             <div class="folder-name">
 
                 @Ajax.ActionLink(string.Format("Semestr {0}", item.SemesterNumber), "ShowSubjects", "Group",
-                 new { semesterId = item.SemesterId, groupId = Model.GroupId, semesterName = string.Format("Semestr {0}", item.SemesterNumber), groupName = Model.GroupName},
+                 new {item.SemesterId, Model.GroupId, SemesterName = string.Format("Semestr {0}", item.SemesterNumber), Model.GroupName},
                     new AjaxOptions()
                     {
                         UpdateTargetId = "page-content",

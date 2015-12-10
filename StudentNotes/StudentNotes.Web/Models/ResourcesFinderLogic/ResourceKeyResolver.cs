@@ -411,6 +411,38 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("SuccessJoinedStudySubject"); }
         }
+        public static string ErrorGroupNameEmpty
+        {
+            get { return ResourceFinder.GetResource("ErrorGroupNameEmpty"); }
+        }
+        public static string ErrorSemesterAlreadyContainsGroup
+        {
+            get { return ResourceFinder.GetResource("ErrorSemesterAlreadyContainsGroup"); }
+        }
+        public static string ErrorCriticalFailure
+        {
+            get { return ResourceFinder.GetResource("ErrorCriticalFailure"); }
+        }
+        public static string SuccessGroupAdded
+        {
+            get { return ResourceFinder.GetResource("SuccessGroupAdded"); }
+        }
+        public static string ErrorSemesterDoesntExist
+        {
+            get { return ResourceFinder.GetResource("ErrorSemesterDoesntExist"); }
+        }
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

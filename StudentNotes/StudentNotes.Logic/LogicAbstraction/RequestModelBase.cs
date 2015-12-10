@@ -9,16 +9,7 @@ namespace StudentNotes.Logic.LogicAbstraction
 {
     public abstract class RequestModelBase
     {
-        protected readonly ISchoolService SchoolService;
-
         public bool IsValid { get; set; }
-
-        protected RequestModelBase() { }
-
-        protected RequestModelBase(ISchoolService schoolService)
-        {
-            SchoolService = schoolService;
-        }
 
         public abstract ResponseViewModelBase Validate();
     }
