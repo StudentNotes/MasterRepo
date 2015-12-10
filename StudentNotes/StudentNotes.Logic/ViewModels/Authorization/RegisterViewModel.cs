@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.Logic.LogicAbstraction;
+using StudentNotes.Logic.ViewModels.Validation;
 
 namespace StudentNotes.Logic.ViewModels.Authorization
 {
-    public class RegisterViewModel : RequestModelBase
+    public class RegisterViewModel
     {
         public string Email { get; set; }
         public string Password { get; set; }
@@ -20,11 +21,6 @@ namespace StudentNotes.Logic.ViewModels.Authorization
         public RegisterViewModel()
         {
             ErrorList = new Dictionary<string, string>();
-        }
-
-        public override ResponseViewModelBase Validate()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -3,10 +3,10 @@ using DependencyResolver.Modules;
 using Ninject.Modules;
 using StudentNotes.DependencyResolver.Modules;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StudentNotesWeb.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StudentNotesWeb.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StudentNotes.Web.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StudentNotes.Web.NinjectWebCommon), "Stop")]
 
-namespace StudentNotesWeb.App_Start
+namespace StudentNotes.Web
 {
     using System;
     using System.Web;

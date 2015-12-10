@@ -390,8 +390,47 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("SuccessNoteUploaded"); }
         }
+        public static string ErrorUniversityDoesntExist
+        {
+            get { return ResourceFinder.GetResource("ErrorUniversityDoesntExist"); }
+        }
+        public static string ErrorUniversityGradeDoesntExist
+        {
+            get { return ResourceFinder.GetResource("ErrorUniversityGradeDoesntExist"); }
+        }
+        public static string ErrorStudySubjectDoesntExist
+        {
+            get { return ResourceFinder.GetResource("ErrorStudySubjectDoesntExist"); }
+        }
 
-
+        public static string ErrorAllreadyJoinedToStudySubject
+        {
+            get { return ResourceFinder.GetResource("ErrorAllreadyJoinedToStudySubject"); }
+        }
+        public static string SuccessJoinedStudySubject
+        {
+            get { return ResourceFinder.GetResource("SuccessJoinedStudySubject"); }
+        }
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

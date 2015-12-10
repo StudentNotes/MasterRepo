@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using StudentNotes.Logic.ServiceInterfaces;
@@ -116,19 +115,18 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public JsonResult SemesterSubjectsSuggestions(string term)
         {
-            var universitiesList = new List<string>()
-            {
-                "Informatyka",
-                "Analiza Matematyczna",
-                "Algerbra Liniowa",
-                "Informatyka 2"
-            };
+            var subjects = _studySubjectService.GetAllSubjects().OrderBy(s => s.Name).Select(s => s.Name).ToList();
 
-            var filteredUniversities = universitiesList.Where(
-                university => university.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
+            if (subjects.Count == 0)
+            {
+                return null;
+            }
+
+            var filteredSubjects = subjects.Where(
+                subject => subject.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
                 );
 
-            return Json(filteredUniversities, JsonRequestBehavior.AllowGet);
+            return Json(filteredSubjects, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

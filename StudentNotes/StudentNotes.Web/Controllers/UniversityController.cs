@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.WebPages;
 using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
+using StudentNotes.Logic.ViewModels.Authorization;
 using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.LoggedIn;
 using StudentNotes.Logic.ViewModels.University;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Web.Filters;
+using StudentNotes.Web.Models.ResourcesFinderLogic;
+using StudentNotes.Web.RequestViewModels.University;
 
 namespace StudentNotes.Web.Controllers
 {
@@ -30,27 +29,18 @@ namespace StudentNotes.Web.Controllers
 
         // GET: University
         [HttpPost]
-        public ActionResult JoinToUniversity(string universityName, string year, string universitySubject)
+        public ActionResult JoinToUniversity(JoinUniversityRequest request)
         {
-            if (universitySubject.IsEmpty() || universityName.IsEmpty() || year.IsEmpty())
+            var response = request.Validate();
+            if (!request.IsValid)
             {
-                return RedirectToAction("StudySubjectJoinedRedirect", new {errorCode = (int)ErrorCode.WrongDataPassed});
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("StudySubjectJoinedRedirect");
             }
-            var university = _schoolService.GetSchoolByName(universityName);
-            if (university == null)
-            {
-                return RedirectToAction("StudySubjectJoinedRedirect", new { errorCode = (int)ErrorCode.UniversityDoesntExist });
-            }
-            var grade = university.Grade.FirstOrDefault(g => g.Year == year);
-            if (grade == null)
-            {
-                return RedirectToAction("StudySubjectJoinedRedirect", new { errorCode = (int)ErrorCode.UniversityGradeDoesntExist });
-            }
-            var studySubject = grade.StudySubject.FirstOrDefault(ss => ss.Name == universitySubject);
-            if (studySubject == null)
-            {
-                return RedirectToAction("StudySubjectJoinedRedirect", new { errorCode = (int)ErrorCode.StudySubjectDoesntExist });
-            }
+
+            var university = _schoolService.GetSchoolByName(request.UniversityName);
+            var grade = university.Grade.FirstOrDefault(g => g.Year == request.Year);
+            var studySubject = grade.StudySubject.FirstOrDefault(ss => ss.Name == request.UniversitySubject);
 
             if (!_schoolService.UserAddedToSchool((int) Session["CurrentUserId"], university.SchoolId))
             {
@@ -59,9 +49,10 @@ namespace StudentNotes.Web.Controllers
 
             if (_schoolService.UserJoinedStudySubject((int) Session["CurrentUserId"], studySubject.StudySubjectId))
             {
-                return RedirectToAction("StudySubjectJoinedRedirect", new { errorCode = (int)ErrorCode.AllreadyJoinedToStudySubject });
+                response.AddError(ResourceKeyResolver.ErrorAllreadyJoinedToStudySubject);
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("StudySubjectJoinedRedirect");
             }
-
             
             foreach (var semester in studySubject.Semester)
             {
@@ -73,33 +64,17 @@ namespace StudentNotes.Web.Controllers
             }
             _schoolService.Commit();
 
-            return RedirectToAction("StudySubjectJoinedRedirect", new { errorCode = 0 });
+            return RedirectToAction("StudySubjectJoinedRedirect");
         }
 
         [HttpGet]
-        public ActionResult StudySubjectJoinedRedirect(int errorCode)
+        public ActionResult StudySubjectJoinedRedirect()
         {
             HomeViewModel model = new HomeViewModel();
-            switch (errorCode)
+            var responseModel = TempData["ResponseViewModel"];
+            if (responseModel != null)
             {
-                case 0:
-                    model.LoginViewModel.SuccessList.Add(WebResponseCode.JoinedStudySubject);
-                    break;
-                case (int)ErrorCode.UniversityDoesntExist:
-                    model.LoginViewModel.ErrorList.Add(WebResponseCode.UniversityDoesntExist);
-                    break;
-                case (int)ErrorCode.UniversityGradeDoesntExist:
-                    model.LoginViewModel.ErrorList.Add(WebResponseCode.UniversityGradeDoesntExist);
-                    break;
-                case (int)ErrorCode.StudySubjectDoesntExist:
-                    model.LoginViewModel.ErrorList.Add(WebResponseCode.StudySubjectDoesntExist);
-                    break;
-                case (int)ErrorCode.WrongDataPassed:
-                    model.LoginViewModel.ErrorList.Add(WebResponseCode.WrongDataPassed);
-                    break;
-                case (int)ErrorCode.AllreadyJoinedToStudySubject:
-                    model.LoginViewModel.ErrorList.Add(WebResponseCode.AllreadyJoinedToStudySubject);
-                    break;
+                model.LoginViewModel = (LoginViewModel) responseModel;
             }
             return View("~/Views/LoggedIn/Index.cshtml", model);
         }

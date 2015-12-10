@@ -400,11 +400,26 @@
   <data name="ConstJoinUniversity" xml:space="preserve">
     <value>Zapisz się na kierunek</value>
   </data>
+  <data name="ErrorAllreadyJoinedToStudySubject" xml:space="preserve">
+    <value>Nie możesz sie zapisać na ten kierunek studiów, gdyż juz jesteś do niego przypisany.</value>
+  </data>
   <data name="ErrorFileNotChoosen" xml:space="preserve">
     <value>Nie wybrałeś żadnego pliku do wysłania!</value>
   </data>
+  <data name="ErrorStudySubjectDoesntExist" xml:space="preserve">
+    <value>Wybrana uczelnia nie oferuje podanego kierunku kształcenia.</value>
+  </data>
+  <data name="ErrorUniversityDoesntExist" xml:space="preserve">
+    <value>Niestety taka szkoła nie istnieje w serwisie StudentNotes.</value>
+  </data>
+  <data name="ErrorUniversityGradeDoesntExist" xml:space="preserve">
+    <value>Wybrana uczelnia nie przyjmowała w danym roku studentów/uczniów.</value>
+  </data>
   <data name="ErrorWrongDataPassed" xml:space="preserve">
     <value>Nie wprowadziłeś wszystkich wymaganych danych. Dlatego nie mogę przeprowadzić wybranej operacji.</value>
+  </data>
+  <data name="SuccessJoinedStudySubject" xml:space="preserve">
+    <value>Gratuluję! Zapisałeś sie na wybrany kierunek studiów.</value>
   </data>
   <data name="SuccessNoteUploaded" xml:space="preserve">
     <value>Notatka została zapisana na serwerze!</value>
