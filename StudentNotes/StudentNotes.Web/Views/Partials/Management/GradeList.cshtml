@@ -11,10 +11,10 @@
         </div>
         <div class="col-xs-2 buttonArea">
             @Ajax.ActionLink("Usuń ", "DeleteGradeFromSchool", "Management",
-            new { schoolId = Model.UniversityId, year = Model.GradeList.ElementAt(i).Year },
+            new { Model.UniversityId, SchoolGrade = Model.GradeList.ElementAt(i).Year },
             new AjaxOptions()
             {
-                UpdateTargetId = "gradeList",
+                UpdateTargetId = "page-content",
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace
             },

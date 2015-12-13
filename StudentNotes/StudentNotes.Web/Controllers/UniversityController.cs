@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Authorization;
@@ -76,46 +75,72 @@ namespace StudentNotes.Web.Controllers
             {
                 model.LoginViewModel = (LoginViewModel) responseModel;
             }
-            return View("~/Views/LoggedIn/Index.cshtml", model);
+            return View("~/Views/LoggedIn/Processed.cshtml", model);
         }
 
         [HttpGet]
         public ActionResult ShowStudySubjects(int universityId)
         {
+            var university = _schoolService.GetSchoolById(universityId);
+
             MyUniversitiesViewModel model = _schoolService.GetStudySubjectsBySchoolAndUserId(universityId,
                 (int) Session["CurrentUserId"]);
-
+            model.UniversityId = university.SchoolId;
+            model.UniversityName = university.Name;
             
             return PartialView("~/Views/Partials/MyUniversities/UniversitySubjectsPartial.cshtml", model);
         }
 
         [HttpGet]
-        public ActionResult ShowSemesters(int studySubjectId)
+        public ActionResult ShowSemesters(int studySubjectId, string studySubjectName, int universityId, string universityName)
         {
-            List<Semester> semesters = _schoolService.GetSemestersByStudySubjectId(studySubjectId).ToList();
-            return PartialView("~/Views/Partials/MyUniversities/UniversitySemestersPartial.cshtml", semesters);
+            var model = new UniversityGradeSemestersViewModel
+            {
+                UniversityId = universityId,
+                UniversityName = universityName,
+                StudySubjectId = studySubjectId,
+                StudySubjectName = studySubjectName,
+                Semesters = _schoolService.GetSemestersByStudySubjectId(studySubjectId).ToList()
+            };
+            return PartialView("~/Views/Partials/MyUniversities/UniversitySemestersPartial.cshtml", model);
         }
 
         [HttpGet]
         public ActionResult ShowSubjects(int semesterId)
         {
-            List<SemesterSubject> semesterSubjects =
-                _schoolService.GetSemesterSubjectsBySemesterId(semesterId).OrderBy(g => g.Name).ToList();
+            var model = new UniversitySemesterSubjectsViewModel();
+            var semesterPath = _schoolService.GetSemesterPath(semesterId);
+            model.UniversityId = semesterPath.UniversityId;
+            model.UniversityName = semesterPath.UniversityName;
+            model.StudySubjectName = semesterPath.ShortenGradeSubject();
+            model.StudySubjectId = semesterPath.StudySubjectId;
+            model.SemesterId = semesterPath.SemesterId;
+            model.SemesterName = semesterPath.SemesterName;
+            model.SemesterSubjects = _schoolService.GetSemesterSubjectsBySemesterId(semesterId).OrderBy(g => g.Name).ToList();
 
-            return PartialView("~/Views/Partials/MyUniversities/UniversitySemesterSubjectsPartial.cshtml", semesterSubjects);
+            return PartialView("~/Views/Partials/MyUniversities/UniversitySemesterSubjectsPartial.cshtml", model);
         }
 
         [HttpGet]
         public ActionResult ShowNotes(int semesterSubjectId)
         {
-            SemesterSubjectNoteViewModel model = new SemesterSubjectNoteViewModel();
+            var model = new UniversitySemesterSubjectNotesViewModel();
+            var semesterSubjectPath = _schoolService.GetSemesterSubjectPath(semesterSubjectId);
+
+            model.UniversityId = semesterSubjectPath.UniversityId;
+            model.UniversityName = semesterSubjectPath.UniversityName;
+            model.StudySubjectName = semesterSubjectPath.ShortenGradeSubject();
+            model.StudySubjectId = semesterSubjectPath.StudySubjectId;
+            model.SemesterId = semesterSubjectPath.SemesterId;
+            model.SemesterName = semesterSubjectPath.SemesterName;
+            model.SemesterSubjectId = semesterSubjectPath.SemesterSubjectId;
+            model.SemesterSubjectName = semesterSubjectPath.SemesterSubjectName;
 
             var files = _fileService.GetSemesterSubjectFilesByUserId(semesterSubjectId, (int)Session["CurrentUserId"]).ToList();
             foreach (var file in files)
             {
-                model.NoteList.Add(new Note(file));
+                model.Notes.Add(new Note(file));
             }
-            model.SemesterSubjectId = semesterSubjectId;
 
             return PartialView("~/Views/Partials/MyUniversities/UniversitySemesterSubjectNotesPartial.cshtml", model);
         }

@@ -1,40 +1,57 @@
 ﻿@*Moje Notatki -> Udostępnione*@
 @using StudentNotes.Logic.Consts
 @using StudentNotes.Logic.LogicModels
+@using StudentNotes.Web.Models.ResourcesFinderLogic
 @model List<StudentNotes.Logic.ViewModels.File.SharedNotesViewModel>
 @{
     Layout = null;
 }
+<div class="col-xs-12 folder-view">
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Lp.</th>
-            <th>Nazwa</th>
-            <th>Kategoria</th>
-            <th>Typ notatki</th>
-            <th></th>
-        </tr>
-    </thead>
-    @for (int i = 0; i < Model.Count; i++)
-    {
-        <tr>
-            <td>@(i + 1)</td>
-            <td>
-                <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model[i].Category)" style="max-height: 34px;" />
-                @Model[i].Name
-            </td>
-            <td>@Model[i].Category</td>
-            @if (Model[i].Type == NoteType.Private)
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(ResourceKeyResolver.ConstSharedNotes, "SharedNotes", "Note",
+            null,
+            new AjaxOptions()
             {
-                <td>Prywatna</td>
-            }
-            else
-            {
-                <td>Uczelniana</td>
-            }
-            <td>
-                @Ajax.ActionLink("Szczegóły udostępnienia", "SharedNoteDetails", "Note",
+                UpdateTargetId = "page-content",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loading"
+            },
+            new { })
+        </li>
+    </ol>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Typ notatki</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model[i].Category)" style="max-height: 34px;" />
+                    @Model[i].Name
+                </td>
+                <td>@Model[i].Category</td>
+                @if (Model[i].Type == NoteType.Private)
+                {
+                    <td>Prywatna</td>
+                }
+                else
+                {
+                    <td>Uczelniana</td>
+                }
+                <td>
+                    @Ajax.ActionLink("Szczegóły udostępnienia", "SharedNoteDetails", "Note",
                     new { fileId = Model[i].NoteId },
                     new AjaxOptions()
                     {
@@ -44,7 +61,9 @@
                         LoadingElementId = "loading"
                     },
                     new { @class = "btn btn-info" })
-            </td>
-        </tr>
-    }
-</table>
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>

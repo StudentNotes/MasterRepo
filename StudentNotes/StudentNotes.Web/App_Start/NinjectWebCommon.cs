@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DependencyResolver.Modules;
 using Ninject.Modules;
 using StudentNotes.DependencyResolver.Modules;
-using StudentNotes.Web.Models;
+using StudentNotes.Logic.Models;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StudentNotes.Web.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StudentNotes.Web.NinjectWebCommon), "Stop")]

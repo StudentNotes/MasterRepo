@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StudentNotes.Logic.LogicAbstraction;
+﻿using StudentNotes.Logic.LogicAbstraction;
 
 namespace StudentNotes.Logic.ViewModels.Authorization
 {

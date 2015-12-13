@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ViewModels.LoggedIn;
+using StudentNotes.Logic.ViewModels.University;
 using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.ServiceInterfaces
@@ -27,6 +23,8 @@ namespace StudentNotes.Logic.ServiceInterfaces
         #endregion
 
         #region GradeServices
+
+        bool SchoolContainsGrade(int schoolId, string schoolGrade);
         int AddGradeToSchool(int schoolId, string year);
         int RemoveGradeFromSchool(int schoolId, string year);
         int RemoveSchool(int schoolId);
@@ -60,6 +58,8 @@ namespace StudentNotes.Logic.ServiceInterfaces
         IEnumerable<SemesterSubject> GetSemesterSubjectsBySemesterId(int semesterId);
         int AddSemesterSubject(int semesterId, string semesterSubjectName);
         int RemoveSemesterSubjectById(int semesterSubjectId);
+        SemesterSubjectPathViewModel GetSemesterSubjectPath(int semesterSubjectId);
+        SemesterSubjectPathViewModel GetSemesterPath(int semesterId);
 
         #endregion
 

@@ -1,5 +1,7 @@
 ﻿@model StudentNotes.Logic.ViewModels.Common.UniversityGradeStudySubjectViewModel
 
+@Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+
 <div id="subjectManagement" class="col-xs-12">
     <div class="col-xs-6">
         <ul class="list-group">

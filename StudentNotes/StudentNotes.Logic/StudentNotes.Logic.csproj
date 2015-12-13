@@ -40,6 +40,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -78,6 +82,11 @@
   <ItemGroup>
     <Compile Include="Authorization\StudentNotesUser.cs" />
     <Compile Include="Consts\Enums.cs" />
+    <Compile Include="Consts\Lang.pl.Designer.cs">
+      <DependentUpon>Lang.pl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Consts\LogicConstants.cs" />
     <Compile Include="Consts\WebResponseCode.cs" />
     <Compile Include="LogicAbstraction\INote.cs" />
@@ -87,7 +96,10 @@
     <Compile Include="LogicModels\GroupBasics.cs" />
     <Compile Include="LogicModels\Note.cs" />
     <Compile Include="LogicModels\SecureUserModel.cs" />
+    <Compile Include="Models\NinjectResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourcesFinderLogic\ResourceFinder.cs" />
+    <Compile Include="ResourcesFinderLogic\ResourceKeyResolver.cs" />
     <Compile Include="ServiceInterfaces\IFileService.cs" />
     <Compile Include="ServiceInterfaces\IGroupService.cs" />
     <Compile Include="ServiceInterfaces\ISchoolService.cs" />
@@ -110,14 +122,14 @@
     <Compile Include="ViewModels\Common\SubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\UniversityGradeStudySubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\UniversityViewModel.cs" />
+    <Compile Include="ViewModels\Common\UserViewModel.cs" />
+    <Compile Include="ViewModels\File\FileUploadViewModel.cs" />
     <Compile Include="ViewModels\File\SharedNotesViewModel.cs" />
     <Compile Include="ViewModels\File\UserNotesViewModel.cs" />
-    <Compile Include="ViewModels\File\FileUploadViewModel.cs" />
     <Compile Include="ViewModels\Group\GroupSemestersModel.cs" />
     <Compile Include="ViewModels\Group\GroupSemesterSubjectsViewModel.cs" />
     <Compile Include="ViewModels\Group\GroupSubjectNotesViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeViewModel.cs" />
-    <Compile Include="ViewModels\Common\UserViewModel.cs" />
     <Compile Include="ViewModels\JSON\SearchJson.cs" />
     <Compile Include="ViewModels\JSON\SemesterJson.cs" />
     <Compile Include="ViewModels\JSON\SemesterSubjectJson.cs" />
@@ -129,8 +141,12 @@
     <Compile Include="ViewModels\ManageGroups\GroupDetailsViewModel.cs" />
     <Compile Include="ViewModels\ManageGroups\ManageGroupViewModel.cs" />
     <Compile Include="ViewModels\ManageNotes\SharedNoteDetailsViewModel.cs" />
-    <Compile Include="ViewModels\University\SemesterSubjectNoteViewModel.cs" />
+    <Compile Include="ViewModels\University\SemesterSubjectPathViewModel.cs" />
+    <Compile Include="ViewModels\University\UniversityGradeSemestersViewModel.cs" />
+    <Compile Include="ViewModels\University\UniversitySemesterSubjectNotesViewModel.cs" />
+    <Compile Include="ViewModels\University\UniversitySemesterSubjectsViewModel.cs" />
     <Compile Include="ViewModels\Validation\FormInputValidator.cs" />
+    <Compile Include="ViewModels\Validation\ResponseMessageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FullTextSearch\CreatingFTSStructures.txt" />
@@ -141,7 +157,12 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Consts\Lang.pl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

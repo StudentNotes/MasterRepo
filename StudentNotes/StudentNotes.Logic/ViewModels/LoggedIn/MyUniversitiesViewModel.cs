@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.ViewModels.LoggedIn
 {
     public class MyUniversitiesViewModel
     {
+        public int UniversityId { get; set; } 
+        public string UniversityName { get; set; }
         public List<Grade> Grades { get; set; }
         public List<StudySubject> StudySubjects { get; set; } 
 

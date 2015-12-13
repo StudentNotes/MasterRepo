@@ -1,23 +1,62 @@
 ﻿@*Moje Uczelnie -> Konkretna Uczelnia -> Konkretny semestr -> Widok na poszczególne przedmioty*@
-@model List<StudentNotes.Repositories.DbModels.SemesterSubject>
-           
+@model StudentNotes.Logic.ViewModels.University.UniversitySemesterSubjectsViewModel
+
 <div class="col-xs-12 folder-view">
-    @foreach (var item in Model)
+    <ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink(Model.UniversityName, "ShowStudySubjects", "University",
+                new {Model.UniversityId},
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
+        </li>
+        <li>
+            @Ajax.ActionLink(Model.StudySubjectName, "ShowSemesters", "University",
+                new { Model.StudySubjectId, Model.StudySubjectName, Model.UniversityId, Model.UniversityName },
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(Model.SemesterName, "ShowSubjects", "University",
+                new { Model.SemesterId},
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
+        </li>
+    </ol>
+
+    @foreach (var item in Model.SemesterSubjects)
     {
         <div class="col-sm-2 col-xs-1 folder">
-            <img src="~/Resources/folder-symbol.jpg" class="img-responsive img-rounded" />
+            <img src="~/Resources/folder-symbol.jpg" class="img-responsive img-rounded"/>
             <div class="folder-name">
 
                 @Ajax.ActionLink(item.Name, "ShowNotes", "University",
-                     new { semesterSubjectId = item.SemesterSubjectId },
-                        new AjaxOptions()
-                        {
-                            UpdateTargetId = "page-content",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        },
-                        new { @class = "folder-name" })
+                    new {item.SemesterSubjectId},
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new {@class = "folder-name"})
             </div>
         </div>
     }

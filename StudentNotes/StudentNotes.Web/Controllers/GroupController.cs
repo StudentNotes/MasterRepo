@@ -59,7 +59,7 @@ namespace StudentNotes.Web.Controllers
                 model.LoginViewModel = (LoginViewModel)responseModel;
             }
 
-            return View("~/Views/LoggedIn/Index.cshtml", model);
+            return View("~/Views/LoggedIn/Processed.cshtml", model);
         }
 
         [HttpGet]

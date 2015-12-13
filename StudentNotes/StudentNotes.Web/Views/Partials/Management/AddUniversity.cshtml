@@ -1,5 +1,6 @@
 ﻿@model StudentNotes.Logic.ViewModels.Common.NewUniversityViewModel
 
+@Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
 
 <div id="subjectManagement" class="col-xs-12">
     @using (Ajax.BeginForm(

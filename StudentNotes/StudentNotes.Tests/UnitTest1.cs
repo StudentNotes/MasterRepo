@@ -1,10 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StudentNotes.Web.Models.ResourcesFinderLogic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StudentNotes.Logic.ResourcesFinderLogic;
 using StudentNotes.Logic.ViewModels.Validation;
 
-namespace StudentNotesWeb.Tests
+namespace StudentNotes.Tests
 {
     [TestClass]
     public class UnitTest1

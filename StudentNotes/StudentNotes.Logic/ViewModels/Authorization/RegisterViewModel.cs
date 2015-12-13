@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StudentNotes.Logic.LogicAbstraction;
-using StudentNotes.Logic.ViewModels.Validation;
+﻿using System.Collections.Generic;
 
 namespace StudentNotes.Logic.ViewModels.Authorization
 {

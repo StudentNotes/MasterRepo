@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Resources;
 
-namespace StudentNotes.Web.Models.ResourcesFinderLogic
+namespace StudentNotes.Logic.ResourcesFinderLogic
 {
     public class ResourceFinder
     {
@@ -16,7 +14,8 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
 
         static ResourceFinder()
         {
-            resourceManager = new ResourceManager("StudentNotes.Web.Resources.Lang", typeof(StudentNotes.Web.MvcApplication).Assembly);
+            //resourceManager = new ResourceManager("StudentNotes.Web.Resources.Lang", typeof(StudentNotes.Web).Assembly);
+            resourceManager = new ResourceManager("StudentNotes.Logic.Consts.Lang", typeof(StudentNotes.Logic.Consts.LogicConstants).Assembly);
             cultureInfo = CultureInfo.CreateSpecificCulture("pl");
         }
 

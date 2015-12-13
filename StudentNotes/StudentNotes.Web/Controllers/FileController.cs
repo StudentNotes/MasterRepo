@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.WebPages;
-using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
-using StudentNotes.Logic.Services;
 using StudentNotes.Logic.ViewModels.Authorization;
-using StudentNotes.Logic.ViewModels.File;
 using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Web.Models.ResourcesFinderLogic;
 using StudentNotes.Web.RequestViewModels;
@@ -86,7 +77,7 @@ namespace StudentNotes.Web.Controllers
                 responseModel.LoginViewModel = (LoginViewModel) TempData["ResponseViewModel"];
             }
 
-            return View("~/Views/LoggedIn/Index.cshtml", responseModel);
+            return View("~/Views/LoggedIn/Processed.cshtml", responseModel);
         }
 
 

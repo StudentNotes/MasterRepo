@@ -10,7 +10,7 @@ namespace StudentNotes.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private HomeViewModel _viewModelContainer;
+        private readonly HomeViewModel _viewModelContainer;
 
         public HomeController()
         {

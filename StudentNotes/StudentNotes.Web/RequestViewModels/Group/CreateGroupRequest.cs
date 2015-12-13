@@ -1,8 +1,8 @@
 ﻿using System.Web.WebPages;
 using StudentNotes.Logic.LogicAbstraction;
+using StudentNotes.Logic.Models;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Authorization;
-using StudentNotes.Web.Models;
 using StudentNotes.Web.Models.ResourcesFinderLogic;
 
 namespace StudentNotes.Web.RequestViewModels.Group

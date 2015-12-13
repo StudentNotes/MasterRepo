@@ -439,4 +439,10 @@
   <data name="SuccessGroupAdded" xml:space="preserve">
     <value>Grupa została dodana do semestru z powodzeniem, a Ty jesteś jej administratorem!</value>
   </data>
+  <data name="ErrorUniversityNameNotDefined" xml:space="preserve">
+    <value>Nie zdefiniowałeś nazwy uczelni.</value>
+  </data>
+  <data name="ErrorUniversityContainsGrade" xml:space="preserve">
+    <value>Do wybranej uczelni został już przypisany podany rocznik.</value>
+  </data>
 </root>

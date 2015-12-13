@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
+using StudentNotes.Logic.ResourcesFinderLogic;
 
 namespace StudentNotes.Web.Models.ResourcesFinderLogic
 {
@@ -431,14 +429,14 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ErrorSemesterDoesntExist"); }
         }
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
+        public static string ErrorUniversityNameNotDefined
+        {
+            get { return ResourceFinder.GetResource("ErrorUniversityNameNotDefined"); }
+        }
+        public static string ErrorUniversityContainsGrade
+        {
+            get { return ResourceFinder.GetResource("ErrorUniversityContainsGrade"); }
+        }
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

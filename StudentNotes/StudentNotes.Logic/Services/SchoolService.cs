@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.LoggedIn;
+using StudentNotes.Logic.ViewModels.University;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Repositories.RepositoryInterfaces;
@@ -98,6 +97,11 @@ namespace StudentNotes.Logic.Services
                 return true;
             }
             return false;
+        }
+
+        public bool SchoolContainsGrade(int schoolId, string schoolGrade)
+        {
+            return (_gradeRepository.Get(sg => sg.Year == schoolGrade && sg.SchoolId == schoolId)) != null;
         }
 
         public int AddGradeToSchool(int schoolId, string year)
@@ -296,6 +300,51 @@ namespace StudentNotes.Logic.Services
             _semesterSubjectRepository.Delete(s => s.SemesterSubjectId == semesterSubjectId);
             _semesterSubjectRepository.Commit();
             return 0;
+        }
+
+        public SemesterSubjectPathViewModel GetSemesterSubjectPath(int semesterSubjectId)
+        {
+            var model = new SemesterSubjectPathViewModel();
+
+            var semesterSubject = _semesterSubjectRepository.GetById(semesterSubjectId);
+            if (semesterSubject == null)
+            {
+                return model;
+            }
+
+            model.SemesterSubjectId = semesterSubject.SemesterSubjectId;
+            model.SemesterSubjectName = semesterSubject.Name;
+            model.SemesterId = semesterSubject.Semester.SemesterId;
+            model.SemesterName = string.Format("Semestr {0}", semesterSubject.Semester.SemesterNumber);
+            model.StudySubjectId = semesterSubject.Semester.StudySubject.StudySubjectId;
+            model.StudySubjectName = semesterSubject.Semester.StudySubject.Name;
+            model.GradeId = semesterSubject.Semester.StudySubject.Grade.GradeId;
+            model.GradeName = semesterSubject.Semester.StudySubject.Grade.Year;
+            model.UniversityId = semesterSubject.Semester.StudySubject.Grade.School.SchoolId;
+            model.UniversityName = semesterSubject.Semester.StudySubject.Grade.School.Name;
+
+            return model;
+        }
+
+        public SemesterSubjectPathViewModel GetSemesterPath(int semesterId)
+        {
+            var model = new SemesterSubjectPathViewModel();
+
+            var semester = _semesterRepository.GetById(semesterId);
+            if (semester == null)
+            {
+                return model;
+            }
+            model.SemesterId = semester.SemesterId;
+            model.SemesterName = string.Format("Semestr {0}", semester.SemesterNumber);
+            model.StudySubjectId = semester.StudySubject.StudySubjectId;
+            model.StudySubjectName = semester.StudySubject.Name;
+            model.GradeId = semester.StudySubject.Grade.GradeId;
+            model.GradeName = semester.StudySubject.Grade.Year;
+            model.UniversityId = semester.StudySubject.Grade.School.SchoolId;
+            model.UniversityName = semester.StudySubject.Grade.School.Name;
+
+            return model;
         }
 
         public int AddUserToSchool(int userId, int schoolId)

@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
-using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.ManageGroups;
-using StudentNotes.Repositories.DbModels;
 using StudentNotes.Web.Filters;
+using StudentNotes.Logic.ViewModels.Common;
+using StudentNotes.Logic.ViewModels.Validation;
+using StudentNotes.Web.RequestViewModels.Management;
 
 namespace StudentNotes.Web.Controllers
 {
@@ -32,8 +31,10 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult ManageUniversities()
         {
-            UniversityViewModel model = new UniversityViewModel();
-            model.Universities = _schoolService.GetAllSchools().ToList();
+            var model = new UniversityViewModel
+            {
+                Universities = _schoolService.GetAllSchools().ToList()
+            };
 
             return PartialView("~/Views/Partials/Management/ManageUniversities.cshtml", model);
         }
@@ -42,7 +43,7 @@ namespace StudentNotes.Web.Controllers
         public ActionResult ConfigureUniversity(int schoolId)
         {
             var school = _schoolService.GetSchoolById(schoolId);
-            NewUniversityViewModel newUniversityModel = new NewUniversityViewModel()
+            var newUniversityModel = new NewUniversityViewModel()
             {
                 UniversityName = school.Name,
                 UniversityDescription = school.Description,
@@ -55,23 +56,22 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult AddNewUniversity()
         {
-            NewUniversityViewModel model = new NewUniversityViewModel();
-
+            var model = new NewUniversityViewModel();
             return PartialView("~/Views/Partials/Management/AddUniversity.cshtml", model);
         }
 
         [HttpPost]
-        public ActionResult AddNewUniversity(NewUniversityViewModel model, string ButtonType)
+        public ActionResult AddNewUniversity(AddNewUniversityRequest request, string ButtonType)
         {
-            if (!model.UniversityName.IsEmpty())
+            NewUniversityViewModel model = new NewUniversityViewModel();
+            var response = request.Validate();
+            if (!request.IsValid)
             {
-                _schoolService.AddSchoolAndSave(model.UniversityName, model.UniversityDescription);
-            }
-            else
-            {
-                //  Obsługa komunikatu błędu w przypadku, gdy nie zdefiniowano nazwy szkoły
+                model.Response = response;
                 return PartialView("~/Views/Partials/Management/AddUniversity.cshtml", model);
             }
+
+            _schoolService.AddSchoolAndSave(request.UniversityName, request.UniversityDescription);
 
             switch (ButtonType)
             {
@@ -79,12 +79,11 @@ namespace StudentNotes.Web.Controllers
                     return RedirectToAction("ManageUniversities");
                 case "saveUniversityAndContinue":
                 {
-                    NewUniversityViewModel newUniversityModel = new NewUniversityViewModel();
-                    newUniversityModel.UniversityName = model.UniversityName;
-                    newUniversityModel.UniversityDescription = model.UniversityDescription;
-                    newUniversityModel.UniversityId = _schoolService.GetSchoolByName(model.UniversityName).SchoolId;
+                    model.UniversityName = request.UniversityName;
+                    model.UniversityDescription = request.UniversityDescription;
+                    model.UniversityId = _schoolService.GetSchoolByName(request.UniversityName).SchoolId;
 
-                    return PartialView("~/Views/Partials/Management/AddGrade.cshtml", newUniversityModel);   
+                    return PartialView("~/Views/Partials/Management/AddGrade.cshtml", model);   
                 }
                 default:
                     return PartialView("~/Views/Partials/Management/AddUniversity.cshtml", model);
@@ -99,34 +98,33 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddGradeToSchool(string grade, int universityId)
+        public ActionResult AddGradeToSchool(ModifySchoolGradeRequest request)
         {
-            _schoolService.AddGradeToSchool(universityId, grade);
-            var school = _schoolService.GetSchoolById(universityId);
-
-            NewUniversityViewModel model = new NewUniversityViewModel()
+            var university = _schoolService.GetSchoolById(request.UniversityId);
+            var model = new NewUniversityViewModel()
             {
-                UniversityId = school.SchoolId,
-                UniversityName = school.Name,
-                UniversityDescription = school.Description,
+                UniversityId = university.SchoolId,
+                UniversityName = university.Name,
+                UniversityDescription = university.Description
             };
 
-            foreach (var schoolGrade in school.Grade)
+            model.Response = (ResponseMessageViewModel) request.Validate();
+            if (!request.IsValid)
             {
-                model.GradeList.Add(new Grade()
-                {
-                    Year = schoolGrade.Year
-                });
+                model.UpdateGradeList();
+                return PartialView("~/Views/Partials/Management/AddGrade.cshtml", model);
             }
 
+            _schoolService.AddGradeToSchool(request.UniversityId, request.SchoolGrade);
+            model.UpdateGradeList();
             return PartialView("~/Views/Partials/Management/AddGrade.cshtml", model);
         }
 
         [HttpPost]
-        public ActionResult DeleteGradeFromSchool(int schoolId, string year)
+        public ActionResult DeleteGradeFromSchool(ModifySchoolGradeRequest request)
         {
-            _schoolService.RemoveGradeFromSchool(schoolId, year);
-            var school = _schoolService.GetSchoolById(schoolId);
+            _schoolService.RemoveGradeFromSchool(request.UniversityId, request.SchoolGrade);
+            var school = _schoolService.GetSchoolById(request.UniversityId);
 
             NewUniversityViewModel model = new NewUniversityViewModel()
             {
@@ -135,15 +133,9 @@ namespace StudentNotes.Web.Controllers
                 UniversityDescription = school.Description,
             };
 
-            foreach (var schoolGrade in school.Grade)
-            {
-                model.GradeList.Add(new Grade()
-                {
-                    Year = schoolGrade.Year
-                });
-            }
+            model.UpdateGradeList();
 
-            return PartialView("~/Views/Partials/Management/GradeList.cshtml", model);
+            return PartialView("~/Views/Partials/Management/AddGrade.cshtml", model);
         }
 
         [HttpGet]
@@ -182,14 +174,14 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult RemoveGradeSubject(int studySubjectId, int gradeId)
         {
-            //  Delete subject and redirect to DefineStudySubjects
             _schoolService.RemoveStudySubjectById(studySubjectId);
+            var university = _schoolService.GetSchoolByGradeId(gradeId);
 
-            return RedirectToAction("DefineStudySubjects", gradeId);
+            return RedirectToAction("DefineStudySubjects", new {gradeId, university.SchoolId});
         }
 
         [HttpPost]
-        public ActionResult AddStudySubjectToGrade(string studySubjectName, string studySubjectDescription, string semesterNumber, int gradeId)
+        public ActionResult AddGradeSubject(string studySubjectName, string studySubjectDescription, string semesterNumber, int gradeId)
         {
             //  Add semesterNumber semesters to database to gradeId position
             _schoolService.AddStudySubjectToGrade(gradeId, studySubjectName, studySubjectDescription,
