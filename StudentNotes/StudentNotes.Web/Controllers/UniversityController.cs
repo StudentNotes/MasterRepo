@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using StudentNotes.Logic.LogicAbstraction;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Authorization;
@@ -125,6 +126,12 @@ namespace StudentNotes.Web.Controllers
         public ActionResult ShowNotes(int semesterSubjectId)
         {
             var model = new UniversitySemesterSubjectNotesViewModel();
+            var response = TempData["ResponseViewModel"];
+            if (response != null)
+            {
+                model.Response = (ResponseViewModelBase)response;
+            }
+
             var semesterSubjectPath = _schoolService.GetSemesterSubjectPath(semesterSubjectId);
 
             model.UniversityId = semesterSubjectPath.UniversityId;

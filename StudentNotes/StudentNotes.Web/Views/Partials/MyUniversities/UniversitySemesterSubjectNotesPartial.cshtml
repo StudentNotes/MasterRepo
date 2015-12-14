@@ -3,75 +3,82 @@
 @model StudentNotes.Logic.ViewModels.University.UniversitySemesterSubjectNotesViewModel
 
 <div class="col-xs-12 folder-view">
+
+    <ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink(Model.UniversityName, "ShowStudySubjects", "University",
+                    new { Model.UniversityId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { })
+        </li>
+        <li>
+            @Ajax.ActionLink(Model.StudySubjectName, "ShowSemesters", "University",
+                    new { Model.StudySubjectId, Model.StudySubjectName, Model.UniversityId, Model.UniversityName },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { })
+        </li>
+        <li>
+            @Ajax.ActionLink(Model.SemesterName, "ShowSubjects", "University",
+                    new { Model.SemesterId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { })
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(Model.SemesterSubjectName, "ShowNotes", "University",
+                    new { Model.SemesterSubjectId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { })
+        </li>
+    </ol>
+
+    <div class="col-xs-12">
+        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+    </div>
+
     <table class="table table-striped">
-        <ol class="breadcrumb">
-            <li>
-                @Ajax.ActionLink(Model.UniversityName, "ShowStudySubjects", "University",
-                new { Model.UniversityId },
-                new AjaxOptions()
-                {
-                    UpdateTargetId = "page-content",
-                    HttpMethod = "GET",
-                    InsertionMode = InsertionMode.Replace,
-                    LoadingElementId = "loading"
-                },
-                new { })
-            </li>
-            <li>
-                @Ajax.ActionLink(Model.StudySubjectName, "ShowSemesters", "University",
-                new { Model.StudySubjectId, Model.StudySubjectName, Model.UniversityId, Model.UniversityName },
-                new AjaxOptions()
-                {
-                    UpdateTargetId = "page-content",
-                    HttpMethod = "GET",
-                    InsertionMode = InsertionMode.Replace,
-                    LoadingElementId = "loading"
-                },
-                new { })
-            </li>
-            <li>
-                @Ajax.ActionLink(Model.SemesterName, "ShowSubjects", "University",
-            new { Model.SemesterId },
-            new AjaxOptions()
-            {
-                UpdateTargetId = "page-content",
-                HttpMethod = "GET",
-                InsertionMode = InsertionMode.Replace,
-                LoadingElementId = "loading"
-            },
-            new { })
-            </li>
-            <li class="active">
-                @Ajax.ActionLink(Model.SemesterSubjectName, "ShowNotes", "University",
-            new { Model.SemesterSubjectId },
-            new AjaxOptions()
-            {
-                UpdateTargetId = "page-content",
-                HttpMethod = "GET",
-                InsertionMode = InsertionMode.Replace,
-                LoadingElementId = "loading"
-            },
-            new { })
-            </li>
-        </ol>
+
 
         <thead>
-            <tr>
-                <th>Lp.</th>
-                <th>Nazwa</th>
-                <th>Kategoria</th>
-                <th>Rozmiar</th>
-                <th>Data wstawienia</th>
-                <th>Tagi</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Lp.</th>
+            <th>Nazwa</th>
+            <th>Kategoria</th>
+            <th>Rozmiar</th>
+            <th>Data wstawienia</th>
+            <th>Tagi</th>
+            <th></th>
+        </tr>
         </thead>
         @for (int i = 0; i < Model.Notes.Count; i++)
         {
             <tr>
                 <td>@(i + 1)</td>
                 <td>
-                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.Notes[i].Category)" style="max-height: 34px;" />
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.Notes[i].Category)" style="max-height: 34px;"/>
                     @Model.Notes[i].Name
                 </td>
                 <td>@Model.Notes[i].Category</td>
@@ -79,21 +86,21 @@
                 <td>@Model.Notes[i].UploadDate.ToString()</td>
                 <td>
                     @foreach (var tag in @Model.Notes[i].Tags)
-                {
+                    {
                         <text>@tag,</text>
                     }
                 </td>
                 <td>
                     @Ajax.ActionLink("Usuń notatkę", "DeleteSemesterSubjectNote", "Note",
-                    new { noteId = Model.Notes[i].NoteId, semesterSubjectId = Model.SemesterSubjectId },
-                    new AjaxOptions()
-                    {
-                        UpdateTargetId = "page-content",
-                        HttpMethod = "POST",
-                        InsertionMode = InsertionMode.Replace,
-                        LoadingElementId = "loading"
-                    },
-                    new { @class = "btn btn-danger" })
+                        new {noteId = Model.Notes[i].NoteId, semesterSubjectId = Model.SemesterSubjectId},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new {@class = "btn btn-danger"})
 
                     <button id="shareFileButton" type="button" class="btn btn-primary btn-share-modal" data-toggle="modal" data-target="#shareUniversityNoteModal" name="@Model.Notes[i].Name" value="@Model.Notes[i].NoteId">
                         Udostępniaj
@@ -117,18 +124,18 @@
 
                 <div class="modal-body">
                     <p>
-                        <label class="label col-xs-12">Notatka:</label><br />
+                        <label class="label col-xs-12">Notatka:</label><br/>
                         <div class="col-xs-12">
                             <span id="fileNameSpan"></span>
-                            <input id="tmpNoteIdTb" type="text" value="" hidden />
+                            <input id="tmpNoteIdTb" type="text" value="" hidden/>
                         </div>
                     </p>
-                    <br /><br />
+                    <br/><br/>
 
                     <p>
-                        <label class="label col-xs-12">Wybierz rodzaj udostępniania:</label><br />
-                        @Html.RadioButton("fileType", "Private", true, new { @id = "shareUserCheckBox", @class = "file-radio-button" }) udostępniaj użytkownikowi<br />
-                        @Html.RadioButton("fileType", "University", new { @id = "shareGroupCheckBox", @class = "file-radio-button" }) udostępnij grupie
+                        <label class="label col-xs-12">Wybierz rodzaj udostępniania:</label><br/>
+                        @Html.RadioButton("fileType", "Private", true, new {@id = "shareUserCheckBox", @class = "file-radio-button"}) udostępniaj użytkownikowi<br/>
+                        @Html.RadioButton("fileType", "University", new {@id = "shareGroupCheckBox", @class = "file-radio-button"}) udostępnij grupie
                     </p>
 
                     @using (Ajax.BeginForm("ShareNoteToUser", "Note", null, new AjaxOptions()
@@ -139,15 +146,16 @@
                         LoadingElementId = "loading",
                         OnBegin = "HideModal"
                     },
-        new { enctype = "multipart/form-data", id = "shareUserForm" }))
+                        new {enctype = "multipart/form-data", id = "shareUserForm"}))
                     {
-                        <label class="label col-xs-12">Udostępnij notatkę wybranemu użytkownikowi:</label><br />
-                        <input type="text" name="fileId" hidden id="fileIdTb1" />
+                        <label class="label col-xs-12">Udostępnij notatkę wybranemu użytkownikowi:</label><br/>
+                        <input type="text" name="fileId" hidden id="fileIdTb1"/>
+                        <input type="text" name="returnSemesterSubjectId" hidden value="@Model.SemesterSubjectId"/>
 
                         <div class="form-group">
                             <label class="control-label col-sm-6 col-xs-12">Adres E-mail użytkownika:</label>
                             <div class="col-sm-6 col-xs-12">
-                                <input id="privateUserEmailTb" type="text" name="userEmail" />
+                                <input id="privateUserEmailTb" type="text" name="userEmail"/>
                             </div>
                         </div>
 
@@ -182,18 +190,10 @@
 
                         <div>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input id="shareFileWithUserButton" type="submit" name="Wyślij!" class="btn btn-primary" />
+                            <input id="shareFileWithUserButton" type="submit" name="Wyślij!" class="btn btn-primary"/>
                         </div>
                     }
 
-                    @*@using (Html.BeginForm("ShareNoteToUser", "Note", FormMethod.Post, new { enctype = "multipart/form-data", id = "shareUserForm" }))
-                        {
-
-
-                        }*@
-
-                    @*@using (Html.BeginForm("ShareNoteToGroup", "Note", FormMethod.Post, new { enctype = "multipart/form-data", hidden = true, id = "shareGroupForm" }))
-                        {*@
                     @using (Ajax.BeginForm("ShareNoteToGroup", "Note", null, new AjaxOptions()
                     {
                         UpdateTargetId = "page-content",
@@ -202,10 +202,11 @@
                         LoadingElementId = "loading",
                         OnBegin = "HideModal"
                     },
-        new { enctype = "multipart/form-data", id = "shareGroupForm", hidden = true }))
+                        new {enctype = "multipart/form-data", id = "shareGroupForm", hidden = true}))
                     {
-                        <label class="label col-xs-12">Udostępnij notatkę grupie:</label><br />
-                        <input type="text" name="fileId" hidden id="fileIdTb2" />
+                        <label class="label col-xs-12">Udostępnij notatkę grupie:</label><br/>
+                        <input type="text" name="fileId" hidden id="fileIdTb2"/>
+                        <input type="text" name="returnSemesterSubjectId" hidden value="@Model.SemesterSubjectId"/>
 
                         <div class="form-group">
                             <label class="control-label col-sm-4 col-xs-12">Grupa:</label>
@@ -230,7 +231,7 @@
 
                         <div>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input id="shareFileWithGroupButton" type="submit" name="Wyślij!" class="btn btn-primary" />
+                            <input id="shareFileWithGroupButton" type="submit" name="Wyślij!" class="btn btn-primary"/>
                         </div>
 
                     }

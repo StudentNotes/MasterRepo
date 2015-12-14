@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using StudentNotes.Logic.LogicAbstraction;
 using StudentNotes.Logic.LogicModels;
+using StudentNotes.Logic.ViewModels.Validation;
 
 namespace StudentNotes.Logic.ViewModels.University
 {
     public class UniversitySemesterSubjectNotesViewModel
     {
+        public ResponseViewModelBase Response { get; set; }
         public int UniversityId { get; set; }
         public string UniversityName { get; set; }
         public int StudySubjectId { get; set; }
@@ -18,6 +21,7 @@ namespace StudentNotes.Logic.ViewModels.University
         public UniversitySemesterSubjectNotesViewModel()
         {
             Notes = new List<Note>();
+            Response = new ResponseMessageViewModel();
         }
     }
 }

@@ -416,7 +416,7 @@
     <value>Wybrana uczelnia nie przyjmowała w danym roku studentów/uczniów.</value>
   </data>
   <data name="ErrorWrongDataPassed" xml:space="preserve">
-    <value>Nie wprowadziłeś wszystkich wymaganych danych. Dlatego nie mogę przeprowadzić wybranej operacji.</value>
+    <value>Nie wprowadziłeś wszystkich wymaganych danych. Dlatego nie mozna przeprowadzić wybranej operacji.</value>
   </data>
   <data name="SuccessJoinedStudySubject" xml:space="preserve">
     <value>Gratuluję! Zapisałeś sie na wybrany kierunek studiów.</value>
@@ -442,7 +442,19 @@
   <data name="ErrorUniversityNameNotDefined" xml:space="preserve">
     <value>Nie zdefiniowałeś nazwy uczelni.</value>
   </data>
+  <data name="ErrorGroupHasAccessToFile" xml:space="preserve">
+    <value>Wybrana grupa posiada już dostęp do tego pliku.</value>
+  </data>
   <data name="ErrorUniversityContainsGrade" xml:space="preserve">
     <value>Do wybranej uczelni został już przypisany podany rocznik.</value>
+  </data>
+  <data name="ErrorUserHasAccessToFile" xml:space="preserve">
+    <value>Wybrany użytkownik posiada już dostęp do tego pliku.</value>
+  </data>
+  <data name="SuccessNoteSharedToGroup" xml:space="preserve">
+    <value>Wybrana grupa otrzymała dostęp do notatki.</value>
+  </data>
+  <data name="SuccessNoteSharedToUser" xml:space="preserve">
+    <value>Wybrany użytkownik otrzymał dostęp do notatki.</value>
   </data>
 </root>

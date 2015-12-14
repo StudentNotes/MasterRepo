@@ -6,7 +6,11 @@ using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.File;
 using StudentNotes.Logic.ViewModels.ManageNotes;
+using StudentNotes.Logic.ViewModels.Validation;
+using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Web.Filters;
+using StudentNotes.Web.Models.ResourcesFinderLogic;
+using StudentNotes.Web.RequestViewModels.Note;
 
 namespace StudentNotes.Web.Controllers
 {
@@ -17,13 +21,15 @@ namespace StudentNotes.Web.Controllers
         private readonly IUploadService _uploadService;
         private readonly IUserService _userService;
         private readonly IGroupService _groupService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public NoteController(IFileService fileService, IUploadService uploadService, IUserService userService, IGroupService groupService)
+        public NoteController(IFileService fileService, IUploadService uploadService, IUserService userService, IGroupService groupService, IUnitOfWork unitOfWork)
         {
             _fileService = fileService;
             _uploadService = uploadService;
             _userService = userService;
             _groupService = groupService;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Note
@@ -77,44 +83,48 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ShareNoteToGroup(int fileId, int groupId, int semesterSubjectId)
+        public ActionResult ShareNoteToGroup(ShareNoteToGroupRequest request)
         {
-            if (_fileService.GetFileById(fileId) == null || !_groupService.GroupExists(groupId) || !_groupService.SemesterSubjectExists(semesterSubjectId))
+            ResponseMessageViewModel response;
+            response = (ResponseMessageViewModel)request.Validate();
+            if (!request.IsValid)
             {
-                //  Dopisac obsługę, gdy jakieś dane nie zostały przekazane
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("ShowNotes", "University", new { semesterSubjectId = request.ReturnSemesterSubjectId });
             }
-            if (_groupService.FileSharedToGroup(fileId, groupId, semesterSubjectId))
-            {
-                
-            }
-            _groupService.AddFileToGroup(fileId, groupId, semesterSubjectId);
+
+            _groupService.AddFileToGroup(request.FileId, request.GroupId, request.SemesterSubjectId);
             _groupService.Commit();
+            response.AddSuccess(ResourceKeyResolver.SuccessNoteSharedToGroup);
 
-            var semesterId = _groupService.GetSemesterBySemesterSubject(semesterSubjectId).SemesterId;
-
-            return RedirectToAction("ShowGroupNotes", "Group", new {semesterSubjectId, semesterId, groupId});
+            TempData["ResponseViewModel"] = response;
+            return RedirectToAction("ShowNotes", "University", new { semesterSubjectId = request.ReturnSemesterSubjectId });
         }
 
         [HttpPost]
-        public ActionResult ShareNoteToUser(int fileId, int userId = 0, string userEmail = "")
+        public ActionResult ShareNoteToUser(ShareNoteToUserRequest request)
         {
-            if (_fileService.GetFileById(fileId) == null)
+            ResponseMessageViewModel response;
+            response = (ResponseMessageViewModel)request.Validate();
+            if (!request.IsValid)
             {
-                
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("ShowNotes", "University", new { semesterSubjectId = request.ReturnSemesterSubjectId });
             }
-            if (_userService.UserExists(userEmail))
-            {
-                _fileService.AddFileToUser(fileId, userEmail);
-                return RedirectToAction("SharedNotes");
-            }
-            if (_userService.UserExists(userId))
-            {
-                _fileService.AddFileToUser(fileId, userId);
-                return RedirectToAction("SharedNotes");
-            }
-            return null;
 
+            if (_userService.UserExists(request.UserName))
+            {
+                _fileService.AddFileToUser(request.FileId, request.UserName);
+            }
+            if (_userService.UserExists(request.UserId))
+            {
+                _fileService.AddFileToUser(request.FileId, request.UserId);
+            }
+            _unitOfWork.Commit();
+            response.AddSuccess(ResourceKeyResolver.SuccessNoteSharedToUser);
 
+            TempData["ResponseViewModel"] = response;
+            return RedirectToAction("ShowNotes", "University", new { semesterSubjectId = request.ReturnSemesterSubjectId });
         }
 
         [HttpPost]

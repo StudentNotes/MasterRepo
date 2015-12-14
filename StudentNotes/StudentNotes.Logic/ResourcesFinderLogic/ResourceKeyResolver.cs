@@ -437,22 +437,22 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ErrorUniversityContainsGrade"); }
         }
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
+        public static string ErrorUserHasAccessToFile
+        {
+            get { return ResourceFinder.GetResource("ErrorUserHasAccessToFile"); }
+        }
+        public static string ErrorGroupHasAccessToFile
+        {
+            get { return ResourceFinder.GetResource("ErrorGroupHasAccessToFile"); }
+        }
+        public static string SuccessNoteSharedToGroup
+        {
+            get { return ResourceFinder.GetResource("SuccessNoteSharedToGroup"); }
+        }
+        public static string SuccessNoteSharedToUser
+        {
+            get { return ResourceFinder.GetResource("SuccessNoteSharedToUser"); }
+        }
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

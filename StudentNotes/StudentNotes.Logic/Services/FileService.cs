@@ -114,7 +114,7 @@ namespace StudentNotes.Logic.Services
         public bool UserHasAccess(int fileId, int userId)
         {
             var userSharedFile = _userSharedFileRepository.GetMany(usf => usf.FileId == fileId && usf.UserId == userId);
-            return userSharedFile != null;
+            return userSharedFile.Count() != 0;
         }
 
         public int AddFileToUser(int fileId, int userId)

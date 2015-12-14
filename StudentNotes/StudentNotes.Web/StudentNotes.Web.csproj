@@ -250,6 +250,8 @@
     <Compile Include="RequestViewModels\Management\AddGradeSubjectRequest.cs" />
     <Compile Include="RequestViewModels\Management\AddNewUniversityRequest.cs" />
     <Compile Include="RequestViewModels\Management\ModifySchoolGradeRequest.cs" />
+    <Compile Include="RequestViewModels\Note\ShareNoteToGroupRequest.cs" />
+    <Compile Include="RequestViewModels\Note\ShareNoteToUserRequest.cs" />
     <Compile Include="RequestViewModels\SendFileRequest.cs" />
     <Compile Include="RequestViewModels\University\JoinUniversityRequest.cs" />
   </ItemGroup>
