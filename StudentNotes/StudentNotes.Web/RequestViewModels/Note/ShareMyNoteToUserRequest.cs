@@ -7,17 +7,16 @@ using StudentNotes.Web.Models.ResourcesFinderLogic;
 
 namespace StudentNotes.Web.RequestViewModels.Note
 {
-    public class ShareNoteToUserRequest : RequestModelBase
+    public class ShareMyNoteToUserRequest : RequestModelBase
     {
         private readonly IFileService _fileService;
         private readonly IUserService _userService;
 
-        public int ReturnSemesterSubjectId { get; set; }
         public int FileId { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
 
-        public ShareNoteToUserRequest()
+        public ShareMyNoteToUserRequest()
         {
             _fileService = NinjectResolver.GetInstance<IFileService>();
             _userService = NinjectResolver.GetInstance<IUserService>();

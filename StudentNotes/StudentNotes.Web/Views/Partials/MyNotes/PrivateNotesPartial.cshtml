@@ -62,10 +62,14 @@
                             LoadingElementId = "loading"
                         },
                         new { @class = "btn btn-danger" })
+
+                    <button id="shareFileButton" type="button" class="btn btn-primary btn-share-modal" data-toggle="modal" data-target="#shareUniversityNoteModal" name="@Model.UserNotesList[i].Name" value="@Model.UserNotesList[i].NoteId">
+                        Udostępniaj
+                    </button>
                 </td>
             </tr>
         }
     </table>
 </div>
 
-
+@Html.Partial("~/Views/Partials/Note/ShareMyNoteModal.cshtml")

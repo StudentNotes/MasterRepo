@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using StudentNotes.Logic.LogicModels;
 
 namespace StudentNotes.Logic.ServiceInterfaces
@@ -11,6 +7,7 @@ namespace StudentNotes.Logic.ServiceInterfaces
     {
         Task<int> UploadPrivateNote(Note note, int userId);
         Task<int> UploadUniversityNote(Note note, int userId, string filePath, int semesterSubjectId);
+        Task<int> DeleteNote(int noteId);
         Task<int> DeletePrivateNoteAsync(int fileId);
         Task<int> DeleteSemesterSubjectNoteAsync(int fileId, int semesterSubjectId);
         void SaveUpload();

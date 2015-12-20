@@ -97,6 +97,24 @@ namespace StudentNotes.Logic.Services
             return -1;
         }
 
+        public async Task<int> DeleteNote(int noteId)
+        {
+            var file = _fileRepository.GetById(noteId);
+            var remoteFilePath = file.Path + "/" + file.Name;
+
+            var responseCode = await _fileServerUser.DeleteFile(remoteFilePath);
+            if (responseCode != (int) FtpResponseCode.FileDeleted) return responseCode;
+
+            _fileRepository.Delete(f => f.FileId == noteId);
+            if (_semesterSubjectFileRepository.Get(ssf => ssf.FileId == noteId) != null)
+            {
+                _semesterSubjectFileRepository.Delete(ssf => ssf.FileId == noteId);
+            }
+            _unitOfWork.Commit();
+
+            return responseCode;
+        }
+
         public async Task<int> DeletePrivateNoteAsync(int fileId)
         {
             var privateFile = _fileRepository.GetById(fileId);

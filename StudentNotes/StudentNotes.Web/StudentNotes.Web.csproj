@@ -194,10 +194,13 @@
     <Content Include="Resources\mobile_devices.png" />
     <Content Include="Resources\mobile_devices_2.png" />
     <Content Include="Resources\otherFile.jpg" />
+    <Content Include="Resources\pending_black.GIF" />
+    <Content Include="Resources\pending_black_2.GIF" />
+    <Content Include="Resources\pending_yellow.GIF" />
+    <Content Include="Resources\pending_yellowBlack.GIF" />
     <Content Include="Resources\presentationFile.jpg" />
     <Content Include="Resources\spreadSheet.jpg" />
     <Content Include="Resources\tekstFile.jpg" />
-    <Content Include="Resources\triangles-back.jpg" />
     <Content Include="Resources\videoFile.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -250,8 +253,10 @@
     <Compile Include="RequestViewModels\Management\AddGradeSubjectRequest.cs" />
     <Compile Include="RequestViewModels\Management\AddNewUniversityRequest.cs" />
     <Compile Include="RequestViewModels\Management\ModifySchoolGradeRequest.cs" />
-    <Compile Include="RequestViewModels\Note\ShareNoteToGroupRequest.cs" />
-    <Compile Include="RequestViewModels\Note\ShareNoteToUserRequest.cs" />
+    <Compile Include="RequestViewModels\Note\ShareMyNoteToGroupRequest.cs" />
+    <Compile Include="RequestViewModels\Note\ShareMyNoteToUserRequest.cs" />
+    <Compile Include="RequestViewModels\Note\ShareUniversityNoteToGroupRequest.cs" />
+    <Compile Include="RequestViewModels\Note\ShareUniversityNoteToUserRequest.cs" />
     <Compile Include="RequestViewModels\SendFileRequest.cs" />
     <Compile Include="RequestViewModels\University\JoinUniversityRequest.cs" />
   </ItemGroup>
@@ -295,6 +300,8 @@
     <Content Include="Views\Partials\Note\NoteDetailsPartial.cshtml" />
     <Content Include="Views\Partials\Validation\ResponseMessagePartial.cshtml" />
     <Content Include="Views\LoggedIn\Processed.cshtml" />
+    <Content Include="Views\Partials\Note\ShareUniversityNoteModal.cshtml" />
+    <Content Include="Views\Partials\Note\ShareMyNoteModal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

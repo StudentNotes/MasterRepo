@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using StudentNotes.Logic.Authorization;
+﻿using System.Web.Mvc;
+using System.Web.WebPages;
 using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Authorization;
@@ -11,7 +7,6 @@ using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Logic.ViewModels.Validation;
 using StudentNotes.Repositories.DbModels;
-using StudentNotes.Web.Filters;
 
 namespace StudentNotes.Web.Controllers
 {
@@ -128,7 +123,7 @@ namespace StudentNotes.Web.Controllers
             UserViewModel model = new UserViewModel();
             UserInfo userInfo = _userService.GetAllServiceUserInfo((int) Session["CurrentUserId"]);
 
-            if (userInfo.Name == null || userInfo.Name == "")
+            if (userInfo.Name.IsEmpty())
             {
                 model.Name = "Nieznajomy";
             }
@@ -137,7 +132,7 @@ namespace StudentNotes.Web.Controllers
                 model.Name = userInfo.Name;
             }
 
-            if (userInfo.LastName == null)
+            if (userInfo.LastName.IsEmpty())
             {
                 model.LastName = "";
             }

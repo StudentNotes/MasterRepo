@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using StudentNotes.Logic.LogicModels;
@@ -10,6 +11,7 @@ using StudentNotes.Web.RequestViewModels;
 
 namespace StudentNotes.Web.Controllers
 {
+    [SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
     public class FileController : AsyncController
     {
         private readonly IUploadService _uploadService;
@@ -82,17 +84,17 @@ namespace StudentNotes.Web.Controllers
 
 
 
-        //[HttpGet]
-        //public async Task<string> HeavyAction(int holdTime)
-        //{
-        //    Debug.WriteLine(GetMessage(holdTime));
-        //    return "Now I'm done!";
-        //}
+        [HttpGet]
+        public async Task<string> HeavyAction(int holdTime)
+        {
+            Debug.WriteLine(await GetMessage(holdTime));
+            return "Now I'm done!";
+        }
 
-        //private async Task<ActionResult> GetMessage(int holdTime)
-        //{
-        //    await Task.Delay(holdTime);
-        //    return RedirectToAction("RetriveInfo", new { errorCode = 0 });
-        //}
+        private async Task<ActionResult> GetMessage(int holdTime)
+        {
+            await Task.Delay(holdTime);
+            return RedirectToAction("RetriveInfo", new { errorCode = 0 });
+        }
     }
 }

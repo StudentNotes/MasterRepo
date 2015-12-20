@@ -1,2 +1,72 @@
 ﻿@*Moje Notatki -> Najnowsze*@
+@using System.Web.Mvc.Html
+@using StudentNotes.Logic.LogicModels
+@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.File.RecentlyAddedNotesViewModel
 
+<div class="col-xs-12 folder-view">
+
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(ResourceKeyResolver.ConstNewest, "RecentlyUploadedNotes", "Note", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        },
+                        new { @class = "fa fa-fw fa-dashboard" })
+        </li>
+    </ol>
+
+    <div class="col-xs-12">
+        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Rozmiar</th>
+                <th>Katalog docelowy</th>
+                <th>Data wstawienia</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.Notes.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.Notes[i].Category)" style="max-height: 34px;" />
+                    @Model.Notes[i].Name
+                </td>
+                <td>@Model.Notes[i].Category</td>
+                <td>@Model.Notes[i].Size</td>
+                <td>@Model.Notes[i].DestinationPath</td>
+                <td>@Model.Notes[i].UploadDate.ToString()</td>
+                <td>
+                    @Ajax.ActionLink("Usuń notatkę", "DeleteNote", "Note",
+                        new { Model.Notes[i].NoteId},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        },
+                        new { @class = "btn btn-danger" })
+
+                    <button id="shareFileButton" type="button" class="btn btn-primary btn-share-modal" data-toggle="modal" data-target="#shareUniversityNoteModal" name="@Model.Notes[i].Name" value="@Model.Notes[i].NoteId">
+                        Udostępniaj
+                    </button>
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+@Html.Partial("~/Views/Partials/Note/ShareMyNoteModal.cshtml")

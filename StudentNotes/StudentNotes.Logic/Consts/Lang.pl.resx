@@ -457,4 +457,7 @@
   <data name="SuccessNoteSharedToUser" xml:space="preserve">
     <value>Wybrany użytkownik otrzymał dostęp do notatki.</value>
   </data>
+  <data name="ErrorNoContentToDisplay" xml:space="preserve">
+    <value>Brak zawartości, którą można by wyświetlić.</value>
+  </data>
 </root>

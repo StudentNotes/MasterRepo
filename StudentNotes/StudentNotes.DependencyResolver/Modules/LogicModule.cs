@@ -40,6 +40,7 @@ namespace DependencyResolver.Modules
             Bind<IUserInfoRepository>().To<UserInfoRepository>();
             Bind<IUserRepository>().To<UserRepository>();
             Bind<IUserSharedFileRepository>().To<UserSharedFileRepository>();
+            Bind<IUserPreferencesRepository>().To<UserPreferencesRepository>();
             Bind<IUserVisitedSchoolRepository>().To<UserVisitedSchoolRepository>();
             Bind<ISubjectRepository>().To<SubjectRepository>();
 

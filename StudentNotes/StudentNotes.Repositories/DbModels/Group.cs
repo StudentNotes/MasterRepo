@@ -9,6 +9,7 @@ namespace StudentNotes.Repositories.DbModels
     [Table("Group")]
     public partial class Group
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Group()
         {
             FileSharedGroup = new HashSet<FileSharedGroup>();
@@ -29,12 +30,15 @@ namespace StudentNotes.Repositories.DbModels
 
         public int AdminId { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FileSharedGroup> FileSharedGroup { get; set; }
 
         public virtual User User { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupSemester> GroupSemester { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupUser> GroupUser { get; set; }
     }
 }

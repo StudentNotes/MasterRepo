@@ -26,8 +26,10 @@ namespace StudentNotes.Repositories.DbModels
         public virtual DbSet<SemesterUser> SemesterUser { get; set; }
         public virtual DbSet<StudySubject> StudySubject { get; set; }
         public virtual DbSet<Subject> Subject { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<UserPreferences> UserPreferences { get; set; }
         public virtual DbSet<UserSharedFile> UserSharedFile { get; set; }
         public virtual DbSet<UserVisitedSchool> UserVisitedSchool { get; set; }
 
@@ -139,6 +141,10 @@ namespace StudentNotes.Repositories.DbModels
 
             modelBuilder.Entity<User>()
                 .HasOptional(e => e.UserInfo)
+                .WithRequired(e => e.User);
+
+            modelBuilder.Entity<User>()
+                .HasOptional(e => e.UserPreferences)
                 .WithRequired(e => e.User);
 
             modelBuilder.Entity<User>()

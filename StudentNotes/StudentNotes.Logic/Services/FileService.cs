@@ -17,16 +17,18 @@ namespace StudentNotes.Logic.Services
         private readonly IFileSharedGroupRepository _fileSharedGroupRepository;
         private readonly IUserSharedFileRepository _userSharedFileRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IUserPreferencesRepository _userPreferencesRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public FileService(IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IFileSharedGroupRepository fileSharedGroupRepository,
-            IUserSharedFileRepository userSharedFileRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
+            IUserSharedFileRepository userSharedFileRepository, IUserRepository userRepository, IUserPreferencesRepository userPreferencesRepository, IUnitOfWork unitOfWork)
         {
             _fileRepository = fileRepository;
             _semesterSubjectFileRepository = semesterSubjectFileRepository;
             _fileSharedGroupRepository = fileSharedGroupRepository;
             _userSharedFileRepository = userSharedFileRepository;
             _userRepository = userRepository;
+            _userPreferencesRepository = userPreferencesRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -77,6 +79,22 @@ namespace StudentNotes.Logic.Services
         {
             var sharedFiles = _fileRepository.GetMany(u => u.UserId == userId && u.IsShared);
             return sharedFiles;
+        }
+
+        public IEnumerable<File> GetRecentlyAddedFiles(int userId)
+        {
+            var lastUploadDays = _userPreferencesRepository.GetById(userId).LastUploadDays;
+            if (lastUploadDays == null)
+            {
+                return null;
+            }
+            var daysInterval = (double)lastUploadDays;
+            var oldDate = (DateTime.Now).AddDays(-daysInterval);
+
+            var recentlyAddedFiles =
+                _fileRepository.GetMany(f => f.UserId == userId && DateTime.Compare(f.UploadDate, oldDate) >= 0);
+
+            return recentlyAddedFiles;
         }
 
         public List<File> GetSharedGroupFiles(int userId)

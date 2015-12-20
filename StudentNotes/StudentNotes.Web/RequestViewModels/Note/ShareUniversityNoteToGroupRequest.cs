@@ -11,7 +11,7 @@ using StudentNotes.Web.Models.ResourcesFinderLogic;
 
 namespace StudentNotes.Web.RequestViewModels.Note
 {
-    public class ShareNoteToGroupRequest : RequestModelBase
+    public class ShareUniversityNoteToGroupRequest : RequestModelBase
     {
         private readonly IFileService _fileService;
         private readonly IGroupService _groupService;
@@ -21,7 +21,7 @@ namespace StudentNotes.Web.RequestViewModels.Note
         public int GroupId { get; set; }
         public int SemesterSubjectId { get; set; }
 
-        public ShareNoteToGroupRequest()
+        public ShareUniversityNoteToGroupRequest()
         {
             _fileService = NinjectResolver.GetInstance<IFileService>();
             _groupService = NinjectResolver.GetInstance<IGroupService>();

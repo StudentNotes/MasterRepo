@@ -12,12 +12,14 @@ namespace StudentNotes.Logic.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserInfoRepository _userInfoRepository;
+        private readonly IUserPreferencesRepository _userPreferencesRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository userRepository, IUserInfoRepository userInfoRepository,  IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository, IUserInfoRepository userInfoRepository, IUserPreferencesRepository userPreferencesRepository,  IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _userInfoRepository = userInfoRepository;
+            _userPreferencesRepository = userPreferencesRepository;
             _unitOfWork = unitOfWork;
         }
         public bool UserExists(string email)
@@ -58,6 +60,12 @@ namespace StudentNotes.Logic.Services
                 UserInfo = new UserInfo()
                 {
                     CreatedOn = DateTime.Now
+                },
+                UserPreferences = new UserPreferences()
+                {
+                    LastUploadDays = 30,
+                    MaxFileSize = "5242880",
+                    SearchMethod = "mixed"
                 }
             });
 
@@ -77,6 +85,12 @@ namespace StudentNotes.Logic.Services
                 UserInfo = new UserInfo()
                 {
                     CreatedOn = DateTime.Now
+                },
+                UserPreferences = new UserPreferences()
+                {
+                    LastUploadDays = 30,
+                    MaxFileSize = "5242880",
+                    SearchMethod = "mixed"
                 }
             });
 

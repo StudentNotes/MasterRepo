@@ -67,8 +67,10 @@
     <Compile Include="DbModels\StudentNotesContext.cs" />
     <Compile Include="DbModels\StudySubject.cs" />
     <Compile Include="DbModels\Subject.cs" />
+    <Compile Include="DbModels\sysdiagrams.cs" />
     <Compile Include="DbModels\User.cs" />
     <Compile Include="DbModels\UserInfo.cs" />
+    <Compile Include="DbModels\UserPreferences.cs" />
     <Compile Include="DbModels\UserSharedFile.cs" />
     <Compile Include="DbModels\UserVisitedSchool.cs" />
     <Compile Include="Infrastructure\IDbFactory.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Repositories\StudySubjectRepository.cs" />
     <Compile Include="Repositories\SubjectRepository.cs" />
     <Compile Include="Repositories\UserInfoRepository.cs" />
+    <Compile Include="Repositories\UserPreferencesRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserSharedFileRepository.cs" />
     <Compile Include="Repositories\UserVisitedSchoolRepository.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="RepositoryInterfaces\IStudySubjectRepository.cs" />
     <Compile Include="RepositoryInterfaces\ISubjectRepository.cs" />
     <Compile Include="RepositoryInterfaces\IUserInfoRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IUserPreferencesRepository.cs" />
     <Compile Include="RepositoryInterfaces\IUserRepository.cs" />
     <Compile Include="RepositoryInterfaces\IUserSharedFileRepository.cs" />
     <Compile Include="RepositoryInterfaces\IUserVisitedSchoolRepository.cs" />

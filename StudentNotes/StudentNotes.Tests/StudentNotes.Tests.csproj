@@ -40,7 +40,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -55,6 +57,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileServiceTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FtpClientTest.cs" />
@@ -72,6 +75,10 @@
     <ProjectReference Include="..\StudentNotes.Logic\StudentNotes.Logic.csproj">
       <Project>{921a6f78-ac3a-4f8b-b292-bccdedb33c49}</Project>
       <Name>StudentNotes.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentNotes.Repositories\StudentNotes.Repositories.csproj">
+      <Project>{5c1ce73e-6dac-48ed-b4ff-6e4bda53688b}</Project>
+      <Name>StudentNotes.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentNotes.Web\StudentNotes.Web.csproj">
       <Project>{2a1b6ef9-62aa-409b-b775-f2d44c3cc949}</Project>

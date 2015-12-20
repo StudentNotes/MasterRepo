@@ -9,6 +9,7 @@ namespace StudentNotes.Repositories.DbModels
     [Table("Semester")]
     public partial class Semester
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Semester()
         {
             GroupSemester = new HashSet<GroupSemester>();
@@ -22,12 +23,15 @@ namespace StudentNotes.Repositories.DbModels
 
         public int StudySubjectId { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupSemester> GroupSemester { get; set; }
 
         public virtual StudySubject StudySubject { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemesterSubject> SemesterSubject { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemesterUser> SemesterUser { get; set; }
     }
 }

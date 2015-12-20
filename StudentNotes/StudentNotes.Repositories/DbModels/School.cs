@@ -9,6 +9,7 @@ namespace StudentNotes.Repositories.DbModels
     [Table("School")]
     public partial class School
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public School()
         {
             Grade = new HashSet<Grade>();
@@ -24,8 +25,10 @@ namespace StudentNotes.Repositories.DbModels
         [Column(TypeName = "text")]
         public string Description { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grade { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserVisitedSchool> UserVisitedSchool { get; set; }
     }
 }

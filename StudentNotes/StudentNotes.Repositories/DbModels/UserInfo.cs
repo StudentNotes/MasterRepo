@@ -39,6 +39,9 @@ namespace StudentNotes.Repositories.DbModels
 
         public DateTime CreatedOn { get; set; }
 
+        [StringLength(256)]
+        public string PicturePath { get; set; }
+
         public virtual User User { get; set; }
     }
 }

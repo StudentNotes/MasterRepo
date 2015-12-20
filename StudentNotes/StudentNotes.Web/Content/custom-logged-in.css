@@ -74,10 +74,10 @@
     margin-top: 1.2rem;
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    /*left: 250px;*/
     width: 25rem;
     height: 90%;
-    margin-left: -250px;
+    /*margin-left: -250px;*/
     overflow-y: auto;
     background: #000;
     -webkit-transition: all 0.5s ease;
@@ -86,7 +86,7 @@
     transition: all 0.5s ease;
 }
 .sidebar-nav {
-    position: absolute;
+    position: relative;
     top: 0;
     width: 250px;
     margin: 0;
@@ -117,6 +117,10 @@
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
     text-decoration: none;
+}
+.sidebar-nav li .sidebar-cattegory.first,
+.sidebar-nav li .sidebar-cattegory.collapsed.first {
+    margin-top: 10px;
 }
 .sidebar-nav li .sidebar-cattegory.collapsed{
     text-transform: uppercase;
@@ -419,3 +423,29 @@
 #addGroupModal {
     
 }*/
+
+/***************************************    LOADING CONTENT ANIMATION    **********************************************************************/
+#loading-content {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 20px;
+    display: none;
+    transition: all .7s ease;
+}
+#loading-content.shown {
+    display: block;
+    transition: all .7s ease;
+}
+
+#loading-content .loading-content-gif {
+    margin: 0;
+    display: inline;
+}
+#loading-content .loading-content-desc {
+    position: absolute;
+    display: inline;
+    font-size: 20px;
+    color: #fdd017;
+    padding-top: 2px;
+    padding-left: 15px;
+}

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using StudentNotes.Logic.Consts;
@@ -32,7 +33,30 @@ namespace StudentNotes.Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: Note
+        [HttpGet]
+        public ActionResult RecentlyUploadedNotes()
+        {
+            var model = new RecentlyAddedNotesViewModel();
+            if (TempData["ResponseViewModel"] != null)
+            {
+                var response = (ResponseMessageViewModel) TempData["ResponseViewModel"];
+                model.Response = response;
+            }
+
+            var files = _fileService.GetRecentlyAddedFiles((int) Session["CurrentUserId"]).OrderByDescending(file => file.UploadDate);
+            if (!files.Any())
+            {
+                model.Response.ErrorList.Add(ResourceKeyResolver.ErrorNoContentToDisplay);
+            }
+         
+            foreach (var file in files)
+            {
+                model.Notes.Add(new Note(file));
+            }
+
+            return PartialView("~/Views/Partials/MyNotes/NewestNotesPartial.cshtml", model);
+        }
+
         [HttpGet]
         public ActionResult PrivateNotes()
         {
@@ -67,6 +91,14 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpPost]
+        public async Task<ActionResult> DeleteNote(int noteId)
+        {
+            await _uploadService.DeleteNote(noteId);
+
+            return RedirectToAction("RecentlyUploadedNotes");
+        }
+
+        [HttpPost]
         public async Task<ActionResult> DeletePrivateNote(int fileId)
         {
             await _uploadService.DeletePrivateNoteAsync(fileId);
@@ -83,7 +115,52 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ShareNoteToGroup(ShareNoteToGroupRequest request)
+        public ActionResult ShareMyNoteToGroup(ShareMyNoteToGroupRequest request)
+        {
+            ResponseMessageViewModel response;
+            response = (ResponseMessageViewModel)request.Validate();
+            if (!request.IsValid)
+            {
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("RecentlyUploadedNotes");
+            }
+
+            _groupService.AddFileToGroup(request.FileId, request.GroupId, request.SemesterSubjectId);
+            _groupService.Commit();
+            response.AddSuccess(ResourceKeyResolver.SuccessNoteSharedToGroup);
+
+            TempData["ResponseViewModel"] = response;
+            return RedirectToAction("RecentlyUploadedNotes");
+        }
+
+        [HttpPost]
+        public ActionResult ShareMyNoteToUser(ShareMyNoteToUserRequest request)
+        {
+            ResponseMessageViewModel response;
+            response = (ResponseMessageViewModel)request.Validate();
+            if (!request.IsValid)
+            {
+                TempData["ResponseViewModel"] = response;
+                return RedirectToAction("RecentlyUploadedNotes");
+            }
+
+            if (_userService.UserExists(request.UserName))
+            {
+                _fileService.AddFileToUser(request.FileId, request.UserName);
+            }
+            if (_userService.UserExists(request.UserId))
+            {
+                _fileService.AddFileToUser(request.FileId, request.UserId);
+            }
+            _unitOfWork.Commit();
+            response.AddSuccess(ResourceKeyResolver.SuccessNoteSharedToUser);
+
+            TempData["ResponseViewModel"] = response;
+            return RedirectToAction("RecentlyUploadedNotes");
+        }
+
+        [HttpPost]
+        public ActionResult ShareUniversityNoteToGroup(ShareUniversityNoteToGroupRequest request)
         {
             ResponseMessageViewModel response;
             response = (ResponseMessageViewModel)request.Validate();
@@ -102,7 +179,7 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ShareNoteToUser(ShareNoteToUserRequest request)
+        public ActionResult ShareUniversityNoteToUser(ShareUniversityNoteToUserRequest request)
         {
             ResponseMessageViewModel response;
             response = (ResponseMessageViewModel)request.Validate();
