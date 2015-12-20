@@ -75,59 +75,6 @@
     <!--Custom JavaScript-->
     <script src="~/Scripts/customScripts.js"></script>
     <script src="~/Scripts/filterJoinedUniversity.js"></script>
-<script>
-    function fileSelected() {
-        var fileInput = document.getElementById("fileInput");
-        var files = fileInput.files;
-
-        var allFiles = "";
-
-        for (var i = 0; i < files.length; i++) {
-            allFiles += files[i].name;
-            allFiles += "<br>";
-        }
-
-        document.getElementById("filePath").innerHTML = allFiles;
-    }
-
-    $(document).ready(function () {
-        setUp();
-    });
-    function setUp() {
-        $("#universityNameGuess").autocomplete({
-            source: '@Url.Action("UniversitySuggestions", "Search")'
-        });
-    }
-
-    $("#gradeYearGuess").keypress(function () {
-        setupAutocompleteGradeGuess();
-    });
-
-    $('#universtitySubjectGuess').keypress(function() {
-        setupAutocompleteStudySubjectGuess();
-    });
-    function setupAutocompleteGradeGuess() {
-        $("#gradeYearGuess").autocomplete({
-            source: ('@Url.Action("GradeSuggestions", "Search")' + '?universityNameGuess=' + encodeURIComponent($('#universityNameGuess').val()))
-        });
-    }
-
-    function setupAutocompleteStudySubjectGuess() {
-        $("#universtitySubjectGuess").autocomplete({
-            source: ('@Url.Action("StudySubjectSuggestions", "Search")' + '?universityNameGuess=' + encodeURIComponent($('#universityNameGuess').val()) + '&gradeYearGuess=' + encodeURIComponent($('#gradeYearGuess').val()))
-
-            });
-        }
-
-        $(document).ajaxComplete(function (event, xhr, options) {
-            if (xhr.status == 401) {
-                var pathParts = window.location.href.split('/').filter(Boolean);
-                window.location.href = "/Account/SessionExpired";
-            }
-        });
-    </script>
-
-
 
 </body>
 </html>

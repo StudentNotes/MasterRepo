@@ -132,5 +132,7 @@
         function HideModal() {
             console.log("Hide modal");
             $('#shareUniversityNoteModal').modal('hide');
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
         }
 </script>

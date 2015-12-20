@@ -97,6 +97,18 @@ namespace StudentNotes.Logic.Services
             return recentlyAddedFiles;
         }
 
+        public IEnumerable<File> GetUniversityFiles(int userId)
+        {
+            var allUserFiles = _fileRepository.GetMany(f => f.UserId == userId).ToList();
+            var allUserFileIds = allUserFiles.Select(f => f.FileId).ToList();
+
+            var semesterSubjectFiles = _semesterSubjectFileRepository.GetMany(ss => allUserFileIds.Contains(ss.FileId)).Select(f => f.FileId).ToList();
+
+            allUserFiles.RemoveAll(file => !semesterSubjectFiles.Contains(file.FileId));
+
+            return allUserFiles;
+        }
+
         public List<File> GetSharedGroupFiles(int userId)
         {
             var userFiles = _fileRepository.GetMany(f => f.UserId == userId).ToList();

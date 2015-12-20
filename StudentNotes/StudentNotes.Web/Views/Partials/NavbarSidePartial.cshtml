@@ -17,7 +17,8 @@
                             UpdateTargetId = "page-content",
                             HttpMethod = "GET",
                             InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading-content"
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
                         },
                         new { @class = "fa fa-fw fa-dashboard" })
                 </li>
@@ -33,7 +34,7 @@
                         new {@class = "fa fa-fw fa-dashboard"})
                 </li>
                 <li>
-                    @Ajax.ActionLink(ResourceKeyResolver.ConstUniversityNotes, "HeavyAction", "File", new {holdTime = 20000},
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstUniversityNotes, "UniversityNotes", "Note", new {holdTime = 20000},
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",

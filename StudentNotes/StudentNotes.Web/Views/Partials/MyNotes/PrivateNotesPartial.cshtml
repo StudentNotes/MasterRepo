@@ -10,17 +10,21 @@
     <ol class="breadcrumb">
         <li class="active">
             @Ajax.ActionLink(ResourceKeyResolver.ConstPrivate, "PrivateNotes", "Note",
-            null,
-            new AjaxOptions()
-            {
-                UpdateTargetId = "page-content",
-                HttpMethod = "GET",
-                InsertionMode = InsertionMode.Replace,
-                LoadingElementId = "loading"
-            },
-            new { })
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
         </li>
     </ol>
+
+    @*<div class="col-xs-12">
+        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+    </div>*@
 
     <table class="table table-striped">
         <thead>

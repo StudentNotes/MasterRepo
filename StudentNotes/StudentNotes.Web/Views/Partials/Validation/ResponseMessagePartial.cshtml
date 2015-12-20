@@ -1,6 +1,6 @@
 ﻿@model StudentNotes.Logic.LogicAbstraction.ResponseViewModelBase
 
-<div id="login-errors">
+<div id="login-errors" hidden>
     @if (Model != null)
     {
         foreach (var error in Model.ErrorList)

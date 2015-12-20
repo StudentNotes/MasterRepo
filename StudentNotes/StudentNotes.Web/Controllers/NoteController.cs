@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using StudentNotes.Logic.Consts;
@@ -51,6 +52,7 @@ namespace StudentNotes.Web.Controllers
          
             foreach (var file in files)
             {
+                file.Path = GetNotePath(file.Path);
                 model.Notes.Add(new Note(file));
             }
 
@@ -66,10 +68,25 @@ namespace StudentNotes.Web.Controllers
 
             foreach (var file in privateFiles)
             {
+                file.Path = GetNotePath(file.Path);
                 model.UserNotesList.Add(new Note(file));
             }
 
             return PartialView("~/Views/Partials/MyNotes/PrivateNotesPartial.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult UniversityNotes()
+        {
+            var model = new UniversityNotesViewModel();
+            var files = _fileService.GetUniversityFiles((int) Session["CurrentUserId"]).ToList();
+            foreach (var file in files)
+            {
+                file.Path = GetNotePath(file.Path);
+                model.Notes.Add(new Note(file));
+            }
+
+            return PartialView("~/Views/Partials/MyNotes/UniversityNotesPartial.cshtml", model);
         }
 
         [HttpGet]
@@ -235,6 +252,17 @@ namespace StudentNotes.Web.Controllers
             };
 
             return PartialView("~/Views/Partials/ManageNotes/SharedNoteDetailsPartial.cshtml", model);
+        }
+
+        private string GetNotePath(string serverPath)
+        {
+            var universityNotePath = new StringBuilder("");
+            var pathNodes = serverPath.Split('/');
+            for (int i = 3; i < pathNodes.Length; i++)
+            {
+                universityNotePath.Append(string.Format("{0}/", pathNodes[i]));
+            }
+            return universityNotePath.ToString();
         }
     }
 }

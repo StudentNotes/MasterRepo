@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.FileTransferManager.Base;
 using StudentNotes.FileTransferManager.Consts;
@@ -13,7 +11,6 @@ using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
-using StudentNotes.Repositories.Repositories;
 using StudentNotes.Repositories.RepositoryInterfaces;
 
 namespace StudentNotes.Logic.Services
@@ -23,15 +20,20 @@ namespace StudentNotes.Logic.Services
         private readonly FileServer _fileServer;
         private readonly FileServerUser _fileServerUser;
         private readonly IUserRepository _userRepository;
+        private readonly IUserSharedFileRepository _userSharedFileRepository;
+        private readonly IFileSharedGroupRepository _fileSharedGroupRepository;
         private readonly IFileRepository _fileRepository;
         private readonly ISemesterSubjectFileRepository _semesterSubjectFileRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UploadService(IUserRepository userRepository, IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IUnitOfWork unitOfWork)
+        public UploadService(IUserRepository userRepository, IUserSharedFileRepository userSharedFileRepository, IFileSharedGroupRepository fileSharedGroupRepository,
+            IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IUnitOfWork unitOfWork)
         {
             _fileServer = new FtpServer(LogicConstants.FtpServerAddress);
             _fileServerUser = new FtpUser(LogicConstants.FtpUserLogin, LogicConstants.FtpUserPassword, _fileServer);
             _userRepository = userRepository;
+            _fileSharedGroupRepository = fileSharedGroupRepository;
+            _userSharedFileRepository = userSharedFileRepository;
             _fileRepository = fileRepository;
             _semesterSubjectFileRepository = semesterSubjectFileRepository;
             _unitOfWork = unitOfWork;
@@ -105,27 +107,32 @@ namespace StudentNotes.Logic.Services
             var responseCode = await _fileServerUser.DeleteFile(remoteFilePath);
             if (responseCode != (int) FtpResponseCode.FileDeleted) return responseCode;
 
+            _semesterSubjectFileRepository.Delete(ssf => ssf.FileId == noteId);
+            _fileSharedGroupRepository.Delete(f => f.FileId == noteId);
+            _userSharedFileRepository.Delete(f => f.FileId == noteId);
             _fileRepository.Delete(f => f.FileId == noteId);
+            
             if (_semesterSubjectFileRepository.Get(ssf => ssf.FileId == noteId) != null)
             {
-                _semesterSubjectFileRepository.Delete(ssf => ssf.FileId == noteId);
+                
             }
             _unitOfWork.Commit();
 
             return responseCode;
         }
 
-        public async Task<int> DeletePrivateNoteAsync(int fileId)
+        public async Task<int> DeletePrivateNoteAsync(int noteId)
         {
-            var privateFile = _fileRepository.GetById(fileId);
+            var privateFile = _fileRepository.GetById(noteId);
             var  remoteFilePath = privateFile.Path + "/" + privateFile.Name;
 
             var responseCode = await _fileServerUser.DeleteFile(remoteFilePath);
-            if (responseCode == (int)FtpResponseCode.FileDeleted)
-            {
-                _fileRepository.Delete(f => f.FileId == fileId);
-                _unitOfWork.Commit();
-            }
+
+            _fileSharedGroupRepository.Delete(f => f.FileId == noteId);
+            _userSharedFileRepository.Delete(f => f.FileId == noteId);
+            _fileRepository.Delete(f => f.FileId == noteId);
+            
+            _unitOfWork.Commit();
 
             return responseCode;
         }

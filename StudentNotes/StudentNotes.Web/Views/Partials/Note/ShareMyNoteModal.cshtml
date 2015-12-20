@@ -28,8 +28,9 @@
                     UpdateTargetId = "page-content",
                     HttpMethod = "POST",
                     InsertionMode = InsertionMode.Replace,
-                    LoadingElementId = "loading",
-                    OnBegin = "HideModal"
+                    LoadingElementId = "loading-content",
+                    OnBegin = "HideModal",
+                    OnComplete = "checkErrorDiv"
                 },
                 new { enctype = "multipart/form-data", id = "shareUserForm" }))
                 {
@@ -82,8 +83,9 @@
                     UpdateTargetId = "page-content",
                     HttpMethod = "POST",
                     InsertionMode = InsertionMode.Replace,
-                    LoadingElementId = "loading",
-                    OnBegin = "HideModal"
+                    LoadingElementId = "loading-content",
+                    OnBegin = "HideModal",
+                    OnComplete = "checkErrorDiv"
                 },
                 new { enctype = "multipart/form-data", id = "shareGroupForm", hidden = true }))
                 {
@@ -129,5 +131,7 @@
         function HideModal() {
             console.log("Hide modal");
             $('#shareUniversityNoteModal').modal('hide');
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
         }
 </script>
