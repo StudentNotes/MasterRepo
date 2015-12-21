@@ -302,7 +302,7 @@
     <value>Serwis</value>
   </data>
   <data name="ConstSharedNotes" xml:space="preserve">
-    <value>Udostępnione</value>
+    <value>Udostępniane</value>
   </data>
   <data name="ConstSharing" xml:space="preserve">
     <value>udostępnianie</value>
@@ -459,5 +459,8 @@
   </data>
   <data name="ErrorNoContentToDisplay" xml:space="preserve">
     <value>Brak zawartości, którą można by wyświetlić.</value>
+  </data>
+  <data name="ConstSharedByOthers" xml:space="preserve">
+    <value>Przydział od znajomych</value>
   </data>
 </root>

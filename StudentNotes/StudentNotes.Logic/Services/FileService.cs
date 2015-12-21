@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
+using StudentNotes.Logic.ViewModels.File;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Repositories.RepositoryInterfaces;
@@ -133,6 +134,31 @@ namespace StudentNotes.Logic.Services
         {
             var user = _userRepository.GetById(userId);
             return new SecureUserModel(user);
+        }
+
+        public AccessedNotesViewModel GetAccessedFiles(int userId)
+        {
+            var model = new AccessedNotesViewModel();
+
+            var accessedFileIds =
+                _userSharedFileRepository.GetMany(usf => usf.UserId == userId).Select(f => f.FileId).ToList();
+            var accessedFiles = _fileRepository.GetMany(f => accessedFileIds.Contains(f.FileId)).ToList();
+            var sharingUserIds = accessedFiles.Select(u => u.UserId).Distinct().ToList();
+            var users = _userRepository.GetMany(u => sharingUserIds.Contains(u.UserId));
+            foreach (var file in accessedFiles)
+            {
+                if (users == null)
+                {
+                    return model;
+                }
+
+                var owner = users.FirstOrDefault(u => u.UserId == file.UserId);
+
+                model.Notes.Add(new Note(file));
+                model.Owners.Add(new SimpleUserModel(owner));
+            }
+
+            return model;
         }
 
         public bool IsPrivateFile(int fileId)

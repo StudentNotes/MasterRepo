@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using StudentNotes.Logic.LogicModels;
+using StudentNotes.Logic.ViewModels.File;
 using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.ServiceInterfaces
@@ -16,6 +17,7 @@ namespace StudentNotes.Logic.ServiceInterfaces
         List<File> GetSharedGroupFiles(int userId);
         File GetFileById(int fileId);
         SecureUserModel GetSecureUser(int userId);
+        AccessedNotesViewModel GetAccessedFiles(int userId);
 
         bool IsPrivateFile(int fileId);
         bool UserHasAccess(int fileId, int userId);

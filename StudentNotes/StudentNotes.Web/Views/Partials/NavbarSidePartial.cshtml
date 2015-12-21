@@ -56,7 +56,26 @@
                         new {@class = "fa fa-fw fa-dashboard"})
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> @ResourceKeyResolver.ConstAllNotes</a>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstSharedByOthers, "AvailableNotes", "Note", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        },
+                        new { @class = "fa fa-fw fa-dashboard" })
+                </li>
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstAllNotes, "AllNotes", "Note", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        },
+                        new { @class = "fa fa-fw fa-dashboard" })
                 </li>
 
             </ul>

@@ -457,10 +457,10 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ErrorNoContentToDisplay"); }
         }
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
+        public static string ConstSharedByOthers
+        {
+            get { return ResourceFinder.GetResource("ConstSharedByOthers"); }
+        }
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

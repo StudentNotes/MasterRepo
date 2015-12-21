@@ -96,6 +96,7 @@
     <Compile Include="LogicModels\GroupBasics.cs" />
     <Compile Include="LogicModels\Note.cs" />
     <Compile Include="LogicModels\SecureUserModel.cs" />
+    <Compile Include="LogicModels\SimpleUserModel.cs" />
     <Compile Include="Models\NinjectResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourcesFinderLogic\ResourceFinder.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ViewModels\Common\UniversityGradeStudySubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\UniversityViewModel.cs" />
     <Compile Include="ViewModels\Common\UserViewModel.cs" />
+    <Compile Include="ViewModels\File\AccessedNotesViewModel.cs" />
     <Compile Include="ViewModels\File\FileUploadViewModel.cs" />
     <Compile Include="ViewModels\File\RecentlyAddedNotesViewModel.cs" />
     <Compile Include="ViewModels\File\SharedNotesViewModel.cs" />

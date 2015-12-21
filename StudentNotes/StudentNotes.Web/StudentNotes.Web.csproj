@@ -302,6 +302,7 @@
     <Content Include="Views\LoggedIn\Processed.cshtml" />
     <Content Include="Views\Partials\Note\ShareUniversityNoteModal.cshtml" />
     <Content Include="Views\Partials\Note\ShareMyNoteModal.cshtml" />
+    <Content Include="Views\Partials\MyNotes\AccessedNotesPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

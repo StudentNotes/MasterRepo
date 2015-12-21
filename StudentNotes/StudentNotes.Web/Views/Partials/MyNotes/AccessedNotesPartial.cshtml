@@ -1,0 +1,92 @@
+﻿@*Moje Notatki -> Udostępnione*@
+@using StudentNotes.Logic.LogicModels
+@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.File.AccessedNotesViewModel
+@{
+    Layout = null;
+}
+<div class="col-xs-12 folder-view">
+
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(ResourceKeyResolver.ConstSharedByOthers, "AvailableNotes", "Note",
+            null,
+            new AjaxOptions()
+            {
+                UpdateTargetId = "page-content",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loading-content"
+            },
+            new { })
+        </li>
+    </ol>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Rozmiar</th>
+                <th>Udostępniający użytkownik</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.Notes.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.Notes[i].Category)" style="max-height: 34px;" />
+                    @Model.Notes[i].Name
+                </td>
+                <td>@Model.Notes[i].Category</td>
+                <td>@Model.Notes[i].Size</td>
+                @if (Model.Owners[i].FullName == "Nieznajomy")
+                {
+                    <td>@string.Format("{0} ({1})", Model.Owners[i].FullName, Model.Owners[i].Email)</td>
+                }
+                else
+                {
+                    <td>@Model.Owners[i].FullName</td>
+                }
+                <td>
+                    @Ajax.ActionLink("Pobierz", "DownloadNote", "Note",
+                    new { fileId = Model.Notes[i].NoteId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading-content"
+                    },
+                    new { @class = "btn btn-success" })
+
+                    @Ajax.ActionLink("Szczegóły", "AccessedNoteDetails", "Note",
+                    new { fileId = Model.Notes[i].NoteId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading-content"
+                    },
+                    new { @class = "btn btn-info" })
+
+                    @Ajax.ActionLink("Usuń udział", "RemoveAccessedShare", "Note",
+                    new { fileId = Model.Notes[i].NoteId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading-content"
+                    },
+                    new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>

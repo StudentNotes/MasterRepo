@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -62,7 +61,7 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult PrivateNotes()
         {
-            UserNotesViewModel model = new UserNotesViewModel();
+            var model = new UserNotesViewModel();
 
             var privateFiles = _fileService.GetPrivateFiles((int) Session["CurrentUserId"]);
 
@@ -105,6 +104,40 @@ namespace StudentNotes.Web.Controllers
                 }).ToList();
 
             return PartialView("~/Views/Partials/MyNotes/SharedNotesPartial.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult AvailableNotes()
+        {
+            var model = _fileService.GetAccessedFiles((int)Session["CurrentUserId"]);
+
+            return PartialView("~/Views/Partials/MyNotes/AccessedNotesPartial.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult AllNotes()
+        {
+            return null;
+        }
+
+        [HttpGet]
+        public ActionResult AccessedNoteDetails(int noteId)
+        {
+
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult RemoveAccessedShare(int fileId)
+        {
+
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult DownloadNote(int noteId)
+        {
+            return null;
         }
 
         [HttpPost]
