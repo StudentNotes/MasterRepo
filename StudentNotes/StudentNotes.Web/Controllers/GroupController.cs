@@ -16,11 +16,13 @@ namespace StudentNotes.Web.Controllers
     {
         private readonly IGroupService _groupService;
         private readonly ISemesterSubjectService _semesterSubjectService;
+        private readonly IUserService _userService;
 
-        public GroupController(IGroupService groupService, ISemesterSubjectService semesterSubjectService)
+        public GroupController(IGroupService groupService, ISemesterSubjectService semesterSubjectService, IUserService userService)
         {
             _groupService = groupService;
             _semesterSubjectService = semesterSubjectService;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -104,10 +106,19 @@ namespace StudentNotes.Web.Controllers
             foreach (var file in groupNotes)
             {
                 model.GroupNotes.Add(new Note(file));
+                model.IsOwnerOrAdmin.Add(file.UserId == (int) Session["CurrentUserID"]);
             }
             var semesterSubject = _semesterSubjectService.GetSemesterSubjectById(request.SemesterSubjectId);
             var group = _groupService.GetGroupById(request.GroupId);
             var semester = _semesterSubjectService.GetSemesterById(request.SemesterId);
+
+            if (group.AdminId == (int) Session["CurrentUserId"] || _userService.IsServiceAdmin((int) Session["CurrentUserId"]))
+            {
+                for (int i = 0; i < model.IsOwnerOrAdmin.Count; i++)
+                {
+                    model.IsOwnerOrAdmin[i] = true;
+                }
+            }
 
             model.SemesterId = semester.SemesterId;
             model.SemesterName = string.Format("Semestr {0}", semester.SemesterNumber);
@@ -122,8 +133,9 @@ namespace StudentNotes.Web.Controllers
         [HttpPost]
         public ActionResult DeleteGroupSemesterSubjectNote(DeleteGroupNoteRequest request)
         {
+            _groupService.RemoveGroupFileFromSemester(request.NoteId, request.GroupId, request.SemesterSubjectId);
 
-            return RedirectToAction("ShowGroupNotes");
+            return RedirectToAction("ShowGroupNotes", new {request.SemesterSubjectId, request.GroupId, request.SemesterId});
         }
     }
 }

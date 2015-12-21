@@ -44,7 +44,7 @@ namespace DependencyResolver.Modules
             Bind<IUserVisitedSchoolRepository>().To<UserVisitedSchoolRepository>();
             Bind<ISubjectRepository>().To<SubjectRepository>();
 
-            Bind<IUploadService>().To<UploadService>();
+            Bind<IFileServerService>().To<FileServerService>();
             Bind<IUserService>().To<UserService>();
             Bind<IFileService>().To<FileService>();
             Bind<ISchoolService>().To<SchoolService>();

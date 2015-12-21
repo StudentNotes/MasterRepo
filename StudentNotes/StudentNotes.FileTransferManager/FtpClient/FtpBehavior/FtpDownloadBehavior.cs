@@ -13,20 +13,18 @@ namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
 
         public byte[] DownloadFile(File file, FileServer server, FileServerUser user)
         {
-            byte[] completeFile = new byte[0];
-
-            string requestPath = string.Format("ftp://{0}{1}", server.ServerUrl, server.FileDestination);
+            string requestPath = string.Format("ftp://{0}{1}/{2}", server.ServerUrl, server.CurrentLocation, file.Name);
 
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(requestPath);
             ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
 
             ftpRequest.Credentials = new NetworkCredential(user.login, user.password);
 
-            FtpWebResponse ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
+            var ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
 
-            using (Stream ftpDownloadStream = ftpResponse.GetResponseStream())
+            using (var ftpDownloadStream = ftpResponse.GetResponseStream())
             {
-                using (BinaryReader reader = new BinaryReader(ftpDownloadStream))
+                using (var reader = new BinaryReader(ftpDownloadStream))
                 {
                     var downloadedFilePart = reader.ReadBytes(SEGMENT_SIZE);
 
@@ -47,7 +45,7 @@ namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
 
             ftpResponse.Close();
 
-            return completeFile;
+            return file.Content;
         }
 
         

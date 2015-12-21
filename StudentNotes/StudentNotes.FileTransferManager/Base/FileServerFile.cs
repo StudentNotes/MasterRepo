@@ -125,7 +125,7 @@ namespace StudentNotes.FileTransferManager.Base
 
         private string GetFileName(string filePath)
         {
-            var directoryTree = filePath.Split('\\').ToList();
+            var directoryTree = filePath.Split('/').ToList();
             return directoryTree.Last();
         }
     }

@@ -272,6 +272,21 @@ namespace StudentNotes.Logic.Services
             return 0;
         }
 
+        public int RemoveGroupFileFromSemester(int fileId, int groupId, int semesterSubjectId)
+        {
+            _fileSharedGroupRepository.Delete(f => f.FileId == fileId && f.GroupId == groupId && f.SemesterSubjectId == semesterSubjectId);
+            _fileSharedGroupRepository.Commit();
+
+            var groupFiles = _groupRepository.GetMany(gf => gf.GroupId == groupId).ToList();
+
+            if (!groupFiles.Any())
+            {
+                return 0;
+            }
+  
+            return groupFiles.Count;
+        }
+
         public IEnumerable<Group> GetUserGroups(int userId)
         {
             var userGroupIds = _groupUserRepository.GetMany(gu => gu.UserId == userId).Select(g => g.GroupId).ToList();

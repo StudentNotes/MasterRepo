@@ -1,12 +1,20 @@
-﻿using StudentNotes.Logic.Consts;
+﻿using System.Collections.Generic;
+using StudentNotes.Logic.LogicAbstraction;
+using StudentNotes.Logic.LogicModels;
+using StudentNotes.Logic.ViewModels.Validation;
 
 namespace StudentNotes.Logic.ViewModels.File
 {
     public class SharedNotesViewModel
     {
-        public int NoteId { get; set; }
-        public string Name { get; set; }
-        public string Category { get; set; }
-        public NoteType Type { get; set; }
+        public ResponseViewModelBase Response { get; set; }
+        public List<SimpleNoteModel> Notes { get; set; }
+
+        public SharedNotesViewModel()
+        {
+            Response = new ResponseMessageViewModel();
+            Notes = new List<SimpleNoteModel>();
+        }
+
     }
 }

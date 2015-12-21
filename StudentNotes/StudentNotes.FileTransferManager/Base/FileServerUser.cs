@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using StudentNotes.FileTransferManager.Abstraction;
 
 namespace StudentNotes.FileTransferManager.Base
@@ -55,6 +51,11 @@ namespace StudentNotes.FileTransferManager.Base
         public int GoToOrCreatePath(string destinationPath)
         {
             return (int)DirectoryBehavior.GoToOrCreatePath(destinationPath);
+        }
+
+        public int GoToPath(string destinationPath)
+        {
+            return (int) DirectoryBehavior.GoToPath(destinationPath);
         }
 
 

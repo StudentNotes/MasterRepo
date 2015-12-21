@@ -19,10 +19,12 @@ namespace StudentNotes.Logic.Services
         private readonly IUserSharedFileRepository _userSharedFileRepository;
         private readonly IUserRepository _userRepository;
         private readonly IUserPreferencesRepository _userPreferencesRepository;
+        private readonly IGroupUserRepository _groupUserRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public FileService(IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IFileSharedGroupRepository fileSharedGroupRepository,
-            IUserSharedFileRepository userSharedFileRepository, IUserRepository userRepository, IUserPreferencesRepository userPreferencesRepository, IUnitOfWork unitOfWork)
+            IUserSharedFileRepository userSharedFileRepository, IUserRepository userRepository, IUserPreferencesRepository userPreferencesRepository,
+            IGroupUserRepository groupUserRepository, IUnitOfWork unitOfWork)
         {
             _fileRepository = fileRepository;
             _semesterSubjectFileRepository = semesterSubjectFileRepository;
@@ -30,6 +32,7 @@ namespace StudentNotes.Logic.Services
             _userSharedFileRepository = userSharedFileRepository;
             _userRepository = userRepository;
             _userPreferencesRepository = userPreferencesRepository;
+            _groupUserRepository = groupUserRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -108,6 +111,25 @@ namespace StudentNotes.Logic.Services
             allUserFiles.RemoveAll(file => !semesterSubjectFiles.Contains(file.FileId));
 
             return allUserFiles;
+        }
+
+        public IEnumerable<File> GetAllFiles(int userId)
+        {
+            var accessedUserFileIds =
+                _userSharedFileRepository.GetMany(usf => usf.UserId == userId).Select(f => f.FileId).ToList();
+            var userGroupIds = _groupUserRepository.GetMany(gu => gu.UserId == userId).Select(g => g.GroupId).ToList();
+            var accessedGroupFileIds =
+                _fileSharedGroupRepository.GetMany(fsg => userGroupIds.Contains(fsg.GroupId))
+                    .Select(f => f.FileId)
+                    .ToList();
+
+            var allFiles =
+                _fileRepository.GetMany(
+                    f =>
+                        accessedUserFileIds.Contains(f.FileId) || accessedGroupFileIds.Contains(f.FileId) ||
+                        f.UserId == userId);
+
+            return allFiles;
         }
 
         public List<File> GetSharedGroupFiles(int userId)
@@ -228,8 +250,7 @@ namespace StudentNotes.Logic.Services
         {
             try
             {
-                var entityToDelete = _userSharedFileRepository.Get(usf => usf.FileId == fileId && usf.UserId == userId);
-                _userSharedFileRepository.Delete(entityToDelete);
+                _userSharedFileRepository.Delete(usf => usf.FileId == fileId && usf.UserId == userId);
                 _userSharedFileRepository.Commit();
 
                 var fileSharedUser = _userSharedFileRepository.GetMany(f => f.FileId == fileId);

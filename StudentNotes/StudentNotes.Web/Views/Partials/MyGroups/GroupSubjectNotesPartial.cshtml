@@ -73,16 +73,22 @@
                     }
                 </td>
                 <td>
-                    @Ajax.ActionLink("Usuń plik", "DeleteGroupSemesterSubjectNote", "Group",
-            new { Model.GroupNotes[i].NoteId, Model.GroupId, Model.SemesterSubjectId },
+                    @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.GroupNotes[i].NoteId }, new { @class = "btn btn-success" })
+
+                    @if (Model.IsOwnerOrAdmin[i])
+                    {
+                        @Ajax.ActionLink("Usuń plik", "DeleteGroupSemesterSubjectNote", "Group",
+                        new { Model.GroupNotes[i].NoteId, Model.GroupId, Model.SemesterSubjectId, Model.SemesterId },
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",
                             HttpMethod = "POST",
                             InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
+                            LoadingElementId = "loading-content"
                         },
                         new { @class = "btn btn-danger" })
+                    }
+                   
                 </td>
             </tr>
         }

@@ -19,12 +19,12 @@ namespace StudentNotes.Web.Controllers
     public class NoteController : Controller
     {
         private readonly IFileService _fileService;
-        private readonly IUploadService _uploadService;
+        private readonly IFileServerService _uploadService;
         private readonly IUserService _userService;
         private readonly IGroupService _groupService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public NoteController(IFileService fileService, IUploadService uploadService, IUserService userService, IGroupService groupService, IUnitOfWork unitOfWork)
+        public NoteController(IFileService fileService, IFileServerService uploadService, IUserService userService, IGroupService groupService, IUnitOfWork unitOfWork)
         {
             _fileService = fileService;
             _uploadService = uploadService;
@@ -91,17 +91,28 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult SharedNotes()
         {
-            var sharedFiles = _fileService.GetSharedUserFiles((int) Session["CurrentUserId"]);
+            var model = new SharedNotesViewModel();
 
-            var model = (from sharedFile in sharedFiles
-                let type = _fileService.IsPrivateFile(sharedFile.FileId) ? NoteType.Private : NoteType.University
-                select new SharedNotesViewModel()
+            var sharedFiles = _fileService.GetSharedUserFiles((int) Session["CurrentUserId"]).ToList();
+
+            if (!sharedFiles.Any())
+            {
+                model.Response.AddError(ResourceKeyResolver.ErrorNoContentToDisplay);
+                return PartialView("~/Views/Partials/MyNotes/SharedNotesPartial.cshtml", model);
+            }
+
+            foreach (var sharedFile in sharedFiles)
+            {
+                var type = _fileService.IsPrivateFile(sharedFile.FileId) ? NoteType.Private : NoteType.University;
+
+                model.Notes.Add(new SimpleNoteModel()
                 {
                     NoteId = sharedFile.FileId,
                     Name = sharedFile.Name,
                     Category = sharedFile.Category,
                     Type = type
-                }).ToList();
+                });
+            }
 
             return PartialView("~/Views/Partials/MyNotes/SharedNotesPartial.cshtml", model);
         }
@@ -117,27 +128,22 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult AllNotes()
         {
-            return null;
-        }
-
-        [HttpGet]
-        public ActionResult AccessedNoteDetails(int noteId)
-        {
-
+            var allFiles = _fileService.GetAllFiles((int) Session["CurrentUserId"]);
             return null;
         }
 
         [HttpPost]
         public ActionResult RemoveAccessedShare(int fileId)
         {
-
-            return null;
+            _fileService.RemoveFileFromUser(fileId, (int) Session["CurrentUserId"]);
+            return RedirectToAction("AvailableNotes");
         }
 
-        [HttpPost]
-        public ActionResult DownloadNote(int noteId)
+        [HttpGet]
+        public FileContentResult DownloadNote(int fileId)
         {
-            return null;
+            var note = _uploadService.DownloadNote(fileId);
+            return File(note.Content, note.Category, note.Name);
         }
 
         [HttpPost]

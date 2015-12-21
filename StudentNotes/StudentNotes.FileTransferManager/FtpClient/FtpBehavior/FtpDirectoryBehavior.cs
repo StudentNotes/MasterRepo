@@ -44,21 +44,32 @@ namespace StudentNotes.FileTransferManager.FtpClient.FtpBehavior
 
         public FtpResponseCode GoToPath(string destinationPath)
         {
-            throw new NotImplementedException();
+            var destinationDirectoriesTree = ConvertDirectoryListingToList(destinationPath);
+
+            for (int i = 1; i < destinationDirectoriesTree.Count; i++)
+            {
+                var responseCode = ChangeCurrentDirectory(destinationDirectoriesTree[i]);
+                if (responseCode == FtpResponseCode.CommandsExecutedSuccessfully)
+                {
+                    continue;
+                }
+                return FtpResponseCode.GlobalError;
+            }
+            return FtpResponseCode.CommandsExecutedSuccessfully;
         }
 
-        private int ChangeCurrentDirectory(string directory)
+        private FtpResponseCode ChangeCurrentDirectory(string directory)
         {
             List<string> directories = GetDirectoriesList();
 
             if (!directories.Contains(directory))
             {
-                return -1;
+                return FtpResponseCode.FileDoesntExist;
             }
 
-            _server.CurrentLocation += directory;
+            _server.CurrentLocation += ("/" + directory);
 
-            return 0;
+            return FtpResponseCode.CommandsExecutedSuccessfully;
         }
 
         private FtpResponseCode ChangeCurrentDirectoryOrCreateDirectory(string directory)

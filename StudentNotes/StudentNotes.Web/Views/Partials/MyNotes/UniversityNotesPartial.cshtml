@@ -8,13 +8,14 @@
 
     <ol class="breadcrumb">
         <li class="active">
-            @Ajax.ActionLink(ResourceKeyResolver.ConstUniversityNotes, "RecentlyUploadedNotes", "Note", null,
+            @Ajax.ActionLink(ResourceKeyResolver.ConstUniversityNotes, "UniversityNotes", "Note", null,
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",
                             HttpMethod = "GET",
                             InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading-content"
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
                         },
                         new { @class = "fa fa-fw fa-dashboard" })
         </li>
@@ -49,16 +50,31 @@
                 <td>@Model.Notes[i].DestinationPath</td>
                 <td>@Model.Notes[i].UploadDate.ToString()</td>
                 <td>
-                    @Ajax.ActionLink("Usuń notatkę", "DeleteNote", "Note",
-                        new { Model.Notes[i].NoteId },
+                    @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.Notes[i].NoteId }, new { @class = "btn btn-success" })
+
+                    @*@Ajax.ActionLink("Pobierz", "DownloadNote", "Note",
+                        new {fileId = Model.Notes[i].NoteId},
                         new AjaxOptions()
                         {
                             UpdateTargetId = "page-content",
                             HttpMethod = "POST",
                             InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading-content"
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
                         },
-                        new { @class = "btn btn-danger" })
+                        new {@class = "btn btn-success"})*@
+
+                    @Ajax.ActionLink("Usuń notatkę", "DeleteNote", "Note",
+                        new {Model.Notes[i].NoteId},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new {@class = "btn btn-danger"})
 
                     <button id="shareFileButton" type="button" class="btn btn-primary btn-share-modal" data-toggle="modal" data-target="#shareUniversityNoteModal" name="@Model.Notes[i].Name" value="@Model.Notes[i].NoteId">
                         Udostępniaj

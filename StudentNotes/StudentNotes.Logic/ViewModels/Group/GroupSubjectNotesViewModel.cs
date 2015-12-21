@@ -16,10 +16,12 @@ namespace StudentNotes.Logic.ViewModels.Group
         public int SemesterSubjectId { get; set; }
         public string SemesterSubjectName { get; set; }
         public List<Note> GroupNotes { get; set; }
+        public List<bool> IsOwnerOrAdmin { get; set; } 
 
         public GroupSubjectNotesViewModel()
         {
             GroupNotes = new List<Note>();
+            IsOwnerOrAdmin = new List<bool>();
         }
     }
 }

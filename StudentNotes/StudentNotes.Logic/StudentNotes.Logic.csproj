@@ -96,6 +96,7 @@
     <Compile Include="LogicModels\GroupBasics.cs" />
     <Compile Include="LogicModels\Note.cs" />
     <Compile Include="LogicModels\SecureUserModel.cs" />
+    <Compile Include="LogicModels\SimpleNoteModel.cs" />
     <Compile Include="LogicModels\SimpleUserModel.cs" />
     <Compile Include="Models\NinjectResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,13 +106,13 @@
     <Compile Include="ServiceInterfaces\IGroupService.cs" />
     <Compile Include="ServiceInterfaces\ISchoolService.cs" />
     <Compile Include="ServiceInterfaces\ISemesterSubjectService.cs" />
-    <Compile Include="ServiceInterfaces\IUploadService.cs" />
+    <Compile Include="ServiceInterfaces\IFileServerService.cs" />
     <Compile Include="ServiceInterfaces\IUserService.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\GroupService.cs" />
     <Compile Include="Services\SchoolService.cs" />
     <Compile Include="Services\SemesterSubjectService.cs" />
-    <Compile Include="Services\UploadService.cs" />
+    <Compile Include="Services\FileServerService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\Authorization\LoginViewModel.cs" />
     <Compile Include="ViewModels\Authorization\RegisterViewModel.cs" />

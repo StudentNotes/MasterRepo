@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Repositories.DbModels;
@@ -26,6 +23,7 @@ namespace StudentNotes.Logic.ServiceInterfaces
         int RemoveUserFromGroup(int userId, int groupId);
         int RemoveSemesterFromGroup(int semesterId, int groupId);
         int DeleteGroup(int groupId);
+        int RemoveGroupFileFromSemester(int fileId, int groupId, int semesterSubjectId);
 
         IEnumerable<Group> GetUserGroups(int userId);
         IEnumerable<Group> GetAdminGroups(int adminId);

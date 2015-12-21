@@ -8,6 +8,7 @@ namespace StudentNotes.Web.RequestViewModels.Group
         public int NoteId { get; set; }
         public int GroupId { get; set; }
         public int SemesterSubjectId { get; set; }
+        public int SemesterId { get; set; }
 
         public override ResponseViewModelBase Validate()
         {

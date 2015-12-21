@@ -14,10 +14,10 @@ namespace StudentNotes.Web.Controllers
     [SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
     public class FileController : AsyncController
     {
-        private readonly IUploadService _uploadService;
+        private readonly IFileServerService _uploadService;
         private readonly IFileService _fileService;
 
-        public FileController(IUploadService uploadService, IFileService fileService)
+        public FileController(IFileServerService uploadService, IFileService fileService)
         {
             _uploadService = uploadService;
             _fileService = fileService;

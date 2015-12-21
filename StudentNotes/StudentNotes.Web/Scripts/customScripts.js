@@ -1,10 +1,5 @@
 ﻿$(document).ready(function () {
-    $('*[data-autocomplete-url]')
-        .each(function () {
-            $(this).autocomplete({
-                source: $(this).data("autocomplete-url")
-            });
-        });
+    
 });
 function loadingAnimationOn() {
     $("#loading-content").addClass("shown");
@@ -26,35 +21,6 @@ function fileSelected() {
     }
 
     document.getElementById("filePath").innerHTML = allFiles;
-}
-
-$(document).ready(function () {
-    setUp();
-});
-function setUp() {
-    $("#universityNameGuess").autocomplete({
-        source: '@Url.Action("UniversitySuggestions", "Search")'
-    });
-}
-
-$("#gradeYearGuess").keypress(function () {
-    setupAutocompleteGradeGuess();
-});
-
-$('#universtitySubjectGuess').keypress(function () {
-    setupAutocompleteStudySubjectGuess();
-});
-function setupAutocompleteGradeGuess() {
-    $("#gradeYearGuess").autocomplete({
-        source: ('@Url.Action("GradeSuggestions", "Search")' + '?universityNameGuess=' + encodeURIComponent($('#universityNameGuess').val()))
-    });
-}
-
-function setupAutocompleteStudySubjectGuess() {
-    $("#universtitySubjectGuess").autocomplete({
-        source: ('@Url.Action("StudySubjectSuggestions", "Search")' + '?universityNameGuess=' + encodeURIComponent($('#universityNameGuess').val()) + '&gradeYearGuess=' + encodeURIComponent($('#gradeYearGuess').val()))
-
-    });
 }
 
 $(document).ajaxComplete(function (event, xhr, options) {

@@ -15,7 +15,7 @@ using StudentNotes.Repositories.RepositoryInterfaces;
 
 namespace StudentNotes.Logic.Services
 {
-    public class UploadService : IUploadService
+    public class FileServerService : IFileServerService
     {
         private readonly FileServer _fileServer;
         private readonly FileServerUser _fileServerUser;
@@ -26,7 +26,7 @@ namespace StudentNotes.Logic.Services
         private readonly ISemesterSubjectFileRepository _semesterSubjectFileRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UploadService(IUserRepository userRepository, IUserSharedFileRepository userSharedFileRepository, IFileSharedGroupRepository fileSharedGroupRepository,
+        public FileServerService(IUserRepository userRepository, IUserSharedFileRepository userSharedFileRepository, IFileSharedGroupRepository fileSharedGroupRepository,
             IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IUnitOfWork unitOfWork)
         {
             _fileServer = new FtpServer(LogicConstants.FtpServerAddress);
@@ -37,6 +37,18 @@ namespace StudentNotes.Logic.Services
             _fileRepository = fileRepository;
             _semesterSubjectFileRepository = semesterSubjectFileRepository;
             _unitOfWork = unitOfWork;
+        }
+
+        public Note DownloadNote(int noteId)
+        {
+            var file = _fileRepository.GetById(noteId);
+            var returnNote = new Note(file);
+            
+            _fileServerUser.GoToPath(file.Path);
+
+            returnNote.Content = _fileServerUser.DownloadFile(new CommonFile(string.Format("{0}/{1}", file.Path, file.Name)));
+
+            return returnNote;
         }
 
         public async Task<int> UploadPrivateNote(Note note, int userId)
@@ -159,11 +171,6 @@ namespace StudentNotes.Logic.Services
             _unitOfWork.Commit();
             return (int)FtpResponseCode.FileDeleted;
         }
-
-        //public async Task<int> DeleteUniversityFileTask(int fileId, int semesterSubjectId)
-        //{
-            
-        //}
 
         public void SaveUpload()
         {

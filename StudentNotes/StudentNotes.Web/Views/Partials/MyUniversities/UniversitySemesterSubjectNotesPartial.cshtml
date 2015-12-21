@@ -91,6 +91,8 @@
                     }
                 </td>
                 <td>
+                    @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.Notes[i].NoteId }, new { @class = "btn btn-success" })
+
                     @Ajax.ActionLink("Usuń notatkę", "DeleteSemesterSubjectNote", "Note",
                         new {noteId = Model.Notes[i].NoteId, semesterSubjectId = Model.SemesterSubjectId},
                         new AjaxOptions()
@@ -98,7 +100,8 @@
                             UpdateTargetId = "page-content",
                             HttpMethod = "POST",
                             InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading-content"
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
                         },
                         new {@class = "btn btn-danger"})
 

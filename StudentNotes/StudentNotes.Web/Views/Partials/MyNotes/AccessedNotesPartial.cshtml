@@ -16,11 +16,16 @@
                 UpdateTargetId = "page-content",
                 HttpMethod = "GET",
                 InsertionMode = InsertionMode.Replace,
-                LoadingElementId = "loading-content"
+                LoadingElementId = "loading-content",
+                OnComplete = "checkErrorDiv"
             },
             new { })
         </li>
     </ol>
+
+    <div class="col-xs-12">
+        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+    </div>
 
     <table class="table table-striped">
         <thead>
@@ -30,6 +35,7 @@
                 <th>Kategoria</th>
                 <th>Rozmiar</th>
                 <th>Udostępniający użytkownik</th>
+                <th>Tagi</th>
                 <th></th>
             </tr>
         </thead>
@@ -52,38 +58,37 @@
                     <td>@Model.Owners[i].FullName</td>
                 }
                 <td>
-                    @Ajax.ActionLink("Pobierz", "DownloadNote", "Note",
-                    new { fileId = Model.Notes[i].NoteId },
-                    new AjaxOptions()
+                    @foreach (var tag in @Model.Notes[i].Tags)
                     {
-                        UpdateTargetId = "page-content",
-                        HttpMethod = "POST",
-                        InsertionMode = InsertionMode.Replace,
-                        LoadingElementId = "loading-content"
-                    },
-                    new { @class = "btn btn-success" })
+                        string.Format("{0}, ", tag);
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.Notes[i].NoteId }, new { @class = "btn btn-success" })
 
-                    @Ajax.ActionLink("Szczegóły", "AccessedNoteDetails", "Note",
-                    new { fileId = Model.Notes[i].NoteId },
-                    new AjaxOptions()
-                    {
-                        UpdateTargetId = "page-content",
-                        HttpMethod = "GET",
-                        InsertionMode = InsertionMode.Replace,
-                        LoadingElementId = "loading-content"
-                    },
-                    new { @class = "btn btn-info" })
+                    @*@Ajax.ActionLink("Pobierz", "DownloadNote", "Note",
+                        new {fileId = Model.Notes[i].NoteId},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new {@class = "btn btn-success"})*@
 
                     @Ajax.ActionLink("Usuń udział", "RemoveAccessedShare", "Note",
-                    new { fileId = Model.Notes[i].NoteId },
-                    new AjaxOptions()
-                    {
-                        UpdateTargetId = "page-content",
-                        HttpMethod = "POST",
-                        InsertionMode = InsertionMode.Replace,
-                        LoadingElementId = "loading-content"
-                    },
-                    new { @class = "btn btn-danger" })
+                        new {fileId = Model.Notes[i].NoteId},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new {@class = "btn btn-danger"})
                 </td>
             </tr>
         }
