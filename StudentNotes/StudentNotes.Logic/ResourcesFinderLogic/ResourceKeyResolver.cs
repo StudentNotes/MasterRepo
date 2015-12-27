@@ -461,6 +461,38 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ConstSharedByOthers"); }
         }
+        public static string ConstGroupAccess
+        {
+            get { return ResourceFinder.GetResource("ConstGroupAccess"); }
+        }
+        public static string ConstOwnerAccess
+        {
+            get { return ResourceFinder.GetResource("ConstOwnerAccess"); }
+        }
+        public static string ConstPrivateShare
+        {
+            get { return ResourceFinder.GetResource("ConstPrivateShare"); }
+        }
+        public static string ConstChangeAvatar
+        {
+            get { return ResourceFinder.GetResource("ConstChangeAvatar"); }
+        }
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

@@ -14,7 +14,9 @@ namespace StudentNotes.Logic.ServiceInterfaces
         IEnumerable<File> GetSharedUserFiles(int userId);
         IEnumerable<File> GetRecentlyAddedFiles(int userId);
         IEnumerable<File> GetUniversityFiles(int userId);
-        IEnumerable<File> GetAllFiles(int userId);
+        IEnumerable<Group> GetFileGroupShares(int fileId, int memberId);
+        User GetPrivateShareUser(int fileId);
+        List<Note> GetAllFiles(int userId);
         List<File> GetSharedGroupFiles(int userId);
         File GetFileById(int fileId);
         SecureUserModel GetSecureUser(int userId);

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using StudentNotes.Logic.Consts;
@@ -20,12 +22,17 @@ namespace StudentNotes.Web.Controllers
         private readonly ISemesterSubjectService _semesterSubjectService;
         private readonly IGroupService _groupService;
         private readonly ISchoolService _schoolService;
+        private readonly IFileService _fileService;
+        private readonly IUserService _userService;
 
-        public ManagementController(ISemesterSubjectService studySubjectService, IGroupService groupService, ISchoolService schoolService)
+        public ManagementController(ISemesterSubjectService studySubjectService, IGroupService groupService, IFileService fileService,
+            IUserService userService, ISchoolService schoolService)
         {
             _semesterSubjectService = studySubjectService;
             _groupService = groupService;
             _schoolService = schoolService;
+            _fileService = fileService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -441,6 +448,14 @@ namespace StudentNotes.Web.Controllers
             return RedirectToAction("GroupDetails", new {groupId});
         }
 
+        [HttpGet]
+        public ActionResult UserPreferences()
+        {
+            var model = _fileService.GetSecureUser((int) Session["CurrentUserId"]);
+
+            return PartialView("~/Views/Partials/Management/UserPreferencesPartial.cshtml", model);
+        }
+
         private static void RemoveAddedUsers(ref List<SecureUserModel> semesterUsers, ref List<SecureUserModel> groupUsers)
         {
             foreach (var groupUser in groupUsers)
@@ -448,6 +463,22 @@ namespace StudentNotes.Web.Controllers
                 var userToDelete = semesterUsers.Find(u => u.UserId == groupUser.UserId);
                 semesterUsers.Remove(userToDelete);
             }
+        }
+
+        [HttpPost]
+        public ActionResult ChangeAvatar(HttpPostedFileBase file)
+        {
+            if (file.ContentLength == 0)
+            {
+                // obsłużyć, że user nie wybrał pliku
+            }
+            var fileName = $"{(int) Session["CurrentUserId"]}_avatar";
+            var path = Path.Combine(Server.MapPath("~/App_Data/UserPictures"), fileName);
+
+            file.SaveAs(path);
+            _userService.AddAvatar((int)Session["CurrentUserId"], path);
+
+            return View("~/Views/LoggedIn/Index.cshtml");
         }
     }
 

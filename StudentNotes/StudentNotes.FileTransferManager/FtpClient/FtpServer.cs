@@ -11,12 +11,14 @@ namespace StudentNotes.FileTransferManager.FtpClient
     {
         public FtpServer(string serverUrl) : base(serverUrl)
         {
-            
+            FileDestination = "/";
+            CurrentLocation = "/FTP";
         }
 
         public FtpServer(string serverUrl, string fileDestination)
             : base(serverUrl, fileDestination)
         {
+            CurrentLocation = "/FTP";
         }
 
         public override string ToString()

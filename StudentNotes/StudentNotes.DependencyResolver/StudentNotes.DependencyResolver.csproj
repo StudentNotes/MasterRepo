@@ -51,9 +51,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StudentNotes.FileTransferManager\StudentNotes.FileTransferManager.csproj">
-      <Project>{45461541-3ce7-49db-ad6e-f7f9c171e89d}</Project>
-      <Name>StudentNotes.FileTransferManager</Name>
+    <ProjectReference Include="..\StudentNotes.FileManager\StudentNotes.FileManager.csproj">
+      <Project>{1f19cb93-6825-4294-ab93-90b7ea792ec7}</Project>
+      <Name>StudentNotes.FileManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentNotes.Logic\StudentNotes.Logic.csproj">
       <Project>{921a6f78-ac3a-4f8b-b292-bccdedb33c49}</Project>

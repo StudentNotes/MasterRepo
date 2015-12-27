@@ -143,6 +143,11 @@ namespace StudentNotes.Web.Controllers
 
             model.IsServiceAdmin = _userService.IsServiceAdmin((int) Session["CurrentUserId"]);
 
+            if (userInfo.PicturePath.IsEmpty())
+            {
+                //model.AvatarPath = 
+            }
+
             return PartialView("~/Views/Partials/NavbarTopPartial.cshtml", model);
         }
 

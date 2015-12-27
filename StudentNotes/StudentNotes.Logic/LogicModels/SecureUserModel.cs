@@ -15,6 +15,7 @@ namespace StudentNotes.Logic.LogicModels
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string Street { get; set; }
+        public string Gender { get; set; }
         public DateTime CreatedOn { get; set; }
 
         public SecureUserModel()
@@ -34,6 +35,7 @@ namespace StudentNotes.Logic.LogicModels
             PostalCode = user.UserInfo.PostalCode;
             Street = user.UserInfo.Street;
             CreatedOn = user.UserInfo.CreatedOn;
+            Gender = user.UserInfo.Gender;
         }
     }
 }

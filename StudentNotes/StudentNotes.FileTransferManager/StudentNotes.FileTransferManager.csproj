@@ -46,6 +46,7 @@
     <Compile Include="Base\FileServerUser.cs" />
     <Compile Include="Abstraction\IDownloadBehavior.cs" />
     <Compile Include="Abstraction\IUploadBehavior.cs" />
+    <Compile Include="Consts\HttpResponseCode.cs" />
     <Compile Include="Consts\FtpResponseCode.cs" />
     <Compile Include="FtpClient\FileTypes\CommonFile.cs" />
     <Compile Include="FtpClient\FtpBehavior\FtpBehaviorBase.cs" />
@@ -55,6 +56,9 @@
     <Compile Include="FtpClient\FtpBehavior\FtpDeleteBehavior.cs" />
     <Compile Include="FtpClient\FtpBehavior\FtpDownloadBehavior.cs" />
     <Compile Include="FtpClient\FtpBehavior\FtpUploadBehavior.cs" />
+    <Compile Include="HttpClient\HttpBehavior\HttpUploadBehavior.cs" />
+    <Compile Include="HttpClient\HttpServer.cs" />
+    <Compile Include="HttpClient\HttpUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

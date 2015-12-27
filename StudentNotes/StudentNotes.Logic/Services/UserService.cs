@@ -124,6 +124,13 @@ namespace StudentNotes.Logic.Services
             return userInfo;
         }
 
+        public void AddAvatar(int userId, string path)
+        {
+            var user = _userInfoRepository.GetById(userId);
+            user.PicturePath = path;
+            _userInfoRepository.Commit();
+        }
+
         public void SaveUser()
         {
             _unitOfWork.Commit();

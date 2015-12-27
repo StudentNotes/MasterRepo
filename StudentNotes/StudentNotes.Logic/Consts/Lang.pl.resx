@@ -463,4 +463,16 @@
   <data name="ConstSharedByOthers" xml:space="preserve">
     <value>Przydział od znajomych</value>
   </data>
+  <data name="ConstGroupAccess" xml:space="preserve">
+    <value>Dostęp grupowy</value>
+  </data>
+  <data name="ConstOwnerAccess" xml:space="preserve">
+    <value>Właściciel notatki</value>
+  </data>
+  <data name="ConstPrivateShare" xml:space="preserve">
+    <value>Indywidualne udostępnienie</value>
+  </data>
+  <data name="ConstChangeAvatar" xml:space="preserve">
+    <value>Zmiana avatara</value>
+  </data>
 </root>

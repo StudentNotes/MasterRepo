@@ -60,17 +60,12 @@
     <Compile Include="FileServiceTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FtpClientTest.cs" />
     <Compile Include="StudentNotesUserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StudentNotes.DependencyResolver\StudentNotes.DependencyResolver.csproj">
       <Project>{a8374e3c-1eb6-44c2-94b9-6718161fb631}</Project>
       <Name>StudentNotes.DependencyResolver</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StudentNotes.FileTransferManager\StudentNotes.FileTransferManager.csproj">
-      <Project>{45461541-3ce7-49db-ad6e-f7f9c171e89d}</Project>
-      <Name>StudentNotes.FileTransferManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentNotes.Logic\StudentNotes.Logic.csproj">
       <Project>{921a6f78-ac3a-4f8b-b292-bccdedb33c49}</Project>

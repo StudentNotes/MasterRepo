@@ -1,0 +1,101 @@
+﻿@using StudentNotes.Logic.LogicModels
+@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model SecureUserModel
+@*Moje konto*@
+
+<div class="col-xs-12">
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(ResourceKeyResolver.ConstMyAccount, "UserPreferences", "Management",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading-content"
+                },
+                new { })
+        </li>
+    </ol>
+</div>
+
+<div class="col-xs-12">
+    <div class="col-sm-2 col-xs-12">
+        <img class="img-thumbnail img-responsive" src="~/Resources/avatar-facet.jpg" alt="Avatar icon"/>
+        @using (Html.BeginForm("ChangeAvatar", "Management", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input id="fileInput" type="file" name="file">
+            <input id="sendButton" type="submit" name="Zmień zdjęcie" class="btn btn-primary" />
+        }
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <ul class="list-group">
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>IMIĘ:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Name
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>NAZWISKO:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.LastName
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>ZAWÓD/SPECJALIZACJA:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Profession
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>NUMER TELEFONU:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.PhoneNumber
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>MIASTO:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.City
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>KOD POCZTOWY:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.PostalCode
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>ULICA:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Street
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>DATA UTWORZENIA KONTA:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.CreatedOn
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>

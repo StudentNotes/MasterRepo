@@ -17,6 +17,13 @@
         Private,
         University
     }
+
+    public enum NoteAccess
+    {
+        Owner,
+        Group,
+        PrivateShare
+    }
 }
 
 

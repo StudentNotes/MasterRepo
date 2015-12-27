@@ -42,6 +42,9 @@ namespace StudentNotes.Repositories.DbModels
         [StringLength(256)]
         public string PicturePath { get; set; }
 
+        [StringLength(10)]
+        public string Gender { get; set; }
+
         public virtual User User { get; set; }
     }
 }

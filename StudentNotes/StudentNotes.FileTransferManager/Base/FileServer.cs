@@ -9,22 +9,19 @@ namespace StudentNotes.FileTransferManager.Base
 {
     public abstract class FileServer
     {
-        public string FileDestination { get; private set; }
-        public string ServerUrl { get; private set; }
+        public string FileDestination { get; protected set; }
+        public string ServerUrl { get; protected set; }
         public string CurrentLocation { get; set; }
 
         protected FileServer(string serverUrl)
         {
-            ServerUrl = serverUrl;
-            FileDestination = "/";
-            CurrentLocation = "/FTP";
+            ServerUrl = serverUrl;            
         }
 
         protected FileServer(string serverUrl, string fileDestination)
         {
             ServerUrl = serverUrl;
             FileDestination = fileDestination;
-            CurrentLocation = "/FTP";
         }
 
         public abstract override string ToString();

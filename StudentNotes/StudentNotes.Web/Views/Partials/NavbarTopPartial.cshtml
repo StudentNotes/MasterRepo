@@ -18,7 +18,7 @@
     <div class="navbar-right navbar-nav-user">
         <a class="dropdown-toggle" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
             <div class="thumbnail">
-                <img class="img-responsive" src="~/Resources/avatar-facet.jpg"/>
+                <img class="img-responsive" src=@Model.AvatarPath/>
 
                 @if (Model == null)
                 {
@@ -33,8 +33,17 @@
             </div>
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdown1" style="float: right;">
-            <li><a href="#">@ResourceKeyResolver.ConstMyAccount</a></li>
-            <li><a href="#">@ResourceKeyResolver.ConstOptions</a></li>
+            <li>
+                @Ajax.ActionLink(ResourceKeyResolver.ConstMyAccount, "UserPreferences", "Management", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        }
+                        )
+            </li>
             <li>
                 @Ajax.ActionLink("Zarządzaj grupami", "ManageGroups", "Management", null,
                         new AjaxOptions()

@@ -1,0 +1,129 @@
+﻿
+@*Moje notatki -> Wszystkie -> Szczegóły*@
+@using StudentNotes.Logic.LogicModels
+@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.ManageNotes.AllNotesDetailsViewModel
+
+
+<div class="col-xs-12">
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(ResourceKeyResolver.ConstAllNotes, "AllNotes", "Note",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
+        </li>
+        <li>
+            @Ajax.ActionLink(Model.Note.Name, "AllNotesDetails", "Note",
+                new {Model.Note.NoteId, Model.NoteType},
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
+        </li>
+    </ol>
+</div>
+
+<div class="col-xs-12">
+    <div class="col-sm-3 col-xs-12">
+        <img class="img-thumbnail img-responsive" src="@CategorySelector.GetCategoryPicturePath(Model.Note.Category)" alt="Note icon" />
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <ul class="list-group">
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>NAZWA:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Note.Name
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>KATEGORIA:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Note.Category
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-sm-6">
+                    <b>ROZMIAR:</b>
+                </div>
+                <div class="col-sm-6">
+                    @Model.Note.Size
+                </div>
+            </li>
+
+            @switch (Model.NoteType)
+            {
+                case 0:
+                {
+                    <li class="list-group-item row">
+                        <div class="col-sm-6">
+                            <b>DATA WSTAWIENIA:</b>
+                        </div>
+                        <div class="col-sm-6">
+                            @Model.Note.UploadDate
+                        </div>
+                    </li>
+                    break;
+                }
+                case 1:
+                {
+                    <li class="list-group-item row">
+                        <div class="col-sm-6">
+                            <b>DOSTĘP:</b>
+                        </div>
+                        <div class="col-sm-6">
+                            @Model.NoteOwner.Email
+                        </div>
+                    </li>
+                        break;
+                    }
+                case 2:
+                {
+                    <li class="list-group-item row">
+                        <div class="col-sm-6">
+                            <b>DOSTĘP:</b>
+                        </div>
+                        <div class="col-sm-6">
+                            @foreach (var group in Model.NoteGroup)
+                            {
+                                @Ajax.ActionLink(group.Name, "ShowGroupSemesters", "Group",
+                                    new { group.GroupId, GroupName = group.Name },
+                                    new AjaxOptions()
+                                    {
+                                        UpdateTargetId = "page-content",
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loading-content"
+                                    },
+                                    new { @class = "fa fa-fw fa-dashboard" })
+                                <br />
+                            }
+                            
+                        </div>
+                    </li>
+                    break;
+                }
+            }
+ 
+        </ul>
+    </div>
+
+    <div class="col-sm-3 col-xs-12">
+        <h3>TAGI:</h3>
+
+    </div>
+</div>

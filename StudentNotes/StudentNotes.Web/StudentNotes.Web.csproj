@@ -182,8 +182,8 @@
     <Content Include="font-awesome\scss\_variables.scss" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Resources\audioFile.jpg" />
-    <Content Include="Resources\avatar-facet.jpg" />
-    <Content Include="Resources\avatar_baba.jpg" />
+    <Content Include="App_Data\UserPictures\avatar-facet.jpg" />
+    <Content Include="App_Data\UserPictures\avatar_baba.jpg" />
     <Content Include="Resources\data steal.png" />
     <Content Include="Resources\data steal_2.png" />
     <Content Include="Resources\file-sharing.jpg" />
@@ -303,6 +303,8 @@
     <Content Include="Views\Partials\Note\ShareUniversityNoteModal.cshtml" />
     <Content Include="Views\Partials\Note\ShareMyNoteModal.cshtml" />
     <Content Include="Views\Partials\MyNotes\AccessedNotesPartial.cshtml" />
+    <Content Include="Views\Partials\MyNotes\AllNotesDetailsPartial.cshtml" />
+    <Content Include="Views\Partials\Management\UserPreferencesPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -311,7 +313,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\University\" />
   </ItemGroup>
   <ItemGroup>

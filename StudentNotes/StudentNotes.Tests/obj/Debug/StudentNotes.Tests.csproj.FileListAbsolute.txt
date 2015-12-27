@@ -21,7 +21,6 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\DependencyResolver.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\EntityFramework.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.FileTransferManager.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.Logic.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.Web.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\Ninject.dll
@@ -35,7 +34,6 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.WebPages.Deployment.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\DependencyResolver.pdb
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.FileTransferManager.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.Logic.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.Web.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\EntityFramework.xml
@@ -52,3 +50,5 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\obj\Debug\StudentNotes.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\obj\Debug\StudentNotes.Tests.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\obj\Debug\StudentNotes.Tests.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.FileManager.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Tests\bin\Debug\StudentNotes.FileManager.pdb

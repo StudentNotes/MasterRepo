@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicAbstraction;
 using File = StudentNotes.Repositories.DbModels.File;
 
@@ -19,6 +20,7 @@ namespace StudentNotes.Logic.LogicModels
         public bool IsShared { get; set; }
         public List<string> Tags { get; set; }
         public byte[] Content { get; set; }
+        public NoteAccess AccessThrough { get; set; }
 
         public Note()
         {

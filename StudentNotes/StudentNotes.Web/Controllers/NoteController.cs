@@ -128,8 +128,75 @@ namespace StudentNotes.Web.Controllers
         [HttpGet]
         public ActionResult AllNotes()
         {
+            var model = new AllNotesViewModel();
+
             var allFiles = _fileService.GetAllFiles((int) Session["CurrentUserId"]);
-            return null;
+            if (!allFiles.Any())
+            {
+                model.Response.ErrorList.Add(ResourceKeyResolver.ErrorNoContentToDisplay);
+            }
+
+            foreach (var file in allFiles)
+            {
+                model.Notes.Add(file);
+            }
+
+            return PartialView("~/Views/Partials/MyNotes/AllNotesPartial.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult AllNotesDetails(int noteId, int noteType)
+        {
+            var model = new AllNotesDetailsViewModel();
+
+            var file = _fileService.GetFileById(noteId);
+            switch (noteType)
+            {
+                case 0: //Owner
+                {
+                    model.NoteType = 0;
+                    break;
+                }
+                case 1: //PrivateShare
+                {
+                    var noteOwner = _fileService.GetSecureUser(file.UserId);
+                        model.NoteOwner = new SimpleUserModel()
+                        {
+                            UserId = noteOwner.UserId,
+                            Name = noteOwner.Name,
+                            LastName = noteOwner.LastName,
+                            Email = noteOwner.Email
+                        };
+                    model.NoteType = 1;
+                    break;
+                }
+                case 2: //Group
+                {
+                    var groups = _fileService.GetFileGroupShares(file.FileId, (int) Session["CurrentUserId"]).ToList();
+                    foreach (var group in groups)
+                    {
+                        model.NoteGroup.Add(new SimpleGroupModel()
+                        {
+                            GroupId = group.GroupId,
+                            Name = group.Name,
+                            Description = group.Description
+                        });
+                    }
+                    model.NoteType = 2;
+                    break;
+                }
+            }
+            model.Note = new Note(file);
+
+            return PartialView("~/Views/Partials/MyNotes/AllNotesDetailsPartial.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePrivateShareNote(int noteId)
+        {
+            _fileService.RemoveFileFromUser(noteId, (int) Session["CurrentUserId"]);
+
+            return RedirectToAction("AllNotes");
         }
 
         [HttpPost]

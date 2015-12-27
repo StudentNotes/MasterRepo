@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.File;
@@ -20,11 +21,12 @@ namespace StudentNotes.Logic.Services
         private readonly IUserRepository _userRepository;
         private readonly IUserPreferencesRepository _userPreferencesRepository;
         private readonly IGroupUserRepository _groupUserRepository;
+        private readonly IGroupRepository _groupRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public FileService(IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IFileSharedGroupRepository fileSharedGroupRepository,
             IUserSharedFileRepository userSharedFileRepository, IUserRepository userRepository, IUserPreferencesRepository userPreferencesRepository,
-            IGroupUserRepository groupUserRepository, IUnitOfWork unitOfWork)
+            IGroupUserRepository groupUserRepository, IGroupRepository groupRepository, IUnitOfWork unitOfWork)
         {
             _fileRepository = fileRepository;
             _semesterSubjectFileRepository = semesterSubjectFileRepository;
@@ -33,6 +35,7 @@ namespace StudentNotes.Logic.Services
             _userRepository = userRepository;
             _userPreferencesRepository = userPreferencesRepository;
             _groupUserRepository = groupUserRepository;
+            _groupRepository = groupRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -113,7 +116,26 @@ namespace StudentNotes.Logic.Services
             return allUserFiles;
         }
 
-        public IEnumerable<File> GetAllFiles(int userId)
+        public IEnumerable<Group> GetFileGroupShares(int fileId, int memberId)
+        {
+            var fileGroups = _fileSharedGroupRepository.GetMany(fsg => fsg.FileId == fileId).Select(g => g.GroupId);
+            var userGroups = _groupUserRepository.GetMany(gu => gu.UserId == memberId).Select(g => g.GroupId);
+            var ownGroups = _groupRepository.GetMany(g => g.AdminId == memberId).Select(g => g.GroupId);
+
+            var groups = _groupRepository.GetMany(g => (fileGroups.Contains(g.GroupId) && userGroups.Contains(g.GroupId)) || (fileGroups.Contains(g.GroupId) && ownGroups.Contains(g.GroupId)));
+
+            return groups;
+        }
+
+        public User GetPrivateShareUser(int fileId)
+        {
+            var userId = _fileRepository.GetById(fileId).UserId;
+            var user = _userRepository.GetById(userId);
+
+            return user;
+        }
+
+        public List<Note> GetAllFiles(int userId)
         {
             var accessedUserFileIds =
                 _userSharedFileRepository.GetMany(usf => usf.UserId == userId).Select(f => f.FileId).ToList();
@@ -123,13 +145,22 @@ namespace StudentNotes.Logic.Services
                     .Select(f => f.FileId)
                     .ToList();
 
-            var allFiles =
-                _fileRepository.GetMany(
-                    f =>
-                        accessedUserFileIds.Contains(f.FileId) || accessedGroupFileIds.Contains(f.FileId) ||
-                        f.UserId == userId);
+            var userFiles = _fileRepository.GetMany(f => f.UserId == userId).ToList();
+            var accessedGroupFiles = _fileRepository.GetMany(f => accessedGroupFileIds.Contains(f.FileId)
+                                        && f.UserId != userId).ToList();
+            var accessedUserFiles = _fileRepository.GetMany(f => accessedUserFileIds.Contains(f.FileId)
+                                        && f.UserId != userId).ToList();
 
-            return allFiles;
+            var noteList = userFiles.Select(userFile => new Note(userFile) {AccessThrough = NoteAccess.Owner}).ToList();
+            noteList.AddRange(accessedGroupFiles.Select(groupFile => new Note(groupFile) {AccessThrough = NoteAccess.Group}));
+            noteList.AddRange(accessedUserFiles.Select(userFile => new Note(userFile) {AccessThrough = NoteAccess.PrivateShare}));
+
+            //var allFiles =
+            //    _fileRepository.GetMany(
+            //        f => accessedUserFileIds.Contains(f.FileId) || accessedGroupFileIds.Contains(f.FileId) ||
+            //            f.UserId == userId);
+
+            return noteList;
         }
 
         public List<File> GetSharedGroupFiles(int userId)

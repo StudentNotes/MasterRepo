@@ -23,6 +23,7 @@ namespace StudentNotes.Logic.ServiceInterfaces
 
         UserInfo GetAllServiceUserInfo(int userId);
 
+        void AddAvatar(int userId, string path);
         void SaveUser();
     }
 }
