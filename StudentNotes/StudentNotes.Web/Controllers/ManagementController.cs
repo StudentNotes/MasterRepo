@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using StudentNotes.Logic.Consts;
+using StudentNotes.Logic.LogicAbstraction;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Home;
@@ -12,6 +13,7 @@ using StudentNotes.Logic.ViewModels.ManageGroups;
 using StudentNotes.Web.Filters;
 using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Logic.ViewModels.Validation;
+using StudentNotes.Web.Models.ResourcesFinderLogic;
 using StudentNotes.Web.RequestViewModels.Management;
 
 namespace StudentNotes.Web.Controllers
@@ -453,6 +455,17 @@ namespace StudentNotes.Web.Controllers
         {
             var model = _fileService.GetSecureUser((int) Session["CurrentUserId"]);
 
+            var response = (ResponseViewModelBase)TempData["ServerResponse"];
+            if (response != null)
+            {
+                model.Response = response;
+            }
+
+            if (model.PicturePath.IsEmpty())
+            {
+                model.PicturePath = ResourceKeyResolver.GetDefaultAvatar(model.Gender);
+            }
+
             return PartialView("~/Views/Partials/Management/UserPreferencesPartial.cshtml", model);
         }
 
@@ -468,16 +481,45 @@ namespace StudentNotes.Web.Controllers
         [HttpPost]
         public ActionResult ChangeAvatar(HttpPostedFileBase file)
         {
-            if (file.ContentLength == 0)
+            if (file == null || file.ContentLength == 0)
             {
                 // obsłużyć, że user nie wybrał pliku
             }
-            var fileName = $"{(int) Session["CurrentUserId"]}_avatar";
-            var path = Path.Combine(Server.MapPath("~/App_Data/UserPictures"), fileName);
+            var fileExtension = file.FileName.Split('.').Last(e => !e.IsEmpty());
+            var fileName = $"{(int) Session["CurrentUserId"]}_avatar.{fileExtension}";
+            var path = Path.Combine(Server.MapPath("~/Resources/Avatars"), fileName);
 
             file.SaveAs(path);
-            _userService.AddAvatar((int)Session["CurrentUserId"], path);
+            _userService.AddAvatar((int)Session["CurrentUserId"], $"/Resources/Avatars/{fileName}");
 
+            return RedirectToAction("ChangedPreferencesRedirect");
+        }
+
+        [HttpPost]
+        public ActionResult SaveUserInfo(SecureUserModel model)
+        {
+            model.UserId = (int) Session["CurrentUserId"];
+
+            if (_userService.UpdateUserInfo(model))
+            {
+                
+            }
+            model.Response.AddSuccess(ResourceKeyResolver.SuccessUserInfoUpdated);
+            TempData["ServerResponse"] = model.Response;
+
+            return RedirectToAction("ChangedPreferencesRedirect");
+        }
+
+        [HttpPost]
+        public ActionResult SaveUserPreferences(string newestTime, string fileSize, string searchMethod)
+        {
+
+            return null;
+        }
+
+        [HttpGet]
+        public ActionResult ChangedPreferencesRedirect()
+        {
             return View("~/Views/LoggedIn/Index.cshtml");
         }
     }

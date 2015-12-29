@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
@@ -129,6 +130,30 @@ namespace StudentNotes.Logic.Services
             var user = _userInfoRepository.GetById(userId);
             user.PicturePath = path;
             _userInfoRepository.Commit();
+        }
+
+        public bool UpdateUserInfo(SecureUserModel model)
+        {
+            bool genderChanged = false;
+            var user = _userRepository.GetById(model.UserId);
+
+            user.UserInfo.Name = model.Name;
+            user.UserInfo.LastName = model.LastName;
+            if (user.UserInfo.Gender != model.Gender)
+            {
+                user.UserInfo.Gender = model.Gender;
+                genderChanged = true;
+            }
+            
+            user.UserInfo.Profession = model.Profession;
+            user.UserInfo.PhoneNumber = model.PhoneNumber;
+            user.UserInfo.PostalCode = model.PostalCode;
+            user.UserInfo.City = model.City;
+            user.UserInfo.Street = model.Street;
+            user.UserInfo.Country = model.Country;
+            _unitOfWork.Commit();
+
+            return genderChanged;
         }
 
         public void SaveUser()

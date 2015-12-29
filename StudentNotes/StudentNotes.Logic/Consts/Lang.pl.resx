@@ -475,4 +475,7 @@
   <data name="ConstChangeAvatar" xml:space="preserve">
     <value>Zmiana avatara</value>
   </data>
+  <data name="SuccessUserInfoUpdated" xml:space="preserve">
+    <value>Dane personalne użytkownika zostały zapisane.</value>
+  </data>
 </root>

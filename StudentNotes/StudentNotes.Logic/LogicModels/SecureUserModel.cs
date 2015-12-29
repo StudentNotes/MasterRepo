@@ -1,10 +1,14 @@
 ﻿using System;
+using StudentNotes.Logic.LogicAbstraction;
+using StudentNotes.Logic.ViewModels.Validation;
 using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.LogicModels
 {
     public class SecureUserModel
     {
+        public ResponseViewModelBase Response { get; set; }
+
         public int UserId { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
@@ -16,14 +20,18 @@ namespace StudentNotes.Logic.LogicModels
         public string PostalCode { get; set; }
         public string Street { get; set; }
         public string Gender { get; set; }
+        public string PicturePath { get; set; }
         public DateTime CreatedOn { get; set; }
 
         public SecureUserModel()
         {
+            Response = new ResponseMessageViewModel();
         }
 
         public SecureUserModel(User user)
         {
+            Response = new ResponseMessageViewModel();
+
             UserId = user.UserId;
             Email = user.Email;
             Name = user.UserInfo.Name;
@@ -34,6 +42,7 @@ namespace StudentNotes.Logic.LogicModels
             City = user.UserInfo.City;
             PostalCode = user.UserInfo.PostalCode;
             Street = user.UserInfo.Street;
+            PicturePath = user.UserInfo.PicturePath;
             CreatedOn = user.UserInfo.CreatedOn;
             Gender = user.UserInfo.Gender;
         }

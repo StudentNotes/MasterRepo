@@ -5,6 +5,28 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
 {
     public class ResourceKeyResolver
     {
+        public static string GetDefaultAvatar(string gender)
+        {
+            switch (gender)
+            {
+                case "undefined":
+                {
+                    return "/Resources/Avatars/undefined.jpg";
+                }
+                case "man":
+                {
+                    return "/Resources/Avatars/man.jpg";
+                }
+                case "woman":
+                {
+                    return "/Resources/Avatars/woman.jpg";
+                }
+                default:
+                {
+                    return "";
+                }
+            }
+        }
         public static string HomePageNavBarAboutProject
         {
             get { return ResourceFinder.GetResource("HomePageNavBarAboutProject"); }
@@ -477,10 +499,10 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ConstChangeAvatar"); }
         }
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
+        public static string SuccessUserInfoUpdated
+        {
+            get { return ResourceFinder.GetResource("SuccessUserInfoUpdated"); }
+        }
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

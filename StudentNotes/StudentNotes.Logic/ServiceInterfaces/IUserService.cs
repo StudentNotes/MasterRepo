@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StudentNotes.Logic.LogicModels;
 using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.ServiceInterfaces
@@ -24,6 +19,7 @@ namespace StudentNotes.Logic.ServiceInterfaces
         UserInfo GetAllServiceUserInfo(int userId);
 
         void AddAvatar(int userId, string path);
+        bool UpdateUserInfo(SecureUserModel model);
         void SaveUser();
     }
 }

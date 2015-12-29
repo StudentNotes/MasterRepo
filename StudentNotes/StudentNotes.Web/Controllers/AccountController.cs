@@ -7,6 +7,7 @@ using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Logic.ViewModels.Validation;
 using StudentNotes.Repositories.DbModels;
+using StudentNotes.Web.Models.ResourcesFinderLogic;
 
 namespace StudentNotes.Web.Controllers
 {
@@ -121,7 +122,7 @@ namespace StudentNotes.Web.Controllers
                 return View("~/Views/Home/Index.cshtml", new HomeViewModel());
             }
             UserViewModel model = new UserViewModel();
-            UserInfo userInfo = _userService.GetAllServiceUserInfo((int) Session["CurrentUserId"]);
+            var userInfo = _userService.GetAllServiceUserInfo((int) Session["CurrentUserId"]);
 
             if (userInfo.Name.IsEmpty())
             {
@@ -145,7 +146,11 @@ namespace StudentNotes.Web.Controllers
 
             if (userInfo.PicturePath.IsEmpty())
             {
-                //model.AvatarPath = 
+                model.AvatarPath = ResourceKeyResolver.GetDefaultAvatar(userInfo.Gender);
+            }
+            else
+            {
+                model.AvatarPath = userInfo.PicturePath;
             }
 
             return PartialView("~/Views/Partials/NavbarTopPartial.cshtml", model);
