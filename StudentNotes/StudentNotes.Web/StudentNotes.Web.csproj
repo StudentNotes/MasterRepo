@@ -304,6 +304,8 @@
     <Content Include="Views\Partials\Note\ShareMyNoteModal.cshtml" />
     <Content Include="Views\Partials\MyNotes\AccessedNotesPartial.cshtml" />
     <Content Include="Views\Partials\MyNotes\AllNotesDetailsPartial.cshtml" />
+    <Content Include="Views\Partials\Management\UserAccountPartial.cshtml" />
+    <Content Include="Views\LoggedIn\MyAccount.cshtml" />
     <Content Include="Views\Partials\Management\UserPreferencesPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

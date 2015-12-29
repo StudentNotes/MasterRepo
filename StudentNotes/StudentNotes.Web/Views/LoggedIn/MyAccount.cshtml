@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "MyAccount";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+}
+@model StudentNotes.Logic.LogicAbstraction.ResponseViewModelBase
+
+<div class="col-xs-12">
+    @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model)
+</div>
+
+@Html.Action("MyAccount", "Management")
+
+<script>
+    window.onload = function() {
+        var errorDiv = document.getElementById("login-errors");
+        if (errorDiv.childElementCount > 0) {
+            console.log("Checking errors div");
+            errorDiv.removeAttribute("hidden");
+        }
+    }
+</script>

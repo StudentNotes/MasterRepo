@@ -503,6 +503,38 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("SuccessUserInfoUpdated"); }
         }
+        public static string ErrorWrongAvatar
+        {
+            get { return ResourceFinder.GetResource("ErrorWrongAvatar"); }
+        }
+        public static string SuccessAvatarChanged
+        {
+            get { return ResourceFinder.GetResource("SuccessAvatarChanged"); }
+        }
+        public static string ErrorUserInfoUpdated
+        {
+            get { return ResourceFinder.GetResource("ErrorUserInfoUpdated"); }
+        }
+        public static string SuccessUserPreferencesUpdated
+        {
+            get { return ResourceFinder.GetResource("SuccessUserPreferencesUpdated"); }
+        }
+        public static string ErrorUserPreferencesUpdated
+        {
+            get { return ResourceFinder.GetResource("ErrorUserPreferencesUpdated"); }
+        }
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
+        //public static string SignUpFormLabel_0
+        //{
+        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
+        //}
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

@@ -478,4 +478,19 @@
   <data name="SuccessUserInfoUpdated" xml:space="preserve">
     <value>Dane personalne użytkownika zostały zapisane.</value>
   </data>
+  <data name="ErrorUserInfoUpdated" xml:space="preserve">
+    <value>Nic nie zostało zmienione w profilu użytkownika.</value>
+  </data>
+  <data name="ErrorWrongAvatar" xml:space="preserve">
+    <value>Nie można było zmienić avatar'a, gdyż nie wybrałeś pliku lub wybrany plik nie jest plikiem graficznym!</value>
+  </data>
+  <data name="SuccessAvatarChanged" xml:space="preserve">
+    <value>Avatar został z powodzeniem zmieniony.</value>
+  </data>
+  <data name="ErrorUserPreferencesUpdated" xml:space="preserve">
+    <value>Nie zmieniono preferencji użytkownika</value>
+  </data>
+  <data name="SuccessUserPreferencesUpdated" xml:space="preserve">
+    <value>Preference użytkownika zostały z powodzeniem zapisane.</value>
+  </data>
 </root>

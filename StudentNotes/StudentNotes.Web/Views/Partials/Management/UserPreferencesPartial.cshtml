@@ -1,168 +1,25 @@
-﻿@using StudentNotes.Logic.LogicModels
-@using StudentNotes.Web.Models.ResourcesFinderLogic
-@model SecureUserModel
-@*Moje konto*@
-
-<div class="col-xs-12">
-    <ol class="breadcrumb">
-        <li class="active">
-            @Ajax.ActionLink(ResourceKeyResolver.ConstMyAccount, "UserPreferences", "Management",
-                null,
-                new AjaxOptions()
-                {
-                    UpdateTargetId = "page-content",
-                    HttpMethod = "GET",
-                    InsertionMode = InsertionMode.Replace,
-                    LoadingElementId = "loading-content"
-                },
-                new {})
-        </li>
-    </ol>
-
-    <div class="col-xs-12">
-        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
-    </div>
-</div>
-
-<div class="col-xs-12">
-    <div class="col-sm-2 col-xs-12">
-        <img class="img-thumbnail img-responsive" src="@Model.PicturePath" alt="Avatar icon"/>
-        @using (Html.BeginForm("ChangeAvatar", "Management", FormMethod.Post, new { enctype = "multipart/form-data", id="changeAvatarForm"}))
-        {
-            <span class="btn btn-info btn-file">
-                Zmień avatar
-                <input id="avatarInput" type="file" name="file" accept="image/*" onchange="this.form.submit();">
-            </span>
-        }
-    </div>
-    <div class="col-sm-5 col-xs-12">
-        @using (Html.BeginForm("SaveUserInfo", "Management", FormMethod.Post, new {@class = "form-horizontal"}))
-        {
-            <div class="form-group">
-                <label class="control-label col-sm-5">IMIĘ:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="name" class="form-control" value="@Model.Name"/>
-                </div>
+﻿@*Poniższy form wyekstrachować do partiala i za pomoca Html.Action wygenerować!*@
+@model StudentNotes.Logic.ViewModels.Common.UserPreferencesViewModel
+<div class="col-sm-5 col-xs-12">
+    @using (Html.BeginForm("SaveUserPreferences", "Management", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            <label class="control-label col-sm-8">Czas ukazywania się notatek w "Najnowszych" [dni]:</label>
+            <div class="col-sm-4">
+                <input type="text" name="newestTime" class="form-control" value=@Model.NewestTime />
             </div>
+        </div>
             <div class="form-group">
-                <label class="control-label col-sm-5">NAZWISKO:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="lastName" class="form-control" value="@Model.LastName"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">ADRES EMAIL:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="email" class="form-control" disabled value="@Model.Email"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">PŁEĆ:</label>
-                <div class="col-sm-7">
-                    <select class="form-control" name="gender">
-                        @switch (Model.Gender)
-                        {
-                            case "undefined":
-                            {
-                                <option value="undefined">Nie zdefiniowano</option>
-                                <option value="man">Mężczyzna</option>
-                                <option value="woman">Kobieta</option>
-                                break;
-                            }
-                            case "man":
-                            {
-                                <option value="man">Mężczyzna</option>
-                                <option value="woman">Kobieta</option>
-                                <option value="undefined">Nie zdefiniowano</option>
-                                break;
-                            }
-                            case "woman":
-                            {
-                                <option value="woman">Kobieta</option>
-                                <option value="man">Mężczyzna</option>
-                                <option value="undefined">Nie zdefiniowano</option>
-                                break;
-                            }
-                        }
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">ZAWÓD/SPECJALIZACJA:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="profession" class="form-control" value="@Model.Profession"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">NUMER TELEFONU:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="phoneNumber" class="form-control" value="@Model.PhoneNumber"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">KOD POCZTOWY:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="postalCode" class="form-control" value="@Model.PostalCode"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">MIASTO:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="city" class="form-control" value="@Model.City"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">ULICA:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="street" class="form-control" value="@Model.Street"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">KRAJ:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="country" class="form-control" value="@Model.Country"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-5">DATA UTWORZENIA KONTA:</label>
-                <div class="col-sm-7">
-                    <input type="text" name="createdOn" class="form-control" disabled value="@Model.CreatedOn"/>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-info">Zachowaj zmiany w danych personalnych</button>
-
-        }
-    </div>
-
-    @*Poniższy form wyekstrachować do partiala i za pomoca Html.Action wygenerować!*@
-    <div class="col-sm-5 col-xs-12">
-        @using (Ajax.BeginForm("SaveUserPreferences", "Management", null,
-                new AjaxOptions()
-                {
-                    UpdateTargetId = "page-content",
-                    HttpMethod = "POST",
-                    InsertionMode = InsertionMode.Replace
-                },
-                new { @class = "form-horizontal" }))
-        {
-            <div class="form-group">
-                <label class="control-label col-sm-10">Czas ukazywania się notatek w "Najnowszych" [dni]:</label>
-                <div class="col-sm-2">
-                    <input type="text" name="newestTime" class="form-control" value="30" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-10">Maksymalny rozmiar przechowywanych plików:</label>
-                <div class="col-sm-2">
-                    <input type="text" name="fileSize" class="form-control" disabled value="5" />
+                <label class="control-label col-sm-8">Maksymalny rozmiar przechowywanych plików [MB]:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="fileSize" class="form-control" disabled value=@Model.FileSize />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-7">Metoda przeszukiwania zasobów:</label>
                 <div class="col-sm-5">
                     <select class="form-control" name="searchMethod">
-                        @switch ("mixed")
+                        @switch (Model.SearchMethod)
                         {
                             case "mixed":
                                 {
@@ -191,6 +48,5 @@
             </div>
 
             <button type="submit" class="btn btn-info">Zapisz preferencje</button>
-        }
-    </div>
+    }
 </div>

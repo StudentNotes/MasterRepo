@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using StudentNotes.Logic.Consts;
-using StudentNotes.Logic.LogicAbstraction;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Home;
@@ -451,22 +450,20 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult UserPreferences()
+        public ActionResult MyAccount()
         {
-            var model = _fileService.GetSecureUser((int) Session["CurrentUserId"]);
-
-            var response = (ResponseViewModelBase)TempData["ServerResponse"];
-            if (response != null)
+            var model = new MyAccountViewModel()
             {
-                model.Response = response;
+                UserInfo = _fileService.GetSecureUser((int)Session["CurrentUserId"]),
+                UserPreferences = _userService.GetUserPreferences((int)Session["CurrentUserId"])
+             };
+
+            if (model.UserInfo.PicturePath.IsEmpty())
+            {
+                model.UserInfo.PicturePath = ResourceKeyResolver.GetDefaultAvatar(model.UserInfo.Gender);
             }
 
-            if (model.PicturePath.IsEmpty())
-            {
-                model.PicturePath = ResourceKeyResolver.GetDefaultAvatar(model.Gender);
-            }
-
-            return PartialView("~/Views/Partials/Management/UserPreferencesPartial.cshtml", model);
+            return PartialView("~/Views/Partials/Management/UserAccountPartial.cshtml", model);
         }
 
         private static void RemoveAddedUsers(ref List<SecureUserModel> semesterUsers, ref List<SecureUserModel> groupUsers)
@@ -481,16 +478,24 @@ namespace StudentNotes.Web.Controllers
         [HttpPost]
         public ActionResult ChangeAvatar(HttpPostedFileBase file)
         {
+            var serverResponse = new ResponseMessageViewModel();
+
             if (file == null || file.ContentLength == 0)
             {
-                // obsłużyć, że user nie wybrał pliku
+                serverResponse.AddError(ResourceKeyResolver.ErrorWrongAvatar);
             }
-            var fileExtension = file.FileName.Split('.').Last(e => !e.IsEmpty());
-            var fileName = $"{(int) Session["CurrentUserId"]}_avatar.{fileExtension}";
-            var path = Path.Combine(Server.MapPath("~/Resources/Avatars"), fileName);
+            else
+            {
+                var fileExtension = file.FileName.Split('.').Last(e => !e.IsEmpty());
+                var fileName = $"{(int)Session["CurrentUserId"]}_avatar.{fileExtension}";
+                var path = Path.Combine(Server.MapPath("~/Resources/Avatars"), fileName);
 
-            file.SaveAs(path);
-            _userService.AddAvatar((int)Session["CurrentUserId"], $"/Resources/Avatars/{fileName}");
+                file.SaveAs(path);
+                _userService.AddAvatar((int)Session["CurrentUserId"], $"/Resources/Avatars/{fileName}");
+                serverResponse.AddSuccess(ResourceKeyResolver.SuccessAvatarChanged);
+            }
+
+            TempData["ServerResponse"] = serverResponse;
 
             return RedirectToAction("ChangedPreferencesRedirect");
         }
@@ -498,29 +503,49 @@ namespace StudentNotes.Web.Controllers
         [HttpPost]
         public ActionResult SaveUserInfo(SecureUserModel model)
         {
+            var serverResponse = new ResponseMessageViewModel();
             model.UserId = (int) Session["CurrentUserId"];
 
             if (_userService.UpdateUserInfo(model))
             {
-                
+                serverResponse.AddSuccess(ResourceKeyResolver.SuccessUserInfoUpdated);
             }
-            model.Response.AddSuccess(ResourceKeyResolver.SuccessUserInfoUpdated);
-            TempData["ServerResponse"] = model.Response;
+            else
+            {
+                serverResponse.AddError(ResourceKeyResolver.ErrorUserInfoUpdated);
+            }
+
+            TempData["ServerResponse"] = serverResponse;
 
             return RedirectToAction("ChangedPreferencesRedirect");
         }
 
         [HttpPost]
-        public ActionResult SaveUserPreferences(string newestTime, string fileSize, string searchMethod)
+        public ActionResult SaveUserPreferences(UserPreferencesViewModel model)
         {
+            var serverResponse = new ResponseMessageViewModel();
+            model.UserId = (int)Session["CurrentUserId"];
 
-            return null;
+            if (_userService.UpdateUserPreferences(model))
+            {
+                serverResponse.AddSuccess(ResourceKeyResolver.SuccessUserPreferencesUpdated);
+                }
+            else
+            {
+                serverResponse.AddError(ResourceKeyResolver.ErrorUserPreferencesUpdated);
+            }
+
+            TempData["ServerResponse"] = serverResponse;
+
+            return RedirectToAction("ChangedPreferencesRedirect");
         }
 
         [HttpGet]
         public ActionResult ChangedPreferencesRedirect()
         {
-            return View("~/Views/LoggedIn/Index.cshtml");
+            var serverResponse = (ResponseMessageViewModel) TempData["ServerResponse"];
+
+            return View("~/Views/LoggedIn/MyAccount.cshtml", serverResponse);
         }
     }
 

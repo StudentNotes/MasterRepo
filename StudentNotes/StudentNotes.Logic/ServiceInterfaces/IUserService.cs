@@ -1,4 +1,5 @@
 ﻿using StudentNotes.Logic.LogicModels;
+using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.ServiceInterfaces
@@ -17,9 +18,11 @@ namespace StudentNotes.Logic.ServiceInterfaces
         string GetServiceUserLastName(int userId);
 
         UserInfo GetAllServiceUserInfo(int userId);
+        UserPreferencesViewModel GetUserPreferences(int userId);
 
         void AddAvatar(int userId, string path);
         bool UpdateUserInfo(SecureUserModel model);
+        bool UpdateUserPreferences(UserPreferencesViewModel model);
         void SaveUser();
     }
 }

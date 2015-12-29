@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
+using StudentNotes.Logic.ViewModels.Common;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Repositories.RepositoryInterfaces;
@@ -125,6 +126,14 @@ namespace StudentNotes.Logic.Services
             return userInfo;
         }
 
+        public UserPreferencesViewModel GetUserPreferences(int userId)
+        {
+            var user = _userRepository.GetById(userId);
+            var userPreferences = new UserPreferencesViewModel(user);
+
+            return userPreferences;
+        }
+
         public void AddAvatar(int userId, string path)
         {
             var user = _userInfoRepository.GetById(userId);
@@ -134,26 +143,87 @@ namespace StudentNotes.Logic.Services
 
         public bool UpdateUserInfo(SecureUserModel model)
         {
-            bool genderChanged = false;
+            var dataChanged = false;
             var user = _userRepository.GetById(model.UserId);
-
-            user.UserInfo.Name = model.Name;
-            user.UserInfo.LastName = model.LastName;
+      
+            if (user.UserInfo.Name != model.Name)
+            {
+                user.UserInfo.Name = model.Name;
+                dataChanged = true;
+            }
+            if (user.UserInfo.LastName != model.LastName)
+            {
+                user.UserInfo.LastName = model.LastName;
+                dataChanged = true;
+            }
             if (user.UserInfo.Gender != model.Gender)
             {
                 user.UserInfo.Gender = model.Gender;
-                genderChanged = true;
+                dataChanged = true;
             }
-            
-            user.UserInfo.Profession = model.Profession;
-            user.UserInfo.PhoneNumber = model.PhoneNumber;
-            user.UserInfo.PostalCode = model.PostalCode;
-            user.UserInfo.City = model.City;
-            user.UserInfo.Street = model.Street;
-            user.UserInfo.Country = model.Country;
+            if (user.UserInfo.Profession != model.Profession)
+            {
+                user.UserInfo.Profession = model.Profession;
+                dataChanged = true;
+            }
+            if (user.UserInfo.PhoneNumber != model.PhoneNumber)
+            {
+                user.UserInfo.PhoneNumber = model.PhoneNumber;
+                dataChanged = true;
+            }
+            if (user.UserInfo.PostalCode != model.PostalCode)
+            {
+                user.UserInfo.PostalCode = model.PostalCode;
+                dataChanged = true;
+            }
+            if (user.UserInfo.City != model.City)
+            {
+                user.UserInfo.City = model.City;
+                dataChanged = true;
+            }
+            if (user.UserInfo.Street != model.Street)
+            {
+                user.UserInfo.Street = model.Street;
+                dataChanged = true;
+            }
+
+            if (user.UserInfo.Country != model.Country)
+            {
+                user.UserInfo.Country = model.Country;
+                dataChanged = true;
+            }
+   
             _unitOfWork.Commit();
 
-            return genderChanged;
+            return dataChanged;
+        }
+
+        public bool UpdateUserPreferences(UserPreferencesViewModel model)
+        {
+            var preferencesChanged = false;
+
+            var user = _userRepository.GetById(model.UserId);
+
+            if (user.UserPreferences.LastUploadDays != model.NewestTime)
+            {
+                user.UserPreferences.LastUploadDays = model.NewestTime;
+                preferencesChanged = true;
+            }
+            //if (user.UserPreferences.MaxFileSize != model.FileSize)
+            //{
+            //    user.UserPreferences.MaxFileSize = model.FileSize;
+            //    preferencesChanged = true;
+            //}
+
+            if (user.UserPreferences.SearchMethod != model.SearchMethod)
+            {
+                user.UserPreferences.SearchMethod = model.SearchMethod;
+                preferencesChanged = true;
+            }
+
+            _unitOfWork.Commit();
+
+            return preferencesChanged;
         }
 
         public void SaveUser()

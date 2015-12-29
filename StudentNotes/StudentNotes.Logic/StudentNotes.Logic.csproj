@@ -117,6 +117,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\Authorization\LoginViewModel.cs" />
     <Compile Include="ViewModels\Authorization\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Common\MyAccountViewModel.cs" />
     <Compile Include="ViewModels\Common\NewUniversityViewModel.cs" />
     <Compile Include="ViewModels\Common\SemesterAssignSubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\SemesterSubjects.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="ViewModels\Common\SubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\UniversityGradeStudySubjectViewModel.cs" />
     <Compile Include="ViewModels\Common\UniversityViewModel.cs" />
+    <Compile Include="ViewModels\Common\UserPreferencesViewModel.cs" />
     <Compile Include="ViewModels\Common\UserViewModel.cs" />
     <Compile Include="ViewModels\File\AccessedNotesViewModel.cs" />
     <Compile Include="ViewModels\File\AllNotesViewModel.cs" />
