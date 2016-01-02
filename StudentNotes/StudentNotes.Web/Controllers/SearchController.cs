@@ -13,11 +13,14 @@ namespace StudentNotes.Web.Controllers
     {
         private readonly ISchoolService _schoolService;
         private readonly ISemesterSubjectService _studySubjectService;
+        private readonly IFileService _fileService;
 
-        public SearchController(ISchoolService schoolService, ISemesterSubjectService studySubjectService)
+        public SearchController(ISchoolService schoolService, ISemesterSubjectService studySubjectService,
+            IFileService fileService)
         {
             _schoolService = schoolService;
             _studySubjectService = studySubjectService;
+            _fileService = fileService;
         }
 
         // GET: Search
@@ -140,6 +143,14 @@ namespace StudentNotes.Web.Controllers
                 );
 
             return Json(filteredSubjects, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult TagSuggestions(string term)
+        {
+            var tags = _fileService.GetTagsStartingWith(term);
+
+            return Json(tags, JsonRequestBehavior.AllowGet);
         }
     }
 }

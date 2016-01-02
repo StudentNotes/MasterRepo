@@ -14,6 +14,7 @@ namespace StudentNotes.Web.RequestViewModels
         public string FileType { get; set; }
         public string UploadPath { get; set; }
         public string SemesterSubjectId { get; set; }
+        public string FileTags { get; set; }
 
         public override ResponseViewModelBase Validate()
         {

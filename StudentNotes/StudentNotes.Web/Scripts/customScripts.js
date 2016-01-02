@@ -2,11 +2,16 @@
     
 });
 function loadingAnimationOn() {
-    $("#loading-content").addClass("shown");
+    console.log("loading animation ON");
+    //$("#loading-content").addClass("shown");
+    $("#loading-content").css("display", "block");
 }
 
 function loadingAnimationOff() {
-    $("#loading-content").removeClass("shown");
+    console.log("loading animation OFF");
+    //$("#loading-content").removeClass("shown");
+    $("#loading-content").css("display", "none");
+
 }
 
 function fileSelected() {

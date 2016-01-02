@@ -22,11 +22,13 @@ namespace StudentNotes.Logic.Services
         private readonly IUserPreferencesRepository _userPreferencesRepository;
         private readonly IGroupUserRepository _groupUserRepository;
         private readonly IGroupRepository _groupRepository;
+        private readonly IFileTagPatternRepository _fileTagPatternRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public FileService(IFileRepository fileRepository, ISemesterSubjectFileRepository semesterSubjectFileRepository, IFileSharedGroupRepository fileSharedGroupRepository,
             IUserSharedFileRepository userSharedFileRepository, IUserRepository userRepository, IUserPreferencesRepository userPreferencesRepository,
-            IGroupUserRepository groupUserRepository, IGroupRepository groupRepository, IUnitOfWork unitOfWork)
+            IGroupUserRepository groupUserRepository, IGroupRepository groupRepository, 
+            IFileTagPatternRepository fileTagPatternRepository, IUnitOfWork unitOfWork)
         {
             _fileRepository = fileRepository;
             _semesterSubjectFileRepository = semesterSubjectFileRepository;
@@ -36,6 +38,7 @@ namespace StudentNotes.Logic.Services
             _userPreferencesRepository = userPreferencesRepository;
             _groupUserRepository = groupUserRepository;
             _groupRepository = groupRepository;
+            _fileTagPatternRepository = fileTagPatternRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -125,6 +128,13 @@ namespace StudentNotes.Logic.Services
             var groups = _groupRepository.GetMany(g => (fileGroups.Contains(g.GroupId) && userGroups.Contains(g.GroupId)) || (fileGroups.Contains(g.GroupId) && ownGroups.Contains(g.GroupId)));
 
             return groups;
+        }
+
+        public List<string> GetTagsStartingWith(string term)
+        {
+            var tags = _fileTagPatternRepository.GetMany(ftp => ftp.Name.StartsWith(term));
+
+            return tags.Select(t => t.Name).ToList();
         }
 
         public User GetPrivateShareUser(int fileId)

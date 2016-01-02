@@ -6,11 +6,13 @@ using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.Authorization;
 using StudentNotes.Logic.ViewModels.Home;
+using StudentNotes.Web.Filters;
 using StudentNotes.Web.Models.ResourcesFinderLogic;
 using StudentNotes.Web.RequestViewModels;
 
 namespace StudentNotes.Web.Controllers
 {
+    [SessionFilter]
     [SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
     public class FileController : AsyncController
     {
