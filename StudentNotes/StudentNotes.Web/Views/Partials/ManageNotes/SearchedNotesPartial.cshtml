@@ -1,0 +1,132 @@
+﻿@*Wszystkie dostępne notatki -> Wyszukane*@
+@using StudentNotes.Logic.Consts
+@using StudentNotes.Logic.LogicModels
+@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.File.SearchedNotesViewModel
+
+<div class="col-xs-12 folder-view">
+    
+    <div class="col-xs-12">
+        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Lp.</th>
+            <th>Nazwa</th>
+            <th>Kategoria</th>
+            <th>Rozmiar</th>
+            <th>Prawa dostępu</th>
+            <th></th>
+        </tr>
+        </thead>
+        @for (int i = 0; i < Model.Notes.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.Notes[i].Category)" style="max-height: 34px;"/>
+                    @Model.Notes[i].Name
+                </td>
+                <td>@Model.Notes[i].Category</td>
+                <td>@Model.Notes[i].Size</td>
+                @switch (Model.Notes[i].AccessThrough)
+                {
+                    case NoteAccess.Owner:
+                    {
+                        <td>@ResourceKeyResolver.ConstOwnerAccess</td>
+                        <td>
+                            @Html.ActionLink("Pobierz", "DownloadNote", "Note", new {fileId = Model.Notes[i].NoteId}, new {@class = "btn btn-success"})
+
+                            @Ajax.ActionLink("Szczegóły", "AllNotesDetails", "Note",
+                                new {Model.Notes[i].NoteId, noteType = 0},
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "page-content",
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading-content",
+                                    OnComplete = "checkErrorDiv"
+                                },
+                                new {@class = "btn btn-info"})
+
+                            @Ajax.ActionLink("Usuń notatkę", "DeleteNote", "Note",
+                                new {Model.Notes[i].NoteId},
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "page-content",
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading-content",
+                                    OnComplete = "checkErrorDiv"
+                                },
+                                new {@class = "btn btn-danger"})
+
+                            <button id="shareFileButton" type="button" class="btn btn-primary btn-share-modal" data-toggle="modal" data-target="#shareUniversityNoteModal" name="@Model.Notes[i].Name" value="@Model.Notes[i].NoteId">
+                                Udostępniaj
+                            </button>
+
+                        </td>
+                        break;
+                    }
+
+                    case NoteAccess.PrivateShare:
+                    {
+                        <td>@ResourceKeyResolver.ConstPrivateShare</td>
+                        <td>
+                            @Html.ActionLink("Pobierz", "DownloadNote", "Note", new {fileId = Model.Notes[i].NoteId}, new {@class = "btn btn-success"})
+
+                            @Ajax.ActionLink("Szczegóły", "AllNotesDetails", "Note",
+                                new {Model.Notes[i].NoteId, noteType = 1},
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "page-content",
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading-content",
+                                    OnComplete = "checkErrorDiv"
+                                },
+                                new {@class = "btn btn-info"})
+
+                            @Ajax.ActionLink("Zrezygnuj z udziału", "DeletePrivateShareNote", "Note",
+                                new {Model.Notes[i].NoteId},
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "page-content",
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading-content",
+                                    OnComplete = "checkErrorDiv"
+                                },
+                                new {@class = "btn btn-danger"})
+                        </td>
+                        break;
+                    }
+
+                    case NoteAccess.Group:
+                    {
+                        <td>@ResourceKeyResolver.ConstGroupAccess</td>
+                        <td>
+                            @Html.ActionLink("Pobierz", "DownloadNote", "Note", new {fileId = Model.Notes[i].NoteId}, new {@class = "btn btn-success"})
+                            @Ajax.ActionLink("Szczegóły", "AllNotesDetails", "Note",
+                                new {Model.Notes[i].NoteId, noteType = 2},
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "page-content",
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading-content",
+                                    OnComplete = "checkErrorDiv"
+                                },
+                                new {@class = "btn btn-info"})
+                        </td>
+                        break;
+                    }
+                }
+
+            </tr>
+        }
+    </table>
+</div>
+@Html.Partial("~/Views/Partials/Note/ShareMyNoteModal.cshtml")

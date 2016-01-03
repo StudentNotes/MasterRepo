@@ -1,12 +1,13 @@
+using System.Data.Entity.Infrastructure.Interception;
+using StudentNotes.Repositories.Base;
+
 namespace StudentNotes.Repositories.DbModels
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class StudentNotesContext : DbContext
     {
+
         public StudentNotesContext()
             : base("name=StudentNotesContext")
         {

@@ -7,6 +7,7 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\DependencyResolver.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\DependencyResolver.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\Ninject.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.FileManager.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.Logic.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.Repositories.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.WebPages.dll
@@ -14,6 +15,7 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.Razor.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.FileManager.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.Logic.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.Repositories.pdb
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\Ninject.xml
@@ -25,5 +27,3 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\obj\Debug\StudentNotes.DependencyResolver.csprojResolveAssemblyReference.cache
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\obj\Debug\DependencyResolver.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\obj\Debug\DependencyResolver.pdb
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.FileManager.dll
-C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.FileManager.pdb

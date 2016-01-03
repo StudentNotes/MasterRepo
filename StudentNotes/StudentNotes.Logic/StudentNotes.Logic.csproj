@@ -132,6 +132,7 @@
     <Compile Include="ViewModels\File\AllNotesViewModel.cs" />
     <Compile Include="ViewModels\File\FileUploadViewModel.cs" />
     <Compile Include="ViewModels\File\RecentlyAddedNotesViewModel.cs" />
+    <Compile Include="ViewModels\File\SearchedNotesViewModel.cs" />
     <Compile Include="ViewModels\File\SharedNotesViewModel.cs" />
     <Compile Include="ViewModels\File\UniversityNotesViewModel.cs" />
     <Compile Include="ViewModels\File\UserNotesViewModel.cs" />

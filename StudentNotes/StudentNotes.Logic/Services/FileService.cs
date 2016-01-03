@@ -6,6 +6,7 @@ using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.File;
+using StudentNotes.Repositories.Base;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Repositories.RepositoryInterfaces;
@@ -119,6 +120,45 @@ namespace StudentNotes.Logic.Services
             return allUserFiles;
         }
 
+        public List<File> SearchFilesByNames(string term, int userId)
+        {
+            var resultList = new List<File>();
+
+            var namesList = term.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            for(int i = 0; i < namesList.Count; i++)
+            {
+                namesList[i] = namesList[i].Replace(" ", "");
+            }
+
+            var accessibleFileIds = GetAccessedFileIds(userId);
+            var allAccessibleFiles = _fileRepository.GetMany(f => accessibleFileIds.Contains(f.FileId)).ToList();
+
+            foreach (var accessibleFile in allAccessibleFiles)
+            {
+                if (namesList.Any(n => accessibleFile.Name.StartsWith(n)))
+                {
+                    resultList.Add(accessibleFile);
+                }
+            }
+
+            return resultList;
+        }
+
+        public List<File> SearchFilesByTags(string term, int userId)
+        {
+            var accessibleFileIds = GetAccessedFileIds(userId);
+            var possibleHits = _fileRepository.GetByTag(term);
+
+            possibleHits.RemoveAll(f => !accessibleFileIds.Contains(f.FileId));
+
+            return possibleHits;
+        }
+
+        public List<File> SearchFilesMixed(string term, int userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Group> GetFileGroupShares(int fileId, int memberId)
         {
             var fileGroups = _fileSharedGroupRepository.GetMany(fsg => fsg.FileId == fileId).Select(g => g.GroupId);
@@ -171,6 +211,22 @@ namespace StudentNotes.Logic.Services
             //            f.UserId == userId);
 
             return noteList;
+        }
+
+        private List<int> GetAccessedFileIds(int userId)
+        {
+            var accessedUserFileIds =
+                _userSharedFileRepository.GetMany(usf => usf.UserId == userId).Select(f => f.FileId).ToList();
+            var userGroupIds = _groupUserRepository.GetMany(gu => gu.UserId == userId).Select(g => g.GroupId).ToList();
+            var accessedGroupFileIds =
+                _fileSharedGroupRepository.GetMany(fsg => userGroupIds.Contains(fsg.GroupId))
+                    .Select(f => f.FileId)
+                    .ToList();
+            var userFileIds = _fileRepository.GetMany(f => f.UserId == userId).Select(f => f.FileId).ToList();
+
+            var fileIds = userFileIds.Union(accessedGroupFileIds).ToList().Union(accessedUserFileIds).ToList();
+
+            return fileIds;
         }
 
         public List<File> GetSharedGroupFiles(int userId)

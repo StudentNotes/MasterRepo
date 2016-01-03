@@ -53,6 +53,7 @@
     <Compile Include="Base\DbFactory.cs" />
     <Compile Include="Base\UnitOfWork.cs" />
     <Compile Include="DbModels\File.cs" />
+    <Compile Include="DbModels\FileMap.cs" />
     <Compile Include="DbModels\FileSharedGroup.cs" />
     <Compile Include="DbModels\FileTagPattern.cs" />
     <Compile Include="DbModels\Grade.cs" />

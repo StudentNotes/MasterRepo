@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
+using StudentNotes.Logic.ViewModels.File;
 using StudentNotes.Web.Filters;
 
 namespace StudentNotes.Web.Controllers
@@ -14,13 +16,15 @@ namespace StudentNotes.Web.Controllers
         private readonly ISchoolService _schoolService;
         private readonly ISemesterSubjectService _studySubjectService;
         private readonly IFileService _fileService;
+        private readonly IUserService _userService;
 
         public SearchController(ISchoolService schoolService, ISemesterSubjectService studySubjectService,
-            IFileService fileService)
+            IFileService fileService, IUserService userService)
         {
             _schoolService = schoolService;
             _studySubjectService = studySubjectService;
             _fileService = fileService;
+            _userService = userService;
         }
 
         // GET: Search
@@ -151,6 +155,42 @@ namespace StudentNotes.Web.Controllers
             var tags = _fileService.GetTagsStartingWith(term);
 
             return Json(tags, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult FindNotesBy(string term)
+        {
+            var model = new SearchedNotesViewModel();
+
+            var userId = (int) Session["CurrentUserId"];
+            var userPreferences = _userService.GetUserPreferences(userId);
+
+            switch (userPreferences.SearchMethod)
+            {
+                case "mixed":
+                {
+                    break;
+                }
+                case "tags":
+                {
+                    var files = _fileService.SearchFilesByTags(term, userId);
+                    foreach (var file in files)
+                    {
+                        model.Notes.Add(new Note(file));
+                    }
+                    break;
+                }
+                case "names":
+                {
+                    var files = _fileService.SearchFilesByNames(term, userId);
+                    foreach (var file in files)
+                    {
+                        model.Notes.Add(new Note(file));
+                    }
+                    break;
+                }
+            }
+            return PartialView("~/Views/Partials/ManageNotes/SearchedNotesPartial.cshtml", model);
         }
     }
 }

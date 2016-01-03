@@ -91,7 +91,6 @@ namespace StudentNotes.Logic.Services
             await _ftpClient.UploadFile(new FileManager.Base.File(note.Name, note.Content));
             if ((int)_ftpClient.ServerResponse == 226)
             {
-                //string tagsWithSeparator = note.Tags.Aggregate("", (current, tag) => current + string.Format("{0};", tag));
                 _fileRepository.Add(new File()
                 {
                     Name = note.Name,
