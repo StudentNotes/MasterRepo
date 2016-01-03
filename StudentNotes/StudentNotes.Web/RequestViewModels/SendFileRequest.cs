@@ -36,6 +36,12 @@ namespace StudentNotes.Web.RequestViewModels
                     return responseModel;
                 }
             }
+
+            if (FileTags.IsEmpty())
+            {
+                FileTags = "";
+            }
+
             IsValid = true;
             return responseModel;
         }

@@ -15,6 +15,22 @@ namespace StudentNotes.FileManager.FtpClient
             UploadBehavior = new FtpUploadBehavior();
             DirectoryTreeBehavior = new FtpDirectoryTreeBehavior();
             DeleteBehavior = new FtpDeleteBehavior();
+            CurrentLocation = "/FTP";
+        }
+
+        public override string GetRequestPath(string lastNode)
+        {
+            return $"ftp://{ServerUrl}{CurrentLocation}/{lastNode}";
+        }
+
+        public override string GetRequestPath()
+        {
+            return $"ftp://{ServerUrl}{CurrentLocation}/";
+        }
+
+        public override void GoToRootDir()
+        {
+            CurrentLocation = "/FTP";
         }
 
         public override string ToString()

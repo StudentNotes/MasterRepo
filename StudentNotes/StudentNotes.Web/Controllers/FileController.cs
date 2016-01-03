@@ -46,8 +46,8 @@ namespace StudentNotes.Web.Controllers
                     Name = fileName,
                     Content = fileContent,
                     Size = fileContent.Length.ToString(),
-                    Category = CategorySelector.GetCategory(fileName)
-                    //Tags = fileTags
+                    Category = CategorySelector.GetCategory(fileName),
+                    Tags = request.FileTags
                 };
 
                 if (request.FileType == "Private")

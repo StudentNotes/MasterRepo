@@ -49,12 +49,13 @@
                 </td>
                 <td>@Model.UserNotesList[i].Category</td>
                 <td>@Model.UserNotesList[i].Size</td>
-                <td>@Model.UserNotesList[i].UploadDate.ToString()</td>
+                <td>@Model.UserNotesList[i].UploadDate</td>
                 <td>
-                    @foreach (var tag in @Model.UserNotesList[i].Tags)
-                {
-                        <text>@tag,</text>
-                    }
+                    @foreach (var tag in Model.UserNotesList[i].GetTagsList())
+                    {
+                        @tag<text>,</text>
+}
+                    @*@Model.UserNotesList[i].Tags*@
                 </td>
                 <td>
                     @Html.ActionLink("Pobierz", "DownloadNote", "Note",  new {fileId = Model.UserNotesList[i].NoteId}, new { @class = "btn btn-success" })

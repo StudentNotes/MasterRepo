@@ -19,12 +19,11 @@ namespace StudentNotes.FileManager.Base
         protected IDeleteBehavior DeleteBehavior;
         protected IDirectoryTreeBehavior DirectoryTreeBehavior;
 
-        public FileServerClient(string serverUrl, string login, string password)
+        protected FileServerClient(string serverUrl, string login, string password)
         {
             ServerUrl = serverUrl;
             Login = login;
             Password = password;
-            CurrentLocation = "/FTP";
         }
         public virtual void ChangeCredentials(string serverUrl, string login, string password)
         {
@@ -33,15 +32,9 @@ namespace StudentNotes.FileManager.Base
             Password = password;
         }
 
-        public string GetRequestPath(string lastNode)
-        {
-            return $"ftp://{ServerUrl}{CurrentLocation}/{lastNode}";
-        }
+        public abstract string GetRequestPath(string lastNode);
 
-        public string GetRequestPath()
-        {
-            return $"ftp://{ServerUrl}{CurrentLocation}/";
-        }
+        public abstract string GetRequestPath();
 
         public void GetResponseCode(string responseMessage)
         {
@@ -77,6 +70,8 @@ namespace StudentNotes.FileManager.Base
         {
             DirectoryTreeBehavior.GoToPath(path, this);
         }
+
+        public abstract void GoToRootDir();
 
         public abstract override string ToString();
     }

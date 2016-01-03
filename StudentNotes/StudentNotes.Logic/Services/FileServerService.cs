@@ -58,12 +58,13 @@ namespace StudentNotes.Logic.Services
         public async Task<int> UploadPrivateNote(Note note, int userId)
         {
             var targetDirectory = string.Format("/FTP/{0}/{1}", GetFileServerRoot(userId), "Private");
+            _ftpClient.GoToRootDir();
             _ftpClient.GoToOrCreatePath(targetDirectory);
 
             await _ftpClient.UploadFile(new FileManager.Base.File(note.Name, note.Content));
             if ((int)_ftpClient.ServerResponse == 226)
             {
-                string tagsWithSeparator = note.Tags.Aggregate("", (current, tag) => current + string.Format("{0};", tag));
+                //string tagsWithSeparator = note.Tags.Aggregate("", (current, tag) => current + string.Format("{0},", tag));
                 _fileRepository.Add(new File()
                 {
                     Name = note.Name,
@@ -73,7 +74,7 @@ namespace StudentNotes.Logic.Services
                     UploadDate = DateTime.Now,
                     IsShared = false,
                     UserId = userId,
-                    FileTags = tagsWithSeparator
+                    FileTags = note.Tags
                 });
                 _fileRepository.Commit();
                 return 0;
@@ -84,12 +85,13 @@ namespace StudentNotes.Logic.Services
         public async Task<int> UploadUniversityNote(Note note, int userId, string filePath, int semesterSubjectId)
         {
             var targetDirectory = string.Format("/FTP/{0}/{1}", GetFileServerRoot(userId), filePath);
+            _ftpClient.GoToRootDir();
             _ftpClient.GoToOrCreatePath(targetDirectory);
 
             await _ftpClient.UploadFile(new FileManager.Base.File(note.Name, note.Content));
             if ((int)_ftpClient.ServerResponse == 226)
             {
-                string tagsWithSeparator = note.Tags.Aggregate("", (current, tag) => current + string.Format("{0};", tag));
+                //string tagsWithSeparator = note.Tags.Aggregate("", (current, tag) => current + string.Format("{0};", tag));
                 _fileRepository.Add(new File()
                 {
                     Name = note.Name,
@@ -99,7 +101,7 @@ namespace StudentNotes.Logic.Services
                     UploadDate = DateTime.Now,
                     IsShared = false,
                     UserId = userId,
-                    FileTags = tagsWithSeparator,
+                    FileTags = note.Tags,
                     SemesterSubjectFile = new List<SemesterSubjectFile>()
                     {
                         new SemesterSubjectFile()
@@ -119,6 +121,7 @@ namespace StudentNotes.Logic.Services
         {
             var file = _fileRepository.GetById(noteId);
             var remoteFilePath = file.Path + "/";
+            _ftpClient.GoToRootDir();
             _ftpClient.GoToPath(remoteFilePath);
 
             await _ftpClient.DeleteFile(file.Name);
@@ -142,6 +145,7 @@ namespace StudentNotes.Logic.Services
         {
             var privateFile = _fileRepository.GetById(noteId);
             var  remoteFilePath = privateFile.Path + "/";
+            _ftpClient.GoToRootDir();
             _ftpClient.GoToPath(remoteFilePath);
 
             await _ftpClient.DeleteFile(privateFile.Name);
@@ -166,6 +170,7 @@ namespace StudentNotes.Logic.Services
             }
             var file = _fileRepository.GetById(semesterSubjectFile.FileId);
             var remoteFilePath = file.Path + "/";
+            _ftpClient.GoToRootDir();
             _ftpClient.GoToPath(remoteFilePath);
             await _ftpClient.DeleteFile(file.Name);
 

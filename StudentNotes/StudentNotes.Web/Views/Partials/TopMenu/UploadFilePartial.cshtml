@@ -120,10 +120,9 @@
         formData.append('UploadPath', uploadPathInput.value);
         formData.append('SemesterSubjectId', studySubjectInput.value);
 
-        debugger;
         var tags = "";
         for (var i = 0; i < fileTagsInput.children.length - 1; i++) {
-            tags += fileTagsInput.children[i].innerText.replace(/(\r\n|\n|\r)/gm, "") + ", ";
+            tags += fileTagsInput.children[i].innerText.replace(/(\r\n|\n|\r)/gm, "") + ",";
         }
         formData.append('FileTags', tags);
 
@@ -139,8 +138,6 @@
                 checkErrorDiv();
             }
         }
-        //xhr.onload = loadingAnimationOn;
-        //xhr.onsuccess = loadingAnimationOff;
 
         xhr.open('POST', '@Url.Action("SendFile", "File")', true);
 
