@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using StudentNotes.Repositories.DbModels;
 
 namespace StudentNotes.Logic.ServiceInterfaces
@@ -16,6 +12,10 @@ namespace StudentNotes.Logic.ServiceInterfaces
         void AddAndSaveSubject(string subjectName);
         void AddSubject(string subjectName);
         void DeleteSubjectAndSave(string subjectName);
+
+        IEnumerable<FileTagPattern> GetAllFileTagPatterns(); 
+        void AddTagAndSave(string tagName);
+        void DeleteTagAndSave(string tagName);
         void Commit();
     }
 }

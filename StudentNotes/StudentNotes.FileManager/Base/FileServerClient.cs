@@ -71,6 +71,16 @@ namespace StudentNotes.FileManager.Base
             DirectoryTreeBehavior.GoToPath(path, this);
         }
 
+        public bool CheckIfFileExists(string name)
+        {
+            return DirectoryTreeBehavior.FileOrDirectoryAlreadyExists(name, this);
+        }
+
+        public string GetNewName(string oldName)
+        {
+            return DirectoryTreeBehavior.GetNewNameForFile(oldName, this);
+        }
+
         public abstract void GoToRootDir();
 
         public abstract override string ToString();

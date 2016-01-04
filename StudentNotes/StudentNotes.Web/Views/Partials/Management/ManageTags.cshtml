@@ -1,0 +1,112 @@
+﻿@model StudentNotes.Logic.ViewModels.Management.TagsViewModel
+
+<ol class="breadcrumb">
+    <li class="active">
+        @Ajax.ActionLink("Zarządzaj tagami", "ManageTagList", "Management",
+            null,
+            new AjaxOptions()
+            {
+                UpdateTargetId = "page-content",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loading-content",
+                OnComplete = "checkErrorDiv"
+            },
+            new {})
+    </li>
+</ol>
+
+<div id="subjectManagement" class="col-xs-12">
+    @using (Ajax.BeginForm(
+        "RemoveTags", "Management",
+        null,
+        new AjaxOptions()
+        {
+            UpdateTargetId = "page-content",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
+        },
+        new {}
+
+        ))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="col-xs-12">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="col-xs-2 lp">
+                        Lp.
+                    </div>
+                    <div class="col-xs-7 subjectName">
+                        Nazwa tagu
+                    </div>
+                    <div class="col-xs-2 buttonArea">
+                        Operacja
+                    </div>
+                    <div class="col-xs-1 checkboxArea">
+                        @Html.CheckBox("Zaznacz wszystkie")
+                    </div>
+                </li>
+
+                @for (int i = 0; i < Model.Tags.Count; i++)
+                {
+                    <li class="list-group-item lp">
+                        <div class="col-xs-2 lp">
+                            @(i + 1)
+                        </div>
+                        <div class="col-xs-7 subjectName">
+                            @Html.DisplayFor(m => m.Tags.ElementAt(i).Key)
+                        </div>
+                        <div class="col-xs-2 buttonArea">
+                            @Ajax.ActionLink("Usuń taga", "RemoveTag", "Management",
+                                new {tagName = Model.Tags.ElementAt(i).Key},
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "page-content",
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace
+                                },
+                                new {@class = "btn btn-danger"})
+                        </div>
+                        <div class="col-xs-1 checkboxArea">
+                            <input type="checkbox" name="@("Tags[" + Model.Tags.ElementAt(i).Key + "]")" value="true"/>
+                            <input name="@("Tags[" + Model.Tags.ElementAt(i).Key + "]")" type="hidden" value="false"/>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <button type="submit" class="btn btn-danger col-sm-3" target="blank">Usuń zaznaczone tagi</button>
+    }
+
+    @using (Ajax.BeginForm("AddTag", "Management", null,
+        new AjaxOptions()
+        {
+            UpdateTargetId = "page-content",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
+        },
+        new {}
+
+        ))
+    {
+        @Html.AntiForgeryToken()
+        <div id="addSubjectForm" class="col-xs-12">
+            <label class="label col-sm-3">Nazwa nowego tagu:</label>
+            <input class="col-sm-3" id="searchTagInput" type="text" name="tagName" placeholder="Nazwa taga"/>
+            <button type="submit" id="addSubjectButton" class="btn btn-success col-sm-3" target="blank">Dodaj taga</button>
+        </div>
+    }
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#searchTagInput").autocomplete({
+            source: '@Url.Action("TagSuggestions", "Search")'
+        });
+    });
+</script>
+
+

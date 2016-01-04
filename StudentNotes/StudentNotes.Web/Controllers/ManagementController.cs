@@ -11,6 +11,7 @@ using StudentNotes.Logic.ViewModels.Home;
 using StudentNotes.Logic.ViewModels.ManageGroups;
 using StudentNotes.Web.Filters;
 using StudentNotes.Logic.ViewModels.Common;
+using StudentNotes.Logic.ViewModels.Management;
 using StudentNotes.Logic.ViewModels.Validation;
 using StudentNotes.Web.Models.ResourcesFinderLogic;
 using StudentNotes.Web.RequestViewModels.Management;
@@ -292,6 +293,21 @@ namespace StudentNotes.Web.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
+        public ActionResult AddTag(string tagName)
+        {
+            if (!tagName.IsEmpty())
+            {
+                _semesterSubjectService.AddTagAndSave(tagName);
+            }
+
+            var tagsList = _semesterSubjectService.GetAllFileTagPatterns().OrderBy(s => s.Name).ToList();
+            var model = new TagsViewModel(tagsList);
+
+            return PartialView("~/Views/Partials/Management/ManageTags.cshtml", model);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult RemoveSubjects(SubjectViewModel model)
         {
             foreach (var subject in model.Subjects)
@@ -306,6 +322,22 @@ namespace StudentNotes.Web.Controllers
             return PartialView("~/Views/Partials/Management/ManageSubjects.cshtml", model);
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult RemoveTags(TagsViewModel model)
+        {
+            foreach (var tag in model.Tags)
+            {
+                if (tag.Value == true)
+                {
+                    _semesterSubjectService.DeleteTagAndSave(tag.Key);
+                }
+            }
+            model = new TagsViewModel(_semesterSubjectService.GetAllFileTagPatterns().OrderBy(t => t.Name).ToList());
+
+            return PartialView("~/Views/Partials/Management/ManageTags.cshtml", model);
+        }
+
         [HttpPost]
         public ActionResult RemoveSubject(string subjectName)
         {
@@ -317,6 +349,19 @@ namespace StudentNotes.Web.Controllers
             SubjectViewModel model = new SubjectViewModel(_semesterSubjectService.GetAllSubjects().OrderBy(s => s.Name).ToList());
 
             return PartialView("~/Views/Partials/Management/ManageSubjects.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveTag(string tagName)
+        {
+            if (!tagName.IsEmpty())
+            {
+                _semesterSubjectService.DeleteTagAndSave(tagName);
+            }
+
+            var model = new TagsViewModel(_semesterSubjectService.GetAllFileTagPatterns().OrderBy(s => s.Name).ToList());
+
+            return PartialView("~/Views/Partials/Management/ManageTags.cshtml", model);
         }
 
         [HttpGet]
@@ -546,6 +591,15 @@ namespace StudentNotes.Web.Controllers
             var serverResponse = (ResponseMessageViewModel) TempData["ServerResponse"];
 
             return View("~/Views/LoggedIn/MyAccount.cshtml", serverResponse);
+        }
+
+        [HttpGet]
+        public ActionResult ManageTagList()
+        {
+            var tagsList = _semesterSubjectService.GetAllFileTagPatterns().OrderBy(s => s.Name).ToList();
+            var model = new TagsViewModel(tagsList);
+
+            return PartialView("~/Views/Partials/Management/ManageTags.cshtml", model);
         }
     }
 

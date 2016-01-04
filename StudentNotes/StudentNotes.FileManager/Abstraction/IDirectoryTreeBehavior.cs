@@ -6,5 +6,7 @@ namespace StudentNotes.FileManager.Abstraction
     {
         void GoToOrCreatePath(string path, FileServerClient client);
         void GoToPath(string path, FileServerClient client);
+        bool FileOrDirectoryAlreadyExists(string fileName, FileServerClient client);
+        string GetNewNameForFile(string oldName, FileServerClient client);
     }
 }

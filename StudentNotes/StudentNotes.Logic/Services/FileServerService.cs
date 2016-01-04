@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using StudentNotes.FileManager.Base;
 using StudentNotes.FileManager.Consts;
@@ -61,6 +62,11 @@ namespace StudentNotes.Logic.Services
             _ftpClient.GoToRootDir();
             _ftpClient.GoToOrCreatePath(targetDirectory);
 
+            if (_ftpClient.CheckIfFileExists(note.Name))
+            {
+                note.Name = _ftpClient.GetNewName(note.Name);
+            }
+
             await _ftpClient.UploadFile(new FileManager.Base.File(note.Name, note.Content));
             if ((int)_ftpClient.ServerResponse == 226)
             {
@@ -74,7 +80,7 @@ namespace StudentNotes.Logic.Services
                     UploadDate = DateTime.Now,
                     IsShared = false,
                     UserId = userId,
-                    FileTags = note.Tags
+                    FileTags = GetFileTagsWithSeparator(note.Tags)
                 });
                 _fileRepository.Commit();
                 return 0;
@@ -88,6 +94,11 @@ namespace StudentNotes.Logic.Services
             _ftpClient.GoToRootDir();
             _ftpClient.GoToOrCreatePath(targetDirectory);
 
+            if (_ftpClient.CheckIfFileExists(note.Name))
+            {
+                note.Name = _ftpClient.GetNewName(note.Name);
+            }
+
             await _ftpClient.UploadFile(new FileManager.Base.File(note.Name, note.Content));
             if ((int)_ftpClient.ServerResponse == 226)
             {
@@ -100,7 +111,7 @@ namespace StudentNotes.Logic.Services
                     UploadDate = DateTime.Now,
                     IsShared = false,
                     UserId = userId,
-                    FileTags = note.Tags,
+                    FileTags = GetFileTagsWithSeparator(note.Tags),
                     SemesterSubjectFile = new List<SemesterSubjectFile>()
                     {
                         new SemesterSubjectFile()
@@ -203,6 +214,21 @@ namespace StudentNotes.Logic.Services
             }
 
             return user.Email;
+        }
+
+        private string GetFileTagsWithSeparator(string tags)
+        {
+            var resultString = new StringBuilder();
+
+            var tagList = tags.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var tag in tagList)
+            {
+                var tmp = tag.Replace(" ", "_");
+                resultString.Append(tmp);
+                resultString.Append(",");
+            }
+
+            return resultString.ToString();
         }
     }
 }

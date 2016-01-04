@@ -1,5 +1,21 @@
 ﻿@model StudentNotes.Logic.ViewModels.Common.SubjectViewModel
 
+<ol class="breadcrumb">
+    <li class="active">
+        @Ajax.ActionLink("Zarządzaj przedmiotami", "ManageSubjectsList", "Management",
+            null,
+            new AjaxOptions()
+            {
+                UpdateTargetId = "page-content",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loading-content",
+                OnComplete = "checkErrorDiv"
+            },
+            new {})
+    </li>
+</ol>
+
 <div id="subjectManagement" class="col-xs-12">
     @using (Ajax.BeginForm(
         "RemoveSubjects", "Management",

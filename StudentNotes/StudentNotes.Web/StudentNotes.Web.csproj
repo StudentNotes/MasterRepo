@@ -311,6 +311,7 @@
     <Content Include="Views\LoggedIn\MyAccount.cshtml" />
     <Content Include="Views\Partials\Management\UserPreferencesPartial.cshtml" />
     <Content Include="Views\Partials\ManageNotes\SearchedNotesPartial.cshtml" />
+    <Content Include="Views\Partials\Management\ManageTags.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

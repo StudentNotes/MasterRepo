@@ -266,6 +266,22 @@ namespace StudentNotes.Logic.Services
         {
             _groupUserRepository.Delete(gu => gu.GroupId == groupId);
             _groupSemesterRepository.Delete(gs => gs.GroupId == groupId);
+
+            var groupSharedFileIds =
+                _fileSharedGroupRepository.GetMany(fsg => fsg.GroupId == groupId).Select(f => f.FileId).ToList();
+            foreach (var fileId in groupSharedFileIds)
+            {
+                var currentFileUserShares = _userSharedFileRepository.GetMany(usf => usf.FileId == fileId);
+                var currentFileGroupShares =
+                    _fileSharedGroupRepository.GetMany(fsg => fsg.FileId == fileId && fsg.GroupId != groupId);
+                if (!currentFileGroupShares.Any() && !currentFileUserShares.Any())
+                {
+                    var file = _fileRepository.GetById(fileId);
+                    file.IsShared = false;
+                    _fileRepository.Update(file);
+                }
+            }
+
             _fileSharedGroupRepository.Delete(fsg => fsg.GroupId == groupId);
             _groupRepository.Delete(g => g.GroupId == groupId);
 

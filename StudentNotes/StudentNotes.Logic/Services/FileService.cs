@@ -156,7 +156,30 @@ namespace StudentNotes.Logic.Services
 
         public List<File> SearchFilesMixed(string term, int userId)
         {
-            throw new NotImplementedException();
+            var resultList = new List<File>();
+
+            var namesList = term.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            for (int i = 0; i < namesList.Count; i++)
+            {
+                namesList[i] = namesList[i].Replace(" ", "");
+            }
+
+            var accessibleFileIds = GetAccessedFileIds(userId);
+            var possibleHitsByTag = _fileRepository.GetByTag(term);
+            possibleHitsByTag.RemoveAll(f => !accessibleFileIds.Contains(f.FileId));
+
+            var allAccessibleFiles = _fileRepository.GetMany(f => accessibleFileIds.Contains(f.FileId));
+            foreach (var accessibleFile in allAccessibleFiles)
+            {
+                if (namesList.Any(n => accessibleFile.Name.StartsWith(n)))
+                {
+                    resultList.Add(accessibleFile);
+                }
+            }
+
+            resultList = resultList.Union(possibleHitsByTag).ToList();
+
+            return resultList;
         }
 
         public IEnumerable<Group> GetFileGroupShares(int fileId, int memberId)
@@ -190,6 +213,7 @@ namespace StudentNotes.Logic.Services
             var accessedUserFileIds =
                 _userSharedFileRepository.GetMany(usf => usf.UserId == userId).Select(f => f.FileId).ToList();
             var userGroupIds = _groupUserRepository.GetMany(gu => gu.UserId == userId).Select(g => g.GroupId).ToList();
+            userGroupIds.AddRange(_groupRepository.GetMany(g => g.AdminId == userId).Select(g => g.GroupId).ToList());
             var accessedGroupFileIds =
                 _fileSharedGroupRepository.GetMany(fsg => userGroupIds.Contains(fsg.GroupId))
                     .Select(f => f.FileId)
@@ -218,6 +242,7 @@ namespace StudentNotes.Logic.Services
             var accessedUserFileIds =
                 _userSharedFileRepository.GetMany(usf => usf.UserId == userId).Select(f => f.FileId).ToList();
             var userGroupIds = _groupUserRepository.GetMany(gu => gu.UserId == userId).Select(g => g.GroupId).ToList();
+            userGroupIds.AddRange(_groupRepository.GetMany(g => g.AdminId == userId).Select(g => g.GroupId).ToList());
             var accessedGroupFileIds =
                 _fileSharedGroupRepository.GetMany(fsg => userGroupIds.Contains(fsg.GroupId))
                     .Select(f => f.FileId)

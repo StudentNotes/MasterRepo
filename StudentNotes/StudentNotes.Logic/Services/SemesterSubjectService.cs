@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
@@ -15,13 +13,16 @@ namespace StudentNotes.Logic.Services
         private readonly ISemesterRepository _semesterRepository;
         private readonly ISubjectRepository _subjectRepository;
         private readonly ISemesterSubjectRepository _semesterSubjectRepository;
+        private readonly IFileTagPatternRepository _fileTagPatternRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SemesterSubjectService(ISemesterRepository semesterRepository, ISubjectRepository subjectRepository, ISemesterSubjectRepository semesterSubjectRepository, IUnitOfWork unitOfWork)
+        public SemesterSubjectService(ISemesterRepository semesterRepository, ISubjectRepository subjectRepository, ISemesterSubjectRepository semesterSubjectRepository, 
+            IFileTagPatternRepository fileTagPatternRepository, IUnitOfWork unitOfWork)
         {
             _semesterRepository = semesterRepository;
             _subjectRepository = subjectRepository;
             _semesterSubjectRepository = semesterSubjectRepository;
+            _fileTagPatternRepository = fileTagPatternRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -67,6 +68,27 @@ namespace StudentNotes.Logic.Services
         {
             _subjectRepository.Delete(s => s.Name == subjectName);
             _subjectRepository.Commit();
+        }
+
+        public IEnumerable<FileTagPattern> GetAllFileTagPatterns()
+        {
+            var fileTagPatterns = _fileTagPatternRepository.GetAll();
+            return fileTagPatterns;
+        }
+
+        public void AddTagAndSave(string tagName)
+        {
+            _fileTagPatternRepository.Add(new FileTagPattern()
+            {
+                Name = tagName
+            });
+            _fileTagPatternRepository.Commit();
+        }
+
+        public void DeleteTagAndSave(string tagName)
+        {
+            _fileTagPatternRepository.Delete(t => t.Name == tagName);
+            _fileTagPatternRepository.Commit();
         }
 
         public void Commit()

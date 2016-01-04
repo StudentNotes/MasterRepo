@@ -169,6 +169,11 @@ namespace StudentNotes.Web.Controllers
             {
                 case "mixed":
                 {
+                    var files = _fileService.SearchFilesMixed(term, userId);
+                    foreach (var file in files)
+                    {
+                        model.Notes.Add(new Note(file));
+                    }
                     break;
                 }
                 case "tags":
