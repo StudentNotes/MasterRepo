@@ -25,7 +25,7 @@ namespace StudentNotes.Repositories.Repositories
             foreach (var tag in tagList)
             {
                 var dbTag = tag.Replace(" ", "_");
-                string query = $"SELECT * FROM [SNDataBase].[dbo].[File] WHERE CONTAINS (FileTags, '\"{dbTag}\"')";
+                string query = $"SELECT * FROM [robson081192_SN_DataBase].[dbo].[File] WHERE CONTAINS (FileTags, '\"{dbTag}\"')";
 
                 var result = base.DbContext.File.SqlQuery(query).ToList();
                 foreach (var resultItem in result)

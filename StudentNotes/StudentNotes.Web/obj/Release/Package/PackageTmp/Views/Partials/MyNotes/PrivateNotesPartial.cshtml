@@ -1,0 +1,84 @@
+﻿@*Moje Notatki -> Prywatne*@
+@using StudentNotes.Logic.LogicModels
+@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.File.UserNotesViewModel
+@{
+    Layout = null;
+}
+
+<div class="col-xs-12 folder-view">
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(ResourceKeyResolver.ConstPrivate, "PrivateNotes", "Note",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading",
+                    OnComplete = "checkErrorDiv"
+                },
+                new {})
+        </li>
+    </ol>
+
+    <div class="col-xs-12">
+        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Rozmiar</th>
+                <th>Data wstawienia</th>
+                <th>Tagi</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.UserNotesList.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.UserNotesList[i].Category)" style="max-height: 34px;" />
+                    @Model.UserNotesList[i].Name
+                </td>
+                <td>@Model.UserNotesList[i].Category</td>
+                <td>@Model.UserNotesList[i].Size</td>
+                <td>@Model.UserNotesList[i].UploadDate</td>
+                <td>
+                    @foreach (var tag in Model.UserNotesList[i].GetTagsList())
+                    {
+                        @tag<text>,</text>
+}
+                    @*@Model.UserNotesList[i].Tags*@
+                </td>
+                <td>
+                    @Html.ActionLink("Pobierz", "DownloadNote", "Note",  new {fileId = Model.UserNotesList[i].NoteId}, new { @class = "btn btn-success" })
+
+                    @Ajax.ActionLink("Usuń notatkę", "DeletePrivateNote", "Note",
+                        new {fileId = Model.UserNotesList[i].NoteId},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new {@class = "btn btn-danger"})
+
+                    <button id="shareFileButton" type="button" class="btn btn-primary btn-share-modal" data-toggle="modal" data-target="#shareUniversityNoteModal" name="@Model.UserNotesList[i].Name" value="@Model.UserNotesList[i].NoteId">
+                        Udostępniaj
+                    </button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Partial("~/Views/Partials/Note/ShareMyNoteModal.cshtml")

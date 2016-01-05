@@ -1,0 +1,80 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.NewUniversityViewModel
+
+@Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+
+<div id="subjectManagement" class="col-xs-12">
+    @using (Ajax.BeginForm(
+        "AddGradeToSchool", "Management",
+        null,
+        new AjaxOptions()
+        {
+            UpdateTargetId = "page-content",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
+        },
+        new { }
+
+        ))
+    {
+        @Model.UniversityName
+        <br/>
+        @Model.UniversityDescription
+        
+        @Html.AntiForgeryToken()
+
+
+        <div class="col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="col-xs-2 lp">
+                        Lp.
+                    </div>
+                    <div class="col-xs-7 subjectName">
+                        Rocznik
+                    </div>
+                    <div class="col-xs-2 buttonArea">
+                    </div>
+                </li>
+                @Html.Partial("~/Views/Partials/Management/GradeList.cshtml", Model)
+            </ul>
+        </div>
+        
+        
+        <div class="col-xs-6">
+            <input type="text" id="searchGrade" class="col-xs-6" name="SchoolGrade"/>
+            <input type="hidden" value="@Model.UniversityId" name="UniversityId"/>
+            <button type="submit">Dodaj rocznik</button>
+        </div>
+
+        <div class="col-xs-12">
+            @Ajax.ActionLink("Zakończ konfigurację", "ManageUniversities", "Management",
+                            null,
+                            new AjaxOptions()
+                            {
+                                UpdateTargetId = "page-content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                            new { @class = "btn btn-warning" })
+
+            @Ajax.ActionLink("Dobierz kierunki (2/5)", "AddStudySubjects", "Management",
+                            new {schoolId = Model.UniversityId},
+                            new AjaxOptions()
+                            {
+                                UpdateTargetId = "page-content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                            new { @class = "btn btn-info" })
+        </div>     
+        }
+
+    </div>
+
+<script type="text/javascript">
+    $(function() {
+        $("#searchGrade").autocomplete({
+            source: '@Url.Action("GradeSuggestions", "Search")'
+        });
+    });
+</script>

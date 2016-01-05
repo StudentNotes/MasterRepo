@@ -44,6 +44,10 @@
         </div>
 
         <div id="page-wrapper">
+            <button type="button" id="side-menu-toggle" class="btn">
+                <span class="glyphicon glyphicon-menu-right"></span>
+            </button>
+            
             <div id="page-content" class="container-fluid">
                 @RenderBody()
             </div>
@@ -149,6 +153,11 @@
                 singleField: true
         });
         });
+    });
+
+    $("#side-menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
     });
 </script>
 </body>

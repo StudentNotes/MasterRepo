@@ -1,0 +1,125 @@
+﻿@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.LoggedIn.NavbarSideViewModel
+
+<div id="navbar-side">
+    <div id="loading-content">
+        <img class="loading-content-gif" src="~/Resources/pending_black_2.GIF"/>
+        <div class="loading-content-desc">Ładowanie treści</div>
+    </div>
+    <ul class="sidebar-nav">
+        <li>
+            <a class="sidebar-cattegory collapsed first" href="javascript:;" data-toggle="collapse" data-target="#my-notes">@ResourceKeyResolver.ConstMyNotes<span class="glyphicon glyphicon-chevron-down"></span></a>
+            <ul id="my-notes" class="collapse">
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstNewest, "RecentlyUploadedNotes", "Note", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new { @class = "fa fa-fw fa-dashboard" })
+                </li>
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstPrivate, "PrivateNotes", "Note", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new {@class = "fa fa-fw fa-dashboard"})
+                </li>
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstUniversityNotes, "UniversityNotes", "Note", new {holdTime = 20000},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new {@class = "fa fa-fw fa-dashboard"})
+                </li>
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstSharedNotes, "SharedNotes", "Note", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new {@class = "fa fa-fw fa-dashboard"})
+                </li>
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstSharedByOthers, "AvailableNotes", "Note", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new { @class = "fa fa-fw fa-dashboard" })
+                </li>
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstAllNotes, "AllNotes", "Note", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new { @class = "fa fa-fw fa-dashboard" })
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a class="sidebar-cattegory collapsed" href="javascript:;" data-toggle="collapse" data-target="#my-groups">@ResourceKeyResolver.ConstMyGroups<span class="glyphicon glyphicon-chevron-down"></span></a>
+            <ul id="my-groups" class="collapse">
+                @foreach (var group in Model.GroupList)
+                {
+                    @Ajax.ActionLink(group.Value, "ShowGroupSemesters", "Group",
+                        new {GroupId = group.Key, GroupName = group.Value},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        },
+                        new {@class = "fa fa-fw fa-dashboard"})
+                }
+            </ul>
+        </li>
+        <li>
+            <a class="sidebar-cattegory collapsed" href="javascript:;" data-toggle="collapse" data-target="#my-universities">@ResourceKeyResolver.ConstMyUniversities<span class="glyphicon glyphicon-chevron-down"></span></a>
+            <ul id="my-universities" class="collapse">
+                @foreach (var university in Model.UniversityList)
+                {
+                    @Ajax.ActionLink(university.Value, "ShowStudySubjects", "University",
+                        new {universityId = university.Key},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        },
+                        new {@class = "fa fa-fw fa-dashboard"})
+                }
+            </ul>
+        </li>
+    </ul>
+</div>

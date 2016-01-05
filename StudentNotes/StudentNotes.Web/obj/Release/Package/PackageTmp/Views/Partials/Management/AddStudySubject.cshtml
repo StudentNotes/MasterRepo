@@ -1,0 +1,86 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.UniversityGradeStudySubjectViewModel
+
+@Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+
+<div id="subjectManagement" class="col-xs-12">
+    <div class="col-xs-6">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="col-xs-2 lp">
+                    Lp.
+                </div>
+                <div class="col-xs-7 subjectName">
+                    Rocznik
+                </div>
+                <div class="col-xs-2 buttonArea">
+                </div>
+            </li>
+            @for (int i = 0; i < Model.StudyGrades.Count; i++)
+            {
+                <li class="list-group-item">
+                    <div class="col-xs-2 lp">
+                        @(i + 1)
+                    </div>
+                    <div class="col-xs-7 subjectName">
+                        @Model.StudyGrades.ElementAt(i).Year
+                    </div>
+                    <div class="col-xs-2 buttonArea">
+                        @Ajax.ActionLink("Zdefiniuj kierunki ", "DefineStudySubjects", "Management",
+                            new {gradeId = Model.StudyGrades.ElementAt(i).GradeId, schoolId = Model.UniversityId},
+                            new AjaxOptions()
+                            {
+                                UpdateTargetId = "gradeStudySubjects",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                            new {@class = "btn btn-info"})
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div id="gradeStudySubjects">
+        <div class="col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="col-xs-2 lp">
+                        Lp.
+                    </div>
+                    <div class="col-xs-7 subjectName">
+                        Kierunek
+                    </div>
+                    <div class="col-xs-2 buttonArea">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="col-xs-12">
+        @Ajax.ActionLink("Zakończ konfigurację", "ManageUniversities", "Management",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace
+                },
+                new { @class = "btn btn-warning" })
+
+        @if (Model.StudyGrades.Count != 0)
+        {
+            @Ajax.ActionLink("Dobierz przedmioty (3/5", "AddSemesterSubjects", "Management",
+                new { schoolId = Model.UniversityId },
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace
+                },
+                new { @class = "btn btn-info" })
+        }       
+    </div>
+</div>
+       

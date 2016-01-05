@@ -1,0 +1,291 @@
+﻿@using StudentNotes.Logic.ViewModels.Authorization
+@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.Home.HomeViewModel
+
+@{
+    Layout = "~/Views/Shared/_HomePageLayout.cshtml";
+}
+
+
+
+<header id="myCarousel" class="carousel slide" data-rider="carousel">
+    <div id="login-errors">
+        @if (Model.LoginViewModel.ErrorList.Count > 0)
+        {
+            foreach (var error in Model.LoginViewModel.ErrorList)
+            {
+                <span class="label label-danger">@error</span>
+                <br />
+            }
+        }
+    </div>
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <!-- Set the first background image using inline CSS below. -->
+            <img class="img-responsive" src="~/Resources/mobile_devices_2.png"/>
+        </div>
+        <div class="item">
+            <!-- Set the second background image using inline CSS below. -->
+            <img class="img-responsive" src="~/Resources/file-sharing_2.jpg"/>
+        </div>
+        <div class="item">
+            <!-- Set the third background image using inline CSS below. -->
+            <img class="img-responsive" src="~/Resources/data steal_2.png"/>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+
+</header>
+
+<!-- About Project Section -->
+<section id="about-project">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>@ResourceKeyResolver.HomePageNavBarAboutProject</h1>
+                <hr class="star-light star-odd">
+            </div>
+        </div>
+        <div class="jumbotron img-responsive container">
+            <div class="jumbotron-title">
+                <h1>@ResourceKeyResolver.ConstStudentNotes</h1>
+            </div>
+            <div class="jumbotron-content">
+                <div class="jumbotron-logo col-sm-4">
+                    <p>OBRAZEK<br/>LOGO</p>
+                </div>
+                <div class="jumbotron-about col-sm-8">
+                    <p class="lead">@ResourceKeyResolver.HomePageContentAboutProject</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                @ResourceKeyResolver.AccordionFeaturesTitle
+                            </a>
+                        </h2>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <p>
+                                @ResourceKeyResolver.ConstPortal <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionFeaturesContentHeader
+                                <ul>
+                                    <li>@ResourceKeyResolver.ConstComfortable <b>@ResourceKeyResolver.ConstStoring</b> @ResourceKeyResolver.AccordionFeaturesFirstContent <b>@ResourceKeyResolver.ConstYou</b> @ResourceKeyResolver.AccordionFeaturesFirstContentCd</li>
+                                    <li>@ResourceKeyResolver.ConstEasy <b>@ResourceKeyResolver.ConstSharing</b> @ResourceKeyResolver.AccordionFeaturesSecondContent</li>
+                                    <li><b>@ResourceKeyResolver.ConstTagging</b> @ResourceKeyResolver.AccordionFeaturesThirdContent<b> @ResourceKeyResolver.ConstSearching</b> @ResourceKeyResolver.AccordionFeaturesThirdContentCd</li>
+                                    <li><b>@ResourceKeyResolver.ConstManagement</b> @ResourceKeyResolver.AccordionFeaturesFourthContent <b>@ResourceKeyResolver.ConstYours</b> @ResourceKeyResolver.AccordionFeaturesFourthContentCd</li>
+                                    <li><b>@ResourceKeyResolver.ConstDownloading</b> @ResourceKeyResolver.AccordionFeaturesFifthContent</li>
+                                </ul>
+                            </p>
+                            <p>
+                                @ResourceKeyResolver.AccordionFeaturesContentBody <b>@ResourceKeyResolver.AccordionFeaturesContentBodyCd</b>
+                                <br />
+                                <b>@ResourceKeyResolver.AccordionFeaturesContentBodyCd_1</b> @ResourceKeyResolver.AccordionFeaturesContentBodyCd_2
+                            </p>
+                            <div class="page-scroll">
+                                <a class="yellow-button" href="#register">@ResourceKeyResolver.ConstSignUp</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                @ResourceKeyResolver.AccordionExtensionsTitle               
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>
+                                @ResourceKeyResolver.ConstService <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionExtensionsContentHeader <b>@ResourceKeyResolver.AccordionExtensionsContentHeaderCd</b>
+                                @ResourceKeyResolver.AccordionExtensionsContentHeaderCd_1
+                                <ol>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsFirstContentType</b> @ResourceKeyResolver.AccordionExtensionsFirstContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsSecondContentType</b> @ResourceKeyResolver.AccordionExtensionsSecondContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsThirdContentType</b> @ResourceKeyResolver.AccordionExtensionsThirdContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsFourthContentType</b> @ResourceKeyResolver.AccordionExtensionsFourthContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsFifthContentType</b> @ResourceKeyResolver.AccordionExtensionsFifthContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsSixthContentType</b> @ResourceKeyResolver.AccordionExtensionsSixthContentDesc</li>
+                                    <li><b>@ResourceKeyResolver.AccordionExtensionsSeventhContentType</b> @ResourceKeyResolver.AccordionExtensionsSeventhContentDesc</li>
+                                </ol>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                @ResourceKeyResolver.AccordionRulesTitle    
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>
+                               @ResourceKeyResolver.AccordionRulesContentHeader <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionRulesContentHeaderCd
+                            </p>
+                            <ol>
+                                <li>
+                                    @ResourceKeyResolver.AccordionRulesContentFirstRule
+                                </li>
+                                <li>
+                                    @ResourceKeyResolver.AccordionRulesContentSecondRule
+                                </li>
+                                <li>
+                                    @ResourceKeyResolver.AccordionRulesContentThirdRule
+                                </li>
+                                <li>
+                                    @ResourceKeyResolver.ConstPortal <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionRulesContentFourthRule
+                                </li>
+                            </ol>
+                            <p>
+                                @ResourceKeyResolver.AccordionRulesContentBody
+                            </p>
+                            <p>
+                                @ResourceKeyResolver.AccordionRulesContentBodyCd
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Me Section -->
+<section class="success" id="about-me">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>@ResourceKeyResolver.HomePageNavBarAboutAuthor</h1>
+                <hr class="star-light star-even">
+            </div>
+        </div>
+        <div class="jumbotron img-responsive container">
+            <div class="jumbotron-title">
+                <h1>@ResourceKeyResolver.JumbotronAboutUserGreeting</h1>
+            </div>
+            <div class="jumbotron-content">
+                <div class="jumbotron-logo col-sm-4">
+                    @*<p>OBRAZEK<br />ZDJĘCIE</p>*@
+                    <img src="~/Resources/author.jpg" class="img-thumbnail img-responsive"/>
+                </div>
+                <div class="jumbotron-about col-sm-8">
+                    <p class="lead">
+                        @ResourceKeyResolver.JumbotronAboutUserContent_1
+                    </p>
+                    <p>
+                        @ResourceKeyResolver.JumbotronAboutUserContent_2
+                    </p>
+                    <p>
+                        @ResourceKeyResolver.JumbotronAboutUserContent_3
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Register Section -->
+<section id="register">
+    @Html.Partial("~/Views/Partials/Account/Register.cshtml", Model.RegisterViewModel)
+</section>
+
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="footer-above">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col col-md-6">
+                    <h3>Kontakt</h3>
+                    <p><b>E-mail:</b><br>rob.winkler@hotmail.com</p>
+                </div>
+                <div class="footer-col col-md-6">
+                    <h3>Sosial Media</h3>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="https://www.facebook.com/robert.winkler.334" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/robert-winkler-702708100" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-below">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    Copyright &copy; Robert Winkler 2016
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+<div class="scroll-top page-scroll visible-xs visible-sm">
+    <a class="btn btn-primary" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Regulamin portalu StudentNotes</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    @ResourceKeyResolver.AccordionRulesContentHeader <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionRulesContentHeaderCd
+                </p>
+                <ol>
+                    <li>
+                        @ResourceKeyResolver.AccordionRulesContentFirstRule
+                    </li>
+                    <li>
+                        @ResourceKeyResolver.AccordionRulesContentSecondRule
+                    </li>
+                    <li>
+                        @ResourceKeyResolver.AccordionRulesContentThirdRule
+                    </li>
+                    <li>
+                        @ResourceKeyResolver.ConstPortal <b>@ResourceKeyResolver.ConstStudentNotes</b> @ResourceKeyResolver.AccordionRulesContentFourthRule
+                    </li>
+                </ol>
+                <p>
+                    @ResourceKeyResolver.AccordionRulesContentBody
+                </p>
+                <p>
+                    @ResourceKeyResolver.AccordionRulesContentBodyCd
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

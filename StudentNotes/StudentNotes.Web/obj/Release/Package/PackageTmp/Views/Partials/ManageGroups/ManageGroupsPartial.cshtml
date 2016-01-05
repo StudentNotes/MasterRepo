@@ -1,0 +1,80 @@
+﻿@model List<StudentNotes.Logic.ViewModels.ManageGroups.ManageGroupViewModel>
+           
+<div class="col-xs-12 folder-view">
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink("Zarządzanie grupami", "ManageGroups", "Management",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+    </ol>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa grupy</th>
+                <th>Kierunek</th>
+                <th>Semestry</th>
+                <th>Liczba członków</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    @Model[i].GroupName
+                </td>
+                <td>@Model[i].StudySubject</td>
+                <td>@Model[i].Semesters</td>
+                <td>@Model[i].MemberNumber.ToString()</td>
+                <td>
+                    @Ajax.ActionLink("Usuń", "DeleteGroup", "Management",
+                        new { groupId = Model[i].GroupId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-danger" })
+
+                    @Ajax.ActionLink("Szczegóły", "GroupDetails", "Management",
+                        new { groupId = Model[i].GroupId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-warning" })
+
+                    @Ajax.ActionLink("Członkowie", "AddUsers", "Management",
+                        new {groupId = Model[i].GroupId},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new {@class = "btn btn-success"})
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+ 

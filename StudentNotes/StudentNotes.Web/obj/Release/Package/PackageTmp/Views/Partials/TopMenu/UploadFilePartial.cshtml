@@ -1,0 +1,145 @@
+﻿@using StudentNotes.Web.Models.ResourcesFinderLogic
+
+<div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="myModalLabel">@ResourceKeyResolver.ConstAddNote</h2>
+            </div>
+
+            <form enctype="multipart/form-data" id="uploadFileForm" method="POST">
+                <div class="modal-body">
+                    <p>
+                        <span class="label col-xs-12">Wybierz plik z dysku:</span><br/>
+                        <span id="filePath" class="col-xs-7 label file-path">Nazwa pliku</span>
+                        <span class="btn btn-default btn-file col-xs-offset-1 col-xs-4">
+                            Przeglądaj...
+                            <input id="fileInput" type="file" multiple name="Files" onchange="fileSelected()">
+                        </span>
+                    </p>
+                    <br/><br/>
+                    <p>
+                        <span class="label col-xs-12">Zdefiniuj typ pliku:</span><br/>
+                        <input type="radio" id = "privateFileUploadCheckBox" class = "file-radio-button" name="FileType" value="Private" checked="checked">prywatny<br>
+                        <input type="radio" id = "universityFileUploadCheckBox" class = "file-radio-button" name="FileType" value="University">uczelniany/szkolny<br>
+                    </p>
+
+                    <div id="showUploadFileForm" class="form-horizontal hidden">
+                        <span class="label col-xs-12">Gdzie chcesz, by plik został zapisany:</span><br/>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Uczelnia:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <select id="universitiesSelect" class="form-control"></select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Kierunek:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <select id="studySubjectsSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Semestr:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <select id="semestersSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Przedmiot:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <select id="semesterSubjectsSelect" class="form-control"></select>
+                            </div>
+                        </div>
+                        <input id="inputPath" type="text" name="UploadPath" value="" hidden/>
+                        <input id="inputStudySubjectId" type="text" name="SemesterSubjectId" value="" hidden/>
+                    </div>
+
+                    <br/><br/>
+                    <p>
+                        <span class="label col-xs-12">Dodaj tagi do pliku</span><br/>
+                        <div class="col-xs-12">
+                            <div class="label col-xs-12">
+
+                                <ul id="myTags">
+                                    <!-- Existing list items will be pre-added to the tags -->
+                                </ul>
+
+                            </div>
+                        </div>
+                    </p>
+                    <br/><br/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input id="sendButton" type="submit" name="Wyślij!" class="btn btn-primary"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var form = document.getElementById("uploadFileForm");
+    var fileInput = document.getElementById("fileInput");
+    var uploadButton = document.getElementById("sendButton");
+    var privateRadio = document.getElementById("privateFileUploadCheckBox");
+    var universityRadio = document.getElementById("universityFileUploadCheckBox");
+    var uploadPathInput = document.getElementById("inputPath");
+    var studySubjectInput = document.getElementById("inputStudySubjectId");
+    var fileTagsInput = document.getElementById("myTags");
+
+
+    form.onsubmit = function (event) {
+        console.log("Submitting files...");
+        event.preventDefault();
+
+        var formData = new FormData();
+
+        var files = fileInput.files;
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            formData.append('Files', file, file.name);
+        }
+
+        if (privateRadio.checked) {
+            formData.append('FileType', privateRadio.value);
+        }
+        if (universityRadio.checked) {
+            formData.append('FileType', universityRadio.value);
+        }
+
+        formData.append('UploadPath', uploadPathInput.value);
+        formData.append('SemesterSubjectId', studySubjectInput.value);
+
+        var tags = "";
+        for (var i = 0; i < fileTagsInput.children.length - 1; i++) {
+            tags += fileTagsInput.children[i].innerText.replace(/(\r\n|\n|\r)/gm, "") + ",";
+        }
+        formData.append('FileTags', tags);
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 1) {
+                loadingAnimationOn();
+            }
+            if (xhr.readyState === 4) {
+                loadingAnimationOff();
+                $("body").html(xhr.responseText);
+                checkErrorDiv();
+            }
+        }
+
+        xhr.open('POST', '@Url.Action("SendFile", "File")', true);
+
+        xhr.send(formData);
+    }
+
+    
+</script>

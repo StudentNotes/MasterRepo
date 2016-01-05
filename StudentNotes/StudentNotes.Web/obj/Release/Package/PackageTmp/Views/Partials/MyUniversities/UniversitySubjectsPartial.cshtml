@@ -1,0 +1,44 @@
+﻿@model StudentNotes.Logic.ViewModels.LoggedIn.MyUniversitiesViewModel
+
+<div class="col-xs-12 folder-view">
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(Model.UniversityName, "ShowStudySubjects", "University",
+                new {Model.UniversityId},
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
+        </li>
+    </ol>
+
+    @for (int i = 0; i < Model.StudySubjects.Count; i++)
+    {
+        <div class="col-sm-2 col-xs-1 folder">
+            <img src="~/Resources/folder-symbol.jpg" class="img-responsive img-rounded"/>
+            <div class="folder-name">
+                @{
+                    string linkName = string.Format("{0}\n{1}", Model.StudySubjects[i].Name, Model.Grades[i].Year);
+                    @Ajax.ActionLink(linkName, "ShowSemesters", "University",
+                        new {studySubjectId = Model.StudySubjects[i].StudySubjectId, studySubjectName = linkName, Model.UniversityId, Model.UniversityName},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new {@class = "folder-name"});
+                }
+                
+            </div>
+        </div>
+                    }
+</div>
+    
+    
+

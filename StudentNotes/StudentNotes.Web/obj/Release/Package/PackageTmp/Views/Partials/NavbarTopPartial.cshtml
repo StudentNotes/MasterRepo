@@ -1,0 +1,120 @@
+﻿@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.Common.UserViewModel
+
+
+<div id="navbar-top-collapse" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-nav-buttons">
+        <li>
+            <a href="#" class="navbar-nav-button" data-toggle="modal" data-target="#uploadFileModal">@ResourceKeyResolver.ConstAddNote</a>
+        </li>
+        <li>
+            <a href="#" class="navbar-nav-button" data-toggle="modal" data-target="#addUniversityModal">@ResourceKeyResolver.ConstJoinUniversity</a>
+        </li>
+        <li>
+            <a href="#" class="navbar-nav-button" data-toggle="modal" data-target="#addGroupModal">@ResourceKeyResolver.ConstAddGroup</a>
+        </li>
+        <li>
+            @using (Ajax.BeginForm("FindNotesBy", "Search", null, new AjaxOptions()
+            {
+                UpdateTargetId = "page-content",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loading-content",
+                OnComplete = "checkErrorDiv"
+            },
+                new {id = "searchNotesForm", @class = "navbar-form navbar-left", role = "search"}))
+            {
+                <div class="form-group">
+                    <input type="text" name="term" class="form-control" placeholder="Wyszukaj">
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            }
+        </li>
+
+    </ul>
+
+    <div class="navbar-right navbar-nav-user">
+        <a class="dropdown-toggle" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
+            <div class="thumbnail">
+                <img class="img-responsive" src="@Model.AvatarPath" />
+
+                @if (Model == null)
+                {
+                    <span>username</span>
+                }
+                else
+                {
+                    <span>@Model.Name @Model.LastName</span>
+                }
+
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </div>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown1" style="float: right;">
+            <li>
+                @Ajax.ActionLink(ResourceKeyResolver.ConstMyAccount, "MyAccount", "Management", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content-content"
+                        }
+                        )
+            </li>
+            <li>
+                @Ajax.ActionLink("Zarządzaj grupami", "ManageGroups", "Management", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        }
+                        )
+            </li>
+            @if (Model.IsServiceAdmin)
+            {
+                <li>
+                    @Ajax.ActionLink(ResourceKeyResolver.ConstManageUniversities, "ManageUniversities", "Management", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        }
+                        )
+                </li>
+                <li>
+                    @Ajax.ActionLink("Zarządzaj przedmiotami", "ManageSubjectsList", "Management", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        }
+                        )
+                </li>
+                <li>
+                    @Ajax.ActionLink("Zarządzaj tagami", "ManageTagList", "Management", null,
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        }
+                        )
+                </li>
+            }         
+            <li>@Html.ActionLink(ResourceKeyResolver.ConstSignOut, "Logoff", "Account")</li>
+        </ul>
+    </div>
+
+</div>
+
+

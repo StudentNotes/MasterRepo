@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="studentnotes.hostingasp.pl" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Robson\\Documents\\PROJECTS\\University\ projects\\StudentNotes\\StudentNotes\\StudentNotes\.Web\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Robson\\Documents\\PROJECTS\\University\ projects\\StudentNotes\\StudentNotes\\StudentNotes\.Web\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="StudentNotesContext-Web.config Connection String" description="" value="Data Source=mssql5.webio.pl,2401;Initial Catalog=robson081192_SN_DataBase;User ID=robson081192_SN_DBUser;Password=StudentNotesPass1,;MultipleActiveResultSets=True;Application Name=EntityFramework" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Robson\\Documents\\PROJECTS\\University\ projects\\StudentNotes\\StudentNotes\\StudentNotes\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='StudentNotesContext']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,16 +1,16 @@
-using System.Data.Entity.Infrastructure.Interception;
-using StudentNotes.Repositories.Base;
-
 namespace StudentNotes.Repositories.DbModels
 {
+    using System;
     using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public partial class StudentNotesContext : DbContext
     {
-
         public StudentNotesContext()
             : base("name=StudentNotesContext")
         {
+            var ensureCopy = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
 
         public virtual DbSet<File> File { get; set; }
@@ -27,7 +27,6 @@ namespace StudentNotes.Repositories.DbModels
         public virtual DbSet<SemesterUser> SemesterUser { get; set; }
         public virtual DbSet<StudySubject> StudySubject { get; set; }
         public virtual DbSet<Subject> Subject { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<UserPreferences> UserPreferences { get; set; }

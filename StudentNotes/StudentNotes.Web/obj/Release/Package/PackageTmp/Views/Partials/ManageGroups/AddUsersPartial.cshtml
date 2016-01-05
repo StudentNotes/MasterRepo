@@ -1,0 +1,148 @@
+﻿@model StudentNotes.Logic.ViewModels.ManageGroups.AddUserViewModel
+
+<div class="col-xs-12 folder-view">
+    <ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink("Zarządzanie grupami", "ManageGroups", "Management",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(Model.GroupName, "AddUsers", "Management",
+                new { groupId = Model.GroupId },
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+    </ol>
+
+    <h3>Członkowie grupy</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Członek serwisu od:</th>
+                <th>Rola</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.GroupUsers.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    @Model.GroupUsers[i].Name
+                </td>
+                <td>@Model.GroupUsers[i].LastName</td>
+                <td>@Model.GroupUsers[i].CreatedOn.ToString()</td>
+                <td>
+                    @Ajax.ActionLink("Zmień uprawnienia", "ChangeGroupPermissions", "Management",
+                     new { userId = Model.GroupUsers[i].UserId, groupId = Model.GroupId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-info" })
+
+                    @Ajax.ActionLink("Szczegóły", "UserDetails", "Management",
+                     new { userId = Model.GroupUsers[i].UserId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-warning" })
+
+                    @Ajax.ActionLink("Usuń członka", "RemoveUserFromGroup", "Management",
+                        new { userId = Model.GroupUsers[i].UserId, groupId = Model.GroupId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+
+    <h3>Osoby, które mozesz jeszcze dodać</h3>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Lp.</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Członek serwisu od:</th>
+        <th>Rola</th>
+        <th></th>
+    </tr>
+    </thead>
+    @for (int i = 0; i < Model.SemesterUsers.Count; i++)
+    {
+        <tr>
+            <td>@(i + 1)</td>
+            <td>
+                @Model.SemesterUsers[i].Name
+            </td>
+            <td>@Model.SemesterUsers[i].LastName</td>
+            <td>@Model.SemesterUsers[i].CreatedOn.ToString()</td>
+            <td>
+                @Ajax.ActionLink("Zmień uprawnienia", "ChangeGroupPermissions", "Management",
+                 new { userId = Model.SemesterUsers[i].UserId, groupId = Model.GroupId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new {@class = "btn btn-info"})
+
+                @Ajax.ActionLink("Szczegóły", "UserDetails", "Management",
+                 new { userId = Model.SemesterUsers[i].UserId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new {@class = "btn btn-warning"})
+
+                @Ajax.ActionLink("Dodaj członka", "AddUserToGroup", "Management",
+                 new { userId = Model.SemesterUsers[i].UserId, groupId = Model.GroupId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new {@class = "btn btn-success"})
+            </td>
+        </tr>
+    }
+    </table>
+</div>

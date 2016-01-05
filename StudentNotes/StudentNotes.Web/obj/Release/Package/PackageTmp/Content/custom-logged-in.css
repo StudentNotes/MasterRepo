@@ -1,0 +1,557 @@
+﻿html, body {
+    height: 100%;
+}
+
+/****************************************   NAVBAR_TOP_PARTIAL  *****************************************/
+/*pasek menu górnego*/
+.navbar-fixed-top {
+    border-style: none;
+    padding: 10px 0;
+    background-color: #000000;
+    border-bottom: solid 2px #262626;
+    }
+/*logo w pasku górnym*/
+.navbar-fixed-top .navbar-header .navbar-brand{
+    margin-left: 20px; 
+    border: solid 2px #262626;
+    border-radius: 20px;
+    color: #fdd017;
+    height: 54px;
+    font-size: 3rem;
+}
+.navbar-fixed-top .navbar-header .navbar-brand:hover{
+    border: solid 2px #fdd017;
+    color: #fdd017;
+}
+/*Kontener na przyciski menu górne*/
+.navbar-collapse .navbar-nav-buttons {
+    margin-left: 2rem;
+}
+/*Przyciski menu górne*/
+.navbar-collapse .navbar-nav-buttons .navbar-nav-button {
+    text-transform: uppercase;
+    margin: 0 1rem;
+    border: solid 2px #262626;
+    border-radius: 20px;
+    color: #fdd017;
+}
+.navbar-collapse .navbar-nav-buttons .navbar-nav-button:hover {
+    border: solid 2px #fdd017;
+    color: #fdd017;
+}
+/*Przycisk użytkownika menu górne*/
+.navbar-right.navbar-nav-user{
+    border: solid 2px #c6c6c6;
+    background-color: #262626;
+    border-radius: 20px;
+    max-height: 54px;
+    margin-right: 2rem;
+    padding: 1px 0;
+}
+.navbar-right.navbar-nav-user:hover,
+.navbar-right.navbar-nav-user:focus{
+    border-color: #fdd017;
+}
+.navbar-right.navbar-nav-user .thumbnail {
+    margin: 0 20px;
+    background-color: #262626;
+    border: none;
+    padding: 4px;
+}
+
+.navbar-right.navbar-nav-user .thumbnail img {
+    max-height: 40px;
+    display: inline;
+}
+.navbar-right.navbar-nav-user .thumbnail span {
+    color: #fdd017;
+}
+#dropdown1:hover,
+#dropdown1:focus {
+    text-decoration: none;
+}
+
+
+@media (min-width: 768px) and (max-width: 1336px) {
+    .navbar-collapse.collapse {
+        display: none !important;
+        margin-top: 15px;
+    }
+    .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+    .navbar-header .collapse, .navbar-toggle {
+        display:block !important;
+    }
+    .navbar-header {
+        float:none;
+    }
+}
+
+/****************************************   NAVBAR_SIDE_PARTIAL  *****************************************/
+#navbar-side {
+    margin-top: 1.2rem;
+    z-index: 1000;
+    position: absolute;
+    /*left: 250px;*/
+    width: 25rem;
+    height: 90%;
+    /*margin-left: -250px;*/
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.sidebar-nav {
+    position: relative;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    border: solid 2px #000000;
+    display: block;
+    text-decoration: none;
+    color: #c6c6c6;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    border-color: #c6c6c6;
+    border-radius: 20px;
+    color: #ffffff;
+    background: #262626;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+.sidebar-nav li .sidebar-cattegory.first,
+.sidebar-nav li .sidebar-cattegory.collapsed.first {
+    margin-top: 10px;
+}
+.sidebar-nav li .sidebar-cattegory.collapsed{
+    text-transform: uppercase;
+    margin: 2rem 0.5rem 0 0.5rem;
+    border: solid 2px #262626;
+    background-color: #000000;
+    border-radius: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: #fdd017;
+}
+.sidebar-nav li .sidebar-cattegory{
+    text-transform: uppercase;
+    margin: 2rem 0.5rem 0.5rem 0.5rem;
+    border: solid 2px #c6c6c6;
+    background-color: #262626;
+    border-radius: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: #c6c6c6;
+}
+.sidebar-nav li .sidebar-cattegory.collapsed:hover,
+.sidebar-nav li .sidebar-cattegory.collapsed:focus {
+    background-color: #000000;
+    border-color: #fdd017;
+    color: #fdd017;
+}
+.sidebar-nav li .sidebar-cattegory:hover,
+.sidebar-nav li .sidebar-cattegory:focus {
+    background-color: #fdd017;
+    border-color: #c6c6c6;
+    color: #000000;
+}
+
+/****************************************   PAGE_CONTENT - WRAPPER  *****************************************/
+
+#wrapper {
+    height: 100%;
+    margin-top: 76px;
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-wrapper {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #e6e6e6;
+    /*min-height: 900px;*/
+    min-height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+/****************************************   TOGGLE SIDEBAR BUTTON  *****************************************/
+#side-menu-toggle {
+    z-index: 1000;
+    color: #c6c6c6;
+    border-radius: 0;
+    border-width: 1px;
+    background-color: #000000;
+    position: fixed;
+    margin-left: -20px;
+    margin-top: -20px;
+    padding: 0;
+    height: 100%;
+}
+#side-menu-toggle:hover {
+    color: #fdd017;
+}
+
+/****************************************   UPLOAD FILE MODAL  *****************************************/
+#uploadFileModal .modal-content{
+    background-color: #262626;
+    border-color: #fdd017;
+    color: #fdd017;
+}
+#uploadFileModal .modal-header {
+    text-align: center;
+    border-color: #fdd017;
+}
+#uploadFileModal button span{
+    color: #fdd017;
+}
+#uploadFileModal .modal-body .label{
+
+    font-size: 16px;
+    text-align: left;
+    color: #fdd017;
+    font-weight: bold;
+}
+#uploadFileModal .modal-body .label.file-path{
+    background-color: #ffe68b;
+    padding: 6px;
+    color: #000000;
+    border: 2px solid #fdd017;
+    font-weight: 200;
+}
+#uploadFileModal .modal-body .btn.btn-default{
+    background-color: #262626;
+    padding: 4px;
+    color: #fdd017;
+    border: 2px solid;
+    border-color: #c6c6c6;
+}
+#uploadFileModal .modal-body .btn.btn-default:hover{
+    padding: 4px;
+    color: #fdd017;
+    border-color: #fdd017;
+}
+#uploadFileModal .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+#uploadFileModal .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: inherit;
+    display: block;
+}
+
+/****************************************   JOIN TO UNIVERSITY MODAL  *****************************************/
+#addUniversityModal .modal-content{
+    background-color: #262626;
+    border-color: #fdd017;
+    color: #fdd017;
+}
+#addUniversityModal .modal-header {
+    text-align: center;
+    border-color: #fdd017;
+}
+#addUniversityModal button span{
+    color: #fdd017;
+}
+#addUniversityModal .modal-body {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+/****************************************    ADD NEW GROUP MODAL    *********************************************/
+#addGroupModal .modal-content{
+    background-color: #262626;
+    border-color: #fdd017;
+    color: #fdd017;
+}
+#addGroupModal .modal-header {
+    text-align: center;
+    border-color: #fdd017;
+}
+#addGroupModal button span{
+    color: #fdd017;
+}
+#addGroupModal .modal-body {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#addGroupModal .modal-body .label{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    text-align: left;
+    color: #fdd017;
+    font-weight: bold;
+}
+
+/****************************************   SUBJECT MANAGEMENT PARTIAL  *****************************************/
+#subjectManagement {
+    margin-top: 2rem;
+}
+#subjectManagement li {
+    height: 42px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+#subjectManagement li .lp,
+#subjectManagement li .checkboxArea,
+#subjectManagement li .subjectName{
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+#subjectManagement li .buttonArea .btn{
+    height: 32px;
+}
+#addSubjectForm #searchSubjectInput{
+    height: 34px;
+}
+#addSubjectForm {
+    margin: 2rem 0 2rem 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+#addSubjectForm label{
+    font-size: 16px;
+    text-align: left;
+    color: #262626;
+    height: 34px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    margin: 0;
+}
+#addSubjectForm .btn {
+    margin-left: 1rem;
+}
+#deleteSubjectsButton {
+    float: right;
+}
+
+/****************************************   ASSIGN SEMESTER SUBJECTS PARTIAL  *****************************************/
+
+#semesterSubjectList ul.list-group li.list-group-item {
+    height: 42px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content{
+    z-index: 1051;
+}
+
+/****************************************   ERROR CODE STYLING  *****************************************/
+/*#login-errors {
+    margin-top: 5px;
+}*/
+.success-code {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #dff0d8;
+    border: #4cae4c 1px solid;
+    border-radius: 20px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-left: 17px;
+    padding-right: 17px;
+    color: #4cae4c;
+    margin-top: 10px;
+}
+.error-code {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f2dede;
+    border: #d43f3a 1px solid;
+    border-radius: 20px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-left: 17px;
+    padding-right: 17px;
+    color: #d43f3a;
+}
+/****************************************   GRID TREE STRUCTURE VIEW    *****************************************************************/
+.folder-view .folder {
+    background-color: #000000;
+    border: 1px solid #fdd017;
+    border-radius: 20px;
+    margin-right: 30px;
+    max-width: 175px;
+    min-width: 75px;
+    margin-bottom: 30px;
+}
+.folder-view .folder img {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.folder-view .folder .folder-name {
+    text-align: center;
+    color: #fdd017;
+    font-size: 1vw;
+}
+
+/***************************************    SHARE NOTE MODAL    **********************************************************************/
+.share-note-modal .modal-content {
+    background-color: #262626;
+    color: #fdd017;
+    border-color: #fdd017;
+}
+.share-note-modal .modal-header {
+    text-align: center;
+    border-color: #fdd017;
+}
+.share-note-modal .modal-body .label {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    text-align: left;
+    color: #fdd017;
+    font-weight: bold;
+}
+
+/*#addGroupModal  {
+    
+}
+#addGroupModal button span{
+    color: #fdd017;
+}
+#addGroupModal .modal-body {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#addGroupModal {
+    
+}*/
+
+/***************************************    LOADING CONTENT ANIMATION    **********************************************************************/
+#loading-content {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 20px;
+    display: none;
+    transition: all .7s ease;
+}
+#loading-content.shown {
+    display: block;
+    transition: all .7s ease;
+}
+
+#loading-content .loading-content-gif {
+    margin: 0;
+    display: inline;
+}
+#loading-content .loading-content-desc {
+    position: absolute;
+    display: inline;
+    font-size: 20px;
+    color: #fdd017;
+    padding-top: 2px;
+    padding-left: 15px;
+}
+
+/***************************************    CHANGE AVATAR BUTTON    **********************************************************************/
+
+#changeAvatarForm .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+#changeAvatarForm .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: inherit;
+    display: block;
+}

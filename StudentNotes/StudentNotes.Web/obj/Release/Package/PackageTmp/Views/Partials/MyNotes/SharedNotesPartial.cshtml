@@ -1,0 +1,75 @@
+﻿@*Moje Notatki -> Udostępnione*@
+@using StudentNotes.Logic.Consts
+@using StudentNotes.Logic.LogicModels
+@using StudentNotes.Web.Models.ResourcesFinderLogic
+@model StudentNotes.Logic.ViewModels.File.SharedNotesViewModel
+@{
+    Layout = null;
+}
+<div class="col-xs-12 folder-view">
+
+    <ol class="breadcrumb">
+        <li class="active">
+            @Ajax.ActionLink(ResourceKeyResolver.ConstSharedNotes, "SharedNotes", "Note",
+            null,
+            new AjaxOptions()
+            {
+                UpdateTargetId = "page-content",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loading-content",
+                OnComplete = "checkErrorDiv"
+            },
+            new { })
+        </li>
+    </ol>
+
+    <div class="col-xs-12">
+        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Typ notatki</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.Notes.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.Notes[i].Category)" style="max-height: 34px;" />
+                    @Model.Notes[i].Name
+                </td>
+                <td>@Model.Notes[i].Category</td>
+                @if (Model.Notes[i].Type == NoteType.Private)
+                {
+                    <td>Prywatna</td>
+                }
+                else
+                {
+                    <td>Uczelniana</td>
+                }
+                <td>
+                    @Ajax.ActionLink("Szczegóły udostępnienia", "SharedNoteDetails", "Note",
+                    new { fileId = Model.Notes[i].NoteId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading-content",
+                        OnComplete = "checkErrorDiv"
+                    },
+                    new { @class = "btn btn-info" })
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>

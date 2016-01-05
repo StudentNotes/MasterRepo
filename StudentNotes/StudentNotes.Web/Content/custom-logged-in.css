@@ -1,4 +1,8 @@
-﻿/****************************************   NAVBAR_TOP_PARTIAL  *****************************************/
+﻿html, body {
+    height: 100%;
+}
+
+/****************************************   NAVBAR_TOP_PARTIAL  *****************************************/
 /*pasek menu górnego*/
 .navbar-fixed-top {
     border-style: none;
@@ -173,6 +177,7 @@
 /****************************************   PAGE_CONTENT - WRAPPER  *****************************************/
 
 #wrapper {
+    height: 100%;
     margin-top: 76px;
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -208,7 +213,8 @@
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: #e6e6e6;
-    min-height: 900px;
+    /*min-height: 900px;*/
+    min-height: 100%;
     width: 100%;
     position: absolute;
     padding: 15px;
@@ -246,6 +252,22 @@
         position: relative;
         margin-right: 0;
     }
+}
+/****************************************   TOGGLE SIDEBAR BUTTON  *****************************************/
+#side-menu-toggle {
+    z-index: 1000;
+    color: #c6c6c6;
+    border-radius: 0;
+    border-width: 1px;
+    background-color: #000000;
+    position: fixed;
+    margin-left: -20px;
+    margin-top: -20px;
+    padding: 0;
+    height: 100%;
+}
+#side-menu-toggle:hover {
+    color: #fdd017;
 }
 
 /****************************************   UPLOAD FILE MODAL  *****************************************/

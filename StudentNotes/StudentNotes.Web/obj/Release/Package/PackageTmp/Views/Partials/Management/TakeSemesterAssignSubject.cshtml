@@ -1,0 +1,22 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.SemesterAssignSubjectViewModel
+
+<div class="list-group col-sm-6">
+    <h3>Wybierz semestr dla kierunku: kierunek</h3>
+    @for (int i = 0; i < Model.SemesterList.Count; i++)
+    {
+        @Ajax.ActionLink(string.Format("Semestr {0}", Model.SemesterList.ElementAt(i).SemesterNumber), "TakeSemester", "Management",
+            new {semesterId = Model.SemesterList.ElementAt(i).SemesterId},
+            new AjaxOptions()
+            {
+                UpdateTargetId = "takeSemesterSubjectArea",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace
+            },
+            new {@class = "list-group-item"})
+    }
+</div>
+
+<div id="takeSemesterSubjectArea" class="col-sm-6">
+    
+</div>
+

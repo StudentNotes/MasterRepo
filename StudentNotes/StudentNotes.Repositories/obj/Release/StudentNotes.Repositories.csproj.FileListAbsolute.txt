@@ -1,0 +1,10 @@
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\bin\Release\StudentNotes.Repositories.dll.config
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\bin\Release\StudentNotes.Repositories.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\bin\Release\StudentNotes.Repositories.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\bin\Release\EntityFramework.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\bin\Release\EntityFramework.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\obj\Release\StudentNotes.Repositories.csprojResolveAssemblyReference.cache
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\obj\Release\StudentNotes.Repositories.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.Repositories\obj\Release\StudentNotes.Repositories.pdb

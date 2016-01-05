@@ -1,0 +1,120 @@
+﻿@*Moje Uczelnie -> Konkretna Uczelnia -> Konkretny semestr -> Konkretny przedmiot -> Widok na poszczególne notatki*@
+@using StudentNotes.Logic.LogicModels
+@model StudentNotes.Logic.ViewModels.University.UniversitySemesterSubjectNotesViewModel
+
+<div class="col-xs-12 folder-view">
+
+    <ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink(Model.UniversityName, "ShowStudySubjects", "University",
+                    new { Model.UniversityId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { })
+        </li>
+        <li>
+            @Ajax.ActionLink(Model.StudySubjectName, "ShowSemesters", "University",
+                    new { Model.StudySubjectId, Model.StudySubjectName, Model.UniversityId, Model.UniversityName },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { })
+        </li>
+        <li>
+            @Ajax.ActionLink(Model.SemesterName, "ShowSubjects", "University",
+                    new { Model.SemesterId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { })
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(Model.SemesterSubjectName, "ShowNotes", "University",
+                    new { Model.SemesterSubjectId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new { })
+        </li>
+    </ol>
+
+    <div class="col-xs-12">
+        @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+    </div>
+
+    <table class="table table-striped">
+
+
+        <thead>
+        <tr>
+            <th>Lp.</th>
+            <th>Nazwa</th>
+            <th>Kategoria</th>
+            <th>Rozmiar</th>
+            <th>Data wstawienia</th>
+            <th>Tagi</th>
+            <th></th>
+        </tr>
+        </thead>
+        @for (int i = 0; i < Model.Notes.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.Notes[i].Category)" style="max-height: 34px;"/>
+                    @Model.Notes[i].Name
+                </td>
+                <td>@Model.Notes[i].Category</td>
+                <td>@Model.Notes[i].Size</td>
+                <td>@Model.Notes[i].UploadDate.ToString()</td>
+                <td>
+                    @foreach (var tag in @Model.Notes[i].Tags)
+                    {
+                        <text>@tag,</text>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.Notes[i].NoteId }, new { @class = "btn btn-success" })
+
+                    @Ajax.ActionLink("Usuń notatkę", "DeleteSemesterSubjectNote", "Note",
+                        new {noteId = Model.Notes[i].NoteId, semesterSubjectId = Model.SemesterSubjectId},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content",
+                            OnComplete = "checkErrorDiv"
+                        },
+                        new {@class = "btn btn-danger"})
+
+                    <button id="shareFileButton" type="button" class="btn btn-primary btn-share-modal" data-toggle="modal" data-target="#shareUniversityNoteModal" name="@Model.Notes[i].Name" value="@Model.Notes[i].NoteId">
+                        Udostępniaj
+                    </button>
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Partial("~/Views/Partials/Note/ShareUniversityNoteModal.cshtml")
+
+

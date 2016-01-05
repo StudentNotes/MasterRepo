@@ -53,7 +53,6 @@
     <Compile Include="Base\DbFactory.cs" />
     <Compile Include="Base\UnitOfWork.cs" />
     <Compile Include="DbModels\File.cs" />
-    <Compile Include="DbModels\FileMap.cs" />
     <Compile Include="DbModels\FileSharedGroup.cs" />
     <Compile Include="DbModels\FileTagPattern.cs" />
     <Compile Include="DbModels\Grade.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="DbModels\StudentNotesContext.cs" />
     <Compile Include="DbModels\StudySubject.cs" />
     <Compile Include="DbModels\Subject.cs" />
-    <Compile Include="DbModels\sysdiagrams.cs" />
     <Compile Include="DbModels\User.cs" />
     <Compile Include="DbModels\UserInfo.cs" />
     <Compile Include="DbModels\UserPreferences.cs" />

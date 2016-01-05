@@ -12,6 +12,7 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\StudentNotes.Repositories.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.WebPages.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\EntityFramework.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.Razor.dll
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.WebPages.Deployment.dll
@@ -21,6 +22,7 @@ C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\Ninject.xml
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.WebPages.xml
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\EntityFramework.xml
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.Razor.xml
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.DependencyResolver\bin\Debug\pl\StudentNotes.Logic.resources.dll

@@ -1,0 +1,82 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.SemesterSubjects
+
+<h3>Dobierz przedmioty</h3>
+<div id="semesterSubjectList" class="col-sm-12">
+    <div class="col-sm-12">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="col-xs-2 lp">
+                    Lp.
+                </div>
+                <div class="col-xs-7 subjectName">
+                    Przedmiot
+                </div>
+                <div class="col-xs-2 buttonArea">
+                </div>
+            </li>
+            @for (int i = 0; i < Model.SemesterSubjectList.Count; i++)
+            {
+                <li class="list-group-item">
+                    <div class="col-xs-2 lp">
+                        @(i + 1)
+                    </div>
+                    <div class="col-xs-7 subjectName">
+                        @Model.SemesterSubjectList.ElementAt(i).Name
+                    </div>
+                    <div class="col-xs-2 buttonArea">
+                        @Ajax.ActionLink("Usuń", "RemoveSemesterSubject", "Management",
+                            new { semesterSubjectId = Model.SemesterSubjectList.ElementAt(i).SemesterSubjectId, semesterId = Model.SemesterId},
+                            new AjaxOptions()
+                            {
+                                UpdateTargetId = "takeSemesterSubjectArea",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                            new { @class = "btn btn-info" })
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+
+    @using (Ajax.BeginForm("AddSemesterSubjectToSemester", "Management", null,
+        new AjaxOptions()
+        {
+            //UpdateTargetId = "semesterSubjectList",
+            UpdateTargetId = "takeSemesterSubjectArea",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
+        },
+        new { @class = "col-sm-12" }
+        ))
+    {
+        @Html.Label("Nazwa:")
+        @*@Html.TextBox("semesterSubjectName")*@
+        <input type="text" name="semesterSubjectName" id="semesterSubjectSearch"/>
+
+        @Html.Hidden("semesterId", Model.SemesterId)
+        
+        <input type="submit" class="btn btn-info" value="Dodaj przedmiot"/>
+    }
+
+
+    <div class="col-xs-12">
+        @Ajax.ActionLink("Zakończ konfigurację (3/5", "ManageUniversities", "Management",
+                null,
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace
+                },
+                new { @class = "btn btn-success" })
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $("#semesterSubjectSearch").autocomplete({
+            source: '@Url.Action("SemesterSubjectsSuggestions", "Search")'
+        });
+    });
+</script>

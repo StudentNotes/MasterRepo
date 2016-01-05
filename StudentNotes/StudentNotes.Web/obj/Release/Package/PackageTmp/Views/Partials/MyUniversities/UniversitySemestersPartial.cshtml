@@ -1,0 +1,51 @@
+﻿@*Moje Uczelnie -> Konkretna Uczelnia -> Widok na poszczególne semestry*@
+@model StudentNotes.Logic.ViewModels.University.UniversityGradeSemestersViewModel
+
+<div class="col-xs-12 folder-view">
+    <ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink(Model.UniversityName, "ShowStudySubjects", "University",
+                new { Model.UniversityId },
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(Model.StudySubjectName, "ShowSemesters", "University",
+                new {Model.StudySubjectId, Model.StudySubjectName, Model.UniversityId, Model.UniversityName},
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
+        </li>
+    </ol>
+
+    @foreach (var item in Model.Semesters)
+    {
+        <div class="col-sm-2 col-xs-1 folder">
+            <img src="~/Resources/folder-symbol.jpg" class="img-responsive img-rounded"/>
+            <div class="folder-name">
+
+                @Ajax.ActionLink(string.Format("Semestr {0}", item.SemesterNumber), "ShowSubjects", "University",
+                    new { item.SemesterId },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "page-content",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loading"
+                    },
+                    new {@class = "folder-name"})
+            </div>
+        </div>
+    }
+</div>

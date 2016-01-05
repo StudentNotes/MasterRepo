@@ -363,3 +363,13 @@ section {
     color: #fdd017;
 }
 /************************************** FOOTER *********************************************/
+footer .footer-above {
+    background-color: #eeeeee;
+}
+footer .footer-below {
+    background-color: #000000;
+    color: #ffffff;
+}
+footer i.fa{
+    font-size: 24px;
+}

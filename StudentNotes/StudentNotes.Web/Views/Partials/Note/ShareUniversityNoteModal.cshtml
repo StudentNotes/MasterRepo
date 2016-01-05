@@ -30,7 +30,7 @@
                     LoadingElementId = "loading",
                     OnBegin = "HideModal"
                 },
-                    new { enctype = "multipart/form-data", id = "shareUserForm" }))
+                    new { enctype = "multipart/form-data", id = "shareUserForm", @class="form-horizontal" }))
                 {
                     <label class="label col-xs-12">Udostępnij notatkę wybranemu użytkownikowi:</label><br />
                         <input type="text" name="fileId" hidden id="fileIdTb1" />
@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-6 col-xs-12">Adres E-mail użytkownika:</label>
                             <div class="col-sm-6 col-xs-12">
-                                <input id="privateUserEmailTb" type="text" name="userEmail" />
+                                <input id="privateUserEmailTb" type="text" name="userEmail" class="form-control"/>
                             </div>
                         </div>
 
@@ -86,7 +86,7 @@
                     LoadingElementId = "loading",
                     OnBegin = "HideModal"
                 },
-                    new { enctype = "multipart/form-data", id = "shareGroupForm", hidden = true }))
+                    new { enctype = "multipart/form-data", id = "shareGroupForm", hidden = true, @class = "form-horizontal" }))
                 {
                     <label class="label col-xs-12">Udostępnij notatkę grupie:</label><br />
                         <input type="text" name="fileId" hidden id="fileIdTb2" />

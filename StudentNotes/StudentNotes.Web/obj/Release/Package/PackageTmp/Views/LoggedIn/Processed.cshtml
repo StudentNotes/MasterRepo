@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "Przeprocesowano";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+}
+
+@model StudentNotes.Logic.ViewModels.Home.HomeViewModel
+
+@Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.LoginViewModel)

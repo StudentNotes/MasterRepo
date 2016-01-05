@@ -1,0 +1,49 @@
+﻿@using StudentNotes.Web.Models.ResourcesFinderLogic
+
+<div class="modal fade" id="addUniversityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="myModalLabel">@ResourceKeyResolver.ConstJoinUniversity</h2>
+            </div>
+            @using (Html.BeginForm("JoinToUniversity", "University", FormMethod.Post))
+            {
+                <div class="modal-body">
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Nazwa uczelni:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <input class="form-control" type="text" name="UniversityName" id="universityNameGuess"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Rocznik:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <input class="form-control" type="text" name="Year" id="gradeYearGuess"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Kierunek:</label>
+                            <div class="col-sm-8 col-xs-112">
+                                <input class="form-control" type="text" name="UniversitySubject" id="universtitySubjectGuess"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/><br/>
+                    <br/><br/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                    <input type="submit" name="Dołącz!" class="btn btn-primary"/>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

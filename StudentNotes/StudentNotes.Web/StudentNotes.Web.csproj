@@ -181,8 +181,11 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\studentnotes.hostingasp.pl - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Resources\audioFile.jpg" />
+    <Content Include="Resources\author.jpg" />
+    <Content Include="Resources\author_visit.jpg" />
     <Content Include="Resources\Avatars\man.jpg" />
     <Content Include="Resources\Avatars\woman.jpg" />
     <Content Include="Resources\data steal.png" />

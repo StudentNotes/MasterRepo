@@ -1,0 +1,45 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.NewUniversityViewModel
+
+@Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
+
+<div id="subjectManagement" class="col-xs-12">
+    @using (Ajax.BeginForm(
+        "AddNewUniversity", "Management",
+        null,
+        new AjaxOptions()
+        {
+            UpdateTargetId = "page-content",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
+        },
+        new {}
+
+        ))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="col-xs-12">
+            @Html.Label("Nazwa nowej uczelni:")
+            @Html.TextBoxFor(un => un.UniversityName, new {id = "universityNameInput"})
+
+            @Html.Label("Opis uczelni:")
+            @Html.TextAreaFor(un => un.UniversityDescription)
+
+
+        </div>
+
+        <button type="submit" value="saveUniversityAndExit" class="btn btn-warning col-sm-3" target="blank" name="ButtonType">Zapisz i pomiń dalszą konfigurację</button>
+        <button type="submit" value="saveUniversityAndContinue" class="btn btn-info col-sm-3" target="blank" name="ButtonType">Zapisz uczelnię i zdefiniuj roczniki (1/5)</button>
+    }
+
+</div>
+
+
+
+<script type="text/javascript">
+    $(function() {
+        $("#universityNameInput").autocomplete({
+            source: '@Url.Action("UniversitySuggestions", "Search")'
+        });
+    });
+</Script>

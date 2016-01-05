@@ -1,0 +1,138 @@
+﻿<div class="modal fade share-note-modal" id="shareUniversityNoteModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="shareModalLabel">Udostępnij uczelnianą notatkę</h2>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    <label class="label col-xs-12">Notatka:</label><br />
+                    <div class="col-xs-12">
+                        <span id="fileNameSpan"></span>
+                        <input id="tmpNoteIdTb" type="text" value="" hidden />
+                    </div>
+                </p>
+                <br /><br />
+
+                <p>
+                    <label class="label col-xs-12">Wybierz rodzaj udostępniania:</label><br />
+                    @Html.RadioButton("fileType", "Private", true, new { @id = "shareUserCheckBox", @class = "file-radio-button" }) udostępniaj użytkownikowi<br />
+                    @Html.RadioButton("fileType", "University", new { @id = "shareGroupCheckBox", @class = "file-radio-button" }) udostępnij grupie
+                </p>
+
+                @using (Ajax.BeginForm("ShareUniversityNoteToUser", "Note", null, new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading",
+                    OnBegin = "HideModal"
+                },
+                    new { enctype = "multipart/form-data", id = "shareUserForm", @class="form-horizontal" }))
+                {
+                    <label class="label col-xs-12">Udostępnij notatkę wybranemu użytkownikowi:</label><br />
+                        <input type="text" name="fileId" hidden id="fileIdTb1" />
+                        <input type="text" name="returnSemesterSubjectId" hidden value="@Model.SemesterSubjectId" />
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-6 col-xs-12">Adres E-mail użytkownika:</label>
+                            <div class="col-sm-6 col-xs-12">
+                                <input id="privateUserEmailTb" type="text" name="userEmail" class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Uczelnia:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select id="privateSchoolSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Kierunek:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select id="privateSubjectSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Semestr:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select id="privateSemesterSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Użytkownik:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select name="userId" id="privateUserSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input id="shareFileWithUserButton" type="submit" name="Wyślij!" class="btn btn-primary" />
+                        </div>
+                }
+
+                @using (Ajax.BeginForm("ShareUniversityNoteToGroup", "Note", null, new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading",
+                    OnBegin = "HideModal"
+                },
+                    new { enctype = "multipart/form-data", id = "shareGroupForm", hidden = true, @class = "form-horizontal" }))
+                {
+                    <label class="label col-xs-12">Udostępnij notatkę grupie:</label><br />
+                        <input type="text" name="fileId" hidden id="fileIdTb2" />
+                        <input type="text" name="returnSemesterSubjectId" hidden value="@Model.SemesterSubjectId" />
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-xs-12">Grupa:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select name="groupId" id="groupSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Semestr:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select id="groupSemesterSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 col-sm-12">Przedmiot:</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <select name="semesterSubjectId" id="groupSemesterSubjectSelect" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input id="shareFileWithGroupButton" type="submit" name="Wyślij!" class="btn btn-primary" />
+                        </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        $.holdReady(true);
+        function releaseHold() { $.holdReady(false); }
+        $.getScript('../../Scripts/shareNoteScript.js', releaseHold);
+        function HideModal() {
+            console.log("Hide modal");
+            $('#shareUniversityNoteModal').modal('hide');
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
+        }
+</script>

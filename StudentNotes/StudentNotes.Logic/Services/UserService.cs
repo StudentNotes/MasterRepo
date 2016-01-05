@@ -61,7 +61,8 @@ namespace StudentNotes.Logic.Services
                 IsServiceAdmin = false,
                 UserInfo = new UserInfo()
                 {
-                    CreatedOn = DateTime.Now
+                    CreatedOn = DateTime.Now,
+                    Gender = "undefined"
                 },
                 UserPreferences = new UserPreferences()
                 {
@@ -86,7 +87,8 @@ namespace StudentNotes.Logic.Services
                 IsServiceAdmin = true,
                 UserInfo = new UserInfo()
                 {
-                    CreatedOn = DateTime.Now
+                    CreatedOn = DateTime.Now,
+                    Gender = "undefined"
                 },
                 UserPreferences = new UserPreferences()
                 {

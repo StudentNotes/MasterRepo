@@ -1,0 +1,28 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.SemesterSubjectViewModel
+
+<div id="gradeListArea" class="col-sm-6">
+    <h3>Wybierz rocznik</h3>
+    <div class="list-group">
+        @for (int i = 0; i < Model.GradeList.Count; i++)
+        {
+            @Ajax.ActionLink(Model.GradeList.ElementAt(i).Year, "TakeStudyGrade", "Management",
+                             new { gradeId = Model.GradeList.ElementAt(i).GradeId, schoolId = Model.UniversityId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "studySubjectListArea",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                       
+                        },
+                        new { @class = "list-group-item" })
+        }
+    </div>
+</div>
+
+<div id="studySubjectListArea" class="col-sm-6">
+
+</div>
+
+<div id="semesterSubjectAssignArea" class="col-sm-12">
+    
+</div>

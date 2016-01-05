@@ -1,0 +1,5 @@
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileManager\bin\Release\StudentNotes.FileManager.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileManager\bin\Release\StudentNotes.FileManager.pdb
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileManager\obj\Release\StudentNotes.FileManager.csprojResolveAssemblyReference.cache
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileManager\obj\Release\StudentNotes.FileManager.dll
+C:\Users\Robson\Documents\PROJECTS\University projects\StudentNotes\StudentNotes\StudentNotes.FileManager\obj\Release\StudentNotes.FileManager.pdb

@@ -30,7 +30,6 @@ namespace StudentNotes.Web.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model)
         {
             HomeViewModel viewModelContainer = new HomeViewModel();
@@ -65,7 +64,6 @@ namespace StudentNotes.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model)
         {
             HomeViewModel viewModelContainer = new HomeViewModel();

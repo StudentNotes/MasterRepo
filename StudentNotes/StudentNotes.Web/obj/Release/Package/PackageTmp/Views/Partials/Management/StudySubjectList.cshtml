@@ -1,0 +1,63 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.StudySubjectViewModel
+
+
+<div class="col-xs-6">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="col-xs-2 lp">
+                Lp.
+            </div>
+            <div class="col-xs-7 subjectName">
+                Kierunek
+            </div>
+            <div class="col-xs-2 buttonArea">
+            </div>
+        </li>
+        @for (int i = 0; i < Model.StudySubjects.Count; i++)
+        {
+            <div class="col-xs-2 lp">
+                @(i + 1)
+            </div>
+            <div class="col-xs-7 subjectName">
+                @Model.StudySubjects.ElementAt(i).Name
+            </div>
+            <div class="col-xs-2 buttonArea">
+                @Ajax.ActionLink("Usuń", "RemoveGradeSubject", "Management",
+                    new {studySubjectId = Model.StudySubjects.ElementAt(i).StudySubjectId, gradeId = Model.StudySubjects.ElementAt(i).GradeId},
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "gradeStudySubjects",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace
+                    },
+                    new {@class = "btn btn-danger"})
+            </div>
+        }
+    </ul>
+
+    
+</div>
+    
+   @using (Ajax.BeginForm("AddGradeSubject", "Management", null,
+       new AjaxOptions()
+       {
+           UpdateTargetId = "gradeStudySubjects",
+           HttpMethod = "POST",
+           InsertionMode = InsertionMode.Replace
+       },
+       new {@class = "col-sm-6"}
+       ))
+   {
+       @Html.Label("Nazwa:")
+       @Html.TextBox("studySubjectName")
+
+       @Html.Label("Opis")
+       @Html.TextBox("studySubjectDescription")
+
+       @Html.Label("Liczba semestrów")
+       @Html.TextBox("semesterNumber")
+
+       @Html.Hidden("gradeId", Model.GradeId)
+
+       <input type="submit" class="btn btn-success"/>
+   }

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="StudentNotesContext-Web.config Connection String" description="StudentNotesContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=mssql5.webio.pl,2401;Database=robson081192_SN_DataBase;Uid=robson081192_SN_DBUser;Password=StudentNotesPass1," tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Robson\\Documents\\PROJECTS\\University\ projects\\StudentNotes\\StudentNotes\\StudentNotes\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='StudentNotesContext']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,98 @@
+﻿@*Moje Grupy -> Konkretna grupa -> Konkretny przedmiot -> Wszystkie pliki w przedmiocie*@
+@using StudentNotes.Logic.LogicModels
+@model StudentNotes.Logic.ViewModels.Group.GroupSubjectNotesViewModel
+
+<div class="col-xs-12 folder-view">
+    <ol class="breadcrumb">
+        <li>
+            @Ajax.ActionLink(Model.GroupName, "ShowGroupSemesters", "Group",
+                new { Model.GroupId, Model.GroupName },
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+        <li>
+            @Ajax.ActionLink(Model.SemesterName, "ShowSubjects", "Group",
+                new {Model.SemesterId, Model.GroupId, Model.SemesterName, Model.GroupName},
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new {})
+        </li>
+        <li class="active">
+            @Ajax.ActionLink(Model.SemesterSubjectName, "ShowGroupNotes", "Group",
+                new { Model.SemesterSubjectId, Model.SemesterId, Model.GroupId},
+                new AjaxOptions()
+                {
+                    UpdateTargetId = "page-content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading"
+                },
+                new { })
+        </li>
+    </ol>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Rozmiar</th>
+                <th>Data wstawienia</th>
+                <th>Tagi</th>
+                <th></th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.GroupNotes.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    <img class="img-rounded" src="@CategorySelector.GetCategoryPicturePath(Model.GroupNotes[i].Category)" style="max-height: 34px;" />
+                    @Model.GroupNotes[i].Name
+                </td>
+                <td>@Model.GroupNotes[i].Category</td>
+                <td>@Model.GroupNotes[i].Size</td>
+                <td>@Model.GroupNotes[i].UploadDate.ToString()</td>
+                <td>
+                    @foreach (var tag in @Model.GroupNotes[i].Tags)
+                    {
+                        <text>@tag,</text>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.GroupNotes[i].NoteId }, new { @class = "btn btn-success" })
+
+                    @if (Model.IsOwnerOrAdmin[i])
+                    {
+                        @Ajax.ActionLink("Usuń plik", "DeleteGroupSemesterSubjectNote", "Group",
+                        new { Model.GroupNotes[i].NoteId, Model.GroupId, Model.SemesterSubjectId, Model.SemesterId },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "page-content",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        },
+                        new { @class = "btn btn-danger" })
+                    }
+                   
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+

@@ -1,0 +1,51 @@
+﻿@model StudentNotes.Logic.ViewModels.Common.UserPreferencesViewModel
+<div class="col-sm-5 col-xs-12">
+    @using (Html.BeginForm("SaveUserPreferences", "Management", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            <label class="control-label col-sm-8">Czas ukazywania się notatek w "Najnowszych" [dni]:</label>
+            <div class="col-sm-4">
+                <input type="text" name="newestTime" class="form-control" value=@Model.NewestTime />
+            </div>
+        </div>
+            <div class="form-group">
+                <label class="control-label col-sm-8">Maksymalny rozmiar przechowywanych plików [MB]:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="fileSize" class="form-control" disabled value=@Model.FileSize />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-7">Metoda przeszukiwania zasobów:</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="searchMethod">
+                        @switch (Model.SearchMethod)
+                        {
+                            case "mixed":
+                                {
+                                    <option value="mixed">Mieszana</option>
+                                    <option value="tags">Tagi</option>
+                                    <option value="names">Nazwy notatek</option>
+                                    break;
+                                }
+                            case "names":
+                                {
+                                    <option value="names">Nazwy notatek</option>
+                                    <option value="tags">Tagi</option>
+                                    <option value="mixed">Mieszana</option>
+                                    break;
+                                }
+                            case "tags":
+                                {
+                                    <option value="tags">Tagi</option>
+                                    <option value="names">Nazwy notatek</option>
+                                    <option value="mixed">Mieszana</option>
+                                    break;
+                                }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info">Zapisz preferencje</button>
+    }
+</div>
