@@ -22,12 +22,17 @@
                 LoadingElementId = "loading-content",
                 OnComplete = "checkErrorDiv"
             },
-            new {id = "searchNotesForm"}))
+                new {id = "searchNotesForm", @class = "navbar-form navbar-left", role = "search"}))
             {
-                <input type="text" name="term"/>
-                <input type="submit" value="Szukaj!"/>
+                <div class="form-group">
+                    <input type="text" name="term" class="form-control" placeholder="Wyszukaj">
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
             }
         </li>
+
     </ul>
 
     <div class="navbar-right navbar-nav-user">

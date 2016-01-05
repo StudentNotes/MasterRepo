@@ -1,15 +1,13 @@
-﻿body {
-}
-/****************************************   NAVBAR_TOP_PARTIAL  *****************************************/
+﻿/****************************************   NAVBAR_TOP_PARTIAL  *****************************************/
 /*pasek menu górnego*/
-#wrapper .navbar-fixed-top {
+.navbar-fixed-top {
     border-style: none;
     padding: 10px 0;
     background-color: #000000;
     border-bottom: solid 2px #262626;
     }
 /*logo w pasku górnym*/
-#wrapper .navbar-fixed-top .navbar-header .navbar-brand{
+.navbar-fixed-top .navbar-header .navbar-brand{
     margin-left: 20px; 
     border: solid 2px #262626;
     border-radius: 20px;
@@ -17,7 +15,7 @@
     height: 54px;
     font-size: 3rem;
 }
-#wrapper .navbar-fixed-top .navbar-header .navbar-brand:hover{
+.navbar-fixed-top .navbar-header .navbar-brand:hover{
     border: solid 2px #fdd017;
     color: #fdd017;
 }
@@ -69,11 +67,28 @@
     text-decoration: none;
 }
 
+
+@media (min-width: 768px) and (max-width: 1336px) {
+    .navbar-collapse.collapse {
+        display: none !important;
+        margin-top: 15px;
+    }
+    .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+    .navbar-header .collapse, .navbar-toggle {
+        display:block !important;
+    }
+    .navbar-header {
+        float:none;
+    }
+}
+
 /****************************************   NAVBAR_SIDE_PARTIAL  *****************************************/
 #navbar-side {
     margin-top: 1.2rem;
     z-index: 1000;
-    position: fixed;
+    position: absolute;
     /*left: 250px;*/
     width: 25rem;
     height: 90%;
@@ -156,17 +171,83 @@
 }
 
 /****************************************   PAGE_CONTENT - WRAPPER  *****************************************/
-#page-wrapper {
-    min-height: 900px;
-    background-color: #e6e6e6;
-    margin-left: 250px;
+
+#wrapper {
     margin-top: 76px;
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
 }
 
 #page-wrapper {
     padding-top: 15px;
     padding-bottom: 15px;
+    background-color: #e6e6e6;
+    min-height: 900px;
+    width: 100%;
+    position: absolute;
+    padding: 15px;
 }
+
+#wrapper.toggled #page-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
 /****************************************   UPLOAD FILE MODAL  *****************************************/
 #uploadFileModal .modal-content{
     background-color: #262626;
@@ -242,24 +323,6 @@
     padding-left: 10%;
     padding-right: 10%;
 }
-/*#addUniversityModal .modal-body .label{
-    font-size: 16px;
-    text-align: left;
-    color: #fdd017;
-    font-weight: bold;
-}
-#addUniversityModal .modal-body input{
-    font-size: 16px;
-    text-align: left;
-    color: #fdd017;
-    font-weight: bold;
-}*/
-
-/*@media(max-width: 991px) {
-    #addUniversityModal .modal-body .label {
-        text-align: left;
-    }
-}*/
 
 /****************************************    ADD NEW GROUP MODAL    *********************************************/
 #addGroupModal .modal-content{
