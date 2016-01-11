@@ -198,9 +198,9 @@
     <Content Include="Resources\mobile_devices.png" />
     <Content Include="Resources\mobile_devices_2.png" />
     <Content Include="Resources\otherFile.jpg" />
-    <Content Include="Resources\pending_black.GIF" />
     <Content Include="Resources\pending_black_2.GIF" />
-    <Content Include="Resources\pending_yellow.GIF" />
+    <Content Include="Resources\pending_downloading.GIF" />
+    <Content Include="Resources\pending_uploading.GIF" />
     <Content Include="Resources\pending_yellowBlack.GIF" />
     <Content Include="Resources\presentationFile.jpg" />
     <Content Include="Resources\spreadSheet.jpg" />
@@ -315,6 +315,7 @@
     <Content Include="Views\Partials\Management\UserPreferencesPartial.cshtml" />
     <Content Include="Views\Partials\ManageNotes\SearchedNotesPartial.cshtml" />
     <Content Include="Views\Partials\Management\ManageTags.cshtml" />
+    <Content Include="Views\Partials\ManageNotes\NoteTagsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

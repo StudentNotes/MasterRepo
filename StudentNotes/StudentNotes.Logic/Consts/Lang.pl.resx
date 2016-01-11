@@ -493,4 +493,16 @@
   <data name="SuccessUserPreferencesUpdated" xml:space="preserve">
     <value>Preference użytkownika zostały z powodzeniem zapisane.</value>
   </data>
+  <data name="ErrorNoTagChoosen" xml:space="preserve">
+    <value>Nie wybrałeś żadnego tagu.</value>
+  </data>
+  <data name="ErrorNoteHasNoTag" xml:space="preserve">
+    <value>Do notatki nie został jeszcze przypisany podany tag.</value>
+  </data>
+  <data name="ErrorNoteHasTag" xml:space="preserve">
+    <value>Do notatki został juz przypisany podany tag.</value>
+  </data>
+  <data name="ErrorTagDoesntExist" xml:space="preserve">
+    <value>Podany tag nie istnieje w systemie.</value>
+  </data>
 </root>

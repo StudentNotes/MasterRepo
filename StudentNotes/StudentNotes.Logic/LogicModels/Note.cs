@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicAbstraction;
+using StudentNotes.Logic.ViewModels.ManageNotes;
 using File = StudentNotes.Repositories.DbModels.File;
 
 namespace StudentNotes.Logic.LogicModels
@@ -18,15 +19,14 @@ namespace StudentNotes.Logic.LogicModels
         public string Size { get; set; }
         public DateTime UploadDate { get; set; }
         public bool IsShared { get; set; }
-        //public List<string> Tags { get; set; }
         public string Tags { get; set; }
         public byte[] Content { get; set; }
         public NoteAccess AccessThrough { get; set; }
+        public NoteTagsViewModel NoteTags { get; set; }
 
         public Note()
         {
-            //Tags = new List<string>();
-
+            NoteTags = new NoteTagsViewModel();
         }
 
         public Note(File file)
@@ -39,14 +39,18 @@ namespace StudentNotes.Logic.LogicModels
             Size = file.Size;
             UploadDate = file.UploadDate;
             IsShared = file.IsShared;
-            //Tags = DenormalizeTags(file.FileTags);
             Tags = file.FileTags;
+            NoteTags = new NoteTagsViewModel()
+            {
+                NoteId = file.FileId,
+                Tags = file.FileTags
+            };
         }
 
         public Note(int userId)
         {
             UserId = userId;
-            //Tags = new List<string>();
+            NoteTags = new NoteTagsViewModel();
         }
 
         public List<string> GetTagsList()

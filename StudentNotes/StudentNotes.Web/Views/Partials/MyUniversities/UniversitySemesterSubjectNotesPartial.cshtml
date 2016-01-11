@@ -13,7 +13,7 @@
                         UpdateTargetId = "page-content",
                         HttpMethod = "GET",
                         InsertionMode = InsertionMode.Replace,
-                        LoadingElementId = "loading"
+                        LoadingElementId = "loading-content"
                     },
                     new { })
         </li>
@@ -25,7 +25,7 @@
                         UpdateTargetId = "page-content",
                         HttpMethod = "GET",
                         InsertionMode = InsertionMode.Replace,
-                        LoadingElementId = "loading"
+                        LoadingElementId = "loading-content"
                     },
                     new { })
         </li>
@@ -37,7 +37,7 @@
                         UpdateTargetId = "page-content",
                         HttpMethod = "GET",
                         InsertionMode = InsertionMode.Replace,
-                        LoadingElementId = "loading"
+                        LoadingElementId = "loading-content"
                     },
                     new { })
         </li>
@@ -49,13 +49,13 @@
                         UpdateTargetId = "page-content",
                         HttpMethod = "GET",
                         InsertionMode = InsertionMode.Replace,
-                        LoadingElementId = "loading"
+                        LoadingElementId = "loading-content"
                     },
                     new { })
         </li>
     </ol>
 
-    <div class="col-xs-12">
+    <div id="errorDiv" class="col-xs-12">
         @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
     </div>
 
@@ -85,10 +85,7 @@
                 <td>@Model.Notes[i].Size</td>
                 <td>@Model.Notes[i].UploadDate.ToString()</td>
                 <td>
-                    @foreach (var tag in @Model.Notes[i].Tags)
-                    {
-                        <text>@tag,</text>
-                    }
+                    @Model.Notes[i].Tags
                 </td>
                 <td>
                     @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.Notes[i].NoteId }, new { @class = "btn btn-success" })

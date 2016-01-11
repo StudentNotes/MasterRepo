@@ -523,22 +523,22 @@ namespace StudentNotes.Web.Models.ResourcesFinderLogic
         {
             get { return ResourceFinder.GetResource("ErrorUserPreferencesUpdated"); }
         }
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
-        //public static string SignUpFormLabel_0
-        //{
-        //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }
-        //}
+        public static string ErrorTagDoesntExist
+        {
+            get { return ResourceFinder.GetResource("ErrorTagDoesntExist"); }
+        }
+        public static string ErrorNoTagChoosen
+        {
+            get { return ResourceFinder.GetResource("ErrorNoTagChoosen"); }
+        }
+        public static string ErrorNoteHasTag
+        {
+            get { return ResourceFinder.GetResource("ErrorNoteHasTag"); }
+        }
+        public static string ErrorNoteHasNoTag
+        {
+            get { return ResourceFinder.GetResource("ErrorNoteHasNoTag"); }
+        }
         //public static string SignUpFormLabel_0
         //{
         //    get { return ResourceFinder.GetResource("SignUpFormLabel_0"); }

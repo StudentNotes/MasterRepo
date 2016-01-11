@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
 using StudentNotes.Logic.ViewModels.File;
-using StudentNotes.Repositories.Base;
 using StudentNotes.Repositories.DbModels;
 using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Repositories.RepositoryInterfaces;
@@ -308,7 +308,7 @@ namespace StudentNotes.Logic.Services
         public bool IsPrivateFile(int fileId)
         {
             var file = _semesterSubjectFileRepository.GetMany(f => f.FileId == fileId);
-            return file != null;
+            return !file.Any();
         }
 
         public bool UserHasAccess(int fileId, int userId)
@@ -424,6 +424,49 @@ namespace StudentNotes.Logic.Services
                 return -1;
             }
             return 0;
+        }
+
+        public void RemoveTagFromFile(int fileId, string tag)
+        {
+            var file = _fileRepository.GetById(fileId);
+            var tags = file.FileTags.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            tags.Remove(tag);
+            var newTags = new StringBuilder();
+            foreach (var tagPart in tags)
+            {
+                newTags.Append(tagPart);
+                newTags.Append(",");
+            }
+            file.FileTags = newTags.ToString();
+        }
+
+        public void AddTagToFile(int fileId, string tag)
+        {
+            var file = _fileRepository.GetById(fileId);
+            var newTags = new StringBuilder();
+            newTags.Append(file.FileTags);
+            newTags.Append(tag);
+            newTags.Append(",");
+
+            file.FileTags = newTags.ToString();
+        }
+
+        public bool FileHasTag(int fileId, string tag)
+        {
+            var file = _fileRepository.GetById(fileId);
+            var tags = file.FileTags.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            for (int i = 0; i < tags.Count; i++)
+            {
+                tags[i] = tags[i].ToLower();
+            }
+            return tags.Contains(tag.ToLower());
+        }
+
+        public bool TagExistsInDatabase(string tag)
+        {
+            var tagsInDatabase = _fileTagPatternRepository.GetMany(t => t.Name == tag);
+            return tagsInDatabase.Any();
         }
 
         public void SaveFile()

@@ -50,6 +50,7 @@ namespace StudentNotes.Web.Controllers
 
                 return RedirectToAction("RegisterRedirect");
             }
+            viewModelContainer.ErrorAnchor = "register";
             return View("~/Views/Home/Index.cshtml", viewModelContainer);
         }
 

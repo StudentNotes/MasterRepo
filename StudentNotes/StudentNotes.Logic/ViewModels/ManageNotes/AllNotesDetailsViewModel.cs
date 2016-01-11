@@ -13,6 +13,7 @@ namespace StudentNotes.Logic.ViewModels.ManageNotes
         public ResponseViewModelBase Response { get; set; }
         public SimpleUserModel NoteOwner { get; set; }
         public List<SimpleGroupModel> NoteGroup { get; set; }
+        public NoteTagsViewModel NoteTags { get; set; }
 
         public AllNotesDetailsViewModel()
         {
@@ -20,6 +21,7 @@ namespace StudentNotes.Logic.ViewModels.ManageNotes
             NoteOwner = new SimpleUserModel();
             NoteGroup = new List<SimpleGroupModel>();
             Note = new Note();
+            NoteTags = new NoteTagsViewModel();
         }
     }
 }

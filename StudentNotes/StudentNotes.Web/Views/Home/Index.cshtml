@@ -289,3 +289,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    var sectionId = "@Model.ErrorAnchor";
+    if (sectionId == "register") {
+        var anchor = document.getElementById(sectionId);
+        anchor.scrollIntoView(true);
+    }
+</script>

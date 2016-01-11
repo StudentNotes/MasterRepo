@@ -510,23 +510,22 @@
 }*/
 
 /***************************************    LOADING CONTENT ANIMATION    **********************************************************************/
-#loading-content {
+.animation-div {
     position: relative;
     margin-top: 10px;
     margin-left: 20px;
     display: none;
     transition: all .7s ease;
 }
-#loading-content.shown {
+.animation-div.shown {
     display: block;
     transition: all .7s ease;
 }
-
-#loading-content .loading-content-gif {
+.animation-div .animation-gif {
     margin: 0;
     display: inline;
 }
-#loading-content .loading-content-desc {
+.animation-div .animation-description {
     position: absolute;
     display: inline;
     font-size: 20px;
@@ -554,4 +553,34 @@
     outline: none;
     cursor: inherit;
     display: block;
+}
+
+/****************************************   ADD/DELETE TAGS PARTIAL  *****************************************/
+
+#tag-holder .list-group-item {
+    min-height: 56px;
+}
+
+#tag-holder .list-group-item .tagName {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 20px;
+}
+#addTagButton {
+    margin-top: 10px;
+}
+
+/****************************************   FOOTER  *****************************************/
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-left: -4px;
+}
+footer .footer-below {
+    background-color: #262626;
+    color: #ffffff;
+}
+footer i.fa{
+    font-size: 24px;
 }

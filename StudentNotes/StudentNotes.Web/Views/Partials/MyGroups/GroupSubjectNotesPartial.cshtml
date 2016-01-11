@@ -67,10 +67,7 @@
                 <td>@Model.GroupNotes[i].Size</td>
                 <td>@Model.GroupNotes[i].UploadDate.ToString()</td>
                 <td>
-                    @foreach (var tag in @Model.GroupNotes[i].Tags)
-                    {
-                        <text>@tag,</text>
-                    }
+                    @Model.GroupNotes[i].Tags
                 </td>
                 <td>
                     @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.GroupNotes[i].NoteId }, new { @class = "btn btn-success" })

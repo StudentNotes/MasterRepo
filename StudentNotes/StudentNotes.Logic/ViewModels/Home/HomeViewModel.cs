@@ -11,9 +11,11 @@ namespace StudentNotes.Logic.ViewModels.Home
     {
         public LoginViewModel LoginViewModel { get; set; }
         public RegisterViewModel RegisterViewModel { get; set; }
+        public string ErrorAnchor { get; set; }
 
         public HomeViewModel()
         {
+            ErrorAnchor = "";
             LoginViewModel = new LoginViewModel();
             RegisterViewModel =new RegisterViewModel();
         }

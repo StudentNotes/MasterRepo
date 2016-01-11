@@ -35,6 +35,11 @@ namespace StudentNotes.Logic.ServiceInterfaces
         int RemoveFileFromUser(int fileId, int userId);
         int RemoveFileFromUser(int fileId, string email);
 
+        void RemoveTagFromFile(int fileId, string tag);
+        void AddTagToFile(int fileId, string tag);
+        bool FileHasTag(int fileId, string tag);
+        bool TagExistsInDatabase(string tag);
+
         void SaveFile();
     }
 }

@@ -24,11 +24,12 @@
 
                 @using (Ajax.BeginForm("ShareUniversityNoteToUser", "Note", null, new AjaxOptions()
                 {
-                    UpdateTargetId = "page-content",
+                    UpdateTargetId = "errorDiv",
                     HttpMethod = "POST",
                     InsertionMode = InsertionMode.Replace,
-                    LoadingElementId = "loading",
-                    OnBegin = "HideModal"
+                    LoadingElementId = "loading-content",
+                    OnBegin = "HideModal",
+                    OnComplete = "checkErrorDiv"
                 },
                     new { enctype = "multipart/form-data", id = "shareUserForm", @class="form-horizontal" }))
                 {
@@ -39,7 +40,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-6 col-xs-12">Adres E-mail użytkownika:</label>
                             <div class="col-sm-6 col-xs-12">
-                                <input id="privateUserEmailTb" type="text" name="userEmail" class="form-control"/>
+                                <input id="privateUserEmailTb" type="text" name="UserName" class="form-control"/>
                             </div>
                         </div>
 
@@ -73,18 +74,19 @@
 
 
                         <div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input id="shareFileWithUserButton" type="submit" name="Wyślij!" class="btn btn-primary" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                            <input id="shareFileWithUserButton" type="submit" value="Udostępnij!" class="btn btn-primary" />
                         </div>
                 }
 
                 @using (Ajax.BeginForm("ShareUniversityNoteToGroup", "Note", null, new AjaxOptions()
                 {
-                    UpdateTargetId = "page-content",
+                    UpdateTargetId = "errorDiv",
                     HttpMethod = "POST",
                     InsertionMode = InsertionMode.Replace,
-                    LoadingElementId = "loading",
-                    OnBegin = "HideModal"
+                    LoadingElementId = "loading-content",
+                    OnBegin = "HideModal",
+                    OnComplete = "checkErrorDiv"
                 },
                     new { enctype = "multipart/form-data", id = "shareGroupForm", hidden = true, @class = "form-horizontal" }))
                 {
@@ -114,8 +116,8 @@
                         </div>
 
                         <div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input id="shareFileWithGroupButton" type="submit" name="Wyślij!" class="btn btn-primary" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                            <input id="shareFileWithGroupButton" type="submit" value="Udostępnij!" class="btn btn-primary" />
                         </div>
 
                 }
@@ -130,6 +132,9 @@
         function releaseHold() { $.holdReady(false); }
         $.getScript('../../Scripts/shareNoteScript.js', releaseHold);
         function HideModal() {
+            $("#privateUserEmailTb").val("");
+            SetUpShareUserCheckBox();
+            $("#shareUserCheckBox").prop("checked", true);
             console.log("Hide modal");
             $('#shareUniversityNoteModal').modal('hide');
             $("body").removeClass("modal-open");

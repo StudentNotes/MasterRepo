@@ -7,3 +7,9 @@
 @model StudentNotes.Logic.ViewModels.Home.HomeViewModel
 
 @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.LoginViewModel)
+
+<script>
+    window.onload = function() {
+        checkErrorDiv();
+    }
+</script>

@@ -2,10 +2,15 @@
 @model StudentNotes.Logic.ViewModels.LoggedIn.NavbarSideViewModel
 
 <div id="navbar-side">
-    <div id="loading-content">
-        <img class="loading-content-gif" src="~/Resources/pending_black_2.GIF"/>
-        <div class="loading-content-desc">Ładowanie treści</div>
+    <div id="uploading-note" class="animation-div">
+        <img class="animation-gif" src="~/Resources/pending_uploading.GIF"/>
+        <div class="animation-description">Wysyłanie notatki</div>
     </div>
+    <div id="loading-content" class="animation-div">
+        <img class="animation-gif" src="~/Resources/pending_black_2.GIF"/>
+        <div class="animation-description">Ładowanie treści</div>
+    </div>
+    
     <ul class="sidebar-nav">
         <li>
             <a class="sidebar-cattegory collapsed first" href="javascript:;" data-toggle="collapse" data-target="#my-notes">@ResourceKeyResolver.ConstMyNotes<span class="glyphicon glyphicon-chevron-down"></span></a>
@@ -123,3 +128,4 @@
         </li>
     </ul>
 </div>
+

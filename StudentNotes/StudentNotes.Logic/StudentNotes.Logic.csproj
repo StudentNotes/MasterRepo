@@ -152,6 +152,7 @@
     <Compile Include="ViewModels\ManageGroups\ManageGroupViewModel.cs" />
     <Compile Include="ViewModels\Management\TagsViewModel.cs" />
     <Compile Include="ViewModels\ManageNotes\AllNotesDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ManageNotes\NoteTagsViewModel.cs" />
     <Compile Include="ViewModels\ManageNotes\SharedNoteDetailsViewModel.cs" />
     <Compile Include="ViewModels\University\SemesterSubjectPathViewModel.cs" />
     <Compile Include="ViewModels\University\UniversityGradeSemestersViewModel.cs" />

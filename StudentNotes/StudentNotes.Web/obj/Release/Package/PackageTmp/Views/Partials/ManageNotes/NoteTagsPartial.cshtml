@@ -1,0 +1,78 @@
+﻿@model StudentNotes.Logic.ViewModels.ManageNotes.NoteTagsViewModel
+
+
+@*<div class="col-xs-12">
+    <div>
+        @if (Model.Response != null)
+        {
+            foreach (var error in Model.Response.ErrorList)
+            {
+                <div class="error-code">@error</div>
+
+            }
+            foreach (var success in Model.Response.SuccessList)
+            {
+                <div class="success-code">@success</div>
+            }
+        }
+    </div>
+</div>*@
+
+@{
+    var tags = Model.Tags.Split(new []{","}, StringSplitOptions.RemoveEmptyEntries);
+    <ul class="list-group">
+        @foreach (var tag in tags)
+        {
+            <li class="list-group-item">
+                <div class="col-xs-6 tagName">
+                    @tag
+                </div>
+                <div class="col-xs-6 buttonArea">
+                    @Ajax.ActionLink("Usuń tag", "RemoveTagFromNote", "Note",
+                        new {noteId = Model.NoteId, tagName = tag},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "tag-holder",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading-content"
+                        },
+                        new {@class = "btn btn-danger"})
+                </div>
+            </li>
+        }
+</ul>
+
+    using (Ajax.BeginForm("AddTagToNote", "Note", new {noteId = Model.NoteId},
+        new AjaxOptions()
+        {
+            UpdateTargetId = "tag-holder",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            LoadingElementId = "loading-content"
+        },
+        new { @class="form-horizontal col-xs-12"}
+
+                ))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label class="col-xs-6 control-label">Nowy tag:</label>
+            <div class="col-xs-6">
+                <input class="form-control col-xs-6" id="searchTagInput" type="text" name="tagName" placeholder="Nazwa taga" />
+            </div>
+            <button type="submit" id="addTagButton" class="btn btn-success col-xs-12" target="blank">Dodaj</button>
+        </div>
+    }
+}
+
+<script>
+    $('#searchTagInput').keypress(function () {
+        setupAutocompleteTagGuess();
+    });
+    function setupAutocompleteTagGuess() {
+        $("#searchTagInput").autocomplete({
+            source: ('@Url.Action("TagSuggestions", "Search")')
+    });
+    }
+</script>

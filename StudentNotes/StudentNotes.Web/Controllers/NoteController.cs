@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using StudentNotes.Logic.Consts;
 using StudentNotes.Logic.LogicModels;
 using StudentNotes.Logic.ServiceInterfaces;
@@ -187,6 +188,8 @@ namespace StudentNotes.Web.Controllers
                 }
             }
             model.Note = new Note(file);
+            model.NoteTags.NoteId = noteId;
+            model.NoteTags.Tags = file.FileTags;
 
             return PartialView("~/Views/Partials/MyNotes/AllNotesDetailsPartial.cshtml", model);
         }
@@ -244,16 +247,14 @@ namespace StudentNotes.Web.Controllers
             response = (ResponseMessageViewModel)request.Validate();
             if (!request.IsValid)
             {
-                TempData["ResponseViewModel"] = response;
-                return RedirectToAction("RecentlyUploadedNotes");
+                return PartialView("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", response);
             }
 
             _groupService.AddFileToGroup(request.FileId, request.GroupId, request.SemesterSubjectId);
             _groupService.Commit();
             response.AddSuccess(ResourceKeyResolver.SuccessNoteSharedToGroup);
 
-            TempData["ResponseViewModel"] = response;
-            return RedirectToAction("RecentlyUploadedNotes");
+            return PartialView("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", response);
         }
 
         [HttpPost]
@@ -263,8 +264,7 @@ namespace StudentNotes.Web.Controllers
             response = (ResponseMessageViewModel)request.Validate();
             if (!request.IsValid)
             {
-                TempData["ResponseViewModel"] = response;
-                return RedirectToAction("RecentlyUploadedNotes");
+                return PartialView("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", response);
             }
 
             if (_userService.UserExists(request.UserName))
@@ -278,8 +278,7 @@ namespace StudentNotes.Web.Controllers
             _unitOfWork.Commit();
             response.AddSuccess(ResourceKeyResolver.SuccessNoteSharedToUser);
 
-            TempData["ResponseViewModel"] = response;
-            return RedirectToAction("RecentlyUploadedNotes");
+            return PartialView("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", response);
         }
 
         [HttpPost]
@@ -289,16 +288,14 @@ namespace StudentNotes.Web.Controllers
             response = (ResponseMessageViewModel)request.Validate();
             if (!request.IsValid)
             {
-                TempData["ResponseViewModel"] = response;
-                return RedirectToAction("ShowNotes", "University", new { semesterSubjectId = request.ReturnSemesterSubjectId });
+                return PartialView("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", response);
             }
 
             _groupService.AddFileToGroup(request.FileId, request.GroupId, request.SemesterSubjectId);
             _groupService.Commit();
             response.AddSuccess(ResourceKeyResolver.SuccessNoteSharedToGroup);
 
-            TempData["ResponseViewModel"] = response;
-            return RedirectToAction("ShowNotes", "University", new { semesterSubjectId = request.ReturnSemesterSubjectId });
+            return PartialView("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", response);
         }
 
         [HttpPost]
@@ -308,8 +305,7 @@ namespace StudentNotes.Web.Controllers
             response = (ResponseMessageViewModel)request.Validate();
             if (!request.IsValid)
             {
-                TempData["ResponseViewModel"] = response;
-                return RedirectToAction("ShowNotes", "University", new { semesterSubjectId = request.ReturnSemesterSubjectId });
+                return PartialView("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", response);
             }
 
             if (_userService.UserExists(request.UserName))
@@ -323,8 +319,7 @@ namespace StudentNotes.Web.Controllers
             _unitOfWork.Commit();
             response.AddSuccess(ResourceKeyResolver.SuccessNoteSharedToUser);
 
-            TempData["ResponseViewModel"] = response;
-            return RedirectToAction("ShowNotes", "University", new { semesterSubjectId = request.ReturnSemesterSubjectId });
+            return PartialView("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", response);
         }
 
         [HttpPost]
@@ -369,6 +364,81 @@ namespace StudentNotes.Web.Controllers
                 universityNotePath.Append(string.Format("{0}/", pathNodes[i]));
             }
             return universityNotePath.ToString();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult AddTagToNote(int noteId, string tagName)
+        {
+            var model = new NoteTagsViewModel();
+            model.NoteId = noteId;
+
+            var isValid = true;
+
+            if (tagName.IsEmpty())
+            {
+                model.Response.AddError(ResourceKeyResolver.ErrorNoTagChoosen);
+                isValid = false;
+            }
+            if (!_fileService.TagExistsInDatabase(tagName))
+            {
+                model.Response.AddError(ResourceKeyResolver.ErrorTagDoesntExist);
+                isValid = false;
+            }
+            if (_fileService.FileHasTag(noteId, tagName))
+            {
+                model.Response.AddError(ResourceKeyResolver.ErrorNoteHasTag);
+                isValid = false;
+            }
+
+            if (!isValid)
+            {
+                model.Tags = _fileService.GetFileById(noteId).FileTags;
+                return PartialView("~/Views/Partials/ManageNotes/NoteTagsPartial.cshtml", model);
+            }
+
+            _fileService.AddTagToFile(noteId, tagName);
+            _unitOfWork.Commit();
+
+            model.Tags = _fileService.GetFileById(noteId).FileTags;
+            
+            return PartialView("~/Views/Partials/ManageNotes/NoteTagsPartial.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveTagFromNote(int noteId, string tagName)
+        {
+            var model = new NoteTagsViewModel {NoteId = noteId};
+            var isValid = true;
+
+            if (tagName.IsEmpty())
+            {
+                model.Response.AddError(ResourceKeyResolver.ErrorNoTagChoosen);
+                isValid = false;
+            }
+            if (!_fileService.TagExistsInDatabase(tagName))
+            {
+                model.Response.AddError(ResourceKeyResolver.ErrorTagDoesntExist);
+                isValid = false;
+            }
+            if (!_fileService.FileHasTag(noteId, tagName))
+            {
+                model.Response.AddError(ResourceKeyResolver.ErrorNoteHasNoTag);
+                isValid = false;
+            }
+
+            if (!isValid)
+            {
+                model.Tags = _fileService.GetFileById(noteId).FileTags;
+                return PartialView("~/Views/Partials/ManageNotes/NoteTagsPartial.cshtml", model);
+            }
+
+            _fileService.RemoveTagFromFile(noteId, tagName);
+            _unitOfWork.Commit();
+
+            model.Tags = _fileService.GetFileById(noteId).FileTags;
+
+            return PartialView("~/Views/Partials/ManageNotes/NoteTagsPartial.cshtml", model);
         }
     }
 }

@@ -38,7 +38,7 @@
     <div class="col-sm-3 col-xs-12">
         <img class="img-thumbnail img-responsive" src="@CategorySelector.GetCategoryPicturePath(Model.Note.Category)" alt="Note icon" />
     </div>
-    <div class="col-sm-6 col-xs-12">
+    <div class="col-sm-5 col-xs-12">
         <ul class="list-group">
             <li class="list-group-item row">
                 <div class="col-sm-6">
@@ -122,8 +122,10 @@
         </ul>
     </div>
 
-    <div class="col-sm-3 col-xs-12">
-        <h3>TAGI:</h3>
-
+    <div class="col-sm-4 col-xs-12">
+        <h3>Tagi:</h3>
+        <div id="tag-holder">
+            @Html.Partial("~/Views/Partials/ManageNotes/NoteTagsPartial.cshtml", Model.NoteTags)
+        </div>
     </div>
 </div>

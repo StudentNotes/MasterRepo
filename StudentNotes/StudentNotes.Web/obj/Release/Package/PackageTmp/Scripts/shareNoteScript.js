@@ -22,13 +22,14 @@
 });
 
 $("#shareUserCheckBox").on("change", function () {
-    SetUpShareUserCheckBox();
     $("#privateUserEmailTb").val("");
+    SetUpShareUserCheckBox();
     console.log("Ukrywanie forma grupowego");
 });
 
 function SetUpShareUserCheckBox() {
-    $("#fileIdTb1").val($("#shareFileButton").val());
+    $("#fileIdTb1").val($("#tmpNoteIdTb").val());
+    console.log("FileId: " + $("#tmpNoteIdTb").val());
     $("#shareUserForm").removeAttr("hidden");
     $("#shareGroupForm").attr("hidden", true);
 

@@ -4,13 +4,13 @@
 function loadingAnimationOn() {
     console.log("loading animation ON");
     //$("#loading-content").addClass("shown");
-    $("#loading-content").css("display", "block");
+    $("#uploading-note").css("display", "block");
 }
 
 function loadingAnimationOff() {
     console.log("loading animation OFF");
     //$("#loading-content").removeClass("shown");
-    $("#loading-content").css("display", "none");
+    $("#uploading-note").css("display", "none");
 
 }
 

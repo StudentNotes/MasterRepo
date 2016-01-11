@@ -23,7 +23,7 @@
         </li>
     </ol>
 
-    <div class="col-xs-12">
+    <div id="errorDiv" class="col-xs-12">
         @Html.Partial("~/Views/Partials/Validation/ResponseMessagePartial.cshtml", Model.Response)
     </div>
 
@@ -58,10 +58,7 @@
                     <td>@Model.Owners[i].FullName</td>
                 }
                 <td>
-                    @foreach (var tag in @Model.Notes[i].Tags)
-                    {
-                        string.Format("{0}, ", tag);
-                    }
+                    @Model.Notes[i].Tags
                 </td>
                 <td>
                     @Html.ActionLink("Pobierz", "DownloadNote", "Note", new { fileId = Model.Notes[i].NoteId }, new { @class = "btn btn-success" })
