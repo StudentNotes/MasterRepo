@@ -188,6 +188,11 @@
     <Content Include="Resources\author_visit.jpg" />
     <Content Include="Resources\Avatars\man.jpg" />
     <Content Include="Resources\Avatars\woman.jpg" />
+    <Content Include="Resources\carousel-explore.png" />
+    <Content Include="Resources\carousel-management.png" />
+    <Content Include="Resources\carousel-sharing.png" />
+    <Content Include="Resources\carousel-storage.png" />
+    <Content Include="Resources\CreateAccountPicture.png" />
     <Content Include="Resources\data steal.png" />
     <Content Include="Resources\data steal_2.png" />
     <Content Include="Resources\file-sharing.jpg" />
@@ -204,6 +209,7 @@
     <Content Include="Resources\pending_yellowBlack.GIF" />
     <Content Include="Resources\presentationFile.jpg" />
     <Content Include="Resources\spreadSheet.jpg" />
+    <Content Include="Resources\studentNotesLogo.png" />
     <Content Include="Resources\tekstFile.jpg" />
     <Content Include="Resources\videoFile.jpg" />
     <Content Include="Scripts\bootstrap.js" />
