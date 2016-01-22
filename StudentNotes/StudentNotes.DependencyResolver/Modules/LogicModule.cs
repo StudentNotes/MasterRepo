@@ -11,16 +11,12 @@ using StudentNotes.Repositories.Infrastructure;
 using StudentNotes.Repositories.Repositories;
 using StudentNotes.Repositories.RepositoryInterfaces;
 
-namespace DependencyResolver.Modules
+namespace StudentNotes.DependencyResolver.Modules
 {
     public class LogicModule : NinjectModule
     {
         public override void Load()
         {
-            //throw new NotImplementedException();
-            //Bind<IMiddleClass>().To<MiddleClass>();
-            //Bind<IDbFactory>().To<DbFactory>();
-            //Bind<IUnitOfWork>().To<UnitOfWork>();
             Bind<IDbFactory>().To<DbFactory>().InScope(c => System.Web.HttpContext.Current);
             Bind<IUnitOfWork>().To<UnitOfWork>().InScope(c => System.Web.HttpContext.Current);
 
@@ -50,8 +46,6 @@ namespace DependencyResolver.Modules
             Bind<ISchoolService>().To<SchoolService>();
             Bind<ISemesterSubjectService>().To<SemesterSubjectService>();
             Bind<IGroupService>().To<GroupService>();
-
-            //Bind<IFileSharedGroupRepository>().To<FileSharedGroupRepository>();
         }
     }
 }

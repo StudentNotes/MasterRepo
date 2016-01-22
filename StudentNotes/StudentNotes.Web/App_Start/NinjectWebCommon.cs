@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using DependencyResolver.Modules;
-using Ninject.Modules;
 using StudentNotes.DependencyResolver.Modules;
+using Ninject.Modules;
 using StudentNotes.Logic.Models;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StudentNotes.Web.NinjectWebCommon), "Start")]

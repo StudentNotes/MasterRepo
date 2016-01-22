@@ -24,21 +24,29 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
 
     <!-- Wrapper for Slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <!-- Set the first background image using inline CSS below. -->
-            <img class="img-responsive" src="~/Resources/mobile_devices_2.png"/>
+            <!-- Set the third background image using inline CSS below. -->
+            <img class="img-responsive" src="~/Resources/carousel-storage.png" />
         </div>
         <div class="item">
             <!-- Set the second background image using inline CSS below. -->
-            <img class="img-responsive" src="~/Resources/file-sharing_2.jpg"/>
+            @*<img class="img-responsive" src="~/Resources/file-sharing_2.jpg"/>*@
+            <img class="img-responsive" src="~/Resources/carousel-management.png"/>
+        </div>
+        <div class="item">
+            <!-- Set the first background image using inline CSS below. -->
+
+            <img class="img-responsive" src="~/Resources/carousel-sharing.png" />
         </div>
         <div class="item">
             <!-- Set the third background image using inline CSS below. -->
-            <img class="img-responsive" src="~/Resources/data steal_2.png"/>
+
+            <img class="img-responsive" src="~/Resources/carousel-explore.png" />
         </div>
     </div>
 
@@ -62,8 +70,9 @@
                 <h1>@ResourceKeyResolver.ConstStudentNotes</h1>
             </div>
             <div class="jumbotron-content">
-                <div class="jumbotron-logo col-sm-4">
-                    <p>OBRAZEK<br/>LOGO</p>
+                <div class="jumbotron-logo col-sm-3">
+                    @*<p>OBRAZEK<br/>LOGO</p>*@
+                    <img class="img-responsive" src="~/Resources/studentNotesLogo.png" />
                 </div>
                 <div class="jumbotron-about col-sm-8">
                     <p class="lead">@ResourceKeyResolver.HomePageContentAboutProject</p>
@@ -223,7 +232,7 @@
                     <p><b>E-mail:</b><br>rob.winkler@hotmail.com</p>
                 </div>
                 <div class="footer-col col-md-6">
-                    <h3>Sosial Media</h3>
+                    <h3>Social Media</h3>
                     <ul class="list-inline">
                         <li>
                             <a href="https://www.facebook.com/robert.winkler.334" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
